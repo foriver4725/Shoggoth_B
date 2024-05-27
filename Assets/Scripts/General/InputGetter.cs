@@ -45,18 +45,18 @@ namespace IA
         #endregion
 
         #region 変数宣言
-        public bool IsSubmit { get; private set; } = false;
-        public bool IsCancel {  get; private set; } = false;
-        public Vector2 ValueMove { get; private set; } = Vector2.zero;
-        public bool IsHold { get; private set; } = false;
+        public bool Title_Istart { get; private set; } = false;
+        public bool Title_IsQuit { get; private set; } = false;
+        //public Vector2 ValueMove { get; private set; } = Vector2.zero;
+        //public bool IsHold { get; private set; } = false;
         #endregion
 
         #region【LateUpdate】毎フレームの最後で、フラグを初期化する
         void LateUpdate()
         {
-            if (IsSubmit) IsSubmit = false;
-            if (IsCancel) IsCancel = false;
-            if (IsHold) IsHold = false;
+            if (Title_Istart) Title_Istart = false;
+            if (Title_IsQuit) Title_IsQuit = false;
+            //if (IsHold) IsHold = false;
         }
         #endregion
 
@@ -66,51 +66,51 @@ namespace IA
             // インスタンス名.Map名.Action名.コールバック名
             if (isLink)
             {
-                _inputs.Test.Submit.performed += OnSubmit;
+                _inputs.Title.Start.performed += Title_OnStart;
 
-                _inputs.Test.Cancel.performed += OnCancel;
+                _inputs.Title.Quit.performed += Title_OnQuit;
 
-                _inputs.Test.Move.started += ReadMove;
-                _inputs.Test.Move.performed += ReadMove;
-                _inputs.Test.Move.canceled += ReadMove;
+                //_inputs.Test.Move.started += ReadMove;
+                //_inputs.Test.Move.performed += ReadMove;
+                //_inputs.Test.Move.canceled += ReadMove;
 
-                _inputs.Test.Hold.performed += OnHold;
+                //_inputs.Test.Hold.performed += OnHold;
             }
             else
             {
-                _inputs.Test.Submit.performed -= OnSubmit;
+                _inputs.Title.Start.performed -= Title_OnStart;
 
-                _inputs.Test.Cancel.performed -= OnCancel;
+                _inputs.Title.Quit.performed -= Title_OnQuit;
 
-                _inputs.Test.Move.started -= ReadMove;
-                _inputs.Test.Move.performed -= ReadMove;
-                _inputs.Test.Move.canceled -= ReadMove;
+                //_inputs.Test.Move.started -= ReadMove;
+                //_inputs.Test.Move.performed -= ReadMove;
+                //_inputs.Test.Move.canceled -= ReadMove;
 
-                _inputs.Test.Hold.performed -= OnHold;
+                //_inputs.Test.Hold.performed -= OnHold;
             }
         }
         #endregion
 
         #region 処理の詳細
-        void OnSubmit(InputAction.CallbackContext context)
+        void Title_OnStart(InputAction.CallbackContext context)
         {
-            IsSubmit = true;
+            Title_Istart = true;
         }
 
-        void OnCancel(InputAction.CallbackContext context)
+        void Title_OnQuit(InputAction.CallbackContext context)
         {
-            IsCancel = true;
+            Title_IsQuit = true;
         }
 
-        void ReadMove(InputAction.CallbackContext context)
-        {
-            ValueMove = context.ReadValue<Vector2>();
-        }
+        //void ReadMove(InputAction.CallbackContext context)
+        //{
+        //    ValueMove = context.ReadValue<Vector2>();
+        //}
 
-        void OnHold(InputAction.CallbackContext context)
-        {
-            IsHold = true;
-        }
+        //void OnHold(InputAction.CallbackContext context)
+        //{
+        //    IsHold = true;
+        //}
         #endregion
     }
 }
