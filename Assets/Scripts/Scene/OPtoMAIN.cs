@@ -14,9 +14,9 @@ public class OPtoMAIN : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (IA.InputGetter.Instance.)
-        //{
-        //    SceneManager.LoadSceneAsync("Main");
-        //}
+        if (IA.InputGetter.Instance.Title_Istart)
+        {
+            SceneManager.LoadSceneAsync("Main");
+        }
     }
 }
