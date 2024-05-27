@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class OPtoMAIN : MonoBehaviour
 {
@@ -14,9 +13,6 @@ public class OPtoMAIN : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (IA.InputGetter.Instance.)
-        //{
-        //    SceneManager.LoadSceneAsync("Main");
-        //}
+        
     }
 }
