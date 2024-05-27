@@ -26,146 +26,91 @@ namespace IA
     ""name"": ""IA"",
     ""maps"": [
         {
-            ""name"": ""Test"",
-            ""id"": ""bc61e48d-03aa-4c3c-bcb3-750fc99604a8"",
+            ""name"": ""Title"",
+            ""id"": ""11e06454-4cf7-4712-a4fe-968aa20abc4e"",
             ""actions"": [
                 {
-                    ""name"": ""Submit"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
-                    ""id"": ""04ef18b9-b8fe-440c-9468-9a34cae95680"",
+                    ""id"": ""56d5cd92-6e42-4924-ac51-47bdee62c451"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Cancel"",
+                    ""name"": ""Quit"",
                     ""type"": ""Button"",
-                    ""id"": ""5ba26687-a82e-4956-8f4b-3ae5ea250c24"",
+                    ""id"": ""95744a78-e62b-4478-af95-d2e42786148a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""1a3af6e6-3f87-4e63-a0a1-46476443e6d1"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Hold"",
-                    ""type"": ""Button"",
-                    ""id"": ""a0218ada-1b90-479a-a76b-e407dbbc76b1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=3)"",
                     ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""59c1ba26-52fe-4591-848e-557e2c42accf"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""13eb24b8-b151-476c-8968-e77c41906bdd"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Submit"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""78acfd66-b8b6-4318-a959-c8f04b442bfc"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""12b3adfc-f9c3-4c1d-af49-26fa2103475e"",
+                    ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cancel"",
+                    ""action"": ""Quit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""Game"",
+            ""id"": ""beb74ce0-c711-40c8-aaac-d222efcb51fe"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee0551b9-13d0-4b03-896d-31fa2ca8d3fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""9d98355c-66f5-4151-98af-f27fcd73c81d"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Hold(duration=3)"",
+                    ""id"": ""5a96d596-b244-4923-a7f3-5a0108ddc89d"",
+                    ""path"": """",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Hold"",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""d7d0948f-f308-4389-9973-a21ec8c3c3b6"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""bc039e7b-1d80-4fb4-b004-698275acd0e3"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""2ce4079e-717e-458e-836c-1961328c5b59"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""baa8475f-4ca3-40ce-aa8c-e27f196b8f3e"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""5a8074b7-98c6-4302-9819-80b2c6c406eb"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-            // Test
-            m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
-            m_Test_Submit = m_Test.FindAction("Submit", throwIfNotFound: true);
-            m_Test_Cancel = m_Test.FindAction("Cancel", throwIfNotFound: true);
-            m_Test_Move = m_Test.FindAction("Move", throwIfNotFound: true);
-            m_Test_Hold = m_Test.FindAction("Hold", throwIfNotFound: true);
+            // Title
+            m_Title = asset.FindActionMap("Title", throwIfNotFound: true);
+            m_Title_Start = m_Title.FindAction("Start", throwIfNotFound: true);
+            m_Title_Quit = m_Title.FindAction("Quit", throwIfNotFound: true);
+            // Game
+            m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
+            m_Game_Newaction = m_Game.FindAction("New action", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -224,81 +169,113 @@ namespace IA
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Test
-        private readonly InputActionMap m_Test;
-        private List<ITestActions> m_TestActionsCallbackInterfaces = new List<ITestActions>();
-        private readonly InputAction m_Test_Submit;
-        private readonly InputAction m_Test_Cancel;
-        private readonly InputAction m_Test_Move;
-        private readonly InputAction m_Test_Hold;
-        public struct TestActions
+        // Title
+        private readonly InputActionMap m_Title;
+        private List<ITitleActions> m_TitleActionsCallbackInterfaces = new List<ITitleActions>();
+        private readonly InputAction m_Title_Start;
+        private readonly InputAction m_Title_Quit;
+        public struct TitleActions
         {
             private @IA m_Wrapper;
-            public TestActions(@IA wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Submit => m_Wrapper.m_Test_Submit;
-            public InputAction @Cancel => m_Wrapper.m_Test_Cancel;
-            public InputAction @Move => m_Wrapper.m_Test_Move;
-            public InputAction @Hold => m_Wrapper.m_Test_Hold;
-            public InputActionMap Get() { return m_Wrapper.m_Test; }
+            public TitleActions(@IA wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Start => m_Wrapper.m_Title_Start;
+            public InputAction @Quit => m_Wrapper.m_Title_Quit;
+            public InputActionMap Get() { return m_Wrapper.m_Title; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
-            public void AddCallbacks(ITestActions instance)
+            public static implicit operator InputActionMap(TitleActions set) { return set.Get(); }
+            public void AddCallbacks(ITitleActions instance)
             {
-                if (instance == null || m_Wrapper.m_TestActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_TestActionsCallbackInterfaces.Add(instance);
-                @Submit.started += instance.OnSubmit;
-                @Submit.performed += instance.OnSubmit;
-                @Submit.canceled += instance.OnSubmit;
-                @Cancel.started += instance.OnCancel;
-                @Cancel.performed += instance.OnCancel;
-                @Cancel.canceled += instance.OnCancel;
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Hold.started += instance.OnHold;
-                @Hold.performed += instance.OnHold;
-                @Hold.canceled += instance.OnHold;
+                if (instance == null || m_Wrapper.m_TitleActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_TitleActionsCallbackInterfaces.Add(instance);
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
             }
 
-            private void UnregisterCallbacks(ITestActions instance)
+            private void UnregisterCallbacks(ITitleActions instance)
             {
-                @Submit.started -= instance.OnSubmit;
-                @Submit.performed -= instance.OnSubmit;
-                @Submit.canceled -= instance.OnSubmit;
-                @Cancel.started -= instance.OnCancel;
-                @Cancel.performed -= instance.OnCancel;
-                @Cancel.canceled -= instance.OnCancel;
-                @Move.started -= instance.OnMove;
-                @Move.performed -= instance.OnMove;
-                @Move.canceled -= instance.OnMove;
-                @Hold.started -= instance.OnHold;
-                @Hold.performed -= instance.OnHold;
-                @Hold.canceled -= instance.OnHold;
+                @Start.started -= instance.OnStart;
+                @Start.performed -= instance.OnStart;
+                @Start.canceled -= instance.OnStart;
+                @Quit.started -= instance.OnQuit;
+                @Quit.performed -= instance.OnQuit;
+                @Quit.canceled -= instance.OnQuit;
             }
 
-            public void RemoveCallbacks(ITestActions instance)
+            public void RemoveCallbacks(ITitleActions instance)
             {
-                if (m_Wrapper.m_TestActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_TitleActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(ITestActions instance)
+            public void SetCallbacks(ITitleActions instance)
             {
-                foreach (var item in m_Wrapper.m_TestActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_TitleActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_TestActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_TitleActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public TestActions @Test => new TestActions(this);
-        public interface ITestActions
+        public TitleActions @Title => new TitleActions(this);
+
+        // Game
+        private readonly InputActionMap m_Game;
+        private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
+        private readonly InputAction m_Game_Newaction;
+        public struct GameActions
         {
-            void OnSubmit(InputAction.CallbackContext context);
-            void OnCancel(InputAction.CallbackContext context);
-            void OnMove(InputAction.CallbackContext context);
-            void OnHold(InputAction.CallbackContext context);
+            private @IA m_Wrapper;
+            public GameActions(@IA wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Newaction => m_Wrapper.m_Game_Newaction;
+            public InputActionMap Get() { return m_Wrapper.m_Game; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
+            public void AddCallbacks(IGameActions instance)
+            {
+                if (instance == null || m_Wrapper.m_GameActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_GameActionsCallbackInterfaces.Add(instance);
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+
+            private void UnregisterCallbacks(IGameActions instance)
+            {
+                @Newaction.started -= instance.OnNewaction;
+                @Newaction.performed -= instance.OnNewaction;
+                @Newaction.canceled -= instance.OnNewaction;
+            }
+
+            public void RemoveCallbacks(IGameActions instance)
+            {
+                if (m_Wrapper.m_GameActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IGameActions instance)
+            {
+                foreach (var item in m_Wrapper.m_GameActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_GameActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public GameActions @Game => new GameActions(this);
+        public interface ITitleActions
+        {
+            void OnStart(InputAction.CallbackContext context);
+            void OnQuit(InputAction.CallbackContext context);
+        }
+        public interface IGameActions
+        {
+            void OnNewaction(InputAction.CallbackContext context);
         }
     }
 }
