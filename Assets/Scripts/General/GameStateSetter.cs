@@ -1,3 +1,4 @@
+using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,19 @@ namespace General
         [RuntimeInitializeOnLoadMethod]
         static void RuntimeInitializeOnLoadMethods()
         {
-            // Screen.SetResolution(1920, 1080, true); // 解像度とフルスクリーンにするかどうかを設定
+            // 解像度とフルスクリーンにするかどうかを設定
+            Screen.SetResolution(SO_GameState.Entity.Resolution.x, SO_GameState.Entity.Resolution.y, SO_GameState.Entity.IsFullScreen);
 
-            QualitySettings.vSyncCount = 0; // VSyncをOFFにする
-            Application.targetFrameRate = 60; // ターゲットフレームレートの設定
+            // Vsync（とターゲットフレームレート）の設定
+            if (SO_GameState.Entity.IsVsyncOn)
+            {
+                QualitySettings.vSyncCount = 1; // VSyncをONにする
+            }
+            else
+            {
+                QualitySettings.vSyncCount = 0; // VSyncをOFFにする
+                Application.targetFrameRate = SO_GameState.Entity.TargetFrameRate; // ターゲットフレームレートの設定
+            }
         }
     }
 }
