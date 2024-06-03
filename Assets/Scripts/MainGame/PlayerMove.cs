@@ -1,4 +1,5 @@
-using System;
+using IA;
+using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,10 @@ namespace MainGame
     {
         [SerializeField] Animator anim;
 
-        // プレイヤーの向きを判定する際に使う2つの単位ベクトル。
+        // プレイヤーの向きを判定する際に使う2つのベクトル。
         // 入力された移動方向の単位ベクトルと、これらとの内積の正負の組み合わせによって、向いている方向を判断する。
-        readonly Vector2 baseVec1 = new Vector2(-1, -1).normalized;
-        readonly Vector2 baseVec2 = new Vector2(1, -1).normalized;
+        static readonly Vector2 baseVec1 = new(-1, -1);
+        static readonly Vector2 baseVec2 = new(1, -1);
 
         // プレイヤーの向き
         enum DIR { DOWN, LEFT, UP, RIGHT }
@@ -21,23 +22,25 @@ namespace MainGame
         // プレイヤーが整数座標まで移動完了しているか
         bool IsStepEnded = true;
 
-        float speed = 5f;
-
         void Update()
         {
             if (IsStepEnded)
             {
-                Vector2 inputDir = IA.InputGetter.Instance.MainGame_ValueMove;
+                Vector2 inputDir = InputGetter.Instance.MainGame_ValueMove;
 
                 // （動いているなら）向いている方向を判断する。
                 if (inputDir != Vector2.zero)
                 {
                     float dot1 = Vector2.Dot(baseVec1, inputDir);
                     float dot2 = Vector2.Dot(baseVec2, inputDir);
-                    if (dot1 >= 0 && dot2 >= 0) lookingDir = DIR.DOWN;
-                    else if (dot1 >= 0 && dot2 < 0) lookingDir = DIR.LEFT;
-                    else if (dot1 < 0 & dot2 >= 0) lookingDir = DIR.RIGHT;
-                    else lookingDir = DIR.UP;
+
+                    lookingDir = (dot1 >= 0, dot2 >= 0) switch
+                    {
+                        (true, true) => DIR.DOWN,
+                        (true, false) => DIR.LEFT,
+                        (false, true) => DIR.RIGHT,
+                        (false, false) => DIR.UP,
+                    };
                 }
 
                 // アニメーションの遷移を発火させる。
@@ -60,8 +63,9 @@ namespace MainGame
 
             while (true)
             {
-                transform.position += speed * Time.deltaTime * dir;
-                if ((transform.position - fromPos).sqrMagnitude >= 1) break;
+                transform.position += SO_Player.Entity.Speed * Time.deltaTime * dir;
+                if ((transform.position - fromPos).sqrMagnitude >= 1)
+                    break;
                 yield return null;
             }
 
