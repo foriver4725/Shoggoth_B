@@ -9,6 +9,8 @@ namespace Test
         GameObject[] path;
         GameObject[] block;
 
+        GameObject[] stokingPoint;
+
         void Start()
         {
             path = GameObject.FindGameObjectsWithTag("path");
@@ -16,10 +18,17 @@ namespace Test
             {
                 e.GetComponent<SpriteRenderer>().color = Color.green;
             }
+
             block = GameObject.FindGameObjectsWithTag("block");
             foreach (GameObject e in block)
             {
                 e.GetComponent<SpriteRenderer>().color = Color.black;
+            }
+
+            stokingPoint = GameObject.FindGameObjectsWithTag("type_stokingpoint");
+            foreach (GameObject e in stokingPoint)
+            {
+                e.GetComponent<SpriteRenderer>().color = Color.red;
             }
         }
 

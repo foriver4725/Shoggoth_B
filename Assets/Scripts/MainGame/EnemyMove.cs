@@ -1,4 +1,3 @@
-using IA;
 using SO;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,34 +14,68 @@ namespace MainGame
         // プレイヤーが整数座標まで移動完了しているか
         bool IsStepEnded = true;
 
+        // 敵が徘徊ポイント上にいるか
+        bool isAtStokingPosition = true;
+        Vector2Int targetPos = new();
+
         void Update()
         {
             if (IsStepEnded)
             {
-                List<Vector2Int> pathPositionsToPlayer = Ex.AStar.Pathfinding.FindPath
+                if (isAtStokingPosition)
+                {
+                    int posNum = GameManager.Instance.EnemyStokingPositions.Count;
+                    int nextIndex = Random.Range(0, posNum);
+
+                    int i = 0;
+                    foreach (Vector2Int pos in GameManager.Instance.EnemyStokingPositions)
+                    {
+                        Vector2Int preTargetPos = targetPos;
+                        targetPos = pos;
+                        if (i == nextIndex)
+                        {
+                            if (targetPos != transform.position.ToVec2I())
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                targetPos = preTargetPos;
+                                break;
+                            }
+                        }
+                        i++;
+                    }
+
+                    isAtStokingPosition = false;
+                }
+                else
+                {
+                    List<Vector2Int> pathPositionsToPlayer = Ex.AStar.Pathfinding.FindPath
                     (
-                    GameManager.Instance.Enemy.transform.position.ToVec2I(),
-                    GameManager.Instance.Player.transform.position.ToVec2I(),
+                    transform.position.ToVec2I(),
+                    targetPos,
                     GameManager.Instance.PathPositions
                     );
-                Vector2 moveDir = Vector2.zero;
-                if (pathPositionsToPlayer != null && pathPositionsToPlayer.Count > 1)
-                {
-                    Vector3 _moveDir = pathPositionsToPlayer[1].ToVec3() - transform.position;
-                    moveDir = new(_moveDir.x, _moveDir.y);
-                }
+                    Vector2 moveDir = Vector2.zero;
+                    if (pathPositionsToPlayer != null && pathPositionsToPlayer.Count > 1)
+                    {
+                        Vector3 _moveDir = pathPositionsToPlayer[1].ToVec3() - transform.position;
+                        moveDir = new(_moveDir.x, _moveDir.y);
+                    }
 
-                // （動いているなら）向いている方向を判断する。
-                if (moveDir != Vector2.zero)
-                {
-                    lookingDir = moveDir.ToDir();
-                }
+                    // （動いているなら）向いている方向を判断する。
+                    if (moveDir != Vector2.zero)
+                    {
+                        lookingDir = moveDir.ToDir();
+                    }
 
-                // 必ず向いている方向の次の整数座標まで移動し、その間は入力を受け付けない。
-                if (moveDir != Vector2.zero)
-                {
-                    IsStepEnded = false;
-                    StartCoroutine(MoveTo(lookingDir.ToVector3()));
+                    // 必ず向いている方向の次の整数座標まで移動する。
+                    if (moveDir != Vector2.zero)
+                    {
+                        IsStepEnded = false;
+                        StartCoroutine(MoveTo(lookingDir.ToVector3()));
+                    }
                 }
             }
         }
@@ -68,6 +101,7 @@ namespace MainGame
             }
 
             transform.position = toPos;
+            isAtStokingPosition = GameManager.Instance.EnemyStokingPositions.Contains(toPos.ToVec2I());
             IsStepEnded = true;
         }
     }

@@ -1,3 +1,4 @@
+using Ex;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace MainGame
         #endregion
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
+        [NonSerialized] public HashSet<Vector2Int> EnemyStokingPositions = new();
         [NonSerialized] public GameObject Player;
         [NonSerialized] public GameObject Enemy;
 
@@ -33,8 +35,14 @@ namespace MainGame
             GameObject[] paths = GameObject.FindGameObjectsWithTag("path");
             foreach (GameObject path in paths)
             {
-                Vector3 pos = path.transform.position;
-                PathPositions.Add(new Vector2Int((int)pos.x, (int)pos.y));
+                PathPositions.Add(path.transform.position.ToVec2I());
+            }
+
+            // 「type_stokingposition」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
+            GameObject[] stokingPoses = GameObject.FindGameObjectsWithTag("type_stokingpoint");
+            foreach (GameObject stokingPos in stokingPoses)
+            {
+                EnemyStokingPositions.Add(stokingPos.transform.position.ToVec2I());
             }
 
             Player = GameObject.FindGameObjectWithTag("player");

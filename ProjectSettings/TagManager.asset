@@ -8,6 +8,7 @@ TagManager:
   - block
   - player
   - shoggoth
+  - type_stokingpoint
   layers:
   - Default
   - TransparentFX
