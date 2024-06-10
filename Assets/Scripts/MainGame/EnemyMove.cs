@@ -14,15 +14,35 @@ namespace MainGame
         // プレイヤーが整数座標まで移動完了しているか
         bool IsStepEnded = true;
 
-        // 敵が徘徊ポイント上にいるか
+        // 敵が徘徊ポイント上にいるか（trueになったら、1回だけ目的座標を更新する。）
         bool isAtStokingPosition = true;
         Vector2Int targetPos = new();
 
+        // プレイヤーを追いかけるモードになっているか
+        bool isChasing = false;
+        float stopChaseTime = 0;
+
         void Update()
         {
+            // プレイヤーに近づいたら追跡モードになる。
+            if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+            {
+                isChasing = true;
+            }
+
             if (IsStepEnded)
             {
-                if (isAtStokingPosition)
+                if (isChasing)
+                {
+                    if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude > SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+                    {
+                        stopChaseTime += Time.deltaTime;
+                    }
+                        
+                    if (stopChaseTime >= SO_Player.Entity.EnemyStopChaseRange)
+                    targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
+                }
+                else if (isAtStokingPosition)
                 {
                     int posNum = GameManager.Instance.EnemyStokingPositions.Count;
                     int nextIndex = Random.Range(0, posNum);
@@ -49,33 +69,31 @@ namespace MainGame
 
                     isAtStokingPosition = false;
                 }
-                else
+
+                List<Vector2Int> pathPositionsToPlayer = Ex.AStar.Pathfinding.FindPath
+                        (
+                        transform.position.ToVec2I(),
+                        targetPos,
+                        GameManager.Instance.PathPositions
+                        );
+                Vector2 moveDir = Vector2.zero;
+                if (pathPositionsToPlayer != null && pathPositionsToPlayer.Count > 1)
                 {
-                    List<Vector2Int> pathPositionsToPlayer = Ex.AStar.Pathfinding.FindPath
-                    (
-                    transform.position.ToVec2I(),
-                    targetPos,
-                    GameManager.Instance.PathPositions
-                    );
-                    Vector2 moveDir = Vector2.zero;
-                    if (pathPositionsToPlayer != null && pathPositionsToPlayer.Count > 1)
-                    {
-                        Vector3 _moveDir = pathPositionsToPlayer[1].ToVec3() - transform.position;
-                        moveDir = new(_moveDir.x, _moveDir.y);
-                    }
+                    Vector3 _moveDir = pathPositionsToPlayer[1].ToVec3() - transform.position;
+                    moveDir = new(_moveDir.x, _moveDir.y);
+                }
 
-                    // （動いているなら）向いている方向を判断する。
-                    if (moveDir != Vector2.zero)
-                    {
-                        lookingDir = moveDir.ToDir();
-                    }
+                // （動いているなら）向いている方向を判断する。
+                if (moveDir != Vector2.zero)
+                {
+                    lookingDir = moveDir.ToDir();
+                }
 
-                    // 必ず向いている方向の次の整数座標まで移動する。
-                    if (moveDir != Vector2.zero)
-                    {
-                        IsStepEnded = false;
-                        StartCoroutine(MoveTo(lookingDir.ToVector3()));
-                    }
+                // 必ず向いている方向の次の整数座標まで移動する。
+                if (moveDir != Vector2.zero)
+                {
+                    IsStepEnded = false;
+                    StartCoroutine(MoveTo(lookingDir.ToVector3()));
                 }
             }
         }

@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSpeed: 5
   EnemySpeed: 3
+  EnemyChaseRange: 4
+  EnemyStopChaseRange: 6
+  EnemyStopChaseDuration: 3
