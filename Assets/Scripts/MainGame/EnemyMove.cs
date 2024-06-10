@@ -7,11 +7,9 @@ using Ex;
 
 namespace MainGame
 {
-    public class PlayerMove : MonoBehaviour
+    public class EnemyMove : MonoBehaviour
     {
-        [SerializeField] Animator anim;
-
-        // プレイヤーの向き
+        // 敵の向き
         DIR lookingDir = DIR.DOWN;
 
         // プレイヤーが整数座標まで移動完了しているか
@@ -21,20 +19,27 @@ namespace MainGame
         {
             if (IsStepEnded)
             {
-                Vector2 inputDir = InputGetter.Instance.MainGame_ValueMove;
-
-                // （動いているなら）向いている方向を判断する。
-                if (inputDir != Vector2.zero)
+                List<Vector2Int> pathPositionsToPlayer = Ex.AStar.Pathfinding.FindPath
+                    (
+                    GameManager.Instance.Enemy.transform.position.ToVec2I(),
+                    GameManager.Instance.Player.transform.position.ToVec2I(),
+                    GameManager.Instance.PathPositions
+                    );
+                Vector2 moveDir = Vector2.zero;
+                if (pathPositionsToPlayer != null && pathPositionsToPlayer.Count > 1)
                 {
-                    lookingDir = inputDir.ToDir();
+                    Vector3 _moveDir = pathPositionsToPlayer[1].ToVec3() - transform.position;
+                    moveDir = new(_moveDir.x, _moveDir.y);
                 }
 
-                // アニメーションの遷移を発火させる。
-                anim.SetBool("IsMoving", inputDir != Vector2.zero);
-                anim.SetInteger("LookingDirection", (int)lookingDir);
+                // （動いているなら）向いている方向を判断する。
+                if (moveDir != Vector2.zero)
+                {
+                    lookingDir = moveDir.ToDir();
+                }
 
                 // 必ず向いている方向の次の整数座標まで移動し、その間は入力を受け付けない。
-                if (inputDir != Vector2.zero)
+                if (moveDir != Vector2.zero)
                 {
                     IsStepEnded = false;
                     StartCoroutine(MoveTo(lookingDir.ToVector3()));
@@ -56,7 +61,7 @@ namespace MainGame
 
             while (true)
             {
-                transform.position += SO_Player.Entity.PlayerSpeed * Time.deltaTime * dir;
+                transform.position += SO_Player.Entity.EnemySpeed * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;
                 yield return null;

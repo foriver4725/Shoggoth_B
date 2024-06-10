@@ -24,6 +24,8 @@ namespace MainGame
         #endregion
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
+        [NonSerialized] public GameObject Player;
+        [NonSerialized] public GameObject Enemy;
 
         void Start()
         {
@@ -34,6 +36,9 @@ namespace MainGame
                 Vector3 pos = path.transform.position;
                 PathPositions.Add(new Vector2Int((int)pos.x, (int)pos.y));
             }
+
+            Player = GameObject.FindGameObjectWithTag("player");
+            Enemy = GameObject.FindGameObjectWithTag("shoggoth");
         }
 
         void Update()

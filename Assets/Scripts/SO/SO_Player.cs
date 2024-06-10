@@ -34,6 +34,7 @@ namespace SO
         }
         #endregion
 
-        [Header("プレイヤーの移動スピード [m/s]")] public float Speed;
+        [Header("プレイヤーの移動スピード [m/s]")] public float PlayerSpeed;
+        [Header("敵の移動スピード [m/s]")] public float EnemySpeed;
     }
 }
