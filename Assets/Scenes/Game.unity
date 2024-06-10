@@ -691,8 +691,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 583085461805688068, guid: 6cc29a38574953f4c9cb04de8bd47b9b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 583085461805688068, guid: 6cc29a38574953f4c9cb04de8bd47b9b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 583085461805688068, guid: 6cc29a38574953f4c9cb04de8bd47b9b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 583085461805688068, guid: 6cc29a38574953f4c9cb04de8bd47b9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 583085461805688068, guid: 6cc29a38574953f4c9cb04de8bd47b9b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -730,6 +742,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 583085461805688068, guid: 6cc29a38574953f4c9cb04de8bd47b9b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7689756563471850973, guid: 6cc29a38574953f4c9cb04de8bd47b9b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -750,5 +766,5 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1657534789}
-  - {fileID: 5826774510278124518}
   - {fileID: 7042482666381856040}
+  - {fileID: 5826774510278124518}
