@@ -23,11 +23,17 @@ namespace MainGame
         }
         #endregion
 
-        [NonSerialized] readonly public HashSet<Vector2Int> Obstacles;
+        [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
 
         void Start()
         {
-
+            // 「path」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
+            GameObject[] paths = GameObject.FindGameObjectsWithTag("path");
+            foreach (GameObject path in paths)
+            {
+                Vector3 pos = path.transform.position;
+                PathPositions.Add(new Vector2Int((int)pos.x, (int)pos.y));
+            }
         }
 
         void Update()

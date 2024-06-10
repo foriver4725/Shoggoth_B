@@ -61,6 +61,13 @@ namespace MainGame
             Vector3 fromPos = transform.position;
             Vector3 toPos = fromPos + dir;
 
+            // pathの所しか動けないので、目的地がpathでなかったら移動の処理を行わない。
+            if (!GameManager.Instance.PathPositions.Contains(new Vector2Int((int)toPos.x, (int)toPos.y)))
+            {
+                IsStepEnded = true;
+                yield break;
+            }
+
             while (true)
             {
                 transform.position += SO_Player.Entity.Speed * Time.deltaTime * dir;
