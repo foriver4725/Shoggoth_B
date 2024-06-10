@@ -30,46 +30,36 @@ namespace MainGame
                 isChasing = true;
             }
 
-            if (IsStepEnded)
+            if (isChasing)
             {
-                if (isChasing)
+                if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
                 {
-                    if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude > SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
-                    {
-                        stopChaseTime += Time.deltaTime;
-                    }
-                        
-                    if (stopChaseTime >= SO_Player.Entity.EnemyStopChaseRange)
+                    stopChaseTime += Time.deltaTime;
+                }
+                else
+                {
+                    stopChaseTime = 0;
+                }
+
+                if (stopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
+                {
+                    stopChaseTime = 0;
+                    isChasing = false;
+                    SelectNewStokingPoint();
+                }
+                else
+                {
                     targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
                 }
-                else if (isAtStokingPosition)
-                {
-                    int posNum = GameManager.Instance.EnemyStokingPositions.Count;
-                    int nextIndex = Random.Range(0, posNum);
+            }
+            else if (isAtStokingPosition)
+            {
+                SelectNewStokingPoint();
+                isAtStokingPosition = false;
+            }
 
-                    int i = 0;
-                    foreach (Vector2Int pos in GameManager.Instance.EnemyStokingPositions)
-                    {
-                        Vector2Int preTargetPos = targetPos;
-                        targetPos = pos;
-                        if (i == nextIndex)
-                        {
-                            if (targetPos != transform.position.ToVec2I())
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                targetPos = preTargetPos;
-                                break;
-                            }
-                        }
-                        i++;
-                    }
-
-                    isAtStokingPosition = false;
-                }
-
+            if (IsStepEnded)
+            {
                 List<Vector2Int> pathPositionsToPlayer = Ex.AStar.Pathfinding.FindPath
                         (
                         transform.position.ToVec2I(),
@@ -121,6 +111,32 @@ namespace MainGame
             transform.position = toPos;
             isAtStokingPosition = GameManager.Instance.EnemyStokingPositions.Contains(toPos.ToVec2I());
             IsStepEnded = true;
+        }
+
+        void SelectNewStokingPoint()
+        {
+            int posNum = GameManager.Instance.EnemyStokingPositions.Count;
+            int nextIndex = Random.Range(0, posNum);
+
+            int i = 0;
+            foreach (Vector2Int pos in GameManager.Instance.EnemyStokingPositions)
+            {
+                Vector2Int preTargetPos = targetPos;
+                targetPos = pos;
+                if (i == nextIndex)
+                {
+                    if (targetPos != transform.position.ToVec2I())
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        targetPos = preTargetPos;
+                        break;
+                    }
+                }
+                i++;
+            }
         }
     }
 }
