@@ -35,6 +35,7 @@ namespace SO
         #endregion
 
         [Header("プレイヤーの移動スピード [m/s]")] public float PlayerSpeed;
+        [Header("プレイヤーの移動スピード（走り） [m/s]")] public float PlayerDashSpeed;
         [Header("敵の移動スピード [m/s]")] public float EnemySpeed;
         [Header("敵がプレイヤーを発見する距離")] public float EnemyChaseRange;
         [Header("敵がプレイヤーを見失う距離")] public float EnemyStopChaseRange;

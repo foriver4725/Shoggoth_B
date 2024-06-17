@@ -71,7 +71,6 @@ namespace IA
             if (Title_Istart) Title_Istart = false;
             if (Title_IsQuit) Title_IsQuit = false;
 
-            if (MainGame_IsDash) MainGame_IsDash = false;
             if (MainGame_IsUseItem) MainGame_IsUseItem = false;
             if (MainGame_IsPause) MainGame_IsPause = false;
             if (MainGame_IsMenu) MainGame_IsMenu = false;
@@ -99,7 +98,8 @@ namespace IA
                 _inputs.MainGame.Move.started += MainGame_ReadMove;
                 _inputs.MainGame.Move.performed += MainGame_ReadMove;
                 _inputs.MainGame.Move.canceled += MainGame_ReadMove;
-                _inputs.MainGame.Dash.performed += MainGame_OnDash;
+                _inputs.MainGame.Dash.performed += MainGame_OnDashDown;
+                _inputs.MainGame.Dash.canceled += MainGame_OnDashUp;
                 _inputs.MainGame.UseItem.performed += MainGame_OnUseItem;
                 _inputs.MainGame.Pause.performed += MainGame_OnPause;
                 _inputs.MainGame.Menu.performed += MainGame_OnMenu;
@@ -125,7 +125,8 @@ namespace IA
                 _inputs.MainGame.Move.started -= MainGame_ReadMove;
                 _inputs.MainGame.Move.performed -= MainGame_ReadMove;
                 _inputs.MainGame.Move.canceled -= MainGame_ReadMove;
-                _inputs.MainGame.Dash.performed -= MainGame_OnDash;
+                _inputs.MainGame.Dash.performed -= MainGame_OnDashDown;
+                _inputs.MainGame.Dash.canceled -= MainGame_OnDashUp;
                 _inputs.MainGame.UseItem.performed -= MainGame_OnUseItem;
                 _inputs.MainGame.Pause.performed -= MainGame_OnPause;
                 _inputs.MainGame.Menu.performed -= MainGame_OnMenu;
@@ -150,7 +151,8 @@ namespace IA
         void Title_OnQuit(InputAction.CallbackContext context) { Title_IsQuit = true; }
 
         void MainGame_ReadMove(InputAction.CallbackContext context) { MainGame_ValueMove = context.ReadValue<Vector2>(); }
-        void MainGame_OnDash(InputAction.CallbackContext context) { MainGame_IsDash = true; }
+        void MainGame_OnDashDown(InputAction.CallbackContext context) { MainGame_IsDash = true; }
+        void MainGame_OnDashUp(InputAction.CallbackContext context) { MainGame_IsDash = false; }
         void MainGame_OnUseItem(InputAction.CallbackContext context) { MainGame_IsUseItem = true; }
         void MainGame_OnPause(InputAction.CallbackContext context) { MainGame_IsPause = true; }
         void MainGame_OnMenu(InputAction.CallbackContext context) { MainGame_IsMenu = true; }

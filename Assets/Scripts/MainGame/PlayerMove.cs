@@ -56,7 +56,10 @@ namespace MainGame
 
             while (true)
             {
-                transform.position += SO_Player.Entity.PlayerSpeed * Time.deltaTime * dir;
+                transform.position +=
+                    (InputGetter.Instance.MainGame_IsDash ?
+                    SO_Player.Entity.PlayerDashSpeed : SO_Player.Entity.PlayerSpeed)
+                    * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;
                 yield return null;
