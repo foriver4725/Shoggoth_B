@@ -28,6 +28,7 @@ TagManager:
   - wall_hakusei
   - wall_office
   - wall_jail
+  - floor_corridor
   layers:
   - Default
   - TransparentFX

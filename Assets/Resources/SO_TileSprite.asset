@@ -58,6 +58,11 @@ MonoBehaviour:
     ThemeColor:
       serializedVersion: 2
       rgba: 4286512896
+  - TagName: floor_corridor
+    Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4278190080
   Walls:
   - TagName: wall_lobby
     Sprite: {fileID: 0}
