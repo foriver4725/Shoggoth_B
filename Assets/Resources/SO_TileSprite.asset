@@ -15,40 +15,97 @@ MonoBehaviour:
   Floors:
   - TagName: floor_lobby
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4278255499
   - TagName: floor_eatery
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4278253055
   - TagName: floor_terrace
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4278215167
   - TagName: floor_washroom
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4281139455
   - TagName: floor_lab
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4287955199
   - TagName: floor_library
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4294901931
   - TagName: floor_monitor
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4294901810
   - TagName: floor_office
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4294955776
   - TagName: floor_jail
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4286512896
   Walls:
   - TagName: wall_lobby
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4282295661
   - TagName: wall_eatery
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4282163114
   - TagName: wall_terrace
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4281812914
   - TagName: wall_washroom
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4286724010
   - TagName: wall_lab
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4288887665
   - TagName: wall_library
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4289085519
   - TagName: wall_monitor
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4289365821
   - TagName: wall_hakusei
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4288131134
   - TagName: wall_office
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4282494533
   - TagName: wall_jail
     Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4281775266

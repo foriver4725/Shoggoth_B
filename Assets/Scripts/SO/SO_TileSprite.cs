@@ -44,5 +44,6 @@ namespace SO
     {
         public string TagName;
         public Sprite Sprite;
+        public Color32 ThemeColor;
     }
 }
