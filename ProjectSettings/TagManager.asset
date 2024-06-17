@@ -9,6 +9,25 @@ TagManager:
   - player
   - shoggoth
   - type_stokingpoint
+  - floor_lobby
+  - floor_eatery
+  - floor_terrace
+  - floor_washroom
+  - floor_lab
+  - floor_library
+  - floor_monitor
+  - floor_office
+  - floor_jail
+  - wall_lobby
+  - wall_eatery
+  - wall_terrace
+  - wall_washroom
+  - wall_lab
+  - wall_library
+  - wall_monitor
+  - wall_hakusei
+  - wall_office
+  - wall_jail
   layers:
   - Default
   - TransparentFX
