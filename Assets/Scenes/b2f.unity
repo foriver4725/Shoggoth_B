@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 26180855243697200, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 27998306623862028, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -229,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 675462596020467222, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 688032368209803285, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826844178765627524, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 864745502625040155, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -285,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 987204558889555261, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 1025581703318346857, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1059206057363061655, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 1065233521678017450, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -305,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1154255821488964623, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 1207304979529812382, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -317,11 +317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1290395933775332045, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 1382044842814200974, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 1440463640700254095, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -361,7 +361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1623863901358846506, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 1667422020628179995, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1874942816099064927, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 1888524052120161316, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -457,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2076207209764980508, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2092769085303262322, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -513,11 +513,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2517621525199983777, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2533528706122456071, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2581252485691427738, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -537,11 +537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2640138283340324569, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2654361976813005220, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2675559562684572675, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -561,11 +561,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2742791206809270247, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2766843986490982554, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2768258911854109222, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -577,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2801910516733372180, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2803816637405882271, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -621,7 +621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2976287603392620500, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 2986942437711779858, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061352832901281754, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 3069675573711960406, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -653,7 +653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3137759877859768727, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 3139851950857182219, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -689,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3294221368418517237, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 3300289402053503412, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -741,7 +741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3626609394671845596, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 3669002977657355308, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -801,19 +801,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3999180679942596011, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4039051468134842268, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4051267357416305151, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4059380457752828044, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4086901248260267375, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -841,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4236758998094848479, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4258181604491936421, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -885,11 +885,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4608184062984455888, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4616848722618281515, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4631819588777759718, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -909,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4842257961520248964, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 4881772699160965473, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -973,7 +973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5608762103579368905, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 5654068016783942980, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -997,7 +997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5716573029721094783, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 5723471438915616511, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1009,7 +1009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5775521901014904679, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 5786835395661178840, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1021,7 +1021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5830878631468234439, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 5832778593829189698, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1029,7 +1029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5921418829032073348, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 5921603614985252915, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1037,7 +1037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5933129048606156814, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 5933906500091547542, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1081,7 +1081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6263396193428421342, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 6293948048081472969, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1117,7 +1117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6423395781366052161, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 6431839189978799486, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1125,7 +1125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6557891618582610899, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 6612087556926373162, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1145,7 +1145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6667876692354597133, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 6743848010128581967, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1153,7 +1153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6795761085073284942, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 6849721619402171273, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1229,7 +1229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7423115720153196284, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 7431227896966778920, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1249,7 +1249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7512914551367742120, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 7545067262844484483, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1257,7 +1257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7577579000753221408, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 7607506443575301528, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1273,11 +1273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7737830109490144263, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 7777327061161128291, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 7786487274272301970, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1289,7 +1289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7870417919392178177, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 7878531192288065571, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1313,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8070236472771165762, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 8170034636731140214, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1325,7 +1325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8175459283745581506, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 8209245345696141049, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1357,7 +1357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8419587320447294862, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 8425561520539694968, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1389,7 +1389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8511249393216947149, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 8536906970410674638, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1445,7 +1445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8680593829742031844, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 8681630502915672279, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1469,7 +1469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8793236380671767693, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 8795094117978563899, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1501,7 +1501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9014433586750306031, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     - target: {fileID: 9019582656230451085, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
@@ -1525,7 +1525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9214322659784550572, guid: ecac596740bbd8c4499898a458d70e4b, type: 3}
       propertyPath: m_TagString
-      value: floor_office
+      value: floor_privateroom
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
