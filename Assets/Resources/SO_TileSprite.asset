@@ -48,16 +48,21 @@ MonoBehaviour:
     ThemeColor:
       serializedVersion: 2
       rgba: 4294901810
+  - TagName: floor_secretlab
+    Sprite: {fileID: 0}
+    ThemeColor:
+      serializedVersion: 2
+      rgba: 4294958080
   - TagName: floor_privateroom
     Sprite: {fileID: 0}
     ThemeColor:
       serializedVersion: 2
-      rgba: 4294955776
+      rgba: 4286447360
   - TagName: floor_jail
     Sprite: {fileID: 0}
     ThemeColor:
       serializedVersion: 2
-      rgba: 4286512896
+      rgba: 4278255614
   - TagName: floor_corridor
     Sprite: {fileID: 0}
     ThemeColor:
@@ -99,7 +104,7 @@ MonoBehaviour:
     ThemeColor:
       serializedVersion: 2
       rgba: 4289365821
-  - TagName: wall_hakusei
+  - TagName: wall_secretlab
     Sprite: {fileID: 0}
     ThemeColor:
       serializedVersion: 2

@@ -24,11 +24,12 @@ TagManager:
   - wall_lab
   - wall_library
   - wall_monitor
-  - wall_hakusei
   - wall_jail
   - floor_corridor
   - floor_privateroom
   - wall_privateroom
+  - floor_secretlab
+  - wall_secretlab
   layers:
   - Default
   - TransparentFX
