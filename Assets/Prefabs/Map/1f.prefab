@@ -1711,6 +1711,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: path
       objectReference: {fileID: 0}
+    - target: {fileID: 7417347773053323827, guid: 9b650db0f72980041aee1731a66d3438, type: 3}
+      propertyPath: m_Size.x
+      value: 0.908
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417347773053323827, guid: 9b650db0f72980041aee1731a66d3438, type: 3}
+      propertyPath: m_Size.y
+      value: 0.908
+      objectReference: {fileID: 0}
     - target: {fileID: 7929457261304360742, guid: 9b650db0f72980041aee1731a66d3438, type: 3}
       propertyPath: m_TagString
       value: floor_terrace
@@ -4451,7 +4459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1911553190371770144, guid: 9b650db0f72980041aee1731a66d3438, type: 3}
       propertyPath: m_TagString
-      value: floor_lobby
+      value: block
       objectReference: {fileID: 0}
     - target: {fileID: 2105291585266462082, guid: 9b650db0f72980041aee1731a66d3438, type: 3}
       propertyPath: m_TagString

@@ -17,7 +17,7 @@ namespace Test
             path = GameObject.FindGameObjectsWithTag("path");
             foreach (GameObject e in path)
             {
-                e.GetComponent<SpriteRenderer>().color = Color.green;
+                e.GetComponent<SpriteRenderer>().color = Color.white;
             }
 
             block = GameObject.FindGameObjectsWithTag("block");
@@ -37,7 +37,8 @@ namespace Test
                 GameObject[] objArr = GameObject.FindGameObjectsWithTag(e.TagName);
                 foreach (GameObject obj in objArr)
                 {
-                    obj.GetComponent<SpriteRenderer>().color = e.ThemeColor;
+                    obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
+                    //obj.GetComponent<SpriteRenderer>().color = e.ThemeColor;
                 }
             }
 
@@ -46,7 +47,8 @@ namespace Test
                 GameObject[] objArr = GameObject.FindGameObjectsWithTag(e.TagName);
                 foreach (GameObject obj in objArr)
                 {
-                    obj.GetComponent<SpriteRenderer>().color = e.ThemeColor;
+                    obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
+                    //obj.GetComponent<SpriteRenderer>().color = e.ThemeColor;
                 }
             }
         }
