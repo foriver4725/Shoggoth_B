@@ -7,23 +7,17 @@ namespace Test
 {
     public class Check : MonoBehaviour
     {
-        GameObject[] path;
-        GameObject[] block;
-
         GameObject[] stokingPoint;
 
         void Start()
         {
-            path = GameObject.FindGameObjectsWithTag("path");
-            foreach (GameObject e in path)
+            foreach (TagSprite e in SO_TileSprite.Entity.Debugs)
             {
-                e.GetComponent<SpriteRenderer>().color = Color.white;
-            }
-
-            block = GameObject.FindGameObjectsWithTag("block");
-            foreach (GameObject e in block)
-            {
-                e.GetComponent<SpriteRenderer>().color = Color.black;
+                GameObject[] objArr = GameObject.FindGameObjectsWithTag(e.TagName);
+                foreach (GameObject obj in objArr)
+                {
+                    obj.GetComponent<SpriteRenderer>().sprite = e.Sprite;
+                }
             }
 
             stokingPoint = GameObject.FindGameObjectsWithTag("type_stokingpoint");
@@ -38,7 +32,6 @@ namespace Test
                 foreach (GameObject obj in objArr)
                 {
                     obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
-                    //obj.GetComponent<SpriteRenderer>().color = e.ThemeColor;
                 }
             }
 
@@ -48,7 +41,15 @@ namespace Test
                 foreach (GameObject obj in objArr)
                 {
                     obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
-                    //obj.GetComponent<SpriteRenderer>().color = e.ThemeColor;
+                }
+            }
+
+            foreach (TagSprite e in SO_TileSprite.Entity.Objects)
+            {
+                GameObject[] objArr = GameObject.FindGameObjectsWithTag(e.TagName);
+                foreach (GameObject obj in objArr)
+                {
+                    obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
                 }
             }
         }

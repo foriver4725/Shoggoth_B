@@ -159,7 +159,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f1362b27f411391418734468bbad6be7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f02cb15f461d6e84aa957df06be94825, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -179,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1264863189266355685}
-  - component: {fileID: 8083556420276569774}
+  - component: {fileID: 8897833429773945681}
   m_Layer: 0
   m_Name: TileSprite
   m_TagString: Untagged
@@ -202,14 +202,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8924766505355852179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8083556420276569774
+--- !u!212 &8897833429773945681
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4460268601562026047}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

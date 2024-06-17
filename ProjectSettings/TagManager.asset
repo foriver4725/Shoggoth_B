@@ -30,6 +30,8 @@ TagManager:
   - wall_privateroom
   - floor_secretlab
   - wall_secretlab
+  - object_elevator_floor
+  - object_elevator_machine
   layers:
   - Default
   - TransparentFX

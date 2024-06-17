@@ -382,26 +382,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 701400826778370126, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
-      propertyPath: m_TagString
-      value: floor_eatery
-      objectReference: {fileID: 0}
-    - target: {fileID: 1092442985469104483, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
-      propertyPath: m_TagString
-      value: floor_eatery
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316615788136459999, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
-      propertyPath: m_TagString
-      value: floor_terrace
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472540748959669673, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
-      propertyPath: m_TagString
-      value: floor_terrace
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952646370888018087, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
-      propertyPath: m_TagString
-      value: floor_corridor
-      objectReference: {fileID: 0}
     - target: {fileID: 7230423089690079557, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
       propertyPath: m_Name
       value: 1f

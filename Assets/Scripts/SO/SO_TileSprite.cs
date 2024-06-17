@@ -37,6 +37,8 @@ namespace SO
 
         [Header("床")] public List<TagSprite> Floors;
         [Header("壁")] public List<TagSprite> Walls;
+        [Header("オブジェクト")] public List<TagSprite> Objects;
+        [Header("デバッグ用")] public List<TagSprite> Debugs;
     }
 
     [Serializable]
@@ -44,6 +46,5 @@ namespace SO
     {
         public string TagName;
         public Sprite Sprite;
-        public Color32 ThemeColor;
     }
 }

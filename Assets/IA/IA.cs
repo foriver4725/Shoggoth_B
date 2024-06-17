@@ -365,6 +365,17 @@ namespace IA
                 },
                 {
                     ""name"": """",
+                    ""id"": ""82cba658-9faa-4169-95ac-eabc775fe170"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ae098c40-5cfb-4ca3-af17-e4459f02ce91"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
