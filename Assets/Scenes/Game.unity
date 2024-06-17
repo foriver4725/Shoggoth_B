@@ -337,6 +337,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1657534789}
     m_Modifications:
+    - target: {fileID: 128159774126806533, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
+      propertyPath: m_TagString
+      value: floor_lobby
+      objectReference: {fileID: 0}
     - target: {fileID: 517912675971133045, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -377,9 +381,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5050475703881386929, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
+      propertyPath: m_TagString
+      value: floor_lobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 5152894387525734153, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
+      propertyPath: m_TagString
+      value: floor_lobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519307936607160435, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
+      propertyPath: m_TagString
+      value: floor_lobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551992294249516235, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
+      propertyPath: m_TagString
+      value: floor_lobby
+      objectReference: {fileID: 0}
     - target: {fileID: 7230423089690079557, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
       propertyPath: m_Name
       value: 1f
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705015984120838861, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
+      propertyPath: m_TagString
+      value: floor_lobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 8740086485787915413, guid: eb2def4db5e987b4fa2c5556d5dce660, type: 3}
+      propertyPath: m_TagString
+      value: floor_lobby
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
