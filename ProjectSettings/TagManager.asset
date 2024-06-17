@@ -32,6 +32,7 @@ TagManager:
   - wall_secretlab
   - object_elevator_floor
   - object_elevator_machine
+  - object_jail_cage
   layers:
   - Default
   - TransparentFX
