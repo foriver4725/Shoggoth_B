@@ -48,7 +48,7 @@ MonoBehaviour:
     ThemeColor:
       serializedVersion: 2
       rgba: 4294901810
-  - TagName: floor_office
+  - TagName: floor_privateroom
     Sprite: {fileID: 0}
     ThemeColor:
       serializedVersion: 2
@@ -104,7 +104,7 @@ MonoBehaviour:
     ThemeColor:
       serializedVersion: 2
       rgba: 4288131134
-  - TagName: wall_office
+  - TagName: wall_privateroom
     Sprite: {fileID: 0}
     ThemeColor:
       serializedVersion: 2

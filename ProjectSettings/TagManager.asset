@@ -16,7 +16,6 @@ TagManager:
   - floor_lab
   - floor_library
   - floor_monitor
-  - floor_office
   - floor_jail
   - wall_lobby
   - wall_eatery
@@ -26,9 +25,10 @@ TagManager:
   - wall_library
   - wall_monitor
   - wall_hakusei
-  - wall_office
   - wall_jail
   - floor_corridor
+  - floor_privateroom
+  - wall_privateroom
   layers:
   - Default
   - TransparentFX
