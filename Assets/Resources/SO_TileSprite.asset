@@ -115,7 +115,7 @@ MonoBehaviour:
     Sprite: {fileID: 0}
   - TagName: object_hakusei_shoggoth
     Sprite: {fileID: 0}
-  - TagName: object_breakeroom_lever
+  - TagName: object_breakerroom_lever
     Sprite: {fileID: 0}
   - TagName: object_serverroom_server
     Sprite: {fileID: 0}

@@ -60,7 +60,6 @@ TagManager:
   - object_step
   - object_library_lack
   - object_hakusei_shoggoth
-  - object_breakeroom_lever
   - object_serverroom_server
   - object_jail_dust
   - object_privateroom_lack
@@ -68,6 +67,7 @@ TagManager:
   - object_secretlab_desk
   - object_secretlab_lack
   - object_secretlab_generator
+  - object_breakerroom_lever
   layers:
   - Default
   - TransparentFX
