@@ -486,8 +486,30 @@ namespace IA
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6d62796d-20d4-484b-ab28-ed87525fe5a8"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenDoor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""dd1f4d07-1c0c-4318-9726-485aada94bf0"",
                     ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acf9a8af-5ab2-4019-9ccd-2b8999ca74ea"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -509,7 +531,7 @@ namespace IA
                 {
                     ""name"": """",
                     ""id"": ""402d7662-9f86-4f4c-afee-534f59eea1a6"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -521,17 +543,6 @@ namespace IA
                     ""name"": """",
                     ""id"": ""71b57588-ef12-4c36-8718-64d9b5d490ce"",
                     ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gimmick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9885a222-6544-40a4-b631-09a868aa3dca"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -102,7 +102,7 @@ MonoBehaviour:
   - TagName: object_lab_lack
     Sprite: {fileID: 21300000, guid: d6d6644511e92df42aae4cd6d376cdea, type: 3}
   - TagName: object_monitor_monitor
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 1c9f813965eecb1459127390b3115396, type: 3}
   - TagName: object_monitor_lack
     Sprite: {fileID: 21300000, guid: 8c25d170fa94faa44a84fc4cc2c9728e, type: 3}
   - TagName: object_monitor_chair
@@ -134,7 +134,7 @@ MonoBehaviour:
   - TagName: object_eatery_kitchen
     Sprite: {fileID: 21300000, guid: 2b55b6cce62639c42842c189cbb7d052, type: 3}
   - TagName: object_monitor_monitor_front
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 1c9f813965eecb1459127390b3115396, type: 3}
   RandomObjects:
   - TagName: object_office_desk
     Sprites:
