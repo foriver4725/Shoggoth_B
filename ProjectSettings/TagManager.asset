@@ -33,6 +33,41 @@ TagManager:
   - object_elevator_floor
   - object_elevator_machine
   - object_jail_cage
+  - object_desk_office
+  - object_desk_lobby
+  - object_savepoint
+  - object_plant
+  - object_lobby_desk
+  - object_lobby_chair
+  - object_eatery_kitchen
+  - object_eatery_table
+  - object_vendor
+  - object_terrace_table
+  - object_terrace_aquarium
+  - object_entrance_restroom_locker
+  - object_entrance_restroom_washroom
+  - object_entrance_restroom_room_small
+  - object_entrance_restroom_room_big
+  - object_entrance_entry
+  - object_entrance_statue_shoggoth
+  - object_entrance_statue_leader
+  - object_office_desk
+  - object_lab_desk
+  - object_lab_lack
+  - object_monitor_monitor
+  - object_monitor_lack
+  - object_monitor_chair
+  - object_step
+  - object_library_lack
+  - object_hakusei_shoggoth
+  - object_breakeroom_lever
+  - object_serverroom_server
+  - object_jail_dust
+  - object_privateroom_lack
+  - object_secretlab_torturezone
+  - object_secretlab_desk
+  - object_secretlab_lack
+  - object_secretlab_generator
   layers:
   - Default
   - TransparentFX

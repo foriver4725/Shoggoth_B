@@ -63,6 +63,83 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: b7bada391573e6d4aa6c145bdc88aa8d, type: 3}
   - TagName: object_jail_cage
     Sprite: {fileID: 21300000, guid: f0ed3f00249869c4294d6619334847ba, type: 3}
+  - TagName: object_desk_lobby
+    Sprite: {fileID: 21300000, guid: d7d98dc145833bb469e70c3ca5b4f6fd, type: 3}
+  - TagName: object_savepoint
+    Sprite: {fileID: 0}
+  - TagName: object_plant
+    Sprite: {fileID: 0}
+  - TagName: object_lobby_desk
+    Sprite: {fileID: 0}
+  - TagName: object_lobby_chair
+    Sprite: {fileID: 0}
+  - TagName: object_eatery_kitchen
+    Sprite: {fileID: 0}
+  - TagName: object_eatery_table
+    Sprite: {fileID: 0}
+  - TagName: object_vendor
+    Sprite: {fileID: 0}
+  - TagName: object_terrace_table
+    Sprite: {fileID: 0}
+  - TagName: object_terrace_aquarium
+    Sprite: {fileID: 0}
+  - TagName: object_entrance_restroom_locker
+    Sprite: {fileID: 0}
+  - TagName: object_entrance_restroom_washroom
+    Sprite: {fileID: 0}
+  - TagName: object_entrance_restroom_room_small
+    Sprite: {fileID: 0}
+  - TagName: object_entrance_restroom_room_big
+    Sprite: {fileID: 0}
+  - TagName: object_entrance_entry
+    Sprite: {fileID: 0}
+  - TagName: object_entrance_statue_shoggoth
+    Sprite: {fileID: 0}
+  - TagName: object_entrance_statue_leader
+    Sprite: {fileID: 0}
+  - TagName: object_office_desk
+    Sprite: {fileID: 0}
+  - TagName: object_lab_desk
+    Sprite: {fileID: 0}
+  - TagName: object_lab_lack
+    Sprite: {fileID: 0}
+  - TagName: object_monitor_monitor
+    Sprite: {fileID: 0}
+  - TagName: object_monitor_lack
+    Sprite: {fileID: 0}
+  - TagName: object_monitor_chair
+    Sprite: {fileID: 0}
+  - TagName: object_step
+    Sprite: {fileID: 0}
+  - TagName: object_library_lack
+    Sprite: {fileID: 0}
+  - TagName: object_hakusei_shoggoth
+    Sprite: {fileID: 0}
+  - TagName: object_breakeroom_lever
+    Sprite: {fileID: 0}
+  - TagName: object_serverroom_server
+    Sprite: {fileID: 0}
+  - TagName: object_jail_dust
+    Sprite: {fileID: 0}
+  - TagName: object_privateroom_lack
+    Sprite: {fileID: 0}
+  - TagName: object_secretlab_torturezone
+    Sprite: {fileID: 0}
+  - TagName: object_secretlab_desk
+    Sprite: {fileID: 0}
+  - TagName: object_secretlab_lack
+    Sprite: {fileID: 0}
+  - TagName: object_secretlab_generator
+    Sprite: {fileID: 0}
+  RandomObjects:
+  - TagName: object_desk_office
+    Sprites:
+    - {fileID: 21300000, guid: 1d5ae2592f063c74eb270df94ad2a8b9, type: 3}
+    - {fileID: 21300000, guid: 0f75ca974e315404c8c934e2d042a263, type: 3}
+    - {fileID: 21300000, guid: 2a1d6099cb1f879429bb0ccb061c58f4, type: 3}
+    - {fileID: 21300000, guid: 36a8fe329b54920469ae8344d7086be3, type: 3}
+    - {fileID: 21300000, guid: a9ea45bbfac1ae84fa93de0aa059959a, type: 3}
+    - {fileID: 21300000, guid: b0b9ad80bba8c8d41b1b39c243dcd9d9, type: 3}
   Debugs:
   - TagName: block
     Sprite: {fileID: 21300000, guid: a864bcb6120269c41a4e7c8b14b554a4, type: 3}

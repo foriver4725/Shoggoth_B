@@ -352,6 +352,17 @@
                 },
                 {
                     "name": "",
+                    "id": "667316b7-7413-40b4-8d26-4662b3a9331f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ae098c40-5cfb-4ca3-af17-e4459f02ce91",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",

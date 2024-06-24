@@ -52,11 +52,40 @@ namespace Test
                     obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
                 }
             }
+
+            foreach (TagSprites e in SO_TileSprite.Entity.RandomObjects)
+            {
+                GameObject[] objArr = GameObject.FindGameObjectsWithTag(e.TagName);
+                foreach (GameObject obj in objArr)
+                {
+                    obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprites[Random.Range(0, e.Sprites.Count)];
+                }
+            }
+
+            __ForAllgameObjects();
         }
 
         void Update()
         {
 
+        }
+
+
+
+        [SerializeField] GameObject tmpObj;
+        [SerializeField] Sprite tmpSprite;
+        void __ForAllgameObjects()
+        {
+            GameObject[] allObjs = FindObjectsOfType<GameObject>();
+            foreach (GameObject targetObj in allObjs)
+            {
+                if (targetObj.name == "Object(Clone)")
+                {
+                    SpriteRenderer sr = targetObj.GetComponent<SpriteRenderer>();
+                    sr.sprite = tmpSprite;
+                    sr.color = new Color32(255, 255, 255, 125);
+                }
+            }
         }
     }
 }

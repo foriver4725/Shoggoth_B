@@ -38,6 +38,7 @@ namespace SO
         [Header("床")] public List<TagSprite> Floors;
         [Header("壁")] public List<TagSprite> Walls;
         [Header("オブジェクト")] public List<TagSprite> Objects;
+        [Header("ランダム配置するオブジェクト")] public List<TagSprites> RandomObjects;
         [Header("デバッグ用")] public List<TagSprite> Debugs;
     }
 
@@ -46,5 +47,12 @@ namespace SO
     {
         public string TagName;
         public Sprite Sprite;
+    }
+
+    [Serializable]
+    public class TagSprites
+    {
+        public string TagName;
+        public List<Sprite> Sprites;
     }
 }
