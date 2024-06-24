@@ -49,7 +49,7 @@ namespace Test
                 GameObject[] objArr = GameObject.FindGameObjectsWithTag(e.TagName);
                 foreach (GameObject obj in objArr)
                 {
-                    obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
+                    obj.transform.parent.GetChild(3).GetComponent<SpriteRenderer>().sprite = e.Sprite;
                 }
             }
 
@@ -58,11 +58,11 @@ namespace Test
                 GameObject[] objArr = GameObject.FindGameObjectsWithTag(e.TagName);
                 foreach (GameObject obj in objArr)
                 {
-                    obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprites[Random.Range(0, e.Sprites.Count)];
+                    obj.transform.parent.GetChild(3).GetComponent<SpriteRenderer>().sprite = e.Sprites[Random.Range(0, e.Sprites.Count)];
                 }
             }
 
-            __ForAllgameObjects();
+            //__ForAllgameObjects();
         }
 
         void Update()
@@ -81,8 +81,8 @@ namespace Test
             {
                 if (targetObj.name == "Object(Clone)")
                 {
-                    SpriteRenderer sr = targetObj.GetComponent<SpriteRenderer>();
-                    sr.enabled = false;
+                    Transform parent = targetObj.transform.parent;
+                    Instantiate(tmpObj, parent);
                 }
             }
         }

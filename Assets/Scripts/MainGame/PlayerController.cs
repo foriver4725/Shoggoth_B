@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
         {
             // プレイヤーと敵の距離を計算
             float sqrDistance = (transform.position - enemy.transform.position).sqrMagnitude;
-            Debug.Log(sqrDistance);
             if (sqrDistance <= 1.5f * 1.5f)
             {
                 // 距離が1以下の場合、HPを減らす
