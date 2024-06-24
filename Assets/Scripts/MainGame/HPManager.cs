@@ -1,15 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HPManager : MonoBehaviour
 {
-    public Image[] hearts;
+    public List<Image> hearts; // ハートのImageリスト
     private int currentHP;
 
     void Start()
     {
-        currentHP = hearts.Length;
-        UpdateHearts();
+        currentHP = hearts.Count; // 初期HPをハートの数に設定
     }
 
     public void DecreaseHP()
@@ -17,21 +18,7 @@ public class HPManager : MonoBehaviour
         if (currentHP > 0)
         {
             currentHP--;
-            UpdateHearts();
-        }
-
-        if (currentHP == 0)
-        {
-            // ゲームオーバー処理をここに記述
-            Debug.Log("Game Over");
-        }
-    }
-
-    void UpdateHearts()
-    {
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            hearts[i].enabled = i < currentHP;
+            hearts[currentHP].enabled = false; // ハートのImageを非表示にする
         }
     }
 }
