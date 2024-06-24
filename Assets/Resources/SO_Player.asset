@@ -18,3 +18,4 @@ MonoBehaviour:
   EnemyChaseRange: 4
   EnemyStopChaseRange: 6
   EnemyStopChaseDuration: 3
+  InvincibleTime: 1

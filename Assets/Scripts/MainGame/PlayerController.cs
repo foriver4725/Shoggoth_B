@@ -1,3 +1,4 @@
+using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,34 +7,43 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public HPManager hpManager; // HP管理スクリプト
-    public float checkInterval = 0.1f; // チェック間隔
+    private float _invincibleCount = 0f;
+    private bool _isInvincible = false;
 
-    void Start()
+    void Update()
     {
-        // 一定間隔で敵との距離をチェックするコルーチンを開始
-        StartCoroutine(CheckDistanceToEnemies());
-    }
+        #region 一定間隔で敵との距離をチェックする
 
-    IEnumerator CheckDistanceToEnemies()
-    {
-        while (true)
+        // すべての敵を取得
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("shoggoth");
+        foreach (GameObject enemy in enemies)
         {
-            // すべての敵を取得
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("shoggoth");
-            foreach (GameObject enemy in enemies)
+            // プレイヤーと敵の距離を計算
+            float sqrDistance = (transform.position - enemy.transform.position).sqrMagnitude;
+            Debug.Log(sqrDistance);
+            if (sqrDistance <= 1.5f * 1.5f)
             {
-                // プレイヤーと敵の距離を計算
-                float distance = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distance <= 1f)
+                // 距離が1以下の場合、HPを減らす
+                if (!_isInvincible)
                 {
-                    // 距離が1以下の場合、HPを減らす
+                    _isInvincible = true;
                     hpManager.DecreaseHP();
-                    // HPが減ったので、ここでループを抜ける
-                    break;
                 }
+                // HPが減ったので、ここでループを抜ける
+                break;
             }
-            // チェック間隔を待つ
-            yield return new WaitForSeconds(checkInterval);
         }
+
+        if (_isInvincible)
+        {
+            _invincibleCount += Time.deltaTime;
+            if (_invincibleCount > SO_Player.Entity.InvincibleTime)
+            {
+                _invincibleCount = 0f;
+                _isInvincible = false;
+            }
+        }
+
+        #endregion
     }
 }
