@@ -82,8 +82,7 @@ namespace Test
                 if (targetObj.name == "Object(Clone)")
                 {
                     SpriteRenderer sr = targetObj.GetComponent<SpriteRenderer>();
-                    sr.sprite = tmpSprite;
-                    sr.color = new Color32(255, 255, 255, 125);
+                    sr.enabled = false;
                 }
             }
         }
