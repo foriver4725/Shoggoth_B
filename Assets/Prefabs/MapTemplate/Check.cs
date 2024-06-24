@@ -64,7 +64,7 @@ namespace Test
                 }
             }
 
-            __ForAllgameObjects();
+            //__ForAllgameObjects();
         }
 
         void Update()
@@ -92,7 +92,7 @@ namespace Test
             GameObject[] allObjs = FindObjectsOfType<GameObject>();
             foreach (GameObject targetObj in allObjs)
             {
-                if (targetObj.name == "Object(Clone)")
+                if (targetObj.name == "TileSprite")
                 {
                     targetObj.GetComponent<SpriteRenderer>().enabled = false;
                 }

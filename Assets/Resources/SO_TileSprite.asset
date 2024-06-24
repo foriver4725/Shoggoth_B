@@ -94,9 +94,9 @@ MonoBehaviour:
   - TagName: object_entrance_entry
     Sprite: {fileID: 0}
   - TagName: object_entrance_statue_shoggoth
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 4ab3b8ff267403d4198489b911f37b59, type: 3}
   - TagName: object_entrance_statue_leader
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: bad24a181a8d23640ae8e1e580833052, type: 3}
   - TagName: object_lab_desk
     Sprite: {fileID: 21300000, guid: 1d5ae2592f063c74eb270df94ad2a8b9, type: 3}
   - TagName: object_lab_lack
@@ -104,7 +104,7 @@ MonoBehaviour:
   - TagName: object_monitor_monitor
     Sprite: {fileID: 21300000, guid: 1c9f813965eecb1459127390b3115396, type: 3}
   - TagName: object_monitor_lack
-    Sprite: {fileID: 21300000, guid: 8c25d170fa94faa44a84fc4cc2c9728e, type: 3}
+    Sprite: {fileID: 21300000, guid: 98ced0a58b2fe1a4ba5fbf73c566cc47, type: 3}
   - TagName: object_monitor_chair
     Sprite: {fileID: 0}
   - TagName: object_step
@@ -128,7 +128,7 @@ MonoBehaviour:
   - TagName: object_secretlab_desk
     Sprite: {fileID: 21300000, guid: 1d5ae2592f063c74eb270df94ad2a8b9, type: 3}
   - TagName: object_secretlab_lack
-    Sprite: {fileID: 21300000, guid: 51f5f6dc20ac7bd429b74bc16b852a43, type: 3}
+    Sprite: {fileID: 21300000, guid: 98ced0a58b2fe1a4ba5fbf73c566cc47, type: 3}
   - TagName: object_secretlab_generator
     Sprite: {fileID: 0}
   - TagName: object_eatery_kitchen
