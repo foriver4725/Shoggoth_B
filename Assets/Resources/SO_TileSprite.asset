@@ -66,15 +66,15 @@ MonoBehaviour:
   - TagName: object_desk_lobby
     Sprite: {fileID: 21300000, guid: d7d98dc145833bb469e70c3ca5b4f6fd, type: 3}
   - TagName: object_savepoint
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 9a7d27a0161a15541807888304e2d305, type: 3}
   - TagName: object_plant
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: a1bfa5f5b677cb948b29d055ee521fd3, type: 3}
   - TagName: object_lobby_desk
     Sprite: {fileID: 21300000, guid: d7d98dc145833bb469e70c3ca5b4f6fd, type: 3}
   - TagName: object_lobby_chair
     Sprite: {fileID: 0}
-  - TagName: object_eatery_kitchen
-    Sprite: {fileID: 0}
+  - TagName: object_eatery_kitchen_sink
+    Sprite: {fileID: 21300000, guid: ef331b1d774e729449182f1004211514, type: 3}
   - TagName: object_eatery_table
     Sprite: {fileID: 0}
   - TagName: object_vendor
@@ -112,13 +112,13 @@ MonoBehaviour:
   - TagName: object_library_lack
     Sprite: {fileID: 21300000, guid: 0b80f9eb8617e8949b88fb6269eee88b, type: 3}
   - TagName: object_hakusei_shoggoth
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 6eb6eb47b3e1b2a46bc3d387737abbfe, type: 3}
   - TagName: object_breakerroom_lever
     Sprite: {fileID: 21300000, guid: f53f03d9a7cea264ba4d495fd990c5c9, type: 3}
   - TagName: object_serverroom_server
     Sprite: {fileID: 0}
   - TagName: object_jail_dust
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 7c2f9d9f8a133694291f1308b4fae471, type: 3}
   - TagName: object_privateroom_lack
     Sprite: {fileID: 21300000, guid: 0b80f9eb8617e8949b88fb6269eee88b, type: 3}
   - TagName: object_privateroom_lack_low
@@ -130,6 +130,10 @@ MonoBehaviour:
   - TagName: object_secretlab_lack
     Sprite: {fileID: 21300000, guid: 51f5f6dc20ac7bd429b74bc16b852a43, type: 3}
   - TagName: object_secretlab_generator
+    Sprite: {fileID: 0}
+  - TagName: object_eatery_kitchen
+    Sprite: {fileID: 21300000, guid: 2b55b6cce62639c42842c189cbb7d052, type: 3}
+  - TagName: object_monitor_monitor_front
     Sprite: {fileID: 0}
   RandomObjects:
   - TagName: object_office_desk

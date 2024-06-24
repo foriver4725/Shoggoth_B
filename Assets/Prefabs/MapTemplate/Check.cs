@@ -1,3 +1,5 @@
+using IA;
+using MainGame;
 using SO;
 using System.Collections;
 using System.Collections.Generic;
@@ -62,12 +64,19 @@ namespace Test
                 }
             }
 
-            //__ForAllgameObjects();
+            __ForAllgameObjects();
         }
 
         void Update()
         {
-
+            if (InputGetter.Instance.MainGame_IsTalk)
+            {
+                GameManager.Instance.Player.transform.position = new(100, 36, -1);
+            }
+            if (InputGetter.Instance.MainGame_IsGimmick)
+            {
+                GameManager.Instance.Player.transform.position = new(0, 136, -1);
+            }
         }
 
 
@@ -81,8 +90,7 @@ namespace Test
             {
                 if (targetObj.name == "Object(Clone)")
                 {
-                    Transform parent = targetObj.transform.parent;
-                    Instantiate(tmpObj, parent);
+                    targetObj.GetComponent<SpriteRenderer>().enabled = false;
                 }
             }
         }

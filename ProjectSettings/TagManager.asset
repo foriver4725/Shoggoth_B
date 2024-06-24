@@ -69,6 +69,8 @@ TagManager:
   - object_secretlab_generator
   - object_breakerroom_lever
   - object_privateroom_lack_low
+  - object_eatery_kitchen_sink
+  - object_monitor_monitor_front
   layers:
   - Default
   - TransparentFX
