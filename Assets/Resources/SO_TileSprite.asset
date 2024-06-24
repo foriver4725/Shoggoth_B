@@ -97,8 +97,6 @@ MonoBehaviour:
     Sprite: {fileID: 0}
   - TagName: object_entrance_statue_leader
     Sprite: {fileID: 0}
-  - TagName: object_office_desk
-    Sprite: {fileID: 0}
   - TagName: object_lab_desk
     Sprite: {fileID: 0}
   - TagName: object_lab_lack
@@ -131,8 +129,10 @@ MonoBehaviour:
     Sprite: {fileID: 0}
   - TagName: object_secretlab_generator
     Sprite: {fileID: 0}
+  - TagName: object_privateroom_lack_low
+    Sprite: {fileID: 0}
   RandomObjects:
-  - TagName: object_desk_office
+  - TagName: object_office_desk
     Sprites:
     - {fileID: 21300000, guid: 1d5ae2592f063c74eb270df94ad2a8b9, type: 3}
     - {fileID: 21300000, guid: 0f75ca974e315404c8c934e2d042a263, type: 3}
