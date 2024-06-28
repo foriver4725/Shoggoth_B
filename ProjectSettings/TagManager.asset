@@ -66,11 +66,16 @@ TagManager:
   - object_secretlab_torturezone
   - object_secretlab_desk
   - object_secretlab_lack
-  - object_secretlab_generator
   - object_breakerroom_lever
   - object_privateroom_lack_low
   - object_eatery_kitchen_sink
   - object_monitor_monitor_front
+  - object_lab_lack_down
+  - object_secretlab_generator_front
+  - object_secretlab_generator_front_broken
+  - object_secretlab_generator_down
+  - object_secretlab_generator_left
+  - object_secretlab_generator_right
   layers:
   - Default
   - TransparentFX

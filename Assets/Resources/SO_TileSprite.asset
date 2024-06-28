@@ -74,7 +74,7 @@ MonoBehaviour:
   - TagName: object_lobby_chair
     Sprite: {fileID: 0}
   - TagName: object_eatery_kitchen_sink
-    Sprite: {fileID: 21300000, guid: ef331b1d774e729449182f1004211514, type: 3}
+    Sprite: {fileID: 21300000, guid: a74a3db09e9d4fc4fad54b903e39691b, type: 3}
   - TagName: object_eatery_table
     Sprite: {fileID: 0}
   - TagName: object_vendor
@@ -82,7 +82,7 @@ MonoBehaviour:
   - TagName: object_terrace_table
     Sprite: {fileID: 21300000, guid: a8d94aa5f19c29b41b10ff262930e29f, type: 3}
   - TagName: object_terrace_aquarium
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: ff266eb8dd91ecf4791269fb45f17dfb, type: 3}
   - TagName: object_entrance_restroom_locker
     Sprite: {fileID: 0}
   - TagName: object_entrance_restroom_washroom
@@ -124,17 +124,27 @@ MonoBehaviour:
   - TagName: object_privateroom_lack_low
     Sprite: {fileID: 21300000, guid: 7e447bdf367a18240a7e9fec43e24d2c, type: 3}
   - TagName: object_secretlab_torturezone
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: f208ada4feebea840b92d4e85c83af92, type: 3}
   - TagName: object_secretlab_desk
     Sprite: {fileID: 21300000, guid: 1d5ae2592f063c74eb270df94ad2a8b9, type: 3}
   - TagName: object_secretlab_lack
     Sprite: {fileID: 21300000, guid: 98ced0a58b2fe1a4ba5fbf73c566cc47, type: 3}
-  - TagName: object_secretlab_generator
-    Sprite: {fileID: 0}
   - TagName: object_eatery_kitchen
-    Sprite: {fileID: 21300000, guid: 2b55b6cce62639c42842c189cbb7d052, type: 3}
+    Sprite: {fileID: 21300000, guid: a223d5fb2fee953469f4886b93c26982, type: 3}
   - TagName: object_monitor_monitor_front
     Sprite: {fileID: 21300000, guid: 1c9f813965eecb1459127390b3115396, type: 3}
+  - TagName: object_lab_lack_down
+    Sprite: {fileID: 21300000, guid: 7af115c3d2665b64c96de0b5be471fff, type: 3}
+  - TagName: object_secretlab_generator_front
+    Sprite: {fileID: 21300000, guid: c7a47153388dbaf458b1eae711ac665e, type: 3}
+  - TagName: object_secretlab_generator_front_broken
+    Sprite: {fileID: 21300000, guid: d09cbb50d7dba644b8022678fdd25f3b, type: 3}
+  - TagName: object_secretlab_generator_down
+    Sprite: {fileID: 21300000, guid: 9604130eeabc3ac4d9376339d510ca65, type: 3}
+  - TagName: object_secretlab_generator_left
+    Sprite: {fileID: 21300000, guid: 47a3a8bc0056331479d07d75b7574e0c, type: 3}
+  - TagName: object_secretlab_generator_right
+    Sprite: {fileID: 21300000, guid: 4e9278bd9856f0646850b543c03fcc31, type: 3}
   RandomObjects:
   - TagName: object_office_desk
     Sprites:

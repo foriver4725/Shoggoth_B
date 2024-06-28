@@ -64,7 +64,7 @@ namespace Test
                 }
             }
 
-            //__ForAllgameObjects();
+            __ForAllgameObjects();
         }
 
         void Update()
@@ -89,14 +89,14 @@ namespace Test
         [SerializeField] Sprite tmpSprite;
         void __ForAllgameObjects()
         {
-            GameObject[] allObjs = FindObjectsOfType<GameObject>();
-            foreach (GameObject targetObj in allObjs)
-            {
-                if (targetObj.name == "TileSprite")
-                {
-                    targetObj.GetComponent<SpriteRenderer>().enabled = false;
-                }
-            }
+            //GameObject[] allObjs = FindObjectsOfType<GameObject>();
+            //foreach (GameObject targetObj in allObjs)
+            //{
+            //    if (targetObj.name == "Object(Clone)")
+            //    {
+            //        targetObj.GetComponent<SpriteRenderer>().enabled = false;
+            //    }
+            //}
         }
     }
 }
