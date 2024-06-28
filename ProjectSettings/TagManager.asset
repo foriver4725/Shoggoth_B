@@ -76,6 +76,8 @@ TagManager:
   - object_secretlab_generator_down
   - object_secretlab_generator_left
   - object_secretlab_generator_right
+  - object_secretlab_generator
+  - floor_oneway_down
   layers:
   - Default
   - TransparentFX
