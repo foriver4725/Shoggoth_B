@@ -41,5 +41,12 @@ namespace SO
         [Header("敵がプレイヤーを見失う距離")] public float EnemyStopChaseRange;
         [Header("敵が↑の距離より遠くにいるとき、プレイヤーを見失うまでの時間")] public float EnemyStopChaseDuration;
         [Header("無敵時間")] public float InvincibleTime;
+        [Header("BGMのプレハブ")] public GameObject bgmOn;
+        [Header("SEのプレハブ")] public GameObject seOn;
+        [Header("チェイス中のBGM")] public AudioClip ChaseBGM;
+        [Header("通常のBGM")] public AudioClip NormalBGM;
+        [Header("TitleのBGM")] public AudioClip TitleBGM;
+        [Header("ダメージ")] public AudioClip damegeSE;
+        [Header("足音")] public AudioClip footstepBGM;
     }
 }
