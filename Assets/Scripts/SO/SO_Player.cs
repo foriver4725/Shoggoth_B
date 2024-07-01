@@ -47,6 +47,7 @@ namespace SO
         [Header("’Êí‚ÌBGM")] public AudioClip NormalBGM;
         [Header("Title‚ÌBGM")] public AudioClip TitleBGM;
         [Header("ƒ_ƒ[ƒW")] public AudioClip damegeSE;
-        [Header("‘«‰¹")] public AudioClip footstepBGM;
+        [Header("‘«‰¹(walk)")] public AudioClip footstep_wBGM;
+        [Header("‘«‰¹(run)")] public AudioClip footstep_rBGM;
     }
 }
