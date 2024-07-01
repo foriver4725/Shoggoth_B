@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HPManager : MonoBehaviour
 {
     public List<Image> hearts; // ハートのImageリスト
-    private int currentHP;
+     static public int currentHP;
 
     void Start()
     {
