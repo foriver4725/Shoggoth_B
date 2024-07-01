@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Scene
 {
-    public class OPtoMAIN : MonoBehaviour
+    public class GameOvertoOP : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()
@@ -19,7 +19,8 @@ namespace Scene
         {
             if (IA.InputGetter.Instance.System_IsSubmit)
             {
-                SceneManager.LoadSceneAsync(SO_SceneName.Entity.OP);
+                SceneManager.LoadSceneAsync(SO_SceneName.Entity.Title);
+                
             }
         }
     }
