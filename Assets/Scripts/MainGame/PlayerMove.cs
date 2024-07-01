@@ -15,11 +15,17 @@ namespace MainGame
         DIR lookingDir = DIR.DOWN;
 
         // プレイヤーが整数座標まで移動完了しているか
-        bool IsStepEnded = true;
+        bool isStepEnded = true;
+
+        // 生きているか
+        public bool IsAlive { get; set; } = true;
 
         void Update()
         {
-            if (IsStepEnded)
+            // 死んでいるなら動けない
+            if (!IsAlive) return;
+
+            if (isStepEnded)
             {
                 Vector2 inputDir = InputGetter.Instance.MainGame_ValueMove;
 
@@ -36,7 +42,7 @@ namespace MainGame
                 // 必ず向いている方向の次の整数座標まで移動し、その間は入力を受け付けない。
                 if (inputDir != Vector2.zero)
                 {
-                    IsStepEnded = false;
+                    isStepEnded = false;
                     StartCoroutine(MoveTo(lookingDir.ToVector3()));
                 }
             }
@@ -50,7 +56,7 @@ namespace MainGame
             // pathの所しか動けないので、目的地がpathでなかったら移動の処理を行わない。
             if (!GameManager.Instance.PathPositions.Contains(new Vector2Int((int)toPos.x, (int)toPos.y)))
             {
-                IsStepEnded = true;
+                isStepEnded = true;
                 yield break;
             }
 
@@ -66,7 +72,7 @@ namespace MainGame
             }
 
             transform.position = toPos;
-            IsStepEnded = true;
+            isStepEnded = true;
         }
     }
 }
