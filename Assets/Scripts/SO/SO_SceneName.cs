@@ -36,5 +36,6 @@ namespace SO
 
         [Header("タイトルシーン名")] public string Title;
         [Header("メインゲームのシーン名")] public string MainGame;
+        [Header("ゲームクリアのシーン名")] public string GameComplete;
     }
 }
