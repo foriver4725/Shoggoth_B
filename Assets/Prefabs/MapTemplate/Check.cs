@@ -69,18 +69,7 @@ namespace Test
 
         void Update()
         {
-            if (InputGetter.Instance.MainGame_IsOpenDoor)
-            {
-                GameManager.Instance.Player.transform.position = new Vector3(0, 36, -1);
-            }
-            else if (InputGetter.Instance.MainGame_IsHide)
-            {
-                GameManager.Instance.Player.transform.position = new Vector3(100, 36, -1);
-            }
-            else if (InputGetter.Instance.MainGame_IsTalk)
-            {
-                GameManager.Instance.Player.transform.position = new Vector3(0, 136, -1);
-            }
+
         }
 
 

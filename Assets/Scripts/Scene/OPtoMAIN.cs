@@ -17,7 +17,7 @@ namespace Scene
         // Update is called once per frame
         void Update()
         {
-            if (IA.InputGetter.Instance.Title_Istart)
+            if (IA.InputGetter.Instance.System_IsSubmit)
             {
                 SceneManager.LoadSceneAsync(SO_SceneName.Entity.MainGame);
             }

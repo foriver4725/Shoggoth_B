@@ -26,22 +26,22 @@ namespace IA
     ""name"": ""IA"",
     ""maps"": [
         {
-            ""name"": ""Title"",
-            ""id"": ""39449f89-3da2-4942-9a04-c091e17d7aa5"",
+            ""name"": ""System"",
+            ""id"": ""0e2336ca-122c-48d2-bb5b-f87ef7a988c8"",
             ""actions"": [
                 {
-                    ""name"": ""Start"",
+                    ""name"": ""Submit"",
                     ""type"": ""Button"",
-                    ""id"": ""f4fc855e-429d-4b89-866c-9cabc9a20ab9"",
+                    ""id"": ""a956d90e-288b-42be-82ef-db29f30091ee"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Quit"",
+                    ""name"": ""Cancel"",
                     ""type"": ""Button"",
-                    ""id"": ""9d7826b8-4d4d-4df9-b86a-5099b514d6a1"",
+                    ""id"": ""1016d3ae-2743-40c8-adbd-d2b586796e6b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -51,23 +51,23 @@ namespace IA
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""4b4c306d-b868-4207-a7ce-0af28a8f344c"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""id"": ""7e904c8b-468e-4d88-a43e-e79dc86f14f0"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Start"",
+                    ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""286950fd-4f34-48b9-bbf5-ac01cb30ba1f"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""898730ed-d84c-4825-a38a-bde3b7f2ad2a"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Quit"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -105,24 +105,6 @@ namespace IA
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""4377bbed-336e-44b1-9c23-20735cb20ae8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""4575d88f-751e-4997-a620-a7c06e22456d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""ScrollItem"",
                     ""type"": ""Value"",
                     ""id"": ""bfb2fb8e-e651-4a1a-99c2-344f9bbdd66d"",
@@ -132,57 +114,12 @@ namespace IA
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PickUp"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""521b9fbf-1a92-41e7-8ed2-83ef2d937b2e"",
+                    ""id"": ""4377bbed-336e-44b1-9c23-20735cb20ae8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Read"",
-                    ""type"": ""Button"",
-                    ""id"": ""e4cb1275-953c-47ba-a69e-6c45e48262de"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""OpenDoor"",
-                    ""type"": ""Button"",
-                    ""id"": ""b1f48bdb-a5ec-48e8-8bc2-4402ed888be4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Hide"",
-                    ""type"": ""Button"",
-                    ""id"": ""48aa3f28-dc2d-4cf5-980b-98c547fa8cf2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Talk"",
-                    ""type"": ""Button"",
-                    ""id"": ""aa233f2e-e101-4cb5-9101-4c3614635a38"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Gimmick"",
-                    ""type"": ""Button"",
-                    ""id"": ""00e8afd3-289d-4955-827f-586872ce2b26"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=2)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -408,17 +345,6 @@ namespace IA
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""60dbda46-27bd-44c3-a4b2-fc1a4fbf54c5"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""1D Axis"",
                     ""id"": ""35570110-2890-4410-9383-2aeb846bf12a"",
                     ""path"": ""1DAxis"",
@@ -450,181 +376,23 @@ namespace IA
                     ""action"": ""ScrollItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8d46b831-9705-45ff-86da-59947092efc2"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8116aa6f-c109-4aa2-ae13-84a58809aeb0"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Read"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a6d60063-fc30-4388-a1bd-4534b29f8abd"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenDoor"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6d62796d-20d4-484b-ab28-ed87525fe5a8"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenDoor"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dd1f4d07-1c0c-4318-9726-485aada94bf0"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Hide"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""acf9a8af-5ab2-4019-9ccd-2b8999ca74ea"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Hide"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7a35e541-1813-43df-82f1-66b42bbf5e18"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Talk"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""402d7662-9f86-4f4c-afee-534f59eea1a6"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Talk"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""71b57588-ef12-4c36-8718-64d9b5d490ce"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gimmick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Menu"",
-            ""id"": ""0e2336ca-122c-48d2-bb5b-f87ef7a988c8"",
-            ""actions"": [
-                {
-                    ""name"": ""Submit"",
-                    ""type"": ""Button"",
-                    ""id"": ""a956d90e-288b-42be-82ef-db29f30091ee"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Cancel"",
-                    ""type"": ""Button"",
-                    ""id"": ""1016d3ae-2743-40c8-adbd-d2b586796e6b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""7e904c8b-468e-4d88-a43e-e79dc86f14f0"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""898730ed-d84c-4825-a38a-bde3b7f2ad2a"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-            // Title
-            m_Title = asset.FindActionMap("Title", throwIfNotFound: true);
-            m_Title_Start = m_Title.FindAction("Start", throwIfNotFound: true);
-            m_Title_Quit = m_Title.FindAction("Quit", throwIfNotFound: true);
+            // System
+            m_System = asset.FindActionMap("System", throwIfNotFound: true);
+            m_System_Submit = m_System.FindAction("Submit", throwIfNotFound: true);
+            m_System_Cancel = m_System.FindAction("Cancel", throwIfNotFound: true);
             // MainGame
             m_MainGame = asset.FindActionMap("MainGame", throwIfNotFound: true);
             m_MainGame_Move = m_MainGame.FindAction("Move", throwIfNotFound: true);
             m_MainGame_Dash = m_MainGame.FindAction("Dash", throwIfNotFound: true);
             m_MainGame_UseItem = m_MainGame.FindAction("UseItem", throwIfNotFound: true);
-            m_MainGame_Pause = m_MainGame.FindAction("Pause", throwIfNotFound: true);
-            m_MainGame_Menu = m_MainGame.FindAction("Menu", throwIfNotFound: true);
             m_MainGame_ScrollItem = m_MainGame.FindAction("ScrollItem", throwIfNotFound: true);
-            m_MainGame_PickUp = m_MainGame.FindAction("PickUp", throwIfNotFound: true);
-            m_MainGame_Read = m_MainGame.FindAction("Read", throwIfNotFound: true);
-            m_MainGame_OpenDoor = m_MainGame.FindAction("OpenDoor", throwIfNotFound: true);
-            m_MainGame_Hide = m_MainGame.FindAction("Hide", throwIfNotFound: true);
-            m_MainGame_Talk = m_MainGame.FindAction("Talk", throwIfNotFound: true);
-            m_MainGame_Gimmick = m_MainGame.FindAction("Gimmick", throwIfNotFound: true);
-            // Menu
-            m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
-            m_Menu_Submit = m_Menu.FindAction("Submit", throwIfNotFound: true);
-            m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
+            m_MainGame_Pause = m_MainGame.FindAction("Pause", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -683,59 +451,59 @@ namespace IA
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Title
-        private readonly InputActionMap m_Title;
-        private List<ITitleActions> m_TitleActionsCallbackInterfaces = new List<ITitleActions>();
-        private readonly InputAction m_Title_Start;
-        private readonly InputAction m_Title_Quit;
-        public struct TitleActions
+        // System
+        private readonly InputActionMap m_System;
+        private List<ISystemActions> m_SystemActionsCallbackInterfaces = new List<ISystemActions>();
+        private readonly InputAction m_System_Submit;
+        private readonly InputAction m_System_Cancel;
+        public struct SystemActions
         {
             private @IA m_Wrapper;
-            public TitleActions(@IA wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Start => m_Wrapper.m_Title_Start;
-            public InputAction @Quit => m_Wrapper.m_Title_Quit;
-            public InputActionMap Get() { return m_Wrapper.m_Title; }
+            public SystemActions(@IA wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Submit => m_Wrapper.m_System_Submit;
+            public InputAction @Cancel => m_Wrapper.m_System_Cancel;
+            public InputActionMap Get() { return m_Wrapper.m_System; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(TitleActions set) { return set.Get(); }
-            public void AddCallbacks(ITitleActions instance)
+            public static implicit operator InputActionMap(SystemActions set) { return set.Get(); }
+            public void AddCallbacks(ISystemActions instance)
             {
-                if (instance == null || m_Wrapper.m_TitleActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_TitleActionsCallbackInterfaces.Add(instance);
-                @Start.started += instance.OnStart;
-                @Start.performed += instance.OnStart;
-                @Start.canceled += instance.OnStart;
-                @Quit.started += instance.OnQuit;
-                @Quit.performed += instance.OnQuit;
-                @Quit.canceled += instance.OnQuit;
+                if (instance == null || m_Wrapper.m_SystemActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_SystemActionsCallbackInterfaces.Add(instance);
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
             }
 
-            private void UnregisterCallbacks(ITitleActions instance)
+            private void UnregisterCallbacks(ISystemActions instance)
             {
-                @Start.started -= instance.OnStart;
-                @Start.performed -= instance.OnStart;
-                @Start.canceled -= instance.OnStart;
-                @Quit.started -= instance.OnQuit;
-                @Quit.performed -= instance.OnQuit;
-                @Quit.canceled -= instance.OnQuit;
+                @Submit.started -= instance.OnSubmit;
+                @Submit.performed -= instance.OnSubmit;
+                @Submit.canceled -= instance.OnSubmit;
+                @Cancel.started -= instance.OnCancel;
+                @Cancel.performed -= instance.OnCancel;
+                @Cancel.canceled -= instance.OnCancel;
             }
 
-            public void RemoveCallbacks(ITitleActions instance)
+            public void RemoveCallbacks(ISystemActions instance)
             {
-                if (m_Wrapper.m_TitleActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_SystemActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(ITitleActions instance)
+            public void SetCallbacks(ISystemActions instance)
             {
-                foreach (var item in m_Wrapper.m_TitleActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_SystemActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_TitleActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_SystemActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public TitleActions @Title => new TitleActions(this);
+        public SystemActions @System => new SystemActions(this);
 
         // MainGame
         private readonly InputActionMap m_MainGame;
@@ -743,15 +511,8 @@ namespace IA
         private readonly InputAction m_MainGame_Move;
         private readonly InputAction m_MainGame_Dash;
         private readonly InputAction m_MainGame_UseItem;
-        private readonly InputAction m_MainGame_Pause;
-        private readonly InputAction m_MainGame_Menu;
         private readonly InputAction m_MainGame_ScrollItem;
-        private readonly InputAction m_MainGame_PickUp;
-        private readonly InputAction m_MainGame_Read;
-        private readonly InputAction m_MainGame_OpenDoor;
-        private readonly InputAction m_MainGame_Hide;
-        private readonly InputAction m_MainGame_Talk;
-        private readonly InputAction m_MainGame_Gimmick;
+        private readonly InputAction m_MainGame_Pause;
         public struct MainGameActions
         {
             private @IA m_Wrapper;
@@ -759,15 +520,8 @@ namespace IA
             public InputAction @Move => m_Wrapper.m_MainGame_Move;
             public InputAction @Dash => m_Wrapper.m_MainGame_Dash;
             public InputAction @UseItem => m_Wrapper.m_MainGame_UseItem;
-            public InputAction @Pause => m_Wrapper.m_MainGame_Pause;
-            public InputAction @Menu => m_Wrapper.m_MainGame_Menu;
             public InputAction @ScrollItem => m_Wrapper.m_MainGame_ScrollItem;
-            public InputAction @PickUp => m_Wrapper.m_MainGame_PickUp;
-            public InputAction @Read => m_Wrapper.m_MainGame_Read;
-            public InputAction @OpenDoor => m_Wrapper.m_MainGame_OpenDoor;
-            public InputAction @Hide => m_Wrapper.m_MainGame_Hide;
-            public InputAction @Talk => m_Wrapper.m_MainGame_Talk;
-            public InputAction @Gimmick => m_Wrapper.m_MainGame_Gimmick;
+            public InputAction @Pause => m_Wrapper.m_MainGame_Pause;
             public InputActionMap Get() { return m_Wrapper.m_MainGame; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -786,33 +540,12 @@ namespace IA
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
-                @Menu.started += instance.OnMenu;
-                @Menu.performed += instance.OnMenu;
-                @Menu.canceled += instance.OnMenu;
                 @ScrollItem.started += instance.OnScrollItem;
                 @ScrollItem.performed += instance.OnScrollItem;
                 @ScrollItem.canceled += instance.OnScrollItem;
-                @PickUp.started += instance.OnPickUp;
-                @PickUp.performed += instance.OnPickUp;
-                @PickUp.canceled += instance.OnPickUp;
-                @Read.started += instance.OnRead;
-                @Read.performed += instance.OnRead;
-                @Read.canceled += instance.OnRead;
-                @OpenDoor.started += instance.OnOpenDoor;
-                @OpenDoor.performed += instance.OnOpenDoor;
-                @OpenDoor.canceled += instance.OnOpenDoor;
-                @Hide.started += instance.OnHide;
-                @Hide.performed += instance.OnHide;
-                @Hide.canceled += instance.OnHide;
-                @Talk.started += instance.OnTalk;
-                @Talk.performed += instance.OnTalk;
-                @Talk.canceled += instance.OnTalk;
-                @Gimmick.started += instance.OnGimmick;
-                @Gimmick.performed += instance.OnGimmick;
-                @Gimmick.canceled += instance.OnGimmick;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             private void UnregisterCallbacks(IMainGameActions instance)
@@ -826,33 +559,12 @@ namespace IA
                 @UseItem.started -= instance.OnUseItem;
                 @UseItem.performed -= instance.OnUseItem;
                 @UseItem.canceled -= instance.OnUseItem;
-                @Pause.started -= instance.OnPause;
-                @Pause.performed -= instance.OnPause;
-                @Pause.canceled -= instance.OnPause;
-                @Menu.started -= instance.OnMenu;
-                @Menu.performed -= instance.OnMenu;
-                @Menu.canceled -= instance.OnMenu;
                 @ScrollItem.started -= instance.OnScrollItem;
                 @ScrollItem.performed -= instance.OnScrollItem;
                 @ScrollItem.canceled -= instance.OnScrollItem;
-                @PickUp.started -= instance.OnPickUp;
-                @PickUp.performed -= instance.OnPickUp;
-                @PickUp.canceled -= instance.OnPickUp;
-                @Read.started -= instance.OnRead;
-                @Read.performed -= instance.OnRead;
-                @Read.canceled -= instance.OnRead;
-                @OpenDoor.started -= instance.OnOpenDoor;
-                @OpenDoor.performed -= instance.OnOpenDoor;
-                @OpenDoor.canceled -= instance.OnOpenDoor;
-                @Hide.started -= instance.OnHide;
-                @Hide.performed -= instance.OnHide;
-                @Hide.canceled -= instance.OnHide;
-                @Talk.started -= instance.OnTalk;
-                @Talk.performed -= instance.OnTalk;
-                @Talk.canceled -= instance.OnTalk;
-                @Gimmick.started -= instance.OnGimmick;
-                @Gimmick.performed -= instance.OnGimmick;
-                @Gimmick.canceled -= instance.OnGimmick;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             public void RemoveCallbacks(IMainGameActions instance)
@@ -870,84 +582,18 @@ namespace IA
             }
         }
         public MainGameActions @MainGame => new MainGameActions(this);
-
-        // Menu
-        private readonly InputActionMap m_Menu;
-        private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
-        private readonly InputAction m_Menu_Submit;
-        private readonly InputAction m_Menu_Cancel;
-        public struct MenuActions
+        public interface ISystemActions
         {
-            private @IA m_Wrapper;
-            public MenuActions(@IA wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Submit => m_Wrapper.m_Menu_Submit;
-            public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
-            public InputActionMap Get() { return m_Wrapper.m_Menu; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
-            public void AddCallbacks(IMenuActions instance)
-            {
-                if (instance == null || m_Wrapper.m_MenuActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_MenuActionsCallbackInterfaces.Add(instance);
-                @Submit.started += instance.OnSubmit;
-                @Submit.performed += instance.OnSubmit;
-                @Submit.canceled += instance.OnSubmit;
-                @Cancel.started += instance.OnCancel;
-                @Cancel.performed += instance.OnCancel;
-                @Cancel.canceled += instance.OnCancel;
-            }
-
-            private void UnregisterCallbacks(IMenuActions instance)
-            {
-                @Submit.started -= instance.OnSubmit;
-                @Submit.performed -= instance.OnSubmit;
-                @Submit.canceled -= instance.OnSubmit;
-                @Cancel.started -= instance.OnCancel;
-                @Cancel.performed -= instance.OnCancel;
-                @Cancel.canceled -= instance.OnCancel;
-            }
-
-            public void RemoveCallbacks(IMenuActions instance)
-            {
-                if (m_Wrapper.m_MenuActionsCallbackInterfaces.Remove(instance))
-                    UnregisterCallbacks(instance);
-            }
-
-            public void SetCallbacks(IMenuActions instance)
-            {
-                foreach (var item in m_Wrapper.m_MenuActionsCallbackInterfaces)
-                    UnregisterCallbacks(item);
-                m_Wrapper.m_MenuActionsCallbackInterfaces.Clear();
-                AddCallbacks(instance);
-            }
-        }
-        public MenuActions @Menu => new MenuActions(this);
-        public interface ITitleActions
-        {
-            void OnStart(InputAction.CallbackContext context);
-            void OnQuit(InputAction.CallbackContext context);
+            void OnSubmit(InputAction.CallbackContext context);
+            void OnCancel(InputAction.CallbackContext context);
         }
         public interface IMainGameActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
             void OnUseItem(InputAction.CallbackContext context);
-            void OnPause(InputAction.CallbackContext context);
-            void OnMenu(InputAction.CallbackContext context);
             void OnScrollItem(InputAction.CallbackContext context);
-            void OnPickUp(InputAction.CallbackContext context);
-            void OnRead(InputAction.CallbackContext context);
-            void OnOpenDoor(InputAction.CallbackContext context);
-            void OnHide(InputAction.CallbackContext context);
-            void OnTalk(InputAction.CallbackContext context);
-            void OnGimmick(InputAction.CallbackContext context);
-        }
-        public interface IMenuActions
-        {
-            void OnSubmit(InputAction.CallbackContext context);
-            void OnCancel(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }
