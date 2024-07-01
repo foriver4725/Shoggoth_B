@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using IA;
 
 public class MenuController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (IA.InputGetter.Instance.MainGame_IsPause)
         {
             menuPanel.SetActive(!menuPanel.activeSelf);
         }
@@ -28,17 +29,17 @@ public class MenuController : MonoBehaviour
 
     void HandleMenuNavigation()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (IA.InputGetter.Instance.MainGame_IsUp)
         {
             currentIndex = (currentIndex > 0) ? currentIndex - 1 : menuOptions.Length - 1;
             UpdateMenuOptions();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (IA.InputGetter.Instance.MainGame_IsDown)
         {
             currentIndex = (currentIndex < menuOptions.Length - 1) ? currentIndex + 1 : 0;
             UpdateMenuOptions();
         }
-        else if (Input.GetKeyDown(KeyCode.Return))
+        else if (IA.InputGetter.Instance.System_IsSubmit)
         {
             ExecuteMenuOption();
         }

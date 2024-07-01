@@ -50,6 +50,8 @@ namespace IA
         public bool MainGame_IsUseItem { get; private set; } = false;
         public int MainGame_ValueScrollItem { get; private set; } = 0;
         public bool MainGame_IsPause { get; private set; } = false;
+        public bool MainGame_IsUp { get; private set; } = false;
+        public bool MainGame_IsDown { get; private set; } = false;
 
         public bool System_IsSubmit { get; private set; } = false;
         public bool System_IsCancel { get; private set; } = false;
@@ -60,6 +62,8 @@ namespace IA
         {
             if (MainGame_IsUseItem) MainGame_IsUseItem = false;
             if (MainGame_IsPause) MainGame_IsPause = false;
+            if (MainGame_IsUp) MainGame_IsUp = false;
+            if (MainGame_IsDown) MainGame_IsDown = false;
 
             if (System_IsSubmit) System_IsSubmit = false;
             if (System_IsCancel) System_IsCancel = false;
@@ -82,6 +86,8 @@ namespace IA
                 _inputs.MainGame.ScrollItem.performed += MainGame_ReadScrollItem;
                 _inputs.MainGame.ScrollItem.canceled += MainGame_ReadScrollItem;
                 _inputs.MainGame.Pause.performed += MainGame_OnPause;
+                _inputs.MainGame.Up.performed += MainGame_OnUp;
+                _inputs.MainGame.Down.performed += MainGame_OnDown;
 
                 _inputs.System.Submit.performed += System_OnSubmit;
                 _inputs.System.Cancel.performed += System_OnCancel;
@@ -99,6 +105,8 @@ namespace IA
                 _inputs.MainGame.ScrollItem.performed -= MainGame_ReadScrollItem;
                 _inputs.MainGame.ScrollItem.canceled -= MainGame_ReadScrollItem;
                 _inputs.MainGame.Pause.performed -= MainGame_OnPause;
+                _inputs.MainGame.Up.performed -= MainGame_OnUp;
+                _inputs.MainGame.Down.performed -= MainGame_OnDown;
 
                 _inputs.System.Submit.performed -= System_OnSubmit;
                 _inputs.System.Cancel.performed -= System_OnCancel;
@@ -119,6 +127,8 @@ namespace IA
             else MainGame_ValueScrollItem = 0;
         }
         void MainGame_OnPause(InputAction.CallbackContext context) { MainGame_IsPause = true; }
+        void MainGame_OnUp(InputAction.CallbackContext context) { MainGame_IsUp = true; }
+        void MainGame_OnDown(InputAction.CallbackContext context) { MainGame_IsDown = true; }
 
         void System_OnSubmit(InputAction.CallbackContext context) { System_IsSubmit = true; }
         void System_OnCancel(InputAction.CallbackContext context) { System_IsCancel = true; }

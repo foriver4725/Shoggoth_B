@@ -121,6 +121,24 @@ namespace IA
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""88ffc70b-883d-406e-82e8-6a25f41c99cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f3e0d2f-5bd0-4451-9a28-d3ae3df8bcb8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -376,6 +394,28 @@ namespace IA
                     ""action"": ""ScrollItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58dc4cdd-085d-4ac5-a402-364c08004b20"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d8b161b-d925-4392-8044-f4542d34704b"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -393,6 +433,8 @@ namespace IA
             m_MainGame_UseItem = m_MainGame.FindAction("UseItem", throwIfNotFound: true);
             m_MainGame_ScrollItem = m_MainGame.FindAction("ScrollItem", throwIfNotFound: true);
             m_MainGame_Pause = m_MainGame.FindAction("Pause", throwIfNotFound: true);
+            m_MainGame_Up = m_MainGame.FindAction("Up", throwIfNotFound: true);
+            m_MainGame_Down = m_MainGame.FindAction("Down", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -513,6 +555,8 @@ namespace IA
         private readonly InputAction m_MainGame_UseItem;
         private readonly InputAction m_MainGame_ScrollItem;
         private readonly InputAction m_MainGame_Pause;
+        private readonly InputAction m_MainGame_Up;
+        private readonly InputAction m_MainGame_Down;
         public struct MainGameActions
         {
             private @IA m_Wrapper;
@@ -522,6 +566,8 @@ namespace IA
             public InputAction @UseItem => m_Wrapper.m_MainGame_UseItem;
             public InputAction @ScrollItem => m_Wrapper.m_MainGame_ScrollItem;
             public InputAction @Pause => m_Wrapper.m_MainGame_Pause;
+            public InputAction @Up => m_Wrapper.m_MainGame_Up;
+            public InputAction @Down => m_Wrapper.m_MainGame_Down;
             public InputActionMap Get() { return m_Wrapper.m_MainGame; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -546,6 +592,12 @@ namespace IA
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
             }
 
             private void UnregisterCallbacks(IMainGameActions instance)
@@ -565,6 +617,12 @@ namespace IA
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @Up.started -= instance.OnUp;
+                @Up.performed -= instance.OnUp;
+                @Up.canceled -= instance.OnUp;
+                @Down.started -= instance.OnDown;
+                @Down.performed -= instance.OnDown;
+                @Down.canceled -= instance.OnDown;
             }
 
             public void RemoveCallbacks(IMainGameActions instance)
@@ -594,6 +652,8 @@ namespace IA
             void OnUseItem(InputAction.CallbackContext context);
             void OnScrollItem(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
+            void OnUp(InputAction.CallbackContext context);
+            void OnDown(InputAction.CallbackContext context);
         }
     }
 }
