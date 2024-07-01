@@ -62,8 +62,30 @@ namespace IA
                 },
                 {
                     ""name"": """",
+                    ""id"": ""465c17c7-935a-4602-b499-282e08421fa4"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""898730ed-d84c-4825-a38a-bde3b7f2ad2a"",
                     ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d824337-5196-4dfe-8ed7-d0ea1bc34aaa"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -253,8 +275,8 @@ namespace IA
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""8ffceb0c-3646-4735-9efa-4ba4e2c64ad3"",
+                    ""name"": ""Gamepad"",
+                    ""id"": ""5bef9f98-7bf2-4649-a175-1d0c88ba62d8"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -265,8 +287,8 @@ namespace IA
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""243b3a26-73e4-4e9d-8f50-9c7501fa34db"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""id"": ""7dfb4524-4069-48fa-8861-e3e0f16ae62f"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -276,8 +298,8 @@ namespace IA
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""58702007-a759-4070-9a2c-b51a8d10cac6"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""id"": ""fd9af5f1-37a2-4d1c-a67c-00fdc4ffb7c7"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -287,8 +309,8 @@ namespace IA
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""2ee55f1e-4f01-4f1a-95fd-4d789f1dbe92"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""id"": ""4a4da666-8819-4421-a30d-872e5a01528e"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -298,8 +320,8 @@ namespace IA
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""f4de4f3d-5948-4c28-922c-c66240465ee8"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""id"": ""183affb0-2ce2-495e-8be2-faff41a337fa"",
+                    ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -332,7 +354,7 @@ namespace IA
                 {
                     ""name"": """",
                     ""id"": ""667316b7-7413-40b4-8d26-4662b3a9331f"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -353,6 +375,17 @@ namespace IA
                 },
                 {
                     ""name"": """",
+                    ""id"": ""17767f16-fdb4-4a46-a695-bf0afa313c06"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""49bc7cd5-1504-484d-a313-3cb50a7e3869"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -363,7 +396,18 @@ namespace IA
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": """",
+                    ""id"": ""bf56b798-923b-4a4e-8391-b415c2b31c57"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Mouse"",
                     ""id"": ""35570110-2890-4410-9383-2aeb846bf12a"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -396,6 +440,39 @@ namespace IA
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""3cf42207-f8ec-497c-82b1-ed2b388bcadc"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollItem"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""62d15cad-340c-45c3-9a84-02695e7577ac"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""63034d83-d6db-42ae-b409-2088d495d4ea"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""58dc4cdd-085d-4ac5-a402-364c08004b20"",
                     ""path"": ""<Keyboard>/upArrow"",
@@ -408,8 +485,30 @@ namespace IA
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e8cfbdee-c125-4386-845c-45838366ef69"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5d8b161b-d925-4392-8044-f4542d34704b"",
                     ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2921990-7dd3-4945-af43-3c1fbba46434"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
