@@ -22,12 +22,22 @@ namespace MainGame
         bool isChasing = false;
         float stopChaseTime = 0;
 
+        // チェイスBGM
+        private AudioSource _chaseBGMObj = null;
+        //private Coroutine _bgmChange = null;
+
         void Update()
         {
             // プレイヤーに近づいたら追跡モードになる。
             if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
                 isChasing = true;
+
+                //if (_bgmChange != null) StopCoroutine(_bgmChange);
+                //_bgmChange = null;
+                if (_chaseBGMObj == null) _chaseBGMObj = Soundtest.bgmOn(SO_Player.Entity.ChaseBGM);
+                _chaseBGMObj.Play();
+                //_bgmChange = StartCoroutine(SoundVolumeChange(_chaseBGMObj, 0, 1, 1, false));
             }
 
             if (isChasing)
@@ -45,6 +55,13 @@ namespace MainGame
                 {
                     stopChaseTime = 0;
                     isChasing = false;
+
+                    //if (_bgmChange != null) StopCoroutine(_bgmChange);
+                    //_bgmChange = null;
+                    _chaseBGMObj.Stop();
+                    Destroy(_chaseBGMObj.gameObject);
+                    //_bgmChange = StartCoroutine(SoundVolumeChange(_chaseBGMObj, _chaseBGMObj.volume, 0, 1, true));
+
                     SelectNewStokingPoint();
                 }
                 else
@@ -112,6 +129,22 @@ namespace MainGame
             isAtStokingPosition = GameManager.Instance.EnemyStokingPositions.Contains(toPos.ToVec2I());
             IsStepEnded = true;
         }
+
+        //IEnumerator SoundVolumeChange(AudioSource source, float start, float end, float duration, bool isDestroyoOnEnd = false)
+        //{
+        //    float t = 0;
+        //    while (t < duration)
+        //    {
+        //        t += Time.deltaTime;
+
+        //        float volume = t * (end - start) / duration + start;
+        //        source.volume = volume;
+
+        //        yield return null;
+        //    }
+
+        //    if (isDestroyoOnEnd) Destroy(source.gameObject);
+        //}
 
         void SelectNewStokingPoint()
         {
