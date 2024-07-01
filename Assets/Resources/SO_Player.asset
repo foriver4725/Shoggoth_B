@@ -18,7 +18,7 @@ MonoBehaviour:
   EnemyChaseRange: 4
   EnemyStopChaseRange: 6
   EnemyStopChaseDuration: 3
-  InvincibleTime: 1
+  InvincibleTime: 5
   bgmOn: {fileID: 8554479520563138585, guid: f7b30ed9331904e40a33eef91831f896, type: 3}
   seOn: {fileID: 7065322409582102352, guid: 837728a0c15dac744aac2def112c7104, type: 3}
   ChaseBGM: {fileID: 8300000, guid: 93e26401db46be240b80f60e3fb8799f, type: 3}
