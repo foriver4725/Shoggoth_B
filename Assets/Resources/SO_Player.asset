@@ -21,8 +21,9 @@ MonoBehaviour:
   InvincibleTime: 5
   bgmOn: {fileID: 8554479520563138585, guid: f7b30ed9331904e40a33eef91831f896, type: 3}
   seOn: {fileID: 7065322409582102352, guid: 837728a0c15dac744aac2def112c7104, type: 3}
-  ChaseBGM: {fileID: 8300000, guid: 93e26401db46be240b80f60e3fb8799f, type: 3}
-  NormalBGM: {fileID: 8300000, guid: 0ce47c0f8e2280f41b7ca9554340034e, type: 3}
-  TitleBGM: {fileID: 8300000, guid: ea251cb2c617b3e4cad9cd84f717ec39, type: 3}
-  damegeSE: {fileID: 0}
-  footstepBGM: {fileID: 0}
+  ChaseBGM: {fileID: 8300000, guid: 87f2f0a5bdb33f54aafad3c2ac018353, type: 3}
+  NormalBGM: {fileID: 8300000, guid: 9893d8ba8d9648a4cbe5268c52d9665e, type: 3}
+  TitleBGM: {fileID: 8300000, guid: 24dddfbb60c44ce41a3bad4c23d7350e, type: 3}
+  damegeSE: {fileID: 8300000, guid: e560be8c4073cbf4585844844edbed24, type: 3}
+  footstep_wBGM: {fileID: 8300000, guid: 94fa453cfa478194391818053e8e4409, type: 3}
+  footstep_rBGM: {fileID: 8300000, guid: 1a1e51e278b3cb640b509256cbe73f5d, type: 3}
