@@ -10,8 +10,13 @@ namespace MainGame
         public static void GetItem(string itemName)
         {
             Items.Add(itemName);
+            
         }
+        public static void RemoveItem(string itemName)
+        {
+            Items.Remove(itemName);
 
+        }
         public static bool CheckItem(string itemName)
         {
             return Items.Contains(itemName);

@@ -18,7 +18,7 @@ public class HPManager : MonoBehaviour
         if (currentHP > 0)
         {
             currentHP--;
-            hearts[currentHP].enabled = false; // ハートのImageを非表示にする
+            hearts[currentHP].color =Color.black; // ハートのImageを非表示にする
         }
     }
 }
