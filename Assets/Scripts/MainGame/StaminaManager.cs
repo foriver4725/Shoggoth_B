@@ -26,7 +26,10 @@ public class StaminaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (HPManager.currentHP == 0)
+        {
+            FrontStamina.fillAmount = 0;
+        }
 
         if (InputGetter.Instance.MainGame_IsDash && StaminaDetection == true) 
         {
