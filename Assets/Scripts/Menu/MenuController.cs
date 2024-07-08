@@ -80,6 +80,7 @@ public class MenuController : MonoBehaviour
 
     void ReturnToTitle()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadSceneAsync(SO_SceneName.Entity.Title);
     }
 }

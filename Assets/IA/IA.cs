@@ -486,6 +486,17 @@ namespace IA
                 {
                     ""name"": """",
                     ""id"": ""e8cfbdee-c125-4386-845c-45838366ef69"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""906f0acc-ad98-4e53-a9c9-fcd941c71a98"",
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -508,6 +519,17 @@ namespace IA
                 {
                     ""name"": """",
                     ""id"": ""a2921990-7dd3-4945-af43-3c1fbba46434"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7d66f4b-3c76-4a0b-998f-e4ef471a525a"",
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",

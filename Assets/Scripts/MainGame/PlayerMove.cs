@@ -27,7 +27,7 @@ namespace MainGame
 
             if (isStepEnded)
             {
-                Vector2 inputDir = InputGetter.Instance.MainGame_ValueMove;
+                Vector2 inputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
 
                 // i“®‚¢‚Ä‚¢‚é‚È‚çjŒü‚¢‚Ä‚¢‚é•ûŒü‚ğ”»’f‚·‚éB
                 if (inputDir != Vector2.zero)
@@ -65,8 +65,8 @@ namespace MainGame
             {
                 //true,true:A  true,false:B  false,false:C  false,true:C
                 transform.position +=
-                    (InputGetter.Instance.MainGame_IsDash ? StaminaManager.StaminaDetection?
-                    SO_Player.Entity.PlayerDashSpeed : SO_Player.Entity.PlayerSpeed: SO_Player.Entity.PlayerSpeed)
+                    (InputGetter.Instance.MainGame_IsDash ? StaminaManager.StaminaDetection ?
+                    SO_Player.Entity.PlayerDashSpeed : SO_Player.Entity.PlayerSpeed : SO_Player.Entity.PlayerSpeed)
                     * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;

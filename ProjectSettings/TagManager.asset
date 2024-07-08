@@ -78,6 +78,8 @@ TagManager:
   - object_secretlab_generator_right
   - object_secretlab_generator
   - floor_oneway_down
+  - type_stokingpoint_1
+  - type_stokingpoint_2
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,11 @@ namespace MainGame
 {
     public class EnemyMove : MonoBehaviour
     {
+        private enum FLOOR { F1, BF1, BF2 };
+        [SerializeField, Header("‚Ç‚ÌŠK‘w‚Ì“G‚©")] private FLOOR _floor;
+
+        private HashSet<Vector2Int> _stokingPos;
+
         // “G‚ÌŒü‚«
         DIR lookingDir = DIR.DOWN;
 
@@ -25,6 +30,18 @@ namespace MainGame
         // ƒ`ƒFƒCƒXBGM
         private AudioSource _chaseBGMObj = null;
         //private Coroutine _bgmChange = null;
+
+        private void Start()
+        {
+            int stokingPosIndex = _floor switch
+            {
+                FLOOR.F1 => 0,
+                FLOOR.BF1 => 1,
+                FLOOR.BF2 => 2,
+                _ => 0
+            };
+            _stokingPos = GameManager.Instance.EnemyStokingPositions[stokingPosIndex];
+        }
 
         void Update()
         {
@@ -126,7 +143,7 @@ namespace MainGame
             }
 
             transform.position = toPos;
-            isAtStokingPosition = GameManager.Instance.EnemyStokingPositions.Contains(toPos.ToVec2I());
+            isAtStokingPosition = _stokingPos.Contains(toPos.ToVec2I());
             IsStepEnded = true;
         }
 
@@ -148,11 +165,11 @@ namespace MainGame
 
         void SelectNewStokingPoint()
         {
-            int posNum = GameManager.Instance.EnemyStokingPositions.Count;
+            int posNum = _stokingPos.Count;
             int nextIndex = Random.Range(0, posNum);
 
             int i = 0;
-            foreach (Vector2Int pos in GameManager.Instance.EnemyStokingPositions)
+            foreach (Vector2Int pos in _stokingPos)
             {
                 Vector2Int preTargetPos = targetPos;
                 targetPos = pos;

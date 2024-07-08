@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace MainGame
 {
@@ -24,17 +23,19 @@ namespace MainGame
             {
                 Destroy(gameObject);
             }
+
+            Cash();
         }
         #endregion
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
-        [NonSerialized] public HashSet<Vector2Int> EnemyStokingPositions = new();
+        [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
         [NonSerialized] public GameObject Player;
         [NonSerialized] public GameObject Enemy;
         private PlayerMove _player;
         private EnemyMove _enemy;
 
-        void Start()
+        void Cash()
         {
             // 「path」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
             GameObject[] paths = GameObject.FindGameObjectsWithTag("path");
@@ -44,11 +45,24 @@ namespace MainGame
             }
 
             // 「type_stokingposition」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
-            GameObject[] stokingPoses = GameObject.FindGameObjectsWithTag("type_stokingpoint");
-            foreach (GameObject stokingPos in stokingPoses)
+            HashSet<Vector2Int> enemyStokingPositions = new();
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint"))
             {
-                EnemyStokingPositions.Add(stokingPos.transform.position.ToVec2I());
+                enemyStokingPositions.Add(stokingPos.transform.position.ToVec2I());
             }
+            EnemyStokingPositions.Add(enemyStokingPositions);
+            HashSet<Vector2Int> enemyStokingPositions1 = new();
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint_1"))
+            {
+                enemyStokingPositions1.Add(stokingPos.transform.position.ToVec2I());
+            }
+            EnemyStokingPositions.Add(enemyStokingPositions1);
+            HashSet<Vector2Int> enemyStokingPositions2 = new();
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint_2"))
+            {
+                enemyStokingPositions2.Add(stokingPos.transform.position.ToVec2I());
+            }
+            EnemyStokingPositions.Add(enemyStokingPositions2);
 
             Player = GameObject.FindGameObjectWithTag("player");
             Enemy = GameObject.FindGameObjectWithTag("shoggoth");
@@ -70,7 +84,7 @@ namespace MainGame
             Vector3 pos = _player.transform.position;
             DIR dir = _player.LookingDir;
 
-            if (pos == new Vector3(0,37,-1) && dir == DIR.UP)
+            if (pos == new Vector3(0, 37, -1) && dir == DIR.UP)
             {
                 // B1に行く
                 _player.transform.position = new(101, 36, -1);

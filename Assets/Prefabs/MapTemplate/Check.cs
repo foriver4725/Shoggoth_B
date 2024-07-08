@@ -93,9 +93,18 @@ namespace Test
         [SerializeField] private Sprite tmp;
         private void Start()
         {
-            foreach (var e in GameObject.FindGameObjectsWithTag("object_serverroom_server"))
+            foreach (var e in GameObject.FindGameObjectsWithTag("path"))
             {
-                e.transform.parent.GetChild(3).GetComponent<SpriteRenderer>().sprite = tmp;
+                e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+            }
+            foreach(var e in GameObject.FindGameObjectsWithTag("block"))
+            {
+                e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+            }
+
+            foreach (var e in GameObject.FindGameObjectsWithTag("type_stokingpoint"))
+            {
+                e.GetComponent<SpriteRenderer>().enabled = true;
             }
         }
     }
