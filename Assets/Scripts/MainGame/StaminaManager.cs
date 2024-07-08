@@ -37,12 +37,12 @@ namespace MainGame
                 FrontStamina.fillAmount = 0;
             }
 
-            if (InputGetter.Instance.MainGame_IsUseItem && ItemDatabase.FindItem(ItemManager.CurrentIndex).Name == "SpeedPotion")
-            {
-                _isUsedSpeedPotion = true;
-                ItemDatabase.RemoveItem("SpeedPotion");
-                StartCoroutine(CountTime(() => _isUsedSpeedPotion = false, SO_Player.Entity.InfiniteStaminaDur));
-            }
+            //if (InputGetter.Instance.MainGame_IsUseItem && ItemDatabase.FindItem(ItemManager.CurrentIndex).Name == "SpeedPotion")
+            //{
+            //    _isUsedSpeedPotion = true;
+            //    ItemDatabase.RemoveItem("SpeedPotion");
+            //    StartCoroutine(CountTime(() => _isUsedSpeedPotion = false, SO_Player.Entity.InfiniteStaminaDur));
+            //}
 
             if (InputGetter.Instance.MainGame_IsDash && StaminaDetection == true)
             {

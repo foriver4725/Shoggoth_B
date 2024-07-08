@@ -123,15 +123,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ScrollItem",
-                    "type": "Value",
-                    "id": "bfb2fb8e-e651-4a1a-99c2-344f9bbdd66d",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "4377bbed-336e-44b1-9c23-20735cb20ae8",
@@ -401,72 +392,6 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "Mouse",
-                    "id": "35570110-2890-4410-9383-2aeb846bf12a",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollItem",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "2bdb6c76-a268-4d53-a23c-b664a535621f",
-                    "path": "<Mouse>/scroll/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollItem",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "e032136e-4309-4a56-96ec-ffff660a37f9",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollItem",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Gamepad",
-                    "id": "3cf42207-f8ec-497c-82b1-ed2b388bcadc",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollItem",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "62d15cad-340c-45c3-9a84-02695e7577ac",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollItem",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "63034d83-d6db-42ae-b409-2088d495d4ea",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollItem",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
