@@ -12,7 +12,7 @@ namespace MainGame
         [SerializeField] Animator anim;
 
         // プレイヤーの向き
-        DIR lookingDir = DIR.DOWN;
+        public DIR LookingDir { get; set; } = DIR.DOWN;
 
         // プレイヤーが整数座標まで移動完了しているか
         bool isStepEnded = true;
@@ -32,18 +32,18 @@ namespace MainGame
                 // （動いているなら）向いている方向を判断する。
                 if (inputDir != Vector2.zero)
                 {
-                    lookingDir = inputDir.ToDir();
+                    LookingDir = inputDir.ToDir();
                 }
 
                 // アニメーションの遷移を発火させる。
                 anim.SetBool("IsMoving", inputDir != Vector2.zero);
-                anim.SetInteger("LookingDirection", (int)lookingDir);
+                anim.SetInteger("LookingDirection", (int)LookingDir);
 
                 // 必ず向いている方向の次の整数座標まで移動し、その間は入力を受け付けない。
                 if (inputDir != Vector2.zero)
                 {
                     isStepEnded = false;
-                    StartCoroutine(MoveTo(lookingDir.ToVector3()));
+                    StartCoroutine(MoveTo(LookingDir.ToVector3()));
                 }
             }
         }
