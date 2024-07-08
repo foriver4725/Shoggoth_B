@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6fa01979742bc43b0263a623e0ac94, type: 3}
+  m_Name: SO_ItemSprite
+  m_EditorClassIdentifier: 
+  ItemSprites:
+  - Name: Noensan
+    Sprite: {fileID: 21300000, guid: 186027487e2026849b9ebac5c365cfb3, type: 3}
+  - Name: Noryusan
+    Sprite: {fileID: 21300000, guid: 6b3d473b3d2365b4d81237fdfe078fee, type: 3}
+  - Name: Osui
+    Sprite: {fileID: 21300000, guid: f14da6fc05895af4b800c96f14676f58, type: 3}
+  - Name: HealingPotion
+    Sprite: {fileID: 21300000, guid: 3754e5733ee75cb4b9cef9fa0942fe42, type: 3}
+  - Name: SenriganPotion
+    Sprite: {fileID: 21300000, guid: eda533055a2ead94d937607fb6d61da0, type: 3}
+  - Name: SoseiPotion
+    Sprite: {fileID: 21300000, guid: 366d77eeb889bb54bba82a576ea1468f, type: 3}
+  - Name: SpeedPotion
+    Sprite: {fileID: 21300000, guid: eef86b04903f42847bef36bf64236af3, type: 3}
+  - Name: Spray
+    Sprite: {fileID: 21300000, guid: 5083b2616f9345b478c260bb78c3b3d3, type: 3}
+  - Name: Torabasami
+    Sprite: {fileID: 21300000, guid: 6d8b511a694b2b04c93921ee6e83c5c5, type: 3}
+  - Name: ICcard
+    Sprite: {fileID: 21300000, guid: c1b479a9fb7e4964598cbba385480d30, type: 3}
+  - Name: Coin
+    Sprite: {fileID: 21300000, guid: 341031952aecfbc49b9180e9dbab7db0, type: 3}
+  - Name: Point
+    Sprite: {fileID: 21300000, guid: d01b392786e899c48a41968b89cce4f9, type: 3}
