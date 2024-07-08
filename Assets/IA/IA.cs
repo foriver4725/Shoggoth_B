@@ -147,15 +147,6 @@ namespace IA
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ScrollItem"",
-                    ""type"": ""Value"",
-                    ""id"": ""bfb2fb8e-e651-4a1a-99c2-344f9bbdd66d"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""4377bbed-336e-44b1-9c23-20735cb20ae8"",
@@ -427,72 +418,6 @@ namespace IA
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Mouse"",
-                    ""id"": ""35570110-2890-4410-9383-2aeb846bf12a"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ScrollItem"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""2bdb6c76-a268-4d53-a23c-b664a535621f"",
-                    ""path"": ""<Mouse>/scroll/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ScrollItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""e032136e-4309-4a56-96ec-ffff660a37f9"",
-                    ""path"": ""<Mouse>/scroll/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ScrollItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Gamepad"",
-                    ""id"": ""3cf42207-f8ec-497c-82b1-ed2b388bcadc"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ScrollItem"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""62d15cad-340c-45c3-9a84-02695e7577ac"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ScrollItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""63034d83-d6db-42ae-b409-2088d495d4ea"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ScrollItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""58dc4cdd-085d-4ac5-a402-364c08004b20"",
                     ""path"": ""<Keyboard>/upArrow"",
@@ -573,7 +498,6 @@ namespace IA
             m_MainGame_Move = m_MainGame.FindAction("Move", throwIfNotFound: true);
             m_MainGame_Dash = m_MainGame.FindAction("Dash", throwIfNotFound: true);
             m_MainGame_UseItem = m_MainGame.FindAction("UseItem", throwIfNotFound: true);
-            m_MainGame_ScrollItem = m_MainGame.FindAction("ScrollItem", throwIfNotFound: true);
             m_MainGame_Pause = m_MainGame.FindAction("Pause", throwIfNotFound: true);
             m_MainGame_Up = m_MainGame.FindAction("Up", throwIfNotFound: true);
             m_MainGame_Down = m_MainGame.FindAction("Down", throwIfNotFound: true);
@@ -703,7 +627,6 @@ namespace IA
         private readonly InputAction m_MainGame_Move;
         private readonly InputAction m_MainGame_Dash;
         private readonly InputAction m_MainGame_UseItem;
-        private readonly InputAction m_MainGame_ScrollItem;
         private readonly InputAction m_MainGame_Pause;
         private readonly InputAction m_MainGame_Up;
         private readonly InputAction m_MainGame_Down;
@@ -714,7 +637,6 @@ namespace IA
             public InputAction @Move => m_Wrapper.m_MainGame_Move;
             public InputAction @Dash => m_Wrapper.m_MainGame_Dash;
             public InputAction @UseItem => m_Wrapper.m_MainGame_UseItem;
-            public InputAction @ScrollItem => m_Wrapper.m_MainGame_ScrollItem;
             public InputAction @Pause => m_Wrapper.m_MainGame_Pause;
             public InputAction @Up => m_Wrapper.m_MainGame_Up;
             public InputAction @Down => m_Wrapper.m_MainGame_Down;
@@ -736,9 +658,6 @@ namespace IA
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
-                @ScrollItem.started += instance.OnScrollItem;
-                @ScrollItem.performed += instance.OnScrollItem;
-                @ScrollItem.canceled += instance.OnScrollItem;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
@@ -761,9 +680,6 @@ namespace IA
                 @UseItem.started -= instance.OnUseItem;
                 @UseItem.performed -= instance.OnUseItem;
                 @UseItem.canceled -= instance.OnUseItem;
-                @ScrollItem.started -= instance.OnScrollItem;
-                @ScrollItem.performed -= instance.OnScrollItem;
-                @ScrollItem.canceled -= instance.OnScrollItem;
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
@@ -801,7 +717,6 @@ namespace IA
             void OnMove(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
             void OnUseItem(InputAction.CallbackContext context);
-            void OnScrollItem(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
             void OnUp(InputAction.CallbackContext context);
             void OnDown(InputAction.CallbackContext context);

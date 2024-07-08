@@ -10,6 +10,8 @@ namespace MainGame
 {
     public class ItemManager : MonoBehaviour
     {
+
+#if false
         // アイテム画像のUI
         [SerializeField] private Image _itemImage;
 
@@ -66,5 +68,7 @@ namespace MainGame
             // スプライトを変更
             _itemImage.sprite = Sprite;
         }
+
+#endif
     }
 }

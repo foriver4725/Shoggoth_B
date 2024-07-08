@@ -48,7 +48,6 @@ namespace IA
         public Vector2 MainGame_ValueMove { get; private set; } = Vector2.zero;
         public bool MainGame_IsDash { get; private set; } = false;
         public bool MainGame_IsUseItem { get; private set; } = false;
-        public int MainGame_ValueScrollItem { get; private set; } = 0;
         public bool MainGame_IsPause { get; private set; } = false;
         public bool MainGame_IsUp { get; private set; } = false;
         public bool MainGame_IsDown { get; private set; } = false;
@@ -84,9 +83,6 @@ namespace IA
                 _inputs.MainGame.Dash.performed += MainGame_OnDashDown;
                 _inputs.MainGame.Dash.canceled += MainGame_OnDashUp;
                 _inputs.MainGame.UseItem.performed += MainGame_OnUseItem;
-                _inputs.MainGame.ScrollItem.started += MainGame_ReadScrollItem;
-                _inputs.MainGame.ScrollItem.performed += MainGame_ReadScrollItem;
-                _inputs.MainGame.ScrollItem.canceled += MainGame_ReadScrollItem;
                 _inputs.MainGame.Pause.performed += MainGame_OnPause;
                 _inputs.MainGame.Up.performed += MainGame_OnUp;
                 _inputs.MainGame.Down.performed += MainGame_OnDown;
@@ -103,9 +99,6 @@ namespace IA
                 _inputs.MainGame.Dash.performed -= MainGame_OnDashDown;
                 _inputs.MainGame.Dash.canceled -= MainGame_OnDashUp;
                 _inputs.MainGame.UseItem.performed -= MainGame_OnUseItem;
-                _inputs.MainGame.ScrollItem.started -= MainGame_ReadScrollItem;
-                _inputs.MainGame.ScrollItem.performed -= MainGame_ReadScrollItem;
-                _inputs.MainGame.ScrollItem.canceled -= MainGame_ReadScrollItem;
                 _inputs.MainGame.Pause.performed -= MainGame_OnPause;
                 _inputs.MainGame.Up.performed -= MainGame_OnUp;
                 _inputs.MainGame.Down.performed -= MainGame_OnDown;
@@ -122,13 +115,6 @@ namespace IA
         void MainGame_OnDashDown(InputAction.CallbackContext context) { MainGame_IsDash = true; }
         void MainGame_OnDashUp(InputAction.CallbackContext context) { MainGame_IsDash = false; }
         void MainGame_OnUseItem(InputAction.CallbackContext context) { MainGame_IsUseItem = true; }
-        void MainGame_ReadScrollItem(InputAction.CallbackContext context)
-        {
-            float val = context.ReadValue<float>();
-            if (val > 0f) MainGame_ValueScrollItem = 1;
-            else if (val < 0f) MainGame_ValueScrollItem = -1;
-            else MainGame_ValueScrollItem = 0;
-        }
         void MainGame_OnPause(InputAction.CallbackContext context) { MainGame_IsPause = true; }
         void MainGame_OnUp(InputAction.CallbackContext context) { MainGame_IsUp = true; }
         void MainGame_OnDown(InputAction.CallbackContext context) { MainGame_IsDown = true; }
