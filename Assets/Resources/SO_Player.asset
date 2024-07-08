@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a3ec33941aacd4680c0e2dd36e7e02, type: 3}
   m_Name: SO_Player
   m_EditorClassIdentifier: 
-  PlayerSpeed: 4.96
+  PlayerSpeed: 5
   PlayerDashSpeed: 10
-  EnemySpeed: 6
   EnemyChaseRange: 4
   EnemyStopChaseRange: 6
   EnemyStopChaseDuration: 3
@@ -25,9 +24,3 @@ MonoBehaviour:
   InfiniteStaminaDur: 15
   bgmOn: {fileID: 8554479520563138585, guid: f7b30ed9331904e40a33eef91831f896, type: 3}
   seOn: {fileID: 7065322409582102352, guid: 837728a0c15dac744aac2def112c7104, type: 3}
-  ChaseBGM: {fileID: 8300000, guid: 87f2f0a5bdb33f54aafad3c2ac018353, type: 3}
-  NormalBGM: {fileID: 8300000, guid: 9893d8ba8d9648a4cbe5268c52d9665e, type: 3}
-  TitleBGM: {fileID: 8300000, guid: 24dddfbb60c44ce41a3bad4c23d7350e, type: 3}
-  damegeSE: {fileID: 8300000, guid: e560be8c4073cbf4585844844edbed24, type: 3}
-  footstep_wBGM: {fileID: 8300000, guid: 94fa453cfa478194391818053e8e4409, type: 3}
-  footstep_rBGM: {fileID: 8300000, guid: 1a1e51e278b3cb640b509256cbe73f5d, type: 3}

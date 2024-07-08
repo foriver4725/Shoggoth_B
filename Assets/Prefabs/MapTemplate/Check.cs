@@ -97,7 +97,7 @@ namespace Test
             {
                 e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
             }
-            foreach(var e in GameObject.FindGameObjectsWithTag("block"))
+            foreach (var e in GameObject.FindGameObjectsWithTag("block"))
             {
                 e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
             }
@@ -105,6 +105,17 @@ namespace Test
             foreach (var e in GameObject.FindGameObjectsWithTag("type_stokingpoint"))
             {
                 e.GetComponent<SpriteRenderer>().enabled = true;
+                e.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            foreach (var e in GameObject.FindGameObjectsWithTag("type_stokingpoint_1"))
+            {
+                e.GetComponent<SpriteRenderer>().enabled = true;
+                e.GetComponent<SpriteRenderer>().color = Color.blue;
+            }
+            foreach (var e in GameObject.FindGameObjectsWithTag("type_stokingpoint_2"))
+            {
+                e.GetComponent<SpriteRenderer>().enabled = true;
+                e.GetComponent<SpriteRenderer>().color = Color.green;
             }
         }
     }

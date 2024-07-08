@@ -11,6 +11,8 @@ namespace MainGame
         private enum FLOOR { F1, BF1, BF2 };
         [SerializeField, Header("‚Ç‚ÌŠK‘w‚Ì“G‚©")] private FLOOR _floor;
 
+        [SerializeField, Header("“G‚ÌˆÚ“®‘¬“x[m/s]")] private float _enemySpeed;
+
         private HashSet<Vector2Int> _stokingPos;
 
         // “G‚ÌŒü‚«
@@ -136,7 +138,7 @@ namespace MainGame
 
             while (true)
             {
-                transform.position += SO_Player.Entity.EnemySpeed * Time.deltaTime * dir;
+                transform.position += _enemySpeed * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;
                 yield return null;
