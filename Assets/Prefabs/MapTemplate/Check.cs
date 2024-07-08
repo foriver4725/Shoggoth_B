@@ -9,6 +9,7 @@ namespace Test
 {
     public class Check : MonoBehaviour
     {
+#if false
         GameObject[] stokingPoint;
 
         void Start()
@@ -86,6 +87,16 @@ namespace Test
             //        targetObj.GetComponent<SpriteRenderer>().enabled = false;
             //    }
             //}
+        }
+#endif
+
+        [SerializeField] private Sprite tmp;
+        private void Start()
+        {
+            foreach (var e in GameObject.FindGameObjectsWithTag("object_serverroom_server"))
+            {
+                e.transform.parent.GetChild(3).GetComponent<SpriteRenderer>().sprite = tmp;
+            }
         }
     }
 }
