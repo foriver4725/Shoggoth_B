@@ -95,27 +95,27 @@ namespace Test
         {
             foreach (var e in GameObject.FindGameObjectsWithTag("path"))
             {
-                e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+                e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
             }
             foreach (var e in GameObject.FindGameObjectsWithTag("block"))
             {
-                e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+                e.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
             }
 
             foreach (var e in GameObject.FindGameObjectsWithTag("type_stokingpoint"))
             {
-                e.GetComponent<SpriteRenderer>().enabled = true;
                 e.GetComponent<SpriteRenderer>().color = Color.red;
+                e.GetComponent<SpriteRenderer>().enabled = false;
             }
             foreach (var e in GameObject.FindGameObjectsWithTag("type_stokingpoint_1"))
             {
-                e.GetComponent<SpriteRenderer>().enabled = true;
                 e.GetComponent<SpriteRenderer>().color = Color.blue;
+                e.GetComponent<SpriteRenderer>().enabled = false;
             }
             foreach (var e in GameObject.FindGameObjectsWithTag("type_stokingpoint_2"))
             {
-                e.GetComponent<SpriteRenderer>().enabled = true;
                 e.GetComponent<SpriteRenderer>().color = Color.green;
+                e.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
     }
