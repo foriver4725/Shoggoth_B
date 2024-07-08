@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using IA;
+using SO;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -16,32 +18,42 @@ public class MenuController : MonoBehaviour
 
     void Update()
     {
-        if (IA.InputGetter.Instance.MainGame_IsPause)
+        if (!menuPanel.activeSelf)
         {
-            menuPanel.SetActive(!menuPanel.activeSelf);
+            if (InputGetter.Instance.MainGame_IsPause)
+            {
+                Time.timeScale = 0f;
+                menuPanel.SetActive(true);
+            }
         }
-
-        if (menuPanel.activeSelf)
+        else
         {
             HandleMenuNavigation();
+            if (InputGetter.Instance.System_IsSubmit)
+            {
+                if (currentIndex == 0)
+                {
+                    ResumeGame();
+                }
+                else if (currentIndex == menuOptions.Length - 1)
+                {
+                    ReturnToTitle();
+                }
+            }
         }
     }
 
     void HandleMenuNavigation()
     {
-        if (IA.InputGetter.Instance.MainGame_IsUp)
+        if (InputGetter.Instance.MainGame_IsUp)
         {
             currentIndex = (currentIndex > 0) ? currentIndex - 1 : menuOptions.Length - 1;
             UpdateMenuOptions();
         }
-        else if (IA.InputGetter.Instance.MainGame_IsDown)
+        else if (InputGetter.Instance.MainGame_IsDown)
         {
             currentIndex = (currentIndex < menuOptions.Length - 1) ? currentIndex + 1 : 0;
             UpdateMenuOptions();
-        }
-        else if (IA.InputGetter.Instance.System_IsSubmit)
-        {
-            ExecuteMenuOption();
         }
     }
 
@@ -60,43 +72,14 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    void ExecuteMenuOption()
-    {
-        switch (currentIndex)
-        {
-            case 0:
-                ResumeGame();
-                break;
-            case 1:
-                OpenItems();
-                break;
-            case 2:
-                OpenStatus();
-                break;
-            case 3:
-                ReturnToTitle();
-                break;
-        }
-    }
-
     void ResumeGame()
     {
+        Time.timeScale = 1f;
         menuPanel.SetActive(false);
-    }
-
-    void OpenItems()
-    {
-        Debug.Log("アイテムを開く");
-    }
-
-    void OpenStatus()
-    {
-        Debug.Log("ステータスを開く");
     }
 
     void ReturnToTitle()
     {
-        Debug.Log("タイトルに戻る");
-        // ここで実際のシーン遷移処理を追加する
+        SceneManager.LoadSceneAsync(SO_SceneName.Entity.Title);
     }
 }

@@ -35,7 +35,7 @@ namespace MainGame
 
                 //if (_bgmChange != null) StopCoroutine(_bgmChange);
                 //_bgmChange = null;
-                if (_chaseBGMObj == null) _chaseBGMObj = Soundtest.bgmOn(SO_Player.Entity.ChaseBGM);
+                if (_chaseBGMObj == null) _chaseBGMObj = Soundtest.bgmOn(SO_Sound.Entity.ChaseBGM);
                 _chaseBGMObj.Play();
                 //_bgmChange = StartCoroutine(SoundVolumeChange(_chaseBGMObj, 0, 1, 1, false));
             }

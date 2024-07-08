@@ -1,10 +1,11 @@
+using IA;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu; // ポーズメニューのUIオブジェクト
 
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (InputGetter.Instance.MainGame_IsPause)
         {
             if (isPaused)
             {

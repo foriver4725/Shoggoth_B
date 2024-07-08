@@ -49,11 +49,5 @@ namespace SO
 
         [Header("BGMのプレハブ")] public GameObject bgmOn;
         [Header("SEのプレハブ")] public GameObject seOn;
-        [Header("チェイス中のBGM")] public AudioClip ChaseBGM;
-        [Header("通常のBGM")] public AudioClip NormalBGM;
-        [Header("TitleのBGM")] public AudioClip TitleBGM;
-        [Header("ダメージ")] public AudioClip damegeSE;
-        [Header("足音(walk)")] public AudioClip footstep_wBGM;
-        [Header("足音(run)")] public AudioClip footstep_rBGM;
     }
 }
