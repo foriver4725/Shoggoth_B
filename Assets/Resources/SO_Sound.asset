@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a177374e4e970434ca7c928676e59fb5, type: 3}
+  m_Name: SO_Sound
+  m_EditorClassIdentifier: 
+  TitleBGM: {fileID: 8300000, guid: 24dddfbb60c44ce41a3bad4c23d7350e, type: 3}
+  ChaseBGM: {fileID: 8300000, guid: 87f2f0a5bdb33f54aafad3c2ac018353, type: 3}
+  OnGameNormalBGM: {fileID: 8300000, guid: 9893d8ba8d9648a4cbe5268c52d9665e, type: 3}
+  FootstepBGM:
+  - {fileID: 8300000, guid: d8f5dd138d683b64991a8324e6c17e0f, type: 3}
+  - {fileID: 8300000, guid: 94fa453cfa478194391818053e8e4409, type: 3}
+  DashFootstepBGM: {fileID: 8300000, guid: 1a1e51e278b3cb640b509256cbe73f5d, type: 3}
+  DamageTookSE:
+  - {fileID: 8300000, guid: e560be8c4073cbf4585844844edbed24, type: 3}
+  - {fileID: 8300000, guid: 5d8a1b8c74e4ece4885dfe2951d54497, type: 3}
+  - {fileID: 8300000, guid: ca94b6f665a1ae64b8652d39885aec16, type: 3}
+  ItemPurchaseSE: {fileID: 8300000, guid: ffc6739a3fa4cdd43b4224cfa0b72fa6, type: 3}
+  SaveCompletedSE: {fileID: 8300000, guid: ca94b6f665a1ae64b8652d39885aec16, type: 3}
+  OpenDoorSE: {fileID: 8300000, guid: 38120fa5e6007fa44a504370dfcaac0a, type: 3}
+  TryOpenLockedDoorSE: {fileID: 8300000, guid: a978b236803102847878bba00af79edc, type: 3}
+  MoveObjectSE: {fileID: 8300000, guid: 2d754277d9976a0429246b0378bd8df5, type: 3}
+  UsePotionSE: {fileID: 8300000, guid: 8f77a3217bf35f849932569065028dfe, type: 3}
+  FindItemSE: {fileID: 0}
