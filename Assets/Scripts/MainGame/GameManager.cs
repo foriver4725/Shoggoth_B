@@ -114,6 +114,40 @@ namespace MainGame
                 // B1Ç…çsÇ≠
                 _player.transform.position = new(101, 36, -1);
             }
+
+            else if (pos == new Vector3(15, 0, -1) && dir == DIR.DOWN)
+            {
+                CheckEscape();
+            }
+            else if (pos == new Vector3(16, 0, -1) && dir == DIR.DOWN)
+            {
+                CheckEscape();
+            }
+            else if (pos == new Vector3(17, 0, -1) && dir == DIR.DOWN)
+            {
+                CheckEscape();
+            }
+            else if (pos == new Vector3(18, 0, -1) && dir == DIR.DOWN)
+            {
+                CheckEscape();
+            }
+            else if (pos == new Vector3(19, 0, -1) && dir == DIR.DOWN)
+            {
+                CheckEscape();
+            }
+            else if (pos == new Vector3(20, 0, -1) && dir == DIR.DOWN)
+            {
+                CheckEscape();
+            }
+            else if (pos == new Vector3(21, 0, -1) && dir == DIR.DOWN)
+            {
+                CheckEscape();
+            }
+        }
+
+        void CheckEscape()
+        {
+            // íEèoîªíË
         }
     }
 }
