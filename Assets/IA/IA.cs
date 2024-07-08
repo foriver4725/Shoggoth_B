@@ -46,6 +46,15 @@ namespace IA
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Credit"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec116e24-ab50-4308-9b54-36f7e1677547"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -90,6 +99,17 @@ namespace IA
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07d8186e-ba4e-4510-9183-2ee4511a9e3f"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Credit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -547,6 +567,7 @@ namespace IA
             m_System = asset.FindActionMap("System", throwIfNotFound: true);
             m_System_Submit = m_System.FindAction("Submit", throwIfNotFound: true);
             m_System_Cancel = m_System.FindAction("Cancel", throwIfNotFound: true);
+            m_System_Credit = m_System.FindAction("Credit", throwIfNotFound: true);
             // MainGame
             m_MainGame = asset.FindActionMap("MainGame", throwIfNotFound: true);
             m_MainGame_Move = m_MainGame.FindAction("Move", throwIfNotFound: true);
@@ -619,12 +640,14 @@ namespace IA
         private List<ISystemActions> m_SystemActionsCallbackInterfaces = new List<ISystemActions>();
         private readonly InputAction m_System_Submit;
         private readonly InputAction m_System_Cancel;
+        private readonly InputAction m_System_Credit;
         public struct SystemActions
         {
             private @IA m_Wrapper;
             public SystemActions(@IA wrapper) { m_Wrapper = wrapper; }
             public InputAction @Submit => m_Wrapper.m_System_Submit;
             public InputAction @Cancel => m_Wrapper.m_System_Cancel;
+            public InputAction @Credit => m_Wrapper.m_System_Credit;
             public InputActionMap Get() { return m_Wrapper.m_System; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -640,6 +663,9 @@ namespace IA
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @Credit.started += instance.OnCredit;
+                @Credit.performed += instance.OnCredit;
+                @Credit.canceled += instance.OnCredit;
             }
 
             private void UnregisterCallbacks(ISystemActions instance)
@@ -650,6 +676,9 @@ namespace IA
                 @Cancel.started -= instance.OnCancel;
                 @Cancel.performed -= instance.OnCancel;
                 @Cancel.canceled -= instance.OnCancel;
+                @Credit.started -= instance.OnCredit;
+                @Credit.performed -= instance.OnCredit;
+                @Credit.canceled -= instance.OnCredit;
             }
 
             public void RemoveCallbacks(ISystemActions instance)
@@ -765,6 +794,7 @@ namespace IA
         {
             void OnSubmit(InputAction.CallbackContext context);
             void OnCancel(InputAction.CallbackContext context);
+            void OnCredit(InputAction.CallbackContext context);
         }
         public interface IMainGameActions
         {

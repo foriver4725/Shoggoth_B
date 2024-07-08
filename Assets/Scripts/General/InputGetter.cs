@@ -55,6 +55,7 @@ namespace IA
 
         public bool System_IsSubmit { get; private set; } = false;
         public bool System_IsCancel { get; private set; } = false;
+        public bool System_IsCredit { get; set; } = false;
         #endregion
 
         #region【LateUpdate】毎フレームの最後で、フラグを初期化する
@@ -67,6 +68,7 @@ namespace IA
 
             if (System_IsSubmit) System_IsSubmit = false;
             if (System_IsCancel) System_IsCancel = false;
+            if (System_IsCredit) System_IsCredit = false;
         }
         #endregion
 
@@ -91,7 +93,7 @@ namespace IA
 
                 _inputs.System.Submit.performed += System_OnSubmit;
                 _inputs.System.Cancel.performed += System_OnCancel;
-
+                _inputs.System.Credit.performed += System_OnCredit;
             }
             else
             {
@@ -110,6 +112,7 @@ namespace IA
 
                 _inputs.System.Submit.performed -= System_OnSubmit;
                 _inputs.System.Cancel.performed -= System_OnCancel;
+                _inputs.System.Credit.performed -= System_OnCredit;
             }
         }
         #endregion
@@ -132,6 +135,7 @@ namespace IA
 
         void System_OnSubmit(InputAction.CallbackContext context) { System_IsSubmit = true; }
         void System_OnCancel(InputAction.CallbackContext context) { System_IsCancel = true; }
+        void System_OnCredit(InputAction.CallbackContext context) { System_IsCredit = true; }
         #endregion
     }
 }
