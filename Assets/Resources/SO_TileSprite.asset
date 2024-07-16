@@ -16,21 +16,21 @@ MonoBehaviour:
   - TagName: floor_lobby
     Sprite: {fileID: 21300000, guid: dbf54a1b8ee31c84f91e0d24d0d9191c, type: 3}
   - TagName: floor_eatery
-    Sprite: {fileID: 21300000, guid: 5365faa0bbfccb745abfd4b813af23cd, type: 3}
+    Sprite: {fileID: 21300000, guid: f4bac33a06a903c4ca8a5e375bf06953, type: 3}
   - TagName: floor_terrace
-    Sprite: {fileID: 21300000, guid: da807e25bd929c540903834e5ba53141, type: 3}
+    Sprite: {fileID: 21300000, guid: 7b880646f0e607f44b6812a56259635a, type: 3}
   - TagName: floor_washroom
-    Sprite: {fileID: 21300000, guid: cc6f71e11ee816a4ba40ab7134cf3f38, type: 3}
+    Sprite: {fileID: 21300000, guid: f3c2cfad2660a1442bd83538c49252b4, type: 3}
   - TagName: floor_lab
-    Sprite: {fileID: 21300000, guid: cc6f71e11ee816a4ba40ab7134cf3f38, type: 3}
+    Sprite: {fileID: 21300000, guid: f3c2cfad2660a1442bd83538c49252b4, type: 3}
   - TagName: floor_library
-    Sprite: {fileID: 21300000, guid: dfd227d69dc023247882ae7891a75f0a, type: 3}
+    Sprite: {fileID: 21300000, guid: f4bac33a06a903c4ca8a5e375bf06953, type: 3}
   - TagName: floor_monitor
-    Sprite: {fileID: 21300000, guid: cc6f71e11ee816a4ba40ab7134cf3f38, type: 3}
+    Sprite: {fileID: 21300000, guid: f3c2cfad2660a1442bd83538c49252b4, type: 3}
   - TagName: floor_secretlab
-    Sprite: {fileID: 21300000, guid: cc6f71e11ee816a4ba40ab7134cf3f38, type: 3}
+    Sprite: {fileID: 21300000, guid: f3c2cfad2660a1442bd83538c49252b4, type: 3}
   - TagName: floor_privateroom
-    Sprite: {fileID: 21300000, guid: 5365faa0bbfccb745abfd4b813af23cd, type: 3}
+    Sprite: {fileID: 21300000, guid: f4bac33a06a903c4ca8a5e375bf06953, type: 3}
   - TagName: floor_jail
     Sprite: {fileID: 21300000, guid: 309a1271ef7d67c488951288e8ef1556, type: 3}
   - TagName: floor_corridor

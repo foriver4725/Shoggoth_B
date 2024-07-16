@@ -146,7 +146,7 @@ namespace MainGame
                 // アイテム0を入手
                 if (IsHintedItems[0]) IsGetItems[0] = true;
             }
-            else if (pos == new Vector3(133,32,-1) && dir == DIR.UP)
+            else if (pos == new Vector3(132, 32, -1) && dir == DIR.RIGHT)
             {
                 // アイテム1を入手
                 if (IsHintedItems[1]) IsGetItems[1] = true;
