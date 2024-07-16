@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Floors:
   - TagName: floor_lobby
-    Sprite: {fileID: 21300000, guid: 916123ed82a2445439aa85a510650162, type: 3}
+    Sprite: {fileID: 21300000, guid: dbf54a1b8ee31c84f91e0d24d0d9191c, type: 3}
   - TagName: floor_eatery
     Sprite: {fileID: 21300000, guid: 5365faa0bbfccb745abfd4b813af23cd, type: 3}
   - TagName: floor_terrace
@@ -150,12 +150,11 @@ MonoBehaviour:
   RandomObjects:
   - TagName: object_office_desk
     Sprites:
-    - {fileID: 21300000, guid: 1d5ae2592f063c74eb270df94ad2a8b9, type: 3}
-    - {fileID: 21300000, guid: 0f75ca974e315404c8c934e2d042a263, type: 3}
-    - {fileID: 21300000, guid: 2a1d6099cb1f879429bb0ccb061c58f4, type: 3}
-    - {fileID: 21300000, guid: 36a8fe329b54920469ae8344d7086be3, type: 3}
-    - {fileID: 21300000, guid: a9ea45bbfac1ae84fa93de0aa059959a, type: 3}
-    - {fileID: 21300000, guid: b0b9ad80bba8c8d41b1b39c243dcd9d9, type: 3}
+    - {fileID: 21300000, guid: 4ec1b0745c8828f40bb3be9682cf978d, type: 3}
+    - {fileID: 21300000, guid: 4da65ed598997b940b1bba6a96eb671d, type: 3}
+    - {fileID: 21300000, guid: 20a1c5f74f94a2d4f9836720e5d19623, type: 3}
+    - {fileID: 21300000, guid: dbc013a73e04db14fb006eaac8198c67, type: 3}
+    - {fileID: 21300000, guid: b90fb37fa88a0eb43b0e13af9086856c, type: 3}
   Debugs:
   - TagName: block
     Sprite: {fileID: 21300000, guid: a864bcb6120269c41a4e7c8b14b554a4, type: 3}

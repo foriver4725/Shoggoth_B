@@ -88,7 +88,6 @@ namespace Test
             //    }
             //}
         }
-#endif
 
         [SerializeField] private Sprite tmp;
         private void Start()
@@ -118,5 +117,23 @@ namespace Test
                 e.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
+#endif
+
+#if true
+        private void Start()
+        {
+            GameObject[] objs = FindObjectsOfType<GameObject>();
+            foreach (GameObject obj in objs)
+            {
+                foreach (TagSprite e in SO_TileSprite.Entity.Floors)
+                {
+                    if (obj.tag == e.TagName)
+                    {
+                        obj.transform.parent.GetComponent<SpriteRenderer>().sprite = e.Sprite;
+                    }
+                }
+            }
+        }
+#endif
     }
 }

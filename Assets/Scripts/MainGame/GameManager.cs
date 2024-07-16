@@ -139,6 +139,27 @@ namespace MainGame
                 _player.transform.position = new(101, 36, -1);
             }
 
+            else if (pos == new Vector3() && dir == DIR.UP)
+            {
+                // アイテム0を入手
+                IsGetItems[0] = true;
+            }
+            else if (pos == new Vector3() && dir == DIR.UP)
+            {
+                // アイテム1を入手
+                IsGetItems[1] = true;
+            }
+            else if (pos == new Vector3() && dir == DIR.UP)
+            {
+                // アイテム2を入手
+                IsGetItems[2] = true;
+            }
+            else if (pos == new Vector3() && dir == DIR.UP)
+            {
+                // アイテム3を入手
+                IsGetItems[3] = true;
+            }
+
             else if (pos == new Vector3(15, 0, -1) && dir == DIR.DOWN)
             {
                 CheckEscape();
