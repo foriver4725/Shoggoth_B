@@ -4,6 +4,7 @@ using SO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.PlayerSettings;
@@ -29,6 +30,8 @@ namespace MainGame
             Cash();
         }
         #endregion
+
+        public TextMeshProUGUI textMeshProUGUI;
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
@@ -123,62 +126,62 @@ namespace MainGame
             if (pos == new Vector3(0, 37, -1) && dir == DIR.UP)
             {
                 // B1に行く
-                UITextManager.MapMoveB1F();
+               MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(1, 37, -1) && dir == DIR.UP)
             {
                 // B1に行く
-                UITextManager.MapMoveB1F();
+                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(100, 37, -1) && dir == DIR.UP)
             {
                 // 1に行く
-                UITextManager.MapMove1F();
+                MapMove1F();
                 _player.transform.position = new(1, 36, -1);
             }
             else if (pos == new Vector3(101, 37, -1) && dir == DIR.UP)
             {
                 // B2に行く
-                UITextManager.MapMoveB2F();
+                MapMoveB2F();
                 _player.transform.position = new(1, 136, -1);
             }
             else if (pos == new Vector3(0, 137, -1) && dir == DIR.UP)
             {
                 // B1に行く
-                UITextManager.MapMoveB1F();
+                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(1, 137, -1) && dir == DIR.UP)
             {
                 // B1に行く
-                UITextManager.MapMoveB1F();
+                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
 
             else if (pos == new Vector3(ITEM__POSITIONS[0].x, ITEM__POSITIONS[0].y, -1) + Vector3.right && dir == DIR.LEFT)
             {
                 // アイテム0を入手
-                UITextManager.EscapeIndex4();
+                EscapeIndex4();
                 if (IsHintedItems[0]) IsGetItems[0] = true;
             }
             else if (pos == new Vector3(ITEM__POSITIONS[1].x, ITEM__POSITIONS[1].y, -1) + Vector3.left && dir == DIR.RIGHT)
             {
                 // アイテム1を入手
-                UITextManager.EscapeIndex4();
+                EscapeIndex4();
                 if (IsHintedItems[1]) IsGetItems[1] = true;
             }
             else if (pos == new Vector3(ITEM__POSITIONS[2].x, ITEM__POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
             {
                 // アイテム2を入手
-                UITextManager.EscapeIndex4();
+                EscapeIndex4();
                 if (IsHintedItems[2]) IsGetItems[2] = true;
             }
             else if (pos == new Vector3(ITEM__POSITIONS[3].x, ITEM__POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
             {
                 // アイテム3を入手
-                UITextManager.EscapeIndex4();
+                EscapeIndex4();
                 if (IsHintedItems[3]) IsGetItems[3] = true;
             }
 
@@ -219,7 +222,7 @@ namespace MainGame
             // 全てtrueなら...
             if (!All(IsGetItems, true))
             {
-                UITextManager.BreakDoor();
+                BreakDoor();
                 return;
             }
 
@@ -272,6 +275,63 @@ namespace MainGame
             }
 
             return true;
+        }
+
+        public void ShoggothLook()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[0];
+        }
+        public void ShoggothEscape()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[1];
+        }
+        public void ShoggothDamage()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[2];
+        }
+        public void MapMove1F()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[0];
+        }
+        public void MapMoveB1F()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[1];
+        }
+        public void MapMoveB2F()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[2];
+        }
+        public void EscapeIndex()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[0];
+        }
+        public void EscapeIndex2()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[1];
+        }
+        public void EscapeIndex3()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[2];
+        }
+        public void EscapeIndex4()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[3];
+        }
+        public void LockDoor()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[4];
+        }
+        public void BreakDoor()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[5];
+        }
+        public void IndexShoggoth()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[8];
+        }
+        public void IndexShoggoth2()
+        {
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[9];
         }
     }
 }
