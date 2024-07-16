@@ -22,8 +22,8 @@ public class UITextManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-            textMeshProUGUI.text=SO_UIConsoleText.Entity.ShoggothLog.ToString();
+
+        textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[0];
             
         
         
