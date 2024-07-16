@@ -52,6 +52,7 @@ namespace MainGame
             {
                 isChasing = true;
 
+                UITextManager.ShoggothLook();
                 //if (_bgmChange != null) StopCoroutine(_bgmChange);
                 //_bgmChange = null;
                 if (_chaseBGMObj == null) _chaseBGMObj = Soundtest.bgmOn(SO_Sound.Entity.ChaseBGM);
