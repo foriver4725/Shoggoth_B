@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MainGame
 {
@@ -34,6 +35,16 @@ namespace MainGame
         [NonSerialized] public GameObject Enemy;
         private PlayerMove _player;
         private EnemyMove _enemy;
+
+        // アイテム取得状況(4つ集めると脱出可能)
+        // 濃硝酸1つ(0)、濃塩酸3つ(1,2,3)
+        [NonSerialized] public bool[] IsGetItems = new bool[4] { false, false, false, false };
+        // ↑に対応するImage
+        [SerializeField] private Image[] _preItemImages = new Image[4];
+        // ↑の親のGameObject
+        [SerializeField] private GameObject _preItemImageParent;
+        // 王水のImage
+        [SerializeField] private Image _ousuiImage;
 
         void Cash()
         {
@@ -71,12 +82,25 @@ namespace MainGame
             _enemy = Enemy.GetComponent<EnemyMove>();
         }
 
+        void Start()
+        {
+            _ousuiImage.enabled = false;
+            _preItemImageParent.SetActive(true);
+            foreach (Image e in _preItemImages)
+            {
+                e.color = Color.black;
+            }
+        }
+
         void Update()
         {
             if (InputGetter.Instance.System_IsSubmit)
             {
                 InteractCheck();
             }
+
+            // アイテムImage達を更新
+            UpdateItemImages();
         }
 
         void InteractCheck()
@@ -148,6 +172,46 @@ namespace MainGame
         void CheckEscape()
         {
             // 脱出判定
+
+            // 全てtrueなら...
+            if (!All(IsGetItems, true)) return;
+
+            // クリアの処理を行う
+        }
+
+        // アイテムImage達を更新
+        void UpdateItemImages()
+        {
+            // 4つのアイテムをコンプしているなら
+            if (All(IsGetItems, true))
+            {
+                _preItemImageParent.SetActive(false);
+                _ousuiImage.enabled = true;
+            }
+            // 必要アイテムがそろっていないなら
+            else
+            {
+                _ousuiImage.enabled = false;
+                _preItemImageParent.SetActive(true);
+                for (int i = 0; i < IsGetItems.Length; i++)
+                {
+                    _preItemImages[i].color = IsGetItems[i] ? Color.white : Color.black;
+                }
+            }
+        }
+
+        // listの要素が全てtargetの時のみ、trueを返す。
+        private bool All(bool[] list, bool target)
+        {
+            foreach (bool e in list)
+            {
+                if (e != target)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
