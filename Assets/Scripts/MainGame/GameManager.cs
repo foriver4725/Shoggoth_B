@@ -218,7 +218,7 @@ namespace MainGame
                 _preItemImageParent.SetActive(true);
                 for (int i = 0; i < IsGetItems.Length; i++)
                 {
-                    _preItemImages[i].color = IsGetItems[i] ? Color.white : Color.black;
+                    _preItemImages[i].color = IsGetItems[i] ? Color.white : new Color32(100, 100, 100, 255);
                 }
             }
         }
