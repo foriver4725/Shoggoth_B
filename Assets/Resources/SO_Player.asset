@@ -17,7 +17,7 @@ MonoBehaviour:
   EnemyChaseRange: 4
   EnemyStopChaseRange: 6
   EnemyStopChaseDuration: 3
-  InvincibleTime: 3
+  InvincibleTime: 30000
   MaxStamina: 300
   OnDuringStaminaIncreaseDur: 3
   StaminaIncreaseDur: 5
