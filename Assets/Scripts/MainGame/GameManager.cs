@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 namespace MainGame
 {
@@ -36,14 +37,19 @@ namespace MainGame
         private PlayerMove _player;
         private EnemyMove _enemy;
 
-        // アイテム取得状況(4つ集めると脱出可能)
+        // アイテムの場所
         // 濃硝酸1つ(0)、濃塩酸3つ(1,2,3)
+        static readonly private Vector3[] ITEM__POSITIONS
+            = new Vector3[4] { new(25, 110, -0.055f), new(133, 32, -0.055f), new(106, 6, -0.055f), new(35, 136, -0.055f) };
+        // アイテム取得状況(4つ集めると脱出可能)
         [NonSerialized] public bool[] IsGetItems = new bool[4] { false, false, false, false };
-        // ↑のヒントをもらっているか(falseなら、光らないし取得できない)
+        // アイテム取得状況のヒントをもらっているか(falseなら、光らないし取得できない)
         [NonSerialized] public bool[] IsHintedItems = new bool[4] { false, false, false, false };
-        // ↑に対応するImage
+        // アイテムのきらきら
+        [SerializeField] private GameObject[] _kirakiras = new GameObject[4];
+        // アイテム取得状況に対応するImage
         [SerializeField] private Image[] _preItemImages = new Image[4];
-        // ↑の親のGameObject
+        // アイテム取得状況に対応するImageの親のGameObject
         [SerializeField] private GameObject _preItemImageParent;
         // 王水のImage
         [SerializeField] private Image _ousuiImage;
@@ -91,6 +97,10 @@ namespace MainGame
             foreach (Image e in _preItemImages)
             {
                 e.color = Color.black;
+            }
+            foreach (GameObject e in _kirakiras)
+            {
+                e.transform.position = new(-100, -100, -0.055f);
             }
         }
 
@@ -141,22 +151,22 @@ namespace MainGame
                 _player.transform.position = new(101, 36, -1);
             }
 
-            else if (pos == new Vector3(26, 110, -1) && dir == DIR.LEFT)
+            else if (pos == new Vector3(ITEM__POSITIONS[0].x, ITEM__POSITIONS[0].y, -1) + Vector3.right && dir == DIR.LEFT)
             {
                 // アイテム0を入手
                 if (IsHintedItems[0]) IsGetItems[0] = true;
             }
-            else if (pos == new Vector3(132, 32, -1) && dir == DIR.RIGHT)
+            else if (pos == new Vector3(ITEM__POSITIONS[1].x, ITEM__POSITIONS[1].y, -1) + Vector3.left && dir == DIR.RIGHT)
             {
                 // アイテム1を入手
                 if (IsHintedItems[1]) IsGetItems[1] = true;
             }
-            else if (pos == new Vector3(106, 5, -1) && dir == DIR.UP)
+            else if (pos == new Vector3(ITEM__POSITIONS[2].x, ITEM__POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
             {
                 // アイテム2を入手
                 if (IsHintedItems[2]) IsGetItems[2] = true;
             }
-            else if (pos == new Vector3(35, 137, -1) && dir == DIR.DOWN)
+            else if (pos == new Vector3(ITEM__POSITIONS[3].x, ITEM__POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
             {
                 // アイテム3を入手
                 if (IsHintedItems[3]) IsGetItems[3] = true;
@@ -200,6 +210,7 @@ namespace MainGame
             if (!All(IsGetItems, true)) return;
 
             // クリアの処理を行う
+            Debug.Log("Clear!!!");
         }
 
         // アイテムImage達を更新
@@ -210,6 +221,10 @@ namespace MainGame
             {
                 _preItemImageParent.SetActive(false);
                 _ousuiImage.enabled = true;
+                foreach (GameObject e in _kirakiras)
+                {
+                    e.transform.position = new(-100, -100, -0.055f);
+                }
             }
             // 必要アイテムがそろっていないなら
             else
@@ -220,6 +235,14 @@ namespace MainGame
                 {
                     _preItemImages[i].color = IsGetItems[i] ? Color.white : new Color32(100, 100, 100, 255);
                 }
+                if (IsHintedItems[0]) _kirakiras[0].transform.position
+                        = IsGetItems[0] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[0];
+                if (IsHintedItems[1]) _kirakiras[1].transform.position
+                        = IsGetItems[1] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[1];
+                if (IsHintedItems[2]) _kirakiras[2].transform.position
+                        = IsGetItems[2] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[2];
+                if (IsHintedItems[3]) _kirakiras[3].transform.position
+                        = IsGetItems[3] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[3];
             }
         }
 
