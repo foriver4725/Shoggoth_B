@@ -39,6 +39,8 @@ namespace MainGame
         // アイテム取得状況(4つ集めると脱出可能)
         // 濃硝酸1つ(0)、濃塩酸3つ(1,2,3)
         [NonSerialized] public bool[] IsGetItems = new bool[4] { false, false, false, false };
+        // ↑のヒントをもらっているか(falseなら、光らないし取得できない)
+        [NonSerialized] public bool[] IsHintedItems = new bool[4] { false, false, false, false };
         // ↑に対応するImage
         [SerializeField] private Image[] _preItemImages = new Image[4];
         // ↑の親のGameObject
@@ -139,25 +141,25 @@ namespace MainGame
                 _player.transform.position = new(101, 36, -1);
             }
 
-            else if (pos == new Vector3() && dir == DIR.UP)
+            else if (pos == new Vector3(26, 110, -1) && dir == DIR.LEFT)
             {
                 // アイテム0を入手
-                IsGetItems[0] = true;
+                if (IsHintedItems[0]) IsGetItems[0] = true;
             }
-            else if (pos == new Vector3() && dir == DIR.UP)
+            else if (pos == new Vector3(133,32,-1) && dir == DIR.UP)
             {
                 // アイテム1を入手
-                IsGetItems[1] = true;
+                if (IsHintedItems[1]) IsGetItems[1] = true;
             }
-            else if (pos == new Vector3() && dir == DIR.UP)
+            else if (pos == new Vector3(106, 5, -1) && dir == DIR.UP)
             {
                 // アイテム2を入手
-                IsGetItems[2] = true;
+                if (IsHintedItems[2]) IsGetItems[2] = true;
             }
-            else if (pos == new Vector3() && dir == DIR.UP)
+            else if (pos == new Vector3(35, 137, -1) && dir == DIR.DOWN)
             {
                 // アイテム3を入手
-                IsGetItems[3] = true;
+                if (IsHintedItems[3]) IsGetItems[3] = true;
             }
 
             else if (pos == new Vector3(15, 0, -1) && dir == DIR.DOWN)
