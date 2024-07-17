@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 namespace MainGame
 {
@@ -57,6 +56,8 @@ namespace MainGame
         // 王水のImage
         [SerializeField] private Image _ousuiImage;
 
+        [SerializeField] private AudioSource _onGameBGM;
+
         void Cash()
         {
             // 「path」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
@@ -95,6 +96,8 @@ namespace MainGame
 
         void Start()
         {
+            _onGameBGM.Raise(SO_Sound.Entity.OnGameNormalBGM, SType.BGM);
+
             _ousuiImage.enabled = false;
             _preItemImageParent.SetActive(true);
             foreach (Image e in _preItemImages)
@@ -126,7 +129,7 @@ namespace MainGame
             if (pos == new Vector3(0, 37, -1) && dir == DIR.UP)
             {
                 // B1に行く
-               MapMoveB1F();
+                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(1, 37, -1) && dir == DIR.UP)

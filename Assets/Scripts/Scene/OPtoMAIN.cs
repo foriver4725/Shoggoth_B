@@ -8,6 +8,7 @@ using System;
 using Ex;
 using TMPro;
 using System.Threading;
+using IA;
 
 namespace Scene
 {
@@ -18,13 +19,27 @@ namespace Scene
         [SerializeField] private TextMeshProUGUI _nextText;
         [SerializeField] private AudioSource _click1st;
         [SerializeField] private AudioSource _click2nd;
+        [SerializeField] private AudioSource _titleBGM;
 
         private CancellationToken _ct;
 
         void Start()
         {
             _ct = this.GetCancellationTokenOnDestroy();
+            _titleBGM.Raise(SO_Sound.Entity.TitleBGM, SType.BGM);
             SceneChange(_ct).Forget();
+        }
+
+        private void Update()
+        {
+            if (InputGetter.Instance.System_IsCancel)
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+            }
         }
 
         private async UniTask SceneChange(CancellationToken ct)
