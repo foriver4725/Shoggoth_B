@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace SO
 {
@@ -34,6 +35,10 @@ namespace SO
         }
         #endregion
 
+        [Header("MasterのAUdioMixerGroup")] public AudioMixerGroup AMGroupMaster;
+        [Header("BGMのAUdioMixerGroup")] public AudioMixerGroup AMGroupBGM;
+        [Header("SEのAUdioMixerGroup")] public AudioMixerGroup AMGroupSE;
+        [Space(25)]
         [Header("BGM")]
         [Header("タイトル")] public AudioClip TitleBGM;
         [Header("チェイス中")] public AudioClip ChaseBGM;
@@ -50,5 +55,7 @@ namespace SO
         [Header("物を動かす")] public AudioClip MoveObjectSE;
         [Header("ポーションを使う")] public AudioClip UsePotionSE;
         [Header("物を発見する")] public AudioClip FindItemSE;
+
+        [Header("クリックする")] public AudioClip ClickSE;
     }
 }
