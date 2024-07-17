@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a177374e4e970434ca7c928676e59fb5, type: 3}
   m_Name: SO_Sound
   m_EditorClassIdentifier: 
+  AMGroupMaster: {fileID: 24300002, guid: d8572ff33712f714a83def04c1a03f4d, type: 2}
+  AMGroupBGM: {fileID: -3862986652636945467, guid: d8572ff33712f714a83def04c1a03f4d, type: 2}
+  AMGroupSE: {fileID: -5906641442783691037, guid: d8572ff33712f714a83def04c1a03f4d, type: 2}
   TitleBGM: {fileID: 8300000, guid: 24dddfbb60c44ce41a3bad4c23d7350e, type: 3}
   ChaseBGM: {fileID: 8300000, guid: 87f2f0a5bdb33f54aafad3c2ac018353, type: 3}
   OnGameNormalBGM: {fileID: 8300000, guid: 9893d8ba8d9648a4cbe5268c52d9665e, type: 3}
@@ -30,3 +33,4 @@ MonoBehaviour:
   MoveObjectSE: {fileID: 8300000, guid: 2d754277d9976a0429246b0378bd8df5, type: 3}
   UsePotionSE: {fileID: 8300000, guid: 8f77a3217bf35f849932569065028dfe, type: 3}
   FindItemSE: {fileID: 0}
+  ClickSE: {fileID: 8300000, guid: e560be8c4073cbf4585844844edbed24, type: 3}

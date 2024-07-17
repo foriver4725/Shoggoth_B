@@ -1,3 +1,4 @@
+using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -106,12 +107,12 @@ namespace Ex
         {
             public static List<Vector2Int> FindPath(Vector2Int start, Vector2Int goal, HashSet<Vector2Int> validPositions)
             {
-                // A*アルゴリズムのためのオープンリストとクローズドリストを作成するのじゃ。
+                // A*アルゴリズムのためのオープンリストとクローズドリストを作成する。
                 HashSet<Vector2Int> closedSet = new HashSet<Vector2Int>();
                 PriorityQueue<Vector2Int, float> openSet = new PriorityQueue<Vector2Int, float>();
                 openSet.Enqueue(start, 0);
 
-                // 各ノードの親ノードとコストを追跡する辞書を作成するのじゃ。
+                // 各ノードの親ノードとコストを追跡する辞書を作成する。
                 Dictionary<Vector2Int, Vector2Int> cameFrom = new Dictionary<Vector2Int, Vector2Int>();
                 Dictionary<Vector2Int, float> gScore = new Dictionary<Vector2Int, float>
         {
@@ -140,7 +141,7 @@ namespace Ex
                             continue;
                         }
 
-                        float tentativeGScore = gScore[current] + 1; // すべての移動コストは1と仮定するのじゃ。
+                        float tentativeGScore = gScore[current] + 1; // すべての移動コストは1と仮定する。
 
                         if (!gScore.ContainsKey(neighbor))
                         {
@@ -161,7 +162,7 @@ namespace Ex
                     }
                 }
 
-                // 経路が見つからなかった場合、空のリストを返すのじゃ。
+                // 経路が見つからなかった場合、空のリストを返す。
                 return new List<Vector2Int>();
             }
 
@@ -194,5 +195,38 @@ namespace Ex
                 return neighbors;
             }
         }
+    }
+
+    public static class PlaySound
+    {
+        // 与えられたAudioSourceを用いて、BGM/SEを再生する
+        public static void Raise(this AudioSource source, AudioClip clip, bool sType, float volume = 1, float pitch = 1)
+        {
+            source.volume = volume;
+            source.pitch = pitch;
+
+            if (sType == SType.BGM)
+            {
+                source.clip = clip;
+                source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupBGM;
+                source.playOnAwake = true;
+                source.loop = true;
+                source.Play();
+            }
+            else
+            {
+                source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupSE;
+                source.playOnAwake = true;
+                source.loop = false;
+                source.PlayOneShot(clip);
+            }
+        }
+    }
+
+    // サウンドの種類(BGM or SE)
+    public static class SType
+    {
+        public static bool BGM = true;
+        public static bool SE = false;
     }
 }
