@@ -209,15 +209,37 @@ namespace Ex
             {
                 source.clip = clip;
                 source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupBGM;
-                source.playOnAwake = true;
+                source.playOnAwake = false;
                 source.loop = true;
                 source.Play();
             }
             else
             {
                 source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupSE;
-                source.playOnAwake = true;
+                source.playOnAwake = false;
                 source.loop = false;
+                source.PlayOneShot(clip);
+            }
+        }
+
+        // ó^Ç¶ÇÁÇÍÇΩAudioSourceÇópÇ¢ÇƒÅABGM/SEÇçƒê∂Ç∑ÇÈ
+        public static void Raise(this AudioSource source, AudioClip clip, bool sType, bool isLoop, float volume = 1, float pitch = 1)
+        {
+            source.loop = isLoop;
+            source.volume = volume;
+            source.pitch = pitch;
+
+            if (sType == SType.BGM)
+            {
+                source.clip = clip;
+                source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupBGM;
+                source.playOnAwake = false;
+                source.Play();
+            }
+            else
+            {
+                source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupSE;
+                source.playOnAwake = false;
                 source.PlayOneShot(clip);
             }
         }
