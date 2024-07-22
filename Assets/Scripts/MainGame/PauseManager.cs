@@ -1,4 +1,5 @@
 using IA;
+using MainGame;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
@@ -17,6 +18,9 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
+        // クリアまたはゲームオーバーならポーズできない
+        if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
+
         if (InputGetter.Instance.MainGame_IsPause)
         {
             if (isPaused)

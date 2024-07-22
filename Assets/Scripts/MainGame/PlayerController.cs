@@ -1,4 +1,5 @@
 using Ex;
+using MainGame;
 using SO;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
             if (sqrDistance <= SO_Player.Entity.PlayerDamageRange * SO_Player.Entity.PlayerDamageRange)
             {
                 // ‹——£‚ª1ˆÈ‰º‚Ìê‡AHP‚ðŒ¸‚ç‚·
-                if (!_isInvincible)
+                if (HPManager.currentHP > 0 && !_isInvincible)
                 {
                     _isInvincible = true;
                     damagedAS.Raise(SO_Sound.Entity.DamageTookSE, SType.SE);

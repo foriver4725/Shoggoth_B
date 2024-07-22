@@ -32,6 +32,9 @@ namespace MainGame
         }
         #endregion
 
+        [NonSerialized] public bool IsClear = false;
+        [NonSerialized] public bool IsOver = false;
+
         [SerializeField] Image textBack;
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
 
@@ -161,6 +164,12 @@ namespace MainGame
         bool InteractCheck_IsInteractable = true;
         void InteractCheck()
         {
+            // クリアまたはゲームオーバーならインタラクトできない
+            if (IsClear || IsOver) return;
+
+            // ポーズ中ならインタラクトできない
+            if (Time.timeScale == 0) return;
+
             // インタラクト不可なら何もしない
             if (!InteractCheck_IsInteractable) return;
 
@@ -525,7 +534,10 @@ namespace MainGame
             // 次のインタラクトでは脱出する
             else
             {
-                Debug.Log("脱出！");
+                if (!IsClear && !IsOver)
+                {
+                    IsClear = true;
+                }
             }
         }
 

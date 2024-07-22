@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Clear the game!!
+  m_text: 'Game Clear!!
 
 
     Thank you for Playing'

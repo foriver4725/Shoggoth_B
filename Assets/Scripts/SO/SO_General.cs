@@ -39,5 +39,7 @@ namespace SO
         [Header("ボタンを押した後の待機秒数[s]")] public float AfterClickDur;
         [Header("インタラクトの反応間隔")] public float InteractDur;
         [Header("ログを消すまでの時間")] public float LogFadeDur;
+        [Header("ゲーム内で、 フェードアウト/ホワイトアウト が始まるまでの時間[s]")] public float FadeWhiteStartDur;
+        [Header("フェードアウト/ホワイトアウト にかける時間[s]")] public float FadeWhiteDur;
     }
 }

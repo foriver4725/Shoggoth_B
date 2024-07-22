@@ -16,3 +16,5 @@ MonoBehaviour:
   AfterClickDur: 0.5
   InteractDur: 0.5
   LogFadeDur: 10
+  FadeWhiteStartDur: 1
+  FadeWhiteDur: 3

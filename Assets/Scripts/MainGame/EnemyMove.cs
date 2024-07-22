@@ -46,6 +46,9 @@ namespace MainGame
 
         void Update()
         {
+            // クリアまたはゲームオーバーなら動かない
+            if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
+
             // プレイヤーに近づいたら追跡モードになる。
             if (!IsChasing && (GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {

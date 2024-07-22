@@ -12,28 +12,30 @@ namespace MainGame
         [SerializeField] PlayerMove playerMove;
         [SerializeField] Image fadeOutImage;
 
-        Coroutine fadeOut = null;
-
         void Update()
         {
             if (HPManager.currentHP == 0)
             {
-                playerMove.IsAlive = false;
-                if (fadeOut == null) fadeOut = StartCoroutine(FadeOut(3));
+                if (!GameManager.Instance.IsClear && !GameManager.Instance.IsOver)
+                {
+                    GameManager.Instance.IsOver = true;
+                    StartCoroutine(FadeOut());
+                }
             }
         }
 
-        IEnumerator FadeOut(float dur)
+        IEnumerator FadeOut()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(SO_General.Entity.FadeWhiteStartDur);
 
+            float DUR = SO_General.Entity.FadeWhiteDur;
             float t = 0;
 
-            while (t < dur)
+            while (t < DUR)
             {
                 t += Time.deltaTime;
 
-                float a = t / dur;
+                float a = t / DUR;
                 Color color = fadeOutImage.color;
                 color.a = a;
                 fadeOutImage.color = color;

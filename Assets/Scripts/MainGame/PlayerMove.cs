@@ -21,9 +21,6 @@ namespace MainGame
         // プレイヤーが整数座標まで移動完了しているか
         bool isStepEnded = true;
 
-        // 生きているか
-        public bool IsAlive { get; set; } = true;
-
         enum MoveState { STOP, WALK, DASH };
         MoveState moveState = MoveState.STOP; // 現在のフレームの移動状態
         MoveState moveStatePre = MoveState.STOP; // 1つ前のフレームの移動状態
@@ -33,8 +30,8 @@ namespace MainGame
 
         void Update()
         {
-            // 死んでいるなら動けない
-            if (!IsAlive) return;
+            // クリアまたはゲームオーバーなら動かない
+            if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
 
             InputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
 
