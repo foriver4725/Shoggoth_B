@@ -71,8 +71,7 @@ namespace MainGame
 
         private CancellationToken ct;
 
-        float time = 0f;
-        int i = 0;
+        
 
         void Cash()
         {
@@ -636,13 +635,11 @@ namespace MainGame
 
 
             // 諸々の処理をここに書く...
-            time += Time.deltaTime;
-            if (time >= 3f && i <= 2)
-            {
-                time = 0;
-                textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[i];
-                i++;
-            }
+
+           
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[0];
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[1];
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[2];
 
 
 
@@ -659,13 +656,10 @@ namespace MainGame
         public void ResetUIText()
         {
 
-            time += Time.deltaTime;
-            if (time >= 5f)
-            {
-                time = 0;
+
                 textMeshProUGUI.text = "メッセージログ";
 
-            }
+            
         }
     }
 }
