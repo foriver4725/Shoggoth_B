@@ -32,7 +32,7 @@ namespace Scene
 
         private void Update()
         {
-            if (InputGetter.Instance.System_IsCancel)
+            if (InputGetter.Instance.System_IsCancel && !_startDescription.activeSelf)
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

@@ -119,7 +119,7 @@ namespace Test
         }
 #endif
 
-#if true
+#if false
         private void Start()
         {
             GameObject[] objs = FindObjectsOfType<GameObject>();
