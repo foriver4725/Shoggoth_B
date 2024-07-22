@@ -43,7 +43,7 @@ namespace SO
         [Header("タイトル")] public AudioClip TitleBGM;
         [Header("チェイス中")] public AudioClip ChaseBGM;
         [Header("ゲーム内ノーマル")] public AudioClip OnGameNormalBGM;
-        [Header("歩く足音")] public List<AudioClip> FootstepBGM;
+        [Header("歩く足音")] public AudioClip FootstepBGM;
         [Header("走る足音")] public AudioClip DashFootstepBGM;
         [Space(25)]
         [Header("SE")]

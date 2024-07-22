@@ -15,22 +15,20 @@ MonoBehaviour:
   AMGroupMaster: {fileID: 24300002, guid: d8572ff33712f714a83def04c1a03f4d, type: 2}
   AMGroupBGM: {fileID: -3862986652636945467, guid: d8572ff33712f714a83def04c1a03f4d, type: 2}
   AMGroupSE: {fileID: -5906641442783691037, guid: d8572ff33712f714a83def04c1a03f4d, type: 2}
-  TitleBGM: {fileID: 8300000, guid: 24dddfbb60c44ce41a3bad4c23d7350e, type: 3}
-  ChaseBGM: {fileID: 8300000, guid: 87f2f0a5bdb33f54aafad3c2ac018353, type: 3}
-  OnGameNormalBGM: {fileID: 8300000, guid: 9893d8ba8d9648a4cbe5268c52d9665e, type: 3}
-  FootstepBGM:
-  - {fileID: 8300000, guid: d8f5dd138d683b64991a8324e6c17e0f, type: 3}
-  - {fileID: 8300000, guid: 94fa453cfa478194391818053e8e4409, type: 3}
-  DashFootstepBGM: {fileID: 8300000, guid: 1a1e51e278b3cb640b509256cbe73f5d, type: 3}
+  TitleBGM: {fileID: 8300000, guid: 43c091cd479d5d741bf2b7f1f50e7e04, type: 3}
+  ChaseBGM: {fileID: 8300000, guid: 97079b6d1bfcd164b9600c266c7d85e8, type: 3}
+  OnGameNormalBGM: {fileID: 8300000, guid: 84e42138cafeee243a02eca939f421a8, type: 3}
+  FootstepBGM: {fileID: 8300000, guid: 9609d58c48e847945b209beb767a0f78, type: 3}
+  DashFootstepBGM: {fileID: 8300000, guid: 882f78bea44df1549bd8b07621e356a8, type: 3}
   DamageTookSE:
   - {fileID: 8300000, guid: e560be8c4073cbf4585844844edbed24, type: 3}
   - {fileID: 8300000, guid: 5d8a1b8c74e4ece4885dfe2951d54497, type: 3}
   - {fileID: 8300000, guid: ca94b6f665a1ae64b8652d39885aec16, type: 3}
-  ItemPurchaseSE: {fileID: 8300000, guid: ffc6739a3fa4cdd43b4224cfa0b72fa6, type: 3}
+  ItemPurchaseSE: {fileID: 8300000, guid: 66318b7ea4f9064449ba2417eb4d59b1, type: 3}
   SaveCompletedSE: {fileID: 8300000, guid: ca94b6f665a1ae64b8652d39885aec16, type: 3}
-  OpenDoorSE: {fileID: 8300000, guid: 38120fa5e6007fa44a504370dfcaac0a, type: 3}
-  TryOpenLockedDoorSE: {fileID: 8300000, guid: a978b236803102847878bba00af79edc, type: 3}
-  MoveObjectSE: {fileID: 8300000, guid: 2d754277d9976a0429246b0378bd8df5, type: 3}
-  UsePotionSE: {fileID: 8300000, guid: 8f77a3217bf35f849932569065028dfe, type: 3}
+  OpenDoorSE: {fileID: 8300000, guid: e5164dabec87c4b43ad8b9e835fc74f5, type: 3}
+  TryOpenLockedDoorSE: {fileID: 8300000, guid: af41787cb31271b4392c96fb9d287b03, type: 3}
+  MoveObjectSE: {fileID: 8300000, guid: f374a9b3e7603c3428138e2e1086aac1, type: 3}
+  UsePotionSE: {fileID: 8300000, guid: c09a3020fc7e04045bddf6f36881535c, type: 3}
   FindItemSE: {fileID: 0}
-  ClickSE: {fileID: 8300000, guid: e560be8c4073cbf4585844844edbed24, type: 3}
+  ClickSE: {fileID: 8300000, guid: af75497c7a42c46409a52842d8397519, type: 3}

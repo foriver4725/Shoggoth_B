@@ -10,6 +10,7 @@ namespace MainGame
     public class PlayerMove : MonoBehaviour
     {
         [SerializeField] Animator anim;
+        [SerializeField] AudioSource walkAS;
 
         // プレイヤーの向き
         public DIR LookingDir { get; set; } = DIR.DOWN;
@@ -20,15 +21,38 @@ namespace MainGame
         // 生きているか
         public bool IsAlive { get; set; } = true;
 
+        enum MoveState { STOP, WALK, DASH };
+        MoveState moveState = MoveState.STOP; // 現在のフレームの移動状態
+        MoveState moveStatePre = MoveState.STOP; // 1つ前のフレームの移動状態
+        bool isOnDash = true; // ダッシュ状態になったフレームであるか
+        bool isOnWalk = true; // 歩き状態になったフレームであるか
+        bool isOnStop = true; // 停止状態になったフレームであるか
+
         void Update()
         {
             // 死んでいるなら動けない
             if (!IsAlive) return;
 
+            Vector2 inputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
+
+            // ダッシュの入力を検知して、フラグを更新する
+
+            if (InputGetter.Instance.MainGame_IsDash && StaminaManager.StaminaDetection) moveState = MoveState.DASH;
+            else if (inputDir != Vector2.zero) moveState = MoveState.WALK;
+            else moveState = MoveState.STOP;
+
+            isOnStop = (moveState == MoveState.STOP) && (moveStatePre != MoveState.STOP);
+            isOnWalk = (moveState == MoveState.WALK) && (moveStatePre != MoveState.WALK);
+            isOnDash = (moveState == MoveState.DASH) && (moveStatePre != MoveState.DASH);
+
+            moveStatePre = moveState;
+
+            if (isOnDash) walkAS.Raise(SO_Sound.Entity.DashFootstepBGM, SType.BGM);
+            if (isOnWalk) walkAS.Raise(SO_Sound.Entity.FootstepBGM, SType.BGM);
+            else if (isOnStop) walkAS.Stop();
+
             if (isStepEnded)
             {
-                Vector2 inputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
-
                 // （動いているなら）向いている方向を判断する。
                 if (inputDir != Vector2.zero)
                 {
@@ -60,13 +84,12 @@ namespace MainGame
                 yield break;
             }
 
-
             while (true)
             {
                 //true,true:A  true,false:B  false,false:C  false,true:C
                 transform.position +=
-                    (InputGetter.Instance.MainGame_IsDash ? StaminaManager.StaminaDetection ?
-                    SO_Player.Entity.PlayerDashSpeed : SO_Player.Entity.PlayerSpeed : SO_Player.Entity.PlayerSpeed)
+                    (InputGetter.Instance.MainGame_IsDash && StaminaManager.StaminaDetection ?
+                    SO_Player.Entity.PlayerDashSpeed : SO_Player.Entity.PlayerSpeed)
                     * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;

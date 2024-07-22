@@ -221,28 +221,6 @@ namespace Ex
                 source.PlayOneShot(clip);
             }
         }
-
-        // 与えられたAudioSourceを用いて、BGM/SEを再生する
-        public static void Raise(this AudioSource source, AudioClip clip, bool sType, bool isLoop, float volume = 1, float pitch = 1)
-        {
-            source.loop = isLoop;
-            source.volume = volume;
-            source.pitch = pitch;
-
-            if (sType == SType.BGM)
-            {
-                source.clip = clip;
-                source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupBGM;
-                source.playOnAwake = false;
-                source.Play();
-            }
-            else
-            {
-                source.outputAudioMixerGroup = SO_Sound.Entity.AMGroupSE;
-                source.playOnAwake = false;
-                source.PlayOneShot(clip);
-            }
-        }
     }
 
     // サウンドの種類(BGM or SE)
