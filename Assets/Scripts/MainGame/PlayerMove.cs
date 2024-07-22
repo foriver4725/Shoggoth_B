@@ -37,7 +37,7 @@ namespace MainGame
 
             // ダッシュの入力を検知して、フラグを更新する
 
-            if (InputGetter.Instance.MainGame_IsDash) moveState = MoveState.DASH;
+            if (InputGetter.Instance.MainGame_IsDash && StaminaManager.Stamina != 0) moveState = MoveState.DASH;
             else if (inputDir != Vector2.zero) moveState = MoveState.WALK;
             else moveState = MoveState.STOP;
 
@@ -88,7 +88,7 @@ namespace MainGame
             {
                 //true,true:A  true,false:B  false,false:C  false,true:C
                 transform.position +=
-                    (InputGetter.Instance.MainGame_IsDash ?
+                    (InputGetter.Instance.MainGame_IsDash && StaminaManager.Stamina != 0 ?
                     SO_Player.Entity.PlayerDashSpeed : SO_Player.Entity.PlayerSpeed)
                     * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)

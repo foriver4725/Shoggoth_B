@@ -13,8 +13,8 @@ namespace MainGame
         [SerializeField] Image FrontStamina;
 
         // 現在のスタミナ (0 ~ 1)
-        private float _stamina = 1;
-        private float stamina
+        private static float _stamina = 1;
+        public static float Stamina
         {
             get
             {
@@ -28,18 +28,21 @@ namespace MainGame
 
         void Update()
         {
-            // ダッシュしたら...
+            // ダッシュしているなら...
             if (InputGetter.Instance.MainGame_IsDash)
             {
                 // スタミナ減少
-                stamina -= 1 / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
+                Stamina -= 1 / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
+            }
+            // ダッシュしていない時...
+            else
+            {
+                // 常にスタミナは回復する
+                Stamina += 1 / SO_Player.Entity.StaminaIncreaseDur * Time.deltaTime;
             }
 
-            // 常にスタミナは回復する
-            stamina += 1 / SO_Player.Entity.StaminaIncreaseDur * Time.deltaTime;
-
             // UIを更新
-            FrontStamina.fillAmount = stamina;
+            FrontStamina.fillAmount = Stamina;
         }
     }
 }
