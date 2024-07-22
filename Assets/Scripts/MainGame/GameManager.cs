@@ -5,6 +5,7 @@ using SO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,6 +69,8 @@ namespace MainGame
 
         [SerializeField] AudioSource potionSE;
 
+        private CancellationToken ct;
+
         float time = 0f;
         int i = 0;
 
@@ -103,6 +106,8 @@ namespace MainGame
 
         void Start()
         {
+            ct = this.GetCancellationTokenOnDestroy();
+
             Player = GameObject.FindGameObjectWithTag("player");
             Enemys = GameObject.FindGameObjectsWithTag("shoggoth");
 
@@ -152,7 +157,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in _enemys)
@@ -172,7 +177,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in _enemys)
@@ -192,7 +197,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in _enemys)
@@ -212,7 +217,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in _enemys)
@@ -232,7 +237,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in _enemys)
@@ -252,7 +257,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in _enemys)
@@ -273,7 +278,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -283,7 +288,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -293,7 +298,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -303,7 +308,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -313,7 +318,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -323,7 +328,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -333,7 +338,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -343,7 +348,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -353,7 +358,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -363,7 +368,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -374,7 +379,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム0を入手
                 EscapeIndex4();
@@ -385,7 +390,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム1を入手
                 EscapeIndex4();
@@ -396,7 +401,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム2を入手
                 EscapeIndex4();
@@ -407,7 +412,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム3を入手
                 EscapeIndex4();
@@ -419,7 +424,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 CheckEscape();
             }
@@ -428,7 +433,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 CheckEscape();
             }
@@ -437,7 +442,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 CheckEscape();
             }
@@ -446,7 +451,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 CheckEscape();
             }
@@ -455,7 +460,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 CheckEscape();
             }
@@ -464,7 +469,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 CheckEscape();
             }
@@ -473,7 +478,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 CheckEscape();
             }
@@ -624,7 +629,7 @@ namespace MainGame
         // 書斎の棚を調べる
         public void CheckRack()
         {
-            
+
             // 既に調べてあるなら何もしない
             if (IsCheckedRack) return;
 
@@ -632,14 +637,14 @@ namespace MainGame
 
             // 諸々の処理をここに書く...
             time += Time.deltaTime;
-            if (time>=3f&& i<=2)
+            if (time >= 3f && i <= 2)
             {
                 time = 0;
                 textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[i];
                 i++;
             }
-           
-                       
+
+
 
             // もうこのメソッドの処理は行わない
             IsCheckedRack = true;
@@ -653,13 +658,13 @@ namespace MainGame
 
         public void ResetUIText()
         {
-           
+
             time += Time.deltaTime;
-            if (time >= 5f )
+            if (time >= 5f)
             {
                 time = 0;
                 textMeshProUGUI.text = "メッセージログ";
-                
+
             }
         }
     }
