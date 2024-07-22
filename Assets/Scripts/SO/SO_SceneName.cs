@@ -35,7 +35,9 @@ namespace SO
         #endregion
 
         [Header("タイトルシーン名")] public string Title;
+        [Header("クレジットシーン名")] public string Credit;
         [Header("メインゲームのシーン名")] public string MainGame;
-        [Header("ゲームクリアのシーン名")] public string GameComplete;
+        [Header("ゲームクリアのシーン名")] public string GameClear;
+        [Header("ゲームオーバーのシーン名")] public string GameOver;
     }
 }
