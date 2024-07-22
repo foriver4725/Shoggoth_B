@@ -141,7 +141,7 @@ namespace MainGame
             IsStepEnded = true;
         }
 
-        void SelectNewStokingPoint()
+        public void SelectNewStokingPoint()
         {
             int posNum = _stokingPos.Count;
             int nextIndex = Random.Range(0, posNum);

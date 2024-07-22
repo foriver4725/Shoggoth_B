@@ -37,9 +37,9 @@ namespace MainGame
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
         [NonSerialized] public GameObject Player;
-        [NonSerialized] public GameObject[] Enemys;
+        [NonSerialized] public GameObject[] Enemys = new GameObject[6];
         private PlayerMove _player;
-        private EnemyMove[] _enemys;
+        private EnemyMove[] _enemys = new EnemyMove[6];
 
         // 書斎の、調べられる棚の場所
         static readonly private Vector3[] CHECK__POSITIONS
@@ -96,7 +96,10 @@ namespace MainGame
                 enemyStokingPositions2.Add(stokingPos.transform.position.ToVec2I());
             }
             EnemyStokingPositions.Add(enemyStokingPositions2);
+        }
 
+        void Start()
+        {
             Player = GameObject.FindGameObjectWithTag("player");
             Enemys = GameObject.FindGameObjectsWithTag("shoggoth");
 
@@ -105,10 +108,7 @@ namespace MainGame
             {
                 _enemys[i] = Enemys[i].GetComponent<EnemyMove>();
             }
-        }
 
-        void Start()
-        {
             _onGameBGM.Raise(SO_Sound.Entity.OnGameNormalBGM, SType.BGM);
 
             _ousuiImage.enabled = false;
@@ -151,6 +151,15 @@ namespace MainGame
                 // クールタイムのカウントを開始する
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
 
+                // 敵の発覚状態を解除する
+                foreach (EnemyMove _enemy in _enemys)
+                {
+                    _enemy.StopChaseTime = 0;
+                    _enemy.IsChasing = false;
+                    _enemy.ChaseAS.Stop();
+                    _enemy.SelectNewStokingPoint();
+                }
+
                 // B1に行く
                 MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
@@ -161,6 +170,15 @@ namespace MainGame
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+
+                // 敵の発覚状態を解除する
+                foreach (EnemyMove _enemy in _enemys)
+                {
+                    _enemy.StopChaseTime = 0;
+                    _enemy.IsChasing = false;
+                    _enemy.ChaseAS.Stop();
+                    _enemy.SelectNewStokingPoint();
+                }
 
                 // B1に行く
                 MapMoveB1F();
@@ -173,6 +191,15 @@ namespace MainGame
                 // クールタイムのカウントを開始する
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
 
+                // 敵の発覚状態を解除する
+                foreach (EnemyMove _enemy in _enemys)
+                {
+                    _enemy.StopChaseTime = 0;
+                    _enemy.IsChasing = false;
+                    _enemy.ChaseAS.Stop();
+                    _enemy.SelectNewStokingPoint();
+                }
+
                 // 1に行く
                 MapMove1F();
                 _player.transform.position = new(1, 36, -1);
@@ -183,6 +210,15 @@ namespace MainGame
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+
+                // 敵の発覚状態を解除する
+                foreach (EnemyMove _enemy in _enemys)
+                {
+                    _enemy.StopChaseTime = 0;
+                    _enemy.IsChasing = false;
+                    _enemy.ChaseAS.Stop();
+                    _enemy.SelectNewStokingPoint();
+                }
 
                 // B2に行く
                 MapMoveB2F();
@@ -195,6 +231,15 @@ namespace MainGame
                 // クールタイムのカウントを開始する
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
 
+                // 敵の発覚状態を解除する
+                foreach (EnemyMove _enemy in _enemys)
+                {
+                    _enemy.StopChaseTime = 0;
+                    _enemy.IsChasing = false;
+                    _enemy.ChaseAS.Stop();
+                    _enemy.SelectNewStokingPoint();
+                }
+
                 // B1に行く
                 MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
@@ -205,6 +250,15 @@ namespace MainGame
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur).Forget();
+
+                // 敵の発覚状態を解除する
+                foreach (EnemyMove _enemy in _enemys)
+                {
+                    _enemy.StopChaseTime = 0;
+                    _enemy.IsChasing = false;
+                    _enemy.ChaseAS.Stop();
+                    _enemy.SelectNewStokingPoint();
+                }
 
                 // B1に行く
                 MapMoveB1F();
@@ -428,7 +482,7 @@ namespace MainGame
         void CheckEscape()
         {
             // 必要アイテムが揃っていないなら何もしない
-            //if (!All(IsGetItems, true)) return;
+            if (!All(IsGetItems, true)) return;
 
             // 必要アイテムが揃っているなら...
 
