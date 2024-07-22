@@ -68,6 +68,9 @@ namespace MainGame
 
         [SerializeField] AudioSource potionSE;
 
+        float time = 0f;
+        int i = 0;
+
         void Cash()
         {
             // 「path」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
@@ -550,80 +553,114 @@ namespace MainGame
         public void ShoggothLook()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[0];
+            ResetUIText();
         }
         public void ShoggothEscape()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[1];
+            ResetUIText();
         }
         public void ShoggothDamage()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[2];
+            ResetUIText();
         }
         public void MapMove1F()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[0];
+            ResetUIText();
         }
         public void MapMoveB1F()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[1];
+            ResetUIText();
         }
         public void MapMoveB2F()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[2];
+            ResetUIText();
         }
         public void EscapeIndex()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[0];
+            ResetUIText();
         }
         public void EscapeIndex2()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[1];
+            ResetUIText();
         }
         public void EscapeIndex3()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[2];
+            ResetUIText();
         }
         public void EscapeIndex4()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[3];
+            ResetUIText();
         }
         public void LockDoor()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[4];
+            ResetUIText();
         }
         public void BreakDoor()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[5];
+            ResetUIText();
         }
         public void IndexShoggoth()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[8];
+            ResetUIText();
         }
         public void IndexShoggoth2()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[9];
+            ResetUIText();
         }
 
         // 書斎の棚を調べる
         public void CheckRack()
         {
+            
             // 既に調べてあるなら何もしない
             if (IsCheckedRack) return;
 
 
 
             // 諸々の処理をここに書く...
-
-
+            time += Time.deltaTime;
+            if (time>=3f&& i<=2)
+            {
+                time = 0;
+                textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[i];
+                i++;
+            }
+           
+                       
 
             // もうこのメソッドの処理は行わない
             IsCheckedRack = true;
-
+            ResetUIText();
             // アイテムのヒントをもらっている状態にする
             IsHintedItems[0] = true;
             IsHintedItems[1] = true;
             IsHintedItems[2] = true;
             IsHintedItems[3] = true;
+        }
+
+        public void ResetUIText()
+        {
+           
+            time += Time.deltaTime;
+            if (time >= 5f )
+            {
+                time = 0;
+                textMeshProUGUI.text = "メッセージログ";
+                
+            }
         }
     }
 }
