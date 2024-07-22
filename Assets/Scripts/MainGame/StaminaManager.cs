@@ -10,6 +10,7 @@ namespace MainGame
 {
     public class StaminaManager : MonoBehaviour
     {
+        [SerializeField] PlayerMove playerMove;
         [SerializeField] Image FrontStamina;
 
         // 現在のスタミナ (0 ~ 1)
@@ -29,7 +30,7 @@ namespace MainGame
         void Update()
         {
             // ダッシュしているなら...
-            if (InputGetter.Instance.MainGame_IsDash)
+            if (InputGetter.Instance.MainGame_IsDash && playerMove.InputDir != Vector2.zero)
             {
                 // スタミナ減少
                 Stamina -= 1 / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;

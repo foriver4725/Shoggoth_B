@@ -15,4 +15,4 @@ MonoBehaviour:
   ClickDur: 1
   AfterClickDur: 0.5
   InteractDur: 0.5
-  TextFadeDur: 3
+  LogFadeDur: 10

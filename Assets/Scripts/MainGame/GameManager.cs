@@ -34,7 +34,8 @@ namespace MainGame
 
         [SerializeField] Image textBack;
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
-        private bool _isImportantMessageShowing = false; // 重要メッセージを表示中かどうか
+
+        [SerializeField] TextMeshProUGUI floorText;
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
@@ -44,10 +45,12 @@ namespace MainGame
         private EnemyMove[] _enemys = new EnemyMove[6];
 
         // 書斎の、調べられる棚の場所
-        static readonly private Vector3[] CHECK__POSITIONS
+        static readonly private Vector3[] CHECK_POSITIONS
             = new Vector3[4] { new(18, 104, -0.055f), new(19, 104, -0.055f), new(20, 104, -0.055f), new(21, 104, -0.055f) };
         // 書斎の棚を調べているか
         [NonSerialized] public bool IsCheckedRack = false;
+        // 書斎の棚のきらきら
+        [SerializeField] private GameObject[] _checkKirakiras = new GameObject[4];
 
         // アイテムの場所
         // 濃硝酸1つ(0)、濃塩酸3つ(1,2,3)
@@ -58,7 +61,7 @@ namespace MainGame
         // アイテム取得状況のヒントをもらっているか(falseなら、光らないし取得できない)
         [NonSerialized] public bool[] IsHintedItems = new bool[4] { false, false, false, false };
         // アイテムのきらきら
-        [SerializeField] private GameObject[] _kirakiras = new GameObject[4];
+        [SerializeField] private GameObject[] _itemKirakiras = new GameObject[4];
         // アイテム取得状況に対応するImage
         [SerializeField] private Image[] _preItemImages = new Image[4];
         // アイテム取得状況に対応するImageの親のGameObject
@@ -68,6 +71,7 @@ namespace MainGame
 
         [SerializeField] private AudioSource _onGameBGM;
 
+        [SerializeField] AudioSource lockedDoorSE;
         [SerializeField] AudioSource potionSE;
 
         private CancellationToken ct;
@@ -123,13 +127,15 @@ namespace MainGame
             {
                 e.color = Color.black;
             }
-            foreach (GameObject e in _kirakiras)
+            foreach (GameObject e in _itemKirakiras)
             {
                 e.transform.position = new(-100, -100, -0.055f);
             }
 
             textBack.enabled = false;
             textMeshProUGUI.text = "";
+
+            ShowDirectionLog();
         }
 
         void Update()
@@ -141,6 +147,15 @@ namespace MainGame
 
             // アイテムImage達を更新
             UpdateItemImages();
+
+            // 階のテキストを更新
+            floorText.text = (Player.transform.position.x < 75, Player.transform.position.y < 75) switch
+            {
+                (true, true) => "1F",
+                (true, false) => "B1F",
+                (false, true) => "B2F",
+                _ => "B2F"
+            };
         }
 
         bool InteractCheck_IsInteractable = true;
@@ -170,7 +185,6 @@ namespace MainGame
                 }
 
                 // B1に行く
-                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(1, 37, -1) && dir == DIR.UP)
@@ -190,7 +204,6 @@ namespace MainGame
                 }
 
                 // B1に行く
-                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(100, 37, -1) && dir == DIR.UP)
@@ -210,7 +223,6 @@ namespace MainGame
                 }
 
                 // 1に行く
-                MapMove1F();
                 _player.transform.position = new(1, 36, -1);
             }
             else if (pos == new Vector3(101, 37, -1) && dir == DIR.UP)
@@ -230,7 +242,6 @@ namespace MainGame
                 }
 
                 // B2に行く
-                MapMoveB2F();
                 _player.transform.position = new(1, 136, -1);
             }
             else if (pos == new Vector3(0, 137, -1) && dir == DIR.UP)
@@ -250,7 +261,6 @@ namespace MainGame
                 }
 
                 // B1に行く
-                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(1, 137, -1) && dir == DIR.UP)
@@ -270,11 +280,10 @@ namespace MainGame
                 }
 
                 // B1に行く
-                MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
             }
 
-            else if (pos == new Vector3(CHECK__POSITIONS[0].x, CHECK__POSITIONS[0].y, -1) + Vector3.left && dir == DIR.RIGHT)
+            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.left && dir == DIR.RIGHT)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -284,7 +293,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[0].x, CHECK__POSITIONS[0].y, -1) + Vector3.up && dir == DIR.DOWN)
+            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.up && dir == DIR.DOWN)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -294,7 +303,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[0].x, CHECK__POSITIONS[0].y, -1) + Vector3.down && dir == DIR.UP)
+            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.down && dir == DIR.UP)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -304,7 +313,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[1].x, CHECK__POSITIONS[1].y, -1) + Vector3.up && dir == DIR.DOWN)
+            else if (pos == new Vector3(CHECK_POSITIONS[1].x, CHECK_POSITIONS[1].y, -1) + Vector3.up && dir == DIR.DOWN)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -314,7 +323,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[1].x, CHECK__POSITIONS[1].y, -1) + Vector3.down && dir == DIR.UP)
+            else if (pos == new Vector3(CHECK_POSITIONS[1].x, CHECK_POSITIONS[1].y, -1) + Vector3.down && dir == DIR.UP)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -324,7 +333,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[2].x, CHECK__POSITIONS[2].y, -1) + Vector3.up && dir == DIR.DOWN)
+            else if (pos == new Vector3(CHECK_POSITIONS[2].x, CHECK_POSITIONS[2].y, -1) + Vector3.up && dir == DIR.DOWN)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -334,7 +343,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[2].x, CHECK__POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
+            else if (pos == new Vector3(CHECK_POSITIONS[2].x, CHECK_POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -344,7 +353,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[3].x, CHECK__POSITIONS[3].y, -1) + Vector3.right && dir == DIR.LEFT)
+            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.right && dir == DIR.LEFT)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -354,7 +363,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[3].x, CHECK__POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
+            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -364,7 +373,7 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK__POSITIONS[3].x, CHECK__POSITIONS[3].y, -1) + Vector3.down && dir == DIR.UP)
+            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.down && dir == DIR.UP)
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -385,7 +394,6 @@ namespace MainGame
                 // アイテム0を入手
                 if (IsHintedItems[0])
                 {
-                    EscapeIndex4();
                     IsGetItems[0] = true;
                 }
             }
@@ -399,7 +407,6 @@ namespace MainGame
                 // アイテム1を入手
                 if (IsHintedItems[1])
                 {
-                    EscapeIndex4();
                     IsGetItems[1] = true;
                 }
             }
@@ -413,7 +420,6 @@ namespace MainGame
                 // アイテム2を入手
                 if (IsHintedItems[2])
                 {
-                    EscapeIndex4();
                     IsGetItems[2] = true;
                 }
             }
@@ -427,7 +433,6 @@ namespace MainGame
                 // アイテム3を入手
                 if (IsHintedItems[3])
                 {
-                    EscapeIndex4();
                     IsGetItems[3] = true;
                 }
             }
@@ -505,7 +510,7 @@ namespace MainGame
             // 必要アイテムが揃っていないなら何もしない
             if (!All(IsGetItems, true))
             {
-                LockDoor();
+                lockedDoorSE.Raise(SO_Sound.Entity.LockedDoorSE, SType.SE);
                 return;
             }
 
@@ -516,7 +521,6 @@ namespace MainGame
             {
                 CheckEscape_IsDoorBroken = true;
                 potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
-                BreakDoor();
             }
             // 次のインタラクトでは脱出する
             else
@@ -533,7 +537,7 @@ namespace MainGame
             {
                 _preItemImageParent.SetActive(false);
                 _ousuiImage.enabled = true;
-                foreach (GameObject e in _kirakiras)
+                foreach (GameObject e in _itemKirakiras)
                 {
                     e.transform.position = new(-100, -100, -0.055f);
                 }
@@ -547,13 +551,13 @@ namespace MainGame
                 {
                     _preItemImages[i].color = IsGetItems[i] ? Color.white : new Color32(100, 100, 100, 255);
                 }
-                if (IsHintedItems[0]) _kirakiras[0].transform.position
+                if (IsHintedItems[0]) _itemKirakiras[0].transform.position
                         = IsGetItems[0] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[0];
-                if (IsHintedItems[1]) _kirakiras[1].transform.position
+                if (IsHintedItems[1]) _itemKirakiras[1].transform.position
                         = IsGetItems[1] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[1];
-                if (IsHintedItems[2]) _kirakiras[2].transform.position
+                if (IsHintedItems[2]) _itemKirakiras[2].transform.position
                         = IsGetItems[2] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[2];
-                if (IsHintedItems[3]) _kirakiras[3].transform.position
+                if (IsHintedItems[3]) _itemKirakiras[3].transform.position
                         = IsGetItems[3] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[3];
             }
         }
@@ -572,148 +576,63 @@ namespace MainGame
             return true;
         }
 
-        public void ShoggothLook()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[0];
-            ResetUIText();
-        }
-        public void ShoggothEscape()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[1];
-            ResetUIText();
-        }
-        public void ShoggothDamage()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[2];
-            ResetUIText();
-        }
-        public void MapMove1F()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[0];
-            ResetUIText();
-        }
-        public void MapMoveB1F()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[1];
-            ResetUIText();
-        }
-        public void MapMoveB2F()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[2];
-            ResetUIText();
-        }
-        public void EscapeIndex()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[0];
-            ResetUIText();
-        }
-        public void EscapeIndex2()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[1];
-            ResetUIText();
-        }
-        public void EscapeIndex3()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[2];
-            ResetUIText();
-        }
-        public void EscapeIndex4()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[3];
-            ResetUIText();
-        }
-        public void LockDoor()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[4];
-            ResetUIText();
-        }
-        public void BreakDoor()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[5];
-            ResetUIText();
-        }
-        public void IndexShoggoth()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[8];
-            ResetUIText();
-        }
-        public void IndexShoggoth2()
-        {
-            if (_isImportantMessageShowing) return;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[9];
-            ResetUIText();
-        }
-
         // 書斎の棚を調べる
         public void CheckRack()
         {
-
             // 既に調べてあるなら何もしない
             if (IsCheckedRack) return;
 
+            StopCoroutine(ShowDirectionLog_Cor);
+            ShowDirectionLog_Cor = null;
 
-
-            // 諸々の処理をここに書く...
-
-
-            _isImportantMessageShowing = true;
             textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[0];
-
-
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.EscapeTeachLog;
 
             // もうこのメソッドの処理は行わない
             IsCheckedRack = true;
-            ResetUIText(10);
+
+            FadeLog();
             // アイテムのヒントをもらっている状態にする
             IsHintedItems[0] = true;
             IsHintedItems[1] = true;
             IsHintedItems[2] = true;
             IsHintedItems[3] = true;
+
+            // 書斎の棚のきらきらを非表示にする
+            foreach (GameObject e in _checkKirakiras)
+            {
+                e.transform.position = new(-100, -100, -0.055f);
+            }
         }
 
-        Coroutine ResetUIText_Cor = null;
-        public void ResetUIText(float dur = -1)
+        Coroutine ShowDirectionLog_Cor = null;
+        void ShowDirectionLog()
         {
-            if (ResetUIText_Cor != null)
+            ShowDirectionLog_Cor = StartCoroutine(ShowDirectionLogCor());
+        }
+        IEnumerator ShowDirectionLogCor()
+        {
+            yield return new WaitForSeconds(15);
+            textBack.enabled = true;
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShowDirectionLog;
+            FadeLog();
+        }
+
+        Coroutine FadeLog_Cor = null;
+        public void FadeLog()
+        {
+            if (FadeLog_Cor != null)
             {
-                StopCoroutine(ResetUIText_Cor);
-                ResetUIText_Cor = null;
+                StopCoroutine(FadeLog_Cor);
+                FadeLog_Cor = null;
             }
 
-            ResetUIText_Cor = StartCoroutine(ResetUI(dur));
+            FadeLog_Cor = StartCoroutine(ResetLog());
         }
 
-        IEnumerator ResetUI(float dur = -1, bool isImportant)
+        IEnumerator ResetLog()
         {
-            yield return new WaitForSeconds(dur == -1 ? SO_General.Entity.TextFadeDur : dur);
+            yield return new WaitForSeconds(SO_General.Entity.LogFadeDur);
             textBack.enabled = false;
             textMeshProUGUI.text = "";
         }

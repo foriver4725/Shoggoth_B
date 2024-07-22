@@ -34,16 +34,10 @@ namespace SO
             }
         }
         #endregion
-        [Header("ショゴス")] public List<string> ShoggothLog;
-        [Header("アイテム")] public List<string> ItemLog;
-        [Header("マップ")] public List<string> MapLog;
-        [Header("情報"), TextArea(1, 1000)] public List<string> IndexLog;
 
-        [Header("自販機")] public List<string> Vending;
-
+        [Header("書斎に向かうことをを示唆するログ"), TextArea(1, 1000)] public string ShowDirectionLog;
+        [Header("脱出方法を示唆するログ"), TextArea(1, 1000)] public string EscapeTeachLog;
     }
-
-
 }
 
 

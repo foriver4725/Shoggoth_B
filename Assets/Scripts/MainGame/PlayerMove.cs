@@ -15,6 +15,9 @@ namespace MainGame
         // プレイヤーの向き
         public DIR LookingDir { get; set; } = DIR.DOWN;
 
+        // プレイヤーの移動方向のベクトル(大きさ1を想定)
+        public Vector2 InputDir { get; set; } = Vector2.zero;
+
         // プレイヤーが整数座標まで移動完了しているか
         bool isStepEnded = true;
 
@@ -33,12 +36,12 @@ namespace MainGame
             // 死んでいるなら動けない
             if (!IsAlive) return;
 
-            Vector2 inputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
+            InputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
 
             // ダッシュの入力を検知して、フラグを更新する
 
             if (InputGetter.Instance.MainGame_IsDash && StaminaManager.Stamina != 0) moveState = MoveState.DASH;
-            else if (inputDir != Vector2.zero) moveState = MoveState.WALK;
+            else if (InputDir != Vector2.zero) moveState = MoveState.WALK;
             else moveState = MoveState.STOP;
 
             isOnStop = (moveState == MoveState.STOP) && (moveStatePre != MoveState.STOP);
@@ -54,17 +57,17 @@ namespace MainGame
             if (isStepEnded)
             {
                 // （動いているなら）向いている方向を判断する。
-                if (inputDir != Vector2.zero)
+                if (InputDir != Vector2.zero)
                 {
-                    LookingDir = inputDir.ToDir();
+                    LookingDir = InputDir.ToDir();
                 }
 
                 // アニメーションの遷移を発火させる。
-                anim.SetBool("IsMoving", inputDir != Vector2.zero);
+                anim.SetBool("IsMoving", InputDir != Vector2.zero);
                 anim.SetInteger("LookingDirection", (int)LookingDir);
 
                 // 必ず向いている方向の次の整数座標まで移動し、その間は入力を受け付けない。
-                if (inputDir != Vector2.zero)
+                if (InputDir != Vector2.zero)
                 {
                     isStepEnded = false;
                     StartCoroutine(MoveTo(LookingDir.ToVector3()));

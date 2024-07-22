@@ -48,6 +48,7 @@ namespace SO
         [Space(25)]
         [Header("SE")]
         [Header("被ダメージ")] public AudioClip DamageTookSE;
+        [Header("鍵のかかったドアに対してインタラクトする")] public AudioClip LockedDoorSE;
         [Header("ポーションを使う")] public AudioClip UsePotionSE;
         [Header("クリックする")] public AudioClip ClickSE;
     }

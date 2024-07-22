@@ -21,5 +21,6 @@ MonoBehaviour:
   FootstepBGM: {fileID: 8300000, guid: 9609d58c48e847945b209beb767a0f78, type: 3}
   DashFootstepBGM: {fileID: 8300000, guid: 882f78bea44df1549bd8b07621e356a8, type: 3}
   DamageTookSE: {fileID: 8300000, guid: af75497c7a42c46409a52842d8397519, type: 3}
+  LockedDoorSE: {fileID: 8300000, guid: af41787cb31271b4392c96fb9d287b03, type: 3}
   UsePotionSE: {fileID: 8300000, guid: c09a3020fc7e04045bddf6f36881535c, type: 3}
   ClickSE: {fileID: 8300000, guid: af75497c7a42c46409a52842d8397519, type: 3}

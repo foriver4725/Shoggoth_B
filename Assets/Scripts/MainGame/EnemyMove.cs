@@ -51,7 +51,6 @@ namespace MainGame
             {
                 IsChasing = true;
 
-                GameManager.Instance.ShoggothLook();
                 ChaseAS.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
             }
 

@@ -1,3 +1,4 @@
+using MainGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class HPManager : MonoBehaviour
 {
     public List<Image> hearts; // ハートのImageリスト
-     static public int currentHP;
+    static public int currentHP;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class HPManager : MonoBehaviour
         if (currentHP > 0)
         {
             currentHP--;
-            hearts[currentHP].color =Color.black; // ハートのImageを非表示にする
+            hearts[currentHP].color = Color.black; // ハートのImageを非表示にする
         }
     }
 }
