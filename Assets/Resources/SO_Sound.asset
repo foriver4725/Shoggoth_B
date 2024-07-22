@@ -20,15 +20,6 @@ MonoBehaviour:
   OnGameNormalBGM: {fileID: 8300000, guid: 84e42138cafeee243a02eca939f421a8, type: 3}
   FootstepBGM: {fileID: 8300000, guid: 9609d58c48e847945b209beb767a0f78, type: 3}
   DashFootstepBGM: {fileID: 8300000, guid: 882f78bea44df1549bd8b07621e356a8, type: 3}
-  DamageTookSE:
-  - {fileID: 8300000, guid: e560be8c4073cbf4585844844edbed24, type: 3}
-  - {fileID: 8300000, guid: 5d8a1b8c74e4ece4885dfe2951d54497, type: 3}
-  - {fileID: 8300000, guid: ca94b6f665a1ae64b8652d39885aec16, type: 3}
-  ItemPurchaseSE: {fileID: 8300000, guid: 66318b7ea4f9064449ba2417eb4d59b1, type: 3}
-  SaveCompletedSE: {fileID: 8300000, guid: ca94b6f665a1ae64b8652d39885aec16, type: 3}
-  OpenDoorSE: {fileID: 8300000, guid: e5164dabec87c4b43ad8b9e835fc74f5, type: 3}
-  TryOpenLockedDoorSE: {fileID: 8300000, guid: af41787cb31271b4392c96fb9d287b03, type: 3}
-  MoveObjectSE: {fileID: 8300000, guid: f374a9b3e7603c3428138e2e1086aac1, type: 3}
+  DamageTookSE: {fileID: 8300000, guid: af75497c7a42c46409a52842d8397519, type: 3}
   UsePotionSE: {fileID: 8300000, guid: c09a3020fc7e04045bddf6f36881535c, type: 3}
-  FindItemSE: {fileID: 0}
   ClickSE: {fileID: 8300000, guid: af75497c7a42c46409a52842d8397519, type: 3}

@@ -26,12 +26,11 @@ namespace MainGame
         Vector2Int targetPos = new();
 
         // プレイヤーを追いかけるモードになっているか
-        bool isChasing = false;
-        float stopChaseTime = 0;
+        public bool IsChasing { get; set; } = false;
+        public float StopChaseTime { get; set; } = 0;
 
         // チェイスBGM
-        private AudioSource _chaseBGMObj = null;
-        //private Coroutine _bgmChange = null;
+        public AudioSource ChaseAS;
 
         private void Start()
         {
@@ -48,39 +47,31 @@ namespace MainGame
         void Update()
         {
             // プレイヤーに近づいたら追跡モードになる。
-            if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+            if (!IsChasing && (GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
-                isChasing = true;
+                IsChasing = true;
 
-               GameManager.Instance.ShoggothLook();
-                //if (_bgmChange != null) StopCoroutine(_bgmChange);
-                //_bgmChange = null;
-                if (_chaseBGMObj == null) _chaseBGMObj = Soundtest.bgmOn(SO_Sound.Entity.ChaseBGM);
-                _chaseBGMObj.Play();
-                //_bgmChange = StartCoroutine(SoundVolumeChange(_chaseBGMObj, 0, 1, 1, false));
+                GameManager.Instance.ShoggothLook();
+                ChaseAS.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
             }
 
-            if (isChasing)
+            if (IsChasing)
             {
                 if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
                 {
-                    stopChaseTime += Time.deltaTime;
+                    StopChaseTime += Time.deltaTime;
                 }
                 else
                 {
-                    stopChaseTime = 0;
+                    StopChaseTime = 0;
                 }
 
-                if (stopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
+                if (StopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
                 {
-                    stopChaseTime = 0;
-                    isChasing = false;
+                    StopChaseTime = 0;
+                    IsChasing = false;
 
-                    //if (_bgmChange != null) StopCoroutine(_bgmChange);
-                    //_bgmChange = null;
-                    _chaseBGMObj.Stop();
-                    Destroy(_chaseBGMObj.gameObject);
-                    //_bgmChange = StartCoroutine(SoundVolumeChange(_chaseBGMObj, _chaseBGMObj.volume, 0, 1, true));
+                    ChaseAS.Stop();
 
                     SelectNewStokingPoint();
                 }
@@ -149,22 +140,6 @@ namespace MainGame
             isAtStokingPosition = _stokingPos.Contains(toPos.ToVec2I());
             IsStepEnded = true;
         }
-
-        //IEnumerator SoundVolumeChange(AudioSource source, float start, float end, float duration, bool isDestroyoOnEnd = false)
-        //{
-        //    float t = 0;
-        //    while (t < duration)
-        //    {
-        //        t += Time.deltaTime;
-
-        //        float volume = t * (end - start) / duration + start;
-        //        source.volume = volume;
-
-        //        yield return null;
-        //    }
-
-        //    if (isDestroyoOnEnd) Destroy(source.gameObject);
-        //}
 
         void SelectNewStokingPoint()
         {
