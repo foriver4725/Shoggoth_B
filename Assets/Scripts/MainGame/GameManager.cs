@@ -76,6 +76,7 @@ namespace MainGame
 
         [SerializeField] AudioSource lockedDoorSE;
         [SerializeField] AudioSource potionSE;
+        [SerializeField] AudioSource chaseBGM;
 
         private CancellationToken ct;
 
@@ -148,6 +149,16 @@ namespace MainGame
                 InteractCheck();
             }
 
+            // 発覚状態のBGMを更新する
+            if (_enemys.Map(e => e.IsOnChase).Any(true))
+            {
+                chaseBGM.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
+            }
+            else if (_enemys.Map(e => e.IsChasing).All(false))
+            {
+                chaseBGM.Stop();
+            }
+
             // アイテムImage達を更新
             UpdateItemImages();
 
@@ -189,7 +200,6 @@ namespace MainGame
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
-                    _enemy.ChaseAS.Stop();
                     _enemy.SelectNewStokingPoint();
                 }
 
@@ -208,7 +218,6 @@ namespace MainGame
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
-                    _enemy.ChaseAS.Stop();
                     _enemy.SelectNewStokingPoint();
                 }
 
@@ -227,7 +236,6 @@ namespace MainGame
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
-                    _enemy.ChaseAS.Stop();
                     _enemy.SelectNewStokingPoint();
                 }
 
@@ -246,7 +254,6 @@ namespace MainGame
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
-                    _enemy.ChaseAS.Stop();
                     _enemy.SelectNewStokingPoint();
                 }
 
@@ -265,7 +272,6 @@ namespace MainGame
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
-                    _enemy.ChaseAS.Stop();
                     _enemy.SelectNewStokingPoint();
                 }
 
@@ -284,7 +290,6 @@ namespace MainGame
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
-                    _enemy.ChaseAS.Stop();
                     _enemy.SelectNewStokingPoint();
                 }
 
@@ -517,7 +522,7 @@ namespace MainGame
         void CheckEscape()
         {
             // 必要アイテムが揃っていないなら何もしない
-            if (!All(IsGetItems, true))
+            if (IsGetItems.Any(false))
             {
                 lockedDoorSE.Raise(SO_Sound.Entity.LockedDoorSE, SType.SE);
                 return;
@@ -545,7 +550,7 @@ namespace MainGame
         void UpdateItemImages()
         {
             // 4つのアイテムをコンプしているなら
-            if (All(IsGetItems, true))
+            if (IsGetItems.All(true))
             {
                 _preItemImageParent.SetActive(false);
                 _ousuiImage.enabled = true;
@@ -574,19 +579,7 @@ namespace MainGame
             }
         }
 
-        // listの要素が全てtargetの時のみ、trueを返す。
-        private bool All(bool[] list, bool target)
-        {
-            foreach (bool e in list)
-            {
-                if (e != target)
-                {
-                    return false;
-                }
-            }
 
-            return true;
-        }
 
         // 書斎の棚を調べる
         public void CheckRack()

@@ -25,12 +25,11 @@ namespace MainGame
         bool isAtStokingPosition = true;
         Vector2Int targetPos = new();
 
-        // プレイヤーを追いかけるモードになっているか
-        public bool IsChasing { get; set; } = false;
+        public bool IsChasing { get; set; } = false; // 現在のフレームで発覚状態であるか
+        public bool IsOnChase { get; set; } = false; // このフレームで発覚状態になったか
+        public bool IsOffChase { get; set; } = false; // このフレームで発覚状態でなくなったか
+        bool isChasingPre = false; // 1つ前のフレームで発覚状態であったか
         public float StopChaseTime { get; set; } = 0;
-
-        // チェイスBGM
-        public AudioSource ChaseAS;
 
         private void Start()
         {
@@ -53,8 +52,6 @@ namespace MainGame
             if (!IsChasing && (GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
                 IsChasing = true;
-
-                ChaseAS.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
             }
 
             if (IsChasing)
@@ -72,8 +69,6 @@ namespace MainGame
                 {
                     StopChaseTime = 0;
                     IsChasing = false;
-
-                    ChaseAS.Stop();
 
                     SelectNewStokingPoint();
                 }
@@ -116,6 +111,13 @@ namespace MainGame
                     StartCoroutine(MoveTo(lookingDir.ToVector3()));
                 }
             }
+        }
+
+        private void LateUpdate()
+        {
+            IsOnChase = IsChasing && !isChasingPre;
+            IsOffChase = !IsChasing && isChasingPre;
+            isChasingPre = IsChasing;
         }
 
         IEnumerator MoveTo(Vector3 dir)

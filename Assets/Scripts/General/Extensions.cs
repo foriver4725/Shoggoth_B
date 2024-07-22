@@ -242,4 +242,45 @@ namespace Ex
             action();
         }
     }
+
+    public static class Itr
+    {
+        public static List<T2> Map<T1, T2>(this IEnumerable<T1> self, Func<T1, T2> func)
+        {
+            List<T2> ret = new();
+            foreach (T1 e in self)
+            {
+                ret.Add(func(e));
+            }
+            return ret;
+        }
+
+        // 要素のいずれかがtargetの時、trueを返す。
+        public static bool Any(this IEnumerable<bool> self, bool target)
+        {
+            foreach (bool e in self)
+            {
+                if (e == target)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // 要素が全てtargetの時のみ、trueを返す。
+        public static bool All(this IEnumerable<bool> self, bool target)
+        {
+            foreach (bool e in self)
+            {
+                if (e != target)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
 }
