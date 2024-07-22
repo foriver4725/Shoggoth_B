@@ -39,6 +39,12 @@ namespace MainGame
         private PlayerMove _player;
         private EnemyMove _enemy;
 
+        // ‘Ö‚ÌA’²‚×‚ç‚ê‚é’I‚ÌêŠ
+        static readonly private Vector3[] CHECK__POSITIONS
+            = new Vector3[4] { new(18, 104, -0.055f), new(19, 104, -0.055f), new(20, 104, -0.055f), new(21, 104, -0.055f) };
+        // ‘Ö‚Ì’I‚ğ’²‚×‚Ä‚¢‚é‚©
+        [NonSerialized] public bool IsCheckedRack = false;
+
         // ƒAƒCƒeƒ€‚ÌêŠ
         // ”ZÉ_1‚Â(0)A”Z‰–_3‚Â(1,2,3)
         static readonly private Vector3[] ITEM__POSITIONS
@@ -161,6 +167,57 @@ namespace MainGame
                 // B1‚És‚­
                 MapMoveB1F();
                 _player.transform.position = new(101, 36, -1);
+            }
+
+            else if (pos == new Vector3(CHECK__POSITIONS[0].x, CHECK__POSITIONS[0].y, -1) + Vector3.left && dir == DIR.RIGHT)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[0].x, CHECK__POSITIONS[0].y, -1) + Vector3.up && dir == DIR.DOWN)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[0].x, CHECK__POSITIONS[0].y, -1) + Vector3.down && dir == DIR.UP)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[1].x, CHECK__POSITIONS[1].y, -1) + Vector3.up && dir == DIR.DOWN)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[1].x, CHECK__POSITIONS[1].y, -1) + Vector3.down && dir == DIR.UP)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[2].x, CHECK__POSITIONS[2].y, -1) + Vector3.up && dir == DIR.DOWN)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[2].x, CHECK__POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[3].x, CHECK__POSITIONS[3].y, -1) + Vector3.right && dir == DIR.LEFT)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[3].x, CHECK__POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
+            }
+            else if (pos == new Vector3(CHECK__POSITIONS[3].x, CHECK__POSITIONS[3].y, -1) + Vector3.down && dir == DIR.UP)
+            {
+                // ‘Ö‚Ì’I‚ğ’²‚×‚é
+                CheckRack();
             }
 
             else if (pos == new Vector3(ITEM__POSITIONS[0].x, ITEM__POSITIONS[0].y, -1) + Vector3.right && dir == DIR.LEFT)
@@ -335,6 +392,28 @@ namespace MainGame
         public void IndexShoggoth2()
         {
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[9];
+        }
+
+        // ‘Ö‚Ì’I‚ğ’²‚×‚é
+        public void CheckRack()
+        {
+            // Šù‚É’²‚×‚Ä‚ ‚é‚È‚ç‰½‚à‚µ‚È‚¢
+            if (IsCheckedRack) return;
+
+
+
+            // ”X‚Ìˆ—‚ğ‚±‚±‚É‘‚­...
+
+
+
+            // ‚à‚¤‚±‚Ìƒƒ\ƒbƒh‚Ìˆ—‚Ís‚í‚È‚¢
+            IsCheckedRack = true;
+
+            // ƒAƒCƒeƒ€‚Ìƒqƒ“ƒg‚ğ‚à‚ç‚Á‚Ä‚¢‚éó‘Ô‚É‚·‚é
+            IsHintedItems[0] = true;
+            IsHintedItems[1] = true;
+            IsHintedItems[2] = true;
+            IsHintedItems[3] = true;
         }
     }
 }
