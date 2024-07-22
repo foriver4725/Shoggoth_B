@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: SO_SceneName
   m_EditorClassIdentifier: 
   Title: OP
+  Credit: Credit
   MainGame: Game
-  GameComplete: Clear
+  GameClear: GameComplete
+  GameOver: GameOver

@@ -3,6 +3,7 @@ using TMPro;
 using IA;
 using SO;
 using UnityEngine.SceneManagement;
+using MainGame;
 
 public class MenuController : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class MenuController : MonoBehaviour
     void ReturnToTitle()
     {
         Time.timeScale = 1f;
+        StaminaManager.Stamina = 1;
         SceneManager.LoadSceneAsync(SO_SceneName.Entity.Title);
     }
 }

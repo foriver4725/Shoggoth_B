@@ -1,3 +1,4 @@
+using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace MainGame
             _color.a = 1;
             fadeOutImage.color = _color;
 
-            SceneManager.LoadSceneAsync("GameOver");
+            SceneManager.LoadSceneAsync(SO_SceneName.Entity.GameOver);
         }
     }
 }
