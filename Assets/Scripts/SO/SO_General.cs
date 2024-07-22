@@ -38,5 +38,6 @@ namespace SO
         [Header("ボタンの反応間隔[s]")] public float ClickDur;
         [Header("ボタンを押した後の待機秒数[s]")] public float AfterClickDur;
         [Header("インタラクトの反応間隔")] public float InteractDur;
+        [Header("UIを消すまでのデフォルト時間")] public float TextFadeDur;
     }
 }

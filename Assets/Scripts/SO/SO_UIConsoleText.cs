@@ -37,7 +37,7 @@ namespace SO
         [Header("ショゴス")] public List<string> ShoggothLog;
         [Header("アイテム")] public List<string> ItemLog;
         [Header("マップ")] public List<string> MapLog;
-        [Header("情報")] public List<string> IndexLog;
+        [Header("情報"), TextArea(1, 1000)] public List<string> IndexLog;
 
         [Header("自販機")] public List<string> Vending;
 

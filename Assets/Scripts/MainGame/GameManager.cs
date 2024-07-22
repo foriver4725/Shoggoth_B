@@ -9,7 +9,6 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace MainGame
 {
@@ -33,7 +32,9 @@ namespace MainGame
         }
         #endregion
 
-        public TextMeshProUGUI textMeshProUGUI;
+        [SerializeField] Image textBack;
+        [SerializeField] TextMeshProUGUI textMeshProUGUI;
+        private bool _isImportantMessageShowing = false; // 重要メッセージを表示中かどうか
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
@@ -70,8 +71,6 @@ namespace MainGame
         [SerializeField] AudioSource potionSE;
 
         private CancellationToken ct;
-
-        
 
         void Cash()
         {
@@ -128,6 +127,9 @@ namespace MainGame
             {
                 e.transform.position = new(-100, -100, -0.055f);
             }
+
+            textBack.enabled = false;
+            textMeshProUGUI.text = "";
         }
 
         void Update()
@@ -381,8 +383,11 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム0を入手
-                EscapeIndex4();
-                if (IsHintedItems[0]) IsGetItems[0] = true;
+                if (IsHintedItems[0])
+                {
+                    EscapeIndex4();
+                    IsGetItems[0] = true;
+                }
             }
             else if (pos == new Vector3(ITEM__POSITIONS[1].x, ITEM__POSITIONS[1].y, -1) + Vector3.left && dir == DIR.RIGHT)
             {
@@ -392,8 +397,11 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム1を入手
-                EscapeIndex4();
-                if (IsHintedItems[1]) IsGetItems[1] = true;
+                if (IsHintedItems[1])
+                {
+                    EscapeIndex4();
+                    IsGetItems[1] = true;
+                }
             }
             else if (pos == new Vector3(ITEM__POSITIONS[2].x, ITEM__POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
             {
@@ -403,8 +411,11 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム2を入手
-                EscapeIndex4();
-                if (IsHintedItems[2]) IsGetItems[2] = true;
+                if (IsHintedItems[2])
+                {
+                    EscapeIndex4();
+                    IsGetItems[2] = true;
+                }
             }
             else if (pos == new Vector3(ITEM__POSITIONS[3].x, ITEM__POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
             {
@@ -414,8 +425,11 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // アイテム3を入手
-                EscapeIndex4();
-                if (IsHintedItems[3]) IsGetItems[3] = true;
+                if (IsHintedItems[3])
+                {
+                    EscapeIndex4();
+                    IsGetItems[3] = true;
+                }
             }
 
             else if (pos == new Vector3(15, 0, -1) && dir == DIR.DOWN)
@@ -495,10 +509,10 @@ namespace MainGame
                 return;
             }
 
-                // 必要アイテムが揃っているなら...
+            // 必要アイテムが揃っているなら...
 
-                // 最初のインタラクトではドアを壊す
-                if (!CheckEscape_IsDoorBroken)
+            // 最初のインタラクトではドアを壊す
+            if (!CheckEscape_IsDoorBroken)
             {
                 CheckEscape_IsDoorBroken = true;
                 potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
@@ -560,71 +574,99 @@ namespace MainGame
 
         public void ShoggothLook()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[0];
             ResetUIText();
         }
         public void ShoggothEscape()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[1];
             ResetUIText();
         }
         public void ShoggothDamage()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.ShoggothLog[2];
             ResetUIText();
         }
         public void MapMove1F()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[0];
             ResetUIText();
         }
         public void MapMoveB1F()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[1];
             ResetUIText();
         }
         public void MapMoveB2F()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.MapLog[2];
             ResetUIText();
         }
         public void EscapeIndex()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[0];
             ResetUIText();
         }
         public void EscapeIndex2()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[1];
             ResetUIText();
         }
         public void EscapeIndex3()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[2];
             ResetUIText();
         }
         public void EscapeIndex4()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[3];
             ResetUIText();
         }
         public void LockDoor()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[4];
             ResetUIText();
         }
         public void BreakDoor()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[5];
             ResetUIText();
         }
         public void IndexShoggoth()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[8];
             ResetUIText();
         }
         public void IndexShoggoth2()
         {
+            if (_isImportantMessageShowing) return;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[9];
             ResetUIText();
         }
@@ -640,16 +682,16 @@ namespace MainGame
 
             // 諸々の処理をここに書く...
 
-           
+
+            _isImportantMessageShowing = true;
+            textBack.enabled = true;
             textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[0];
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[1];
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.IndexLog[2];
 
 
 
             // もうこのメソッドの処理は行わない
             IsCheckedRack = true;
-            ResetUIText();
+            ResetUIText(10);
             // アイテムのヒントをもらっている状態にする
             IsHintedItems[0] = true;
             IsHintedItems[1] = true;
@@ -657,13 +699,23 @@ namespace MainGame
             IsHintedItems[3] = true;
         }
 
-        public void ResetUIText()
+        Coroutine ResetUIText_Cor = null;
+        public void ResetUIText(float dur = -1)
         {
+            if (ResetUIText_Cor != null)
+            {
+                StopCoroutine(ResetUIText_Cor);
+                ResetUIText_Cor = null;
+            }
 
+            ResetUIText_Cor = StartCoroutine(ResetUI(dur));
+        }
 
-               // textMeshProUGUI.text = "メッセージログ";
-
-            
+        IEnumerator ResetUI(float dur = -1, bool isImportant)
+        {
+            yield return new WaitForSeconds(dur == -1 ? SO_General.Entity.TextFadeDur : dur);
+            textBack.enabled = false;
+            textMeshProUGUI.text = "";
         }
     }
 }
