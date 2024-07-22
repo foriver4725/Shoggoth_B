@@ -3,6 +3,7 @@ using SO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 namespace Ex
@@ -235,9 +236,9 @@ namespace Ex
     public static class Async
     {
         // ˆê’èŠÔ‘Ò‚Á‚Ä‚©‚çˆ—‚ğs‚¤
-        public static async UniTask AfterWaited(Action action, float seconds)
+        public static async UniTask AfterWaited(Action action, float seconds, CancellationToken ct)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(seconds));
+            await UniTask.Delay(TimeSpan.FromSeconds(seconds), cancellationToken: ct);
             action();
         }
     }
