@@ -32,11 +32,14 @@ namespace MainGame
             if (InputGetter.Instance.MainGame_IsDash)
             {
                 // スタミナ減少
-                stamina -= 0.2f * Time.deltaTime;
+                stamina -= 1 / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
             }
 
             // 常にスタミナは回復する
-            stamina += 0.1f * Time.deltaTime;
+            stamina += 1 / SO_Player.Entity.StaminaIncreaseDur * Time.deltaTime;
+
+            // UIを更新
+            FrontStamina.fillAmount = stamina;
         }
     }
 }

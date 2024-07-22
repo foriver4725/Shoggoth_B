@@ -42,10 +42,8 @@ namespace SO
         [Header("敵が↑の距離より遠くにいるとき、プレイヤーを見失うまでの時間")] public float EnemyStopChaseDuration;
         [Header("無敵時間")] public float InvincibleTime;
 
-        [Header("最大スタミナ")] public float MaxStamina;
         [Header("スタミナの回復速度(何秒で最小から最大になるか)")] public float StaminaIncreaseDur;
-        [Header("スタミナの回復速度(何秒で最小から最大になるか)")] public float StaminaDecreaseDur;
-        [Header("スタミナ消費無効の継続時間")] public float InfiniteStaminaDur;
+        [Header("スタミナの減少速度(何秒で最大から最小になるか)")] public float StaminaDecreaseDur;
 
         [Header("BGMのプレハブ")] public GameObject bgmOn;
         [Header("SEのプレハブ")] public GameObject seOn;
