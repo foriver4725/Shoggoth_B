@@ -489,12 +489,16 @@ namespace MainGame
         void CheckEscape()
         {
             // 必要アイテムが揃っていないなら何もしない
-            if (!All(IsGetItems, true)) return;
+            if (!All(IsGetItems, true))
+            {
+                LockDoor();
+                return;
+            }
 
-            // 必要アイテムが揃っているなら...
+                // 必要アイテムが揃っているなら...
 
-            // 最初のインタラクトではドアを壊す
-            if (!CheckEscape_IsDoorBroken)
+                // 最初のインタラクトではドアを壊す
+                if (!CheckEscape_IsDoorBroken)
             {
                 CheckEscape_IsDoorBroken = true;
                 potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
@@ -657,7 +661,7 @@ namespace MainGame
         {
 
 
-                textMeshProUGUI.text = "メッセージログ";
+               // textMeshProUGUI.text = "メッセージログ";
 
             
         }
