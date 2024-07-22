@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0be7831acd654c4f8abaeb3d757a9ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _floor: 0
+  _enemySpeed: 0
+  chaseAS: {fileID: 0}
 --- !u!1 &6236799144384842294
 GameObject:
   m_ObjectHideFlags: 0

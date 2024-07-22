@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClickDur: 1
   AfterClickDur: 0.5
+  InteractDur: 1

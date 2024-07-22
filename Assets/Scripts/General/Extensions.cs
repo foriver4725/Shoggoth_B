@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using SO;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -228,5 +230,15 @@ namespace Ex
     {
         public static bool BGM = true;
         public static bool SE = false;
+    }
+
+    public static class Async
+    {
+        // ˆê’èŠÔ‘Ò‚Á‚Ä‚©‚çˆ—‚ğs‚¤
+        public static async UniTask AfterWaited(Action action, float seconds)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(seconds));
+            action();
+        }
     }
 }

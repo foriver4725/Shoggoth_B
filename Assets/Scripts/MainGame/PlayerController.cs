@@ -1,3 +1,4 @@
+using Ex;
 using SO;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private float _invincibleCount = 0f;
     private bool _isInvincible = false;
 
+    [SerializeField] AudioSource damagedAS;
+
     void Update()
     {
         #region 一定間隔で敵との距離をチェックする
@@ -20,12 +23,13 @@ public class PlayerController : MonoBehaviour
         {
             // プレイヤーと敵の距離を計算
             float sqrDistance = (transform.position - enemy.transform.position).sqrMagnitude;
-            if (sqrDistance <= 1.5f * 1.5f)
+            if (sqrDistance <= SO_Player.Entity.PlayerDamageRange * SO_Player.Entity.PlayerDamageRange)
             {
                 // 距離が1以下の場合、HPを減らす
                 if (!_isInvincible)
                 {
                     _isInvincible = true;
+                    damagedAS.Raise(SO_Sound.Entity.DamageTookSE, SType.SE);
                     hpManager.DecreaseHP();
                 }
                 // HPが減ったので、ここでループを抜ける
