@@ -47,7 +47,6 @@ namespace IA
         #region 変数宣言
         public Vector2 MainGame_ValueMove { get; private set; } = Vector2.zero;
         public bool MainGame_IsDash { get; private set; } = false;
-        public bool MainGame_IsUseItem { get; private set; } = false;
         public bool MainGame_IsPause { get; private set; } = false;
         public bool MainGame_IsUp { get; private set; } = false;
         public bool MainGame_IsDown { get; private set; } = false;
@@ -60,7 +59,6 @@ namespace IA
         #region【LateUpdate】毎フレームの最後で、フラグを初期化する
         void LateUpdate()
         {
-            if (MainGame_IsUseItem) MainGame_IsUseItem = false;
             if (MainGame_IsPause) MainGame_IsPause = false;
             if (MainGame_IsUp) MainGame_IsUp = false;
             if (MainGame_IsDown) MainGame_IsDown = false;
@@ -82,7 +80,6 @@ namespace IA
                 _inputs.MainGame.Move.canceled += MainGame_ReadMove;
                 _inputs.MainGame.Dash.performed += MainGame_OnDashDown;
                 _inputs.MainGame.Dash.canceled += MainGame_OnDashUp;
-                _inputs.MainGame.UseItem.performed += MainGame_OnUseItem;
                 _inputs.MainGame.Pause.performed += MainGame_OnPause;
                 _inputs.MainGame.Up.performed += MainGame_OnUp;
                 _inputs.MainGame.Down.performed += MainGame_OnDown;
@@ -98,7 +95,6 @@ namespace IA
                 _inputs.MainGame.Move.canceled -= MainGame_ReadMove;
                 _inputs.MainGame.Dash.performed -= MainGame_OnDashDown;
                 _inputs.MainGame.Dash.canceled -= MainGame_OnDashUp;
-                _inputs.MainGame.UseItem.performed -= MainGame_OnUseItem;
                 _inputs.MainGame.Pause.performed -= MainGame_OnPause;
                 _inputs.MainGame.Up.performed -= MainGame_OnUp;
                 _inputs.MainGame.Down.performed -= MainGame_OnDown;
@@ -114,7 +110,6 @@ namespace IA
         void MainGame_ReadMove(InputAction.CallbackContext context) { MainGame_ValueMove = context.ReadValue<Vector2>(); }
         void MainGame_OnDashDown(InputAction.CallbackContext context) { MainGame_IsDash = true; }
         void MainGame_OnDashUp(InputAction.CallbackContext context) { MainGame_IsDash = false; }
-        void MainGame_OnUseItem(InputAction.CallbackContext context) { MainGame_IsUseItem = true; }
         void MainGame_OnPause(InputAction.CallbackContext context) { MainGame_IsPause = true; }
         void MainGame_OnUp(InputAction.CallbackContext context) { MainGame_IsUp = true; }
         void MainGame_OnDown(InputAction.CallbackContext context) { MainGame_IsDown = true; }

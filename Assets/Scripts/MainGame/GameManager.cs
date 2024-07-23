@@ -50,6 +50,22 @@ namespace MainGame
         private PlayerMove _player;
         private EnemyMove[] _enemys = new EnemyMove[6];
 
+        [NonSerialized] public int CurrentHP; // プレイヤーのHP
+
+        // 現在のスタミナ (0 ~ 1)
+        private float _stamina = 1;
+        public float Stamina
+        {
+            get
+            {
+                return _stamina;
+            }
+            set
+            {
+                _stamina = Mathf.Clamp(value, 0, 1);
+            }
+        }
+
         // 書斎の、調べられる棚の場所
         static readonly private Vector3[] CHECK_POSITIONS
             = new Vector3[4] { new(18, 104, -0.055f), new(19, 104, -0.055f), new(20, 104, -0.055f), new(21, 104, -0.055f) };
