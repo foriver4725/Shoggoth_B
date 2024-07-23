@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213249cb5560d434296a882abfa667f7, type: 3}
   m_Name: SO_Debug
   m_EditorClassIdentifier: 
-  IsInvincible: 1
-  IsInfiniteStamina: 1
+  IsInvincible: 0
+  IsInfiniteStamina: 0
