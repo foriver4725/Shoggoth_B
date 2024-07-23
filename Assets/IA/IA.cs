@@ -138,15 +138,6 @@ namespace IA
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UseItem"",
-                    ""type"": ""Button"",
-                    ""id"": ""318da8f9-0b84-48b9-8994-1fa9db534472"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""4377bbed-336e-44b1-9c23-20735cb20ae8"",
@@ -375,28 +366,6 @@ namespace IA
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ae098c40-5cfb-4ca3-af17-e4459f02ce91"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""17767f16-fdb4-4a46-a695-bf0afa313c06"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""49bc7cd5-1504-484d-a313-3cb50a7e3869"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -497,7 +466,6 @@ namespace IA
             m_MainGame = asset.FindActionMap("MainGame", throwIfNotFound: true);
             m_MainGame_Move = m_MainGame.FindAction("Move", throwIfNotFound: true);
             m_MainGame_Dash = m_MainGame.FindAction("Dash", throwIfNotFound: true);
-            m_MainGame_UseItem = m_MainGame.FindAction("UseItem", throwIfNotFound: true);
             m_MainGame_Pause = m_MainGame.FindAction("Pause", throwIfNotFound: true);
             m_MainGame_Up = m_MainGame.FindAction("Up", throwIfNotFound: true);
             m_MainGame_Down = m_MainGame.FindAction("Down", throwIfNotFound: true);
@@ -626,7 +594,6 @@ namespace IA
         private List<IMainGameActions> m_MainGameActionsCallbackInterfaces = new List<IMainGameActions>();
         private readonly InputAction m_MainGame_Move;
         private readonly InputAction m_MainGame_Dash;
-        private readonly InputAction m_MainGame_UseItem;
         private readonly InputAction m_MainGame_Pause;
         private readonly InputAction m_MainGame_Up;
         private readonly InputAction m_MainGame_Down;
@@ -636,7 +603,6 @@ namespace IA
             public MainGameActions(@IA wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_MainGame_Move;
             public InputAction @Dash => m_Wrapper.m_MainGame_Dash;
-            public InputAction @UseItem => m_Wrapper.m_MainGame_UseItem;
             public InputAction @Pause => m_Wrapper.m_MainGame_Pause;
             public InputAction @Up => m_Wrapper.m_MainGame_Up;
             public InputAction @Down => m_Wrapper.m_MainGame_Down;
@@ -655,9 +621,6 @@ namespace IA
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @UseItem.started += instance.OnUseItem;
-                @UseItem.performed += instance.OnUseItem;
-                @UseItem.canceled += instance.OnUseItem;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
@@ -677,9 +640,6 @@ namespace IA
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
-                @UseItem.started -= instance.OnUseItem;
-                @UseItem.performed -= instance.OnUseItem;
-                @UseItem.canceled -= instance.OnUseItem;
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
@@ -716,7 +676,6 @@ namespace IA
         {
             void OnMove(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
-            void OnUseItem(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
             void OnUp(InputAction.CallbackContext context);
             void OnDown(InputAction.CallbackContext context);

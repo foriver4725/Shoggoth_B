@@ -245,14 +245,20 @@ namespace Ex
 
     public static class Itr
     {
-        public static List<T2> Map<T1, T2>(this IEnumerable<T1> self, Func<T1, T2> func)
+        public static IEnumerable<T2> Map<T1, T2>(this IEnumerable<T1> self, Func<T1, T2> func)
         {
-            List<T2> ret = new();
             foreach (T1 e in self)
             {
-                ret.Add(func(e));
+                yield return func(e);
             }
-            return ret;
+        }
+
+        public static void Map<T>(this IEnumerable<T> self, Action<T> action)
+        {
+            foreach (T e in self)
+            {
+                action(e);
+            }
         }
 
         // —v‘f‚Ì‚¢‚¸‚ê‚©‚ªtarget‚ÌAtrue‚ğ•Ô‚·B

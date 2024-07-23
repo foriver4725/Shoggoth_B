@@ -14,7 +14,7 @@ namespace MainGame
 
         void Update()
         {
-            if (HPManager.currentHP == 0)
+            if (GameManager.Instance.CurrentHP == 0)
             {
                 if (!GameManager.Instance.IsClear && !GameManager.Instance.IsOver)
                 {

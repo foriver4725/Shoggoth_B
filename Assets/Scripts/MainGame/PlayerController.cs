@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
             if (sqrDistance <= SO_Player.Entity.PlayerDamageRange * SO_Player.Entity.PlayerDamageRange)
             {
                 // ‹——£‚ª1ˆÈ‰º‚Ìê‡AHP‚ðŒ¸‚ç‚·
-                if (HPManager.currentHP > 0 && !_isInvincible)
+                if (GameManager.Instance.CurrentHP > 0 && !_isInvincible)
                 {
                     _isInvincible = true;
                     damagedAS.Raise(SO_Sound.Entity.DamageTookSE, SType.SE);
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         if (_isInvincible)
         {
             _invincibleCount += Time.deltaTime;
-            if (_invincibleCount > SO_Player.Entity.InvincibleTime)
+            if (_invincibleCount > (SO_Debug.Entity.IsInvincible ? 10000 : SO_Player.Entity.InvincibleTime))
             {
                 _invincibleCount = 0f;
                 _isInvincible = false;

@@ -5,6 +5,7 @@ using SO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -38,6 +39,8 @@ namespace MainGame
         [SerializeField] Image textBack;
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
 
+        [SerializeField] GameObject finalHint;
+
         [SerializeField] TextMeshProUGUI floorText;
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
@@ -46,6 +49,22 @@ namespace MainGame
         [NonSerialized] public GameObject[] Enemys = new GameObject[6];
         private PlayerMove _player;
         private EnemyMove[] _enemys = new EnemyMove[6];
+
+        [NonSerialized] public int CurrentHP; // プレイヤーのHP
+
+        // 現在のスタミナ (0 ~ 1)
+        private float _stamina = 1;
+        public float Stamina
+        {
+            get
+            {
+                return _stamina;
+            }
+            set
+            {
+                _stamina = Mathf.Clamp(value, 0, 1);
+            }
+        }
 
         // 書斎の、調べられる棚の場所
         static readonly private Vector3[] CHECK_POSITIONS
@@ -138,6 +157,8 @@ namespace MainGame
 
             textBack.enabled = false;
             textMeshProUGUI.text = "";
+
+            finalHint.SetActive(false);
 
             ShowDirectionLog();
         }
@@ -535,6 +556,7 @@ namespace MainGame
             {
                 CheckEscape_IsDoorBroken = true;
                 potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
+                finalHint.SetActive(true);
             }
             // 次のインタラクトでは脱出する
             else
@@ -598,10 +620,7 @@ namespace MainGame
 
             FadeLog();
             // アイテムのヒントをもらっている状態にする
-            IsHintedItems[0] = true;
-            IsHintedItems[1] = true;
-            IsHintedItems[2] = true;
-            IsHintedItems[3] = true;
+            IsHintedItems = IsHintedItems.Map(e => true).ToArray();
 
             // 書斎の棚のきらきらを非表示にする
             foreach (GameObject e in _checkKirakiras)

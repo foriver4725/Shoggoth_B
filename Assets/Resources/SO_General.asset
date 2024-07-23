@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClickDur: 1
   AfterClickDur: 0.5
-  InteractDur: 0.5
+  InteractDur: 0.2
   LogFadeDur: 10
   FadeWhiteStartDur: 1
   FadeWhiteDur: 3
