@@ -5,6 +5,7 @@ using SO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -37,6 +38,8 @@ namespace MainGame
 
         [SerializeField] Image textBack;
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
+
+        [SerializeField] GameObject finalHint;
 
         [SerializeField] TextMeshProUGUI floorText;
 
@@ -138,6 +141,8 @@ namespace MainGame
 
             textBack.enabled = false;
             textMeshProUGUI.text = "";
+
+            finalHint.SetActive(false);
 
             ShowDirectionLog();
         }
@@ -535,6 +540,7 @@ namespace MainGame
             {
                 CheckEscape_IsDoorBroken = true;
                 potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
+                finalHint.SetActive(true);
             }
             // 次のインタラクトでは脱出する
             else
@@ -598,10 +604,7 @@ namespace MainGame
 
             FadeLog();
             // アイテムのヒントをもらっている状態にする
-            IsHintedItems[0] = true;
-            IsHintedItems[1] = true;
-            IsHintedItems[2] = true;
-            IsHintedItems[3] = true;
+            IsHintedItems = IsHintedItems.Map(e => true).ToArray();
 
             // 書斎の棚のきらきらを非表示にする
             foreach (GameObject e in _checkKirakiras)

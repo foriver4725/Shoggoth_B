@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         if (_isInvincible)
         {
             _invincibleCount += Time.deltaTime;
-            if (_invincibleCount > SO_Player.Entity.InvincibleTime)
+            if (_invincibleCount > (SO_Debug.Entity.IsInvincible ? 10000 : SO_Player.Entity.InvincibleTime))
             {
                 _invincibleCount = 0f;
                 _isInvincible = false;

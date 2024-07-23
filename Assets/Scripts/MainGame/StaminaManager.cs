@@ -33,7 +33,7 @@ namespace MainGame
             if (InputGetter.Instance.MainGame_IsDash && playerMove.InputDir != Vector2.zero)
             {
                 // スタミナ減少
-                Stamina -= 1 / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
+                Stamina -= (SO_Debug.Entity.IsInfiniteStamina ? 0.01f : 1) / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
             }
             // ダッシュしていない時...
             else
