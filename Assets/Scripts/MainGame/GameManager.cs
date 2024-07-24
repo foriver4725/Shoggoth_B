@@ -580,6 +580,11 @@ namespace MainGame
                 {
                     e.transform.position = new(-100, -100, -0.055f);
                 }
+
+                // ログを表示
+                textBack.enabled = true;
+                textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
+                FadeLog();
             }
             // 必要アイテムがそろっていないなら
             else

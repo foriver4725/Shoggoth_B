@@ -37,8 +37,6 @@ namespace SO
 
         [Header("書斎に向かうことをを示唆するログ"), TextArea(1, 1000)] public string ShowDirectionLog;
         [Header("脱出方法を示唆するログ"), TextArea(1, 1000)] public string EscapeTeachLog;
+        [Header("アイテムを全て入手した後、\n脱出する場所を示唆するログ"), TextArea(1, 1000)] public string ItemCompletedLog;
     }
 }
-
-
-
