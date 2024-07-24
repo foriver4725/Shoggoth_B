@@ -46,8 +46,8 @@ namespace MainGame
             // クリアまたはゲームオーバーなら動かない
             if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
 
-            // 1Fのショゴスは、プレイヤーが1Fにいる間、常に発覚状態となる。
-            if (_floor == FLOOR.F1)
+            // 1Fのショゴスは、アイテムが揃ってかつプレイヤーが1Fにいる間、常に発覚状態となる。
+            if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
             {
                 if (GameManager.Instance.Player.transform.position.x < 75 && GameManager.Instance.Player.transform.position.y < 75)
                 {
@@ -66,7 +66,11 @@ namespace MainGame
 
             if (IsChasing)
             {
-                if (_floor != FLOOR.F1)
+                if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
+                {
+                    targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
+                }
+                else
                 {
                     if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
                     {
@@ -88,10 +92,6 @@ namespace MainGame
                     {
                         targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
                     }
-                }
-                else
-                {
-                    targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
                 }
             }
             else if (isAtStokingPosition)

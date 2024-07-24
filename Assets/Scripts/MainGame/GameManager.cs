@@ -40,6 +40,7 @@ namespace MainGame
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
 
         [SerializeField] GameObject finalHint;
+        [SerializeField] Image redImage;
 
         [SerializeField] TextMeshProUGUI floorText;
 
@@ -197,6 +198,13 @@ namespace MainGame
                 (false, true) => "B1F",
                 _ => "B2F"
             };
+
+            // アイテムが揃った状態で1Fにいるなら、画面を赤くする。ただし、クリアとゲームオーバー時は赤くしない。
+            redImage.enabled =
+                !IsClear
+                && !IsOver
+                && IsGetItems.All(true)
+                && Player.transform.position.x < 75 && Player.transform.position.y < 75;
         }
 
         bool InteractCheck_IsInteractable = true;
