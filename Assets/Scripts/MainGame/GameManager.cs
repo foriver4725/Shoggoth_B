@@ -187,8 +187,8 @@ namespace MainGame
             floorText.text = (Player.transform.position.x < 75, Player.transform.position.y < 75) switch
             {
                 (true, true) => "1F",
-                (true, false) => "B1F",
-                (false, true) => "B2F",
+                (true, false) => "B2F",
+                (false, true) => "B1F",
                 _ => "B2F"
             };
         }
