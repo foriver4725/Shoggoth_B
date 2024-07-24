@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
                 // 距離が1以下の場合、HPを減らす
                 if (GameManager.Instance.CurrentHP > 0 && !_isInvincible)
                 {
+                    // クリアまたはゲームオーバーなら被弾しない
+                    if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) continue;
+
                     _isInvincible = true;
                     damagedAS.Raise(SO_Sound.Entity.DamageTookSE, SType.SE);
                     hpManager.DecreaseHP();
