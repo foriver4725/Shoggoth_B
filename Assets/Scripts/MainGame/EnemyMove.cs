@@ -46,33 +46,52 @@ namespace MainGame
             // クリアまたはゲームオーバーなら動かない
             if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
 
+            // 1Fのショゴスは、アイテムが揃ってかつプレイヤーが1Fにいる間、常に発覚状態となる。
+            if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
+            {
+                if (GameManager.Instance.Player.transform.position.x < 75 && GameManager.Instance.Player.transform.position.y < 75)
+                {
+                    IsChasing = true;
+                }
+                else
+                {
+                    IsChasing = false;
+                }
+            }
             // プレイヤーに近づいたら追跡モードになる。
-            if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+            else if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
                 IsChasing = true;
             }
 
             if (IsChasing)
             {
-                if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
-                {
-                    StopChaseTime += Time.deltaTime;
-                }
-                else
-                {
-                    StopChaseTime = 0;
-                }
-
-                if (StopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
-                {
-                    StopChaseTime = 0;
-                    IsChasing = false;
-
-                    SelectNewStokingPoint();
-                }
-                else
+                if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
                 {
                     targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
+                }
+                else
+                {
+                    if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
+                    {
+                        StopChaseTime += Time.deltaTime;
+                    }
+                    else
+                    {
+                        StopChaseTime = 0;
+                    }
+
+                    if (StopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
+                    {
+                        StopChaseTime = 0;
+                        IsChasing = false;
+
+                        SelectNewStokingPoint();
+                    }
+                    else
+                    {
+                        targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
+                    }
                 }
             }
             else if (isAtStokingPosition)

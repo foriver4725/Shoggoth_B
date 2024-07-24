@@ -40,6 +40,7 @@ namespace MainGame
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
 
         [SerializeField] GameObject finalHint;
+        [SerializeField] Image redImage;
 
         [SerializeField] TextMeshProUGUI floorText;
 
@@ -65,6 +66,12 @@ namespace MainGame
                 _stamina = Mathf.Clamp(value, 0, 1);
             }
         }
+
+        // エントランスの場所
+        static readonly private Vector3[] ENTRANCE_POSITIONS
+            = new Vector3[7] { new(15, -1, -0.055f), new(16, -1, -0.055f), new(17, -1, -0.055f), new(18, -1, -0.055f), new(19, -1, -0.055f), new(20, -1, -0.055f), new(21, -1, -0.055f) };
+        // エントランスのきらきら
+        [SerializeField] private GameObject[] _entranceKirakiras = new GameObject[7];
 
         // 書斎の、調べられる棚の場所
         static readonly private Vector3[] CHECK_POSITIONS
@@ -191,6 +198,13 @@ namespace MainGame
                 (false, true) => "B1F",
                 _ => "B2F"
             };
+
+            // アイテムが揃った状態で1Fにいるなら、画面を赤くする。ただし、クリアとゲームオーバー時は赤くしない。
+            redImage.enabled =
+                !IsClear
+                && !IsOver
+                && IsGetItems.All(true)
+                && Player.transform.position.x < 75 && Player.transform.position.y < 75;
         }
 
         bool InteractCheck_IsInteractable = true;
@@ -471,69 +485,28 @@ namespace MainGame
                     IsGetItems[3] = true;
                 }
             }
-
-            else if (pos == new Vector3(15, 0, -1) && dir == DIR.DOWN)
+            else
             {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                for (int i = 0; i < ENTRANCE_POSITIONS.Length; i++)
+                {
+                    if (pos == new Vector3(ENTRANCE_POSITIONS[i].x, ENTRANCE_POSITIONS[i].y, -1) + Vector3.up && dir == DIR.DOWN)
+                    {
+                        // クールタイムが明けるまでインタラクト出来ないようにし...
+                        InteractCheck_IsInteractable = false;
+                        // クールタイムのカウントを開始する
+                        Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
-                CheckEscape();
-            }
-            else if (pos == new Vector3(16, 0, -1) && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                        // きらきらを非表示
+                        foreach (GameObject e in _entranceKirakiras)
+                        {
+                            e.transform.position = new(-100, -100, -0.055f);
+                        }
 
-                CheckEscape();
-            }
-            else if (pos == new Vector3(17, 0, -1) && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                        CheckEscape();
 
-                CheckEscape();
-            }
-            else if (pos == new Vector3(18, 0, -1) && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                CheckEscape();
-            }
-            else if (pos == new Vector3(19, 0, -1) && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                CheckEscape();
-            }
-            else if (pos == new Vector3(20, 0, -1) && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                CheckEscape();
-            }
-            else if (pos == new Vector3(21, 0, -1) && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                CheckEscape();
+                        break;
+                    }
+                }
             }
             #endregion
         }
@@ -556,6 +529,9 @@ namespace MainGame
             {
                 CheckEscape_IsDoorBroken = true;
                 potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
+
+                textBack.enabled = false;
+                textMeshProUGUI.text = "";
                 finalHint.SetActive(true);
             }
             // 次のインタラクトでは脱出する
@@ -568,6 +544,8 @@ namespace MainGame
             }
         }
 
+        // アイテムが揃った演出をまだしていないならfalse、しているならtrue
+        bool UpdateItemImages_IsDirection = false;
         // アイテムImage達を更新
         void UpdateItemImages()
         {
@@ -579,6 +557,24 @@ namespace MainGame
                 foreach (GameObject e in _itemKirakiras)
                 {
                     e.transform.position = new(-100, -100, -0.055f);
+                }
+
+                if (!UpdateItemImages_IsDirection)
+                {
+                    UpdateItemImages_IsDirection = true;
+
+                    potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
+
+                    // きらきらを表示
+                    for (int i = 0; i < _entranceKirakiras.Length; i++)
+                    {
+                        _entranceKirakiras[i].transform.position = ENTRANCE_POSITIONS[i];
+                    }
+
+                    // ログを表示
+                    textBack.enabled = true;
+                    textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
+                    FadeLog();
                 }
             }
             // 必要アイテムがそろっていないなら
