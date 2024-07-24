@@ -556,6 +556,9 @@ namespace MainGame
             {
                 CheckEscape_IsDoorBroken = true;
                 potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
+
+                textBack.enabled = false;
+                textMeshProUGUI.text = "";
                 finalHint.SetActive(true);
             }
             // 次のインタラクトでは脱出する
@@ -568,6 +571,8 @@ namespace MainGame
             }
         }
 
+        // アイテムが揃った演出をまだしていないならfalse、しているならtrue
+        bool UpdateItemImages_IsDirection = false;
         // アイテムImage達を更新
         void UpdateItemImages()
         {
@@ -581,10 +586,17 @@ namespace MainGame
                     e.transform.position = new(-100, -100, -0.055f);
                 }
 
-                // ログを表示
-                textBack.enabled = true;
-                textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
-                FadeLog();
+                if (!UpdateItemImages_IsDirection)
+                {
+                    UpdateItemImages_IsDirection = true;
+
+                    potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
+
+                    // ログを表示
+                    textBack.enabled = true;
+                    textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
+                    FadeLog();
+                }
             }
             // 必要アイテムがそろっていないなら
             else
