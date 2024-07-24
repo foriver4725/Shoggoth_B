@@ -23,8 +23,6 @@ namespace MainGame
 
         IEnumerator FadeOut()
         {
-            yield return new WaitForSeconds(SO_General.Entity.FadeWhiteStartDur);
-
             float DUR = SO_General.Entity.FadeWhiteDur;
             float t = 0;
 
