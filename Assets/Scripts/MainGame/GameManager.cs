@@ -47,8 +47,8 @@ namespace MainGame
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
         [NonSerialized] public GameObject Player;
         [NonSerialized] public GameObject[] Enemys = new GameObject[6];
-        private PlayerMove _player;
-        private EnemyMove[] _enemys = new EnemyMove[6];
+        [NonSerialized] public PlayerMove PlayerMove;
+        [NonSerialized] public EnemyMove[] EnemyMoves = new EnemyMove[6];
 
         [NonSerialized] public int CurrentHP; // プレイヤーのHP
 
@@ -136,10 +136,10 @@ namespace MainGame
             Player = GameObject.FindGameObjectWithTag("player");
             Enemys = GameObject.FindGameObjectsWithTag("shoggoth");
 
-            _player = Player.GetComponent<PlayerMove>();
+            PlayerMove = Player.GetComponent<PlayerMove>();
             for (int i = 0; i < Enemys.Length; i++)
             {
-                _enemys[i] = Enemys[i].GetComponent<EnemyMove>();
+                EnemyMoves[i] = Enemys[i].GetComponent<EnemyMove>();
             }
 
             _onGameBGM.Raise(SO_Sound.Entity.OnGameNormalBGM, SType.BGM);
@@ -171,11 +171,11 @@ namespace MainGame
             }
 
             // 発覚状態のBGMを更新する
-            if (_enemys.Map(e => e.IsOnChase).Any(true))
+            if (EnemyMoves.Map(e => e.IsOnChase).Any(true))
             {
                 chaseBGM.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
             }
-            else if (_enemys.Map(e => e.IsChasing).All(false))
+            else if (EnemyMoves.Map(e => e.IsChasing).All(false))
             {
                 chaseBGM.Stop();
             }
@@ -187,8 +187,8 @@ namespace MainGame
             floorText.text = (Player.transform.position.x < 75, Player.transform.position.y < 75) switch
             {
                 (true, true) => "1F",
-                (true, false) => "B1F",
-                (false, true) => "B2F",
+                (true, false) => "B2F",
+                (false, true) => "B1F",
                 _ => "B2F"
             };
         }
@@ -206,8 +206,8 @@ namespace MainGame
             if (!InteractCheck_IsInteractable) return;
 
             #region インタラクトの検知
-            Vector3 pos = _player.transform.position;
-            DIR dir = _player.LookingDir;
+            Vector3 pos = PlayerMove.transform.position;
+            DIR dir = PlayerMove.LookingDir;
 
             if (pos == new Vector3(0, 37, -1) && dir == DIR.UP)
             {
@@ -217,7 +217,7 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in _enemys)
+                foreach (EnemyMove _enemy in EnemyMoves)
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
@@ -225,7 +225,7 @@ namespace MainGame
                 }
 
                 // B1に行く
-                _player.transform.position = new(101, 36, -1);
+                PlayerMove.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(1, 37, -1) && dir == DIR.UP)
             {
@@ -235,7 +235,7 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in _enemys)
+                foreach (EnemyMove _enemy in EnemyMoves)
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
@@ -243,7 +243,7 @@ namespace MainGame
                 }
 
                 // B1に行く
-                _player.transform.position = new(101, 36, -1);
+                PlayerMove.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(100, 37, -1) && dir == DIR.UP)
             {
@@ -253,7 +253,7 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in _enemys)
+                foreach (EnemyMove _enemy in EnemyMoves)
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
@@ -261,7 +261,7 @@ namespace MainGame
                 }
 
                 // 1に行く
-                _player.transform.position = new(1, 36, -1);
+                PlayerMove.transform.position = new(1, 36, -1);
             }
             else if (pos == new Vector3(101, 37, -1) && dir == DIR.UP)
             {
@@ -271,7 +271,7 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in _enemys)
+                foreach (EnemyMove _enemy in EnemyMoves)
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
@@ -279,7 +279,7 @@ namespace MainGame
                 }
 
                 // B2に行く
-                _player.transform.position = new(1, 136, -1);
+                PlayerMove.transform.position = new(1, 136, -1);
             }
             else if (pos == new Vector3(0, 137, -1) && dir == DIR.UP)
             {
@@ -289,7 +289,7 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in _enemys)
+                foreach (EnemyMove _enemy in EnemyMoves)
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
@@ -297,7 +297,7 @@ namespace MainGame
                 }
 
                 // B1に行く
-                _player.transform.position = new(101, 36, -1);
+                PlayerMove.transform.position = new(101, 36, -1);
             }
             else if (pos == new Vector3(1, 137, -1) && dir == DIR.UP)
             {
@@ -307,7 +307,7 @@ namespace MainGame
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
                 // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in _enemys)
+                foreach (EnemyMove _enemy in EnemyMoves)
                 {
                     _enemy.StopChaseTime = 0;
                     _enemy.IsChasing = false;
@@ -315,7 +315,7 @@ namespace MainGame
                 }
 
                 // B1に行く
-                _player.transform.position = new(101, 36, -1);
+                PlayerMove.transform.position = new(101, 36, -1);
             }
 
             else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.left && dir == DIR.RIGHT)

@@ -4,7 +4,6 @@ using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,11 +18,10 @@ public class PlayerController : MonoBehaviour
         #region 一定間隔で敵との距離をチェックする
 
         // すべての敵を取得
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("shoggoth");
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject e in GameManager.Instance.Enemys)
         {
             // プレイヤーと敵の距離を計算
-            float sqrDistance = (transform.position - enemy.transform.position).sqrMagnitude;
+            float sqrDistance = ((Vector2)transform.position - (Vector2)e.transform.position).sqrMagnitude;
             if (sqrDistance <= SO_Player.Entity.PlayerDamageRange * SO_Player.Entity.PlayerDamageRange)
             {
                 // 距離が1以下の場合、HPを減らす

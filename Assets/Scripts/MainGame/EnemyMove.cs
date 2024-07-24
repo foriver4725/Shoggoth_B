@@ -11,8 +11,6 @@ namespace MainGame
         private enum FLOOR { F1, BF1, BF2 };
         [SerializeField, Header("‚Ç‚ÌŠK‘w‚Ì“G‚©")] private FLOOR _floor;
 
-        [SerializeField, Header("“G‚ÌˆÚ“®‘¬“x[m/s]")] private float _enemySpeed;
-
         private HashSet<Vector2Int> _stokingPos;
 
         // “G‚ÌŒü‚«
@@ -49,14 +47,14 @@ namespace MainGame
             if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
 
             // ƒvƒŒƒCƒ„[‚É‹ß‚Ã‚¢‚½‚ç’ÇÕƒ‚[ƒh‚É‚È‚éB
-            if (!IsChasing && (GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+            if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
                 IsChasing = true;
             }
 
             if (IsChasing)
             {
-                if ((GameManager.Instance.Player.transform.position - transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
+                if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
                 {
                     StopChaseTime += Time.deltaTime;
                 }
@@ -134,7 +132,14 @@ namespace MainGame
 
             while (true)
             {
-                transform.position += _enemySpeed * Time.deltaTime * dir;
+                transform.position
+                    += _floor switch
+                    {
+                        FLOOR.F1 => SO_Player.Entity.EnemySpeed1F,
+                        FLOOR.BF1 => SO_Player.Entity.EnemySpeedB1F,
+                        FLOOR.BF2 => SO_Player.Entity.EnemySpeedB2F,
+                        _ => 0
+                    } * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;
                 yield return null;
