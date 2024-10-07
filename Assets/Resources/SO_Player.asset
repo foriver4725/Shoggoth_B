@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a3ec33941aacd4680c0e2dd36e7e02, type: 3}
   m_Name: SO_Player
   m_EditorClassIdentifier: 
-  PlayerSpeed: 5
-  PlayerDashSpeed: 10
-  EnemySpeed1F: 5
-  EnemySpeedB1F: 4
-  EnemySpeedB2F: 3
+  PlayerSpeed: 3
+  PlayerDashSpeed: 5
+  EnemySpeed1F: 4
+  EnemySpeedB1F: 3
+  EnemySpeedB2F: 2
   PlayerDamageRange: 0.85
-  EnemyChaseRange: 6
-  EnemyStopChaseRange: 9.5
+  EnemyChaseRange: 3
+  EnemyStopChaseRange: 4
   EnemyStopChaseDuration: 3
   InvincibleTime: 2
   StaminaIncreaseDur: 10
