@@ -3,12 +3,12 @@ using TMPro;
 using IA;
 using SO;
 using UnityEngine.SceneManagement;
-using MainGame;
 
 public class MenuController : MonoBehaviour
 {
     public GameObject menuPanel;
     public TextMeshProUGUI[] menuOptions;
+    [SerializeField] private GameObject pauseAnnounceTextBack;
     private int currentIndex = 0;
 
     void Start()
@@ -23,6 +23,7 @@ public class MenuController : MonoBehaviour
         {
             if (InputGetter.Instance.MainGame_IsPause)
             {
+                if (pauseAnnounceTextBack.activeSelf) pauseAnnounceTextBack.SetActive(false);
                 Time.timeScale = 0f;
                 menuPanel.SetActive(true);
             }

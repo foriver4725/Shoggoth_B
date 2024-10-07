@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SO_Debug
   m_EditorClassIdentifier: 
   IsInvincible: 0
+  IsExtraSpeed: 0
   IsInfiniteStamina: 0

@@ -572,9 +572,10 @@ namespace MainGame
                     }
 
                     // ログを表示
+                    Time.timeScale = 0.0f;
                     textBack.enabled = true;
                     textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
-                    FadeLog();
+                    StartCoroutine(FadeItemCompletedLog());
                 }
             }
             // 必要アイテムがそろっていないなら
@@ -597,24 +598,33 @@ namespace MainGame
             }
         }
 
+        private IEnumerator FadeItemCompletedLog()
+        {
+            while (true)
+            {
+                yield return null;
 
+                if (InputGetter.Instance.System_IsSubmit)
+                {
+                    textMeshProUGUI.text = "";
+                    textBack.enabled = false;
+                    Time.timeScale = 1.0f;
+                    yield break;
+                }
+            }
+        }
 
         // 書斎の棚を調べる
         public void CheckRack()
         {
             // 既に調べてあるなら何もしない
             if (IsCheckedRack) return;
+            // もうこのメソッドの処理は行わない
+            IsCheckedRack = true;
 
             StopCoroutine(ShowDirectionLog_Cor);
             ShowDirectionLog_Cor = null;
 
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.EscapeTeachLog;
-
-            // もうこのメソッドの処理は行わない
-            IsCheckedRack = true;
-
-            FadeLog();
             // アイテムのヒントをもらっている状態にする
             IsHintedItems = IsHintedItems.Map(e => true).ToArray();
 
@@ -622,6 +632,28 @@ namespace MainGame
             foreach (GameObject e in _checkKirakiras)
             {
                 e.transform.position = new(-100, -100, -0.055f);
+            }
+
+            Time.timeScale = 0.0f;
+            textBack.enabled = true;
+            textMeshProUGUI.text = SO_UIConsoleText.Entity.EscapeTeachLog;
+
+            StartCoroutine(FadeEscapeTeachLog());
+        }
+
+        private IEnumerator FadeEscapeTeachLog()
+        {
+            while (true)
+            {
+                yield return null;
+
+                if (InputGetter.Instance.System_IsSubmit)
+                {
+                    textMeshProUGUI.text = "";
+                    textBack.enabled = false;
+                    Time.timeScale = 1.0f;
+                    yield break;
+                }
             }
         }
 

@@ -34,8 +34,10 @@ namespace SO
         }
         #endregion
 
-        [Header("プレイヤーの移動スピード [m/s]")] public float PlayerSpeed;
-        [Header("プレイヤーの移動スピード（走り） [m/s]")] public float PlayerDashSpeed;
+        [SerializeField, Header("プレイヤーの移動スピード [m/s]")] private float playerSpeed;
+        public float PlayerSpeed => SO_Debug.Entity.IsExtraSpeed ? playerSpeed * 5 : playerSpeed;
+        [SerializeField, Header("プレイヤーの移動スピード（走り） [m/s]")] private float playerDashSpeed;
+        public float PlayerDashSpeed => SO_Debug.Entity.IsExtraSpeed ? playerDashSpeed * 5 : playerDashSpeed;
         [Header("敵の移動スピード(1F) [m/s]")] public float EnemySpeed1F;
         [Header("敵の移動スピード(B1F) [m/s]")] public float EnemySpeedB1F;
         [Header("敵の移動スピード(B2F) [m/s]")] public float EnemySpeedB2F;

@@ -1,7 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using IA;
+using System.Threading;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SO
 {
@@ -38,5 +40,18 @@ namespace SO
         [Header("書斎に向かうことをを示唆するログ"), TextArea(1, 1000)] public string ShowDirectionLog;
         [Header("脱出方法を示唆するログ"), TextArea(1, 1000)] public string EscapeTeachLog;
         [Header("アイテムを全て入手した後、\n脱出する場所を示唆するログ"), TextArea(1, 1000)] public string ItemCompletedLog;
+
+        public async UniTask Show(Image textBack, TextMeshProUGUI text, string logMessage, CancellationToken ct)
+        {
+            if (text == null) return;
+
+            Time.timeScale = 0f;
+            text.text = logMessage;
+            textBack.enabled = true;
+            await UniTask.WaitUntil(() => InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
+            textBack.enabled = false;
+            text.text = "";
+            Time.timeScale = 1f;
+        }
     }
 }

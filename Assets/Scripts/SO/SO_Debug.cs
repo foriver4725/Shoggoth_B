@@ -35,6 +35,7 @@ namespace SO
         #endregion
 
         [Header("無敵時間を10000秒にする")] public bool IsInvincible;
+        [Header("移動速度を5倍にする")] public bool IsExtraSpeed;
         [Header("スタミナの減少速度を0.01倍にする")] public bool IsInfiniteStamina;
     }
 }
