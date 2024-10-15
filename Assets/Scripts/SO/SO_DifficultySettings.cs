@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SO
@@ -36,8 +34,12 @@ namespace SO
         #endregion
 
 
-        [Header("難易度設定")] public List<Difficulty> Difficulty;
-        
+        [SerializeField, Header("難易度設定\nE, N, H, N")]
+        private Difficulty[] difficulty;
+
+        public int VisibilityRange => difficulty[Difficulty.Type.ToInt()].VisibilityRange;
+        public float StaminaRecover => difficulty[Difficulty.Type.ToInt()].StaminaRecover;
+        public bool IsItemRandom => difficulty[Difficulty.Type.ToInt()].IsItemRandom;
     }
 
     [Serializable]
@@ -46,5 +48,27 @@ namespace SO
         [Header("視界範囲")] public int VisibilityRange;
         [Header("スタミナ回復速度")] public float StaminaRecover;
         [Header("アイテム配置ランダム化")] public bool IsItemRandom;
+
+        public static DifficultyType Type = DifficultyType.Normal;
+    }
+
+    public enum DifficultyType
+    {
+        Easy,
+        Normal,
+        Hard,
+        Nightmare
+    }
+
+    public static class DifficultyEx
+    {
+        public static int ToInt(this DifficultyType type) => type switch
+        {
+            DifficultyType.Easy => 0,
+            DifficultyType.Normal => 1,
+            DifficultyType.Hard => 2,
+            DifficultyType.Nightmare => 3,
+            _ => 1,
+        };
     }
 }
