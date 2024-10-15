@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SO
@@ -45,7 +43,8 @@ namespace SO
         [Header("敵がプレイヤーを発見する距離")] public float EnemyChaseRange;
         [Header("敵がプレイヤーを見失う距離")] public float EnemyStopChaseRange;
         [Header("敵が↑の距離より遠くにいるとき、プレイヤーを見失うまでの時間")] public float EnemyStopChaseDuration;
-        [Header("無敵時間")] public float InvincibleTime;
+        [SerializeField, Header("無敵時間")] private float invincibleTime;
+        public float InvincibleTime => SO_Debug.Entity.IsInvincible ? 10000 : invincibleTime;
 
         [Header("スタミナの回復速度(何秒で最小から最大になるか)")] public float StaminaIncreaseDur;
         [Header("スタミナの減少速度(何秒で最大から最小になるか)")] public float StaminaDecreaseDur;
