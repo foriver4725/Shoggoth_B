@@ -15,8 +15,15 @@ namespace Scene
     public class OPtoMAIN : MonoBehaviour
     {
         [SerializeField] private GameObject _startDescription;
+        [SerializeField] private GameObject _startDifficulty;
         [SerializeField] private TextMeshProUGUI _startText;
         [SerializeField] private TextMeshProUGUI _nextText;
+
+        [SerializeField] private TextMeshProUGUI _easyText;
+        [SerializeField] private TextMeshProUGUI _normalText;
+        [SerializeField] private TextMeshProUGUI _hardText;
+        [SerializeField] private TextMeshProUGUI _nightmareText;
+        
         [SerializeField] private AudioSource _click1st;
         [SerializeField] private AudioSource _click2nd;
         [SerializeField] private AudioSource _titleBGM;
@@ -47,12 +54,32 @@ namespace Scene
             _startDescription.SetActive(false);
             _startText.color = Color.black;
             _nextText.color = Color.black;
+            
+            _startDifficulty.SetActive(false);
+            _easyText.color = Color.black;
+            _normalText.color = Color.black;
+            _hardText.color = Color.black;
+            _nightmareText.color = Color.black;
 
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.ClickDur), cancellationToken: ct);
             await UniTask.WaitUntil(() => IA.InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
             _startText.color = Color.yellow;
             _click1st.Raise(SO_Sound.Entity.ClickSE, SType.SE);
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);
+            
+            _startDifficulty.SetActive(true);
+
+            await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.ClickDur), cancellationToken: ct);
+            await UniTask.WaitUntil(() => IA.InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
+            _easyText.color = Color.yellow;
+            _normalText.color = Color.yellow;
+            _hardText.color = Color.yellow;
+            _nightmareText.color = Color.yellow;
+            _click2nd.Raise(SO_Sound.Entity.ClickSE, SType.SE);
+            await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);
+
+
+
             _startDescription.SetActive(true);
 
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.ClickDur), cancellationToken: ct);
