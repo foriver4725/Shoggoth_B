@@ -48,6 +48,7 @@ namespace MainGame
         [SerializeField] TextMeshProUGUI floorText;
 
         [SerializeField, Header("アイテムの設置候補場所\n(z座標はきらきらと同じにする)")] private ItemPoints itemPoints;
+        [SerializeField] private FloorChangePoints floorChangePoints;
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
@@ -227,20 +228,15 @@ namespace MainGame
         bool InteractCheck_IsInteractable = true;
         void InteractCheck()
         {
-            // クリアまたはゲームオーバーならインタラクトできない
             if (IsClear || IsOver) return;
-
-            // ポーズ中ならインタラクトできない
             if (Time.timeScale == 0) return;
-
-            // インタラクト不可なら何もしない
             if (!InteractCheck_IsInteractable) return;
 
             #region インタラクトの検知
             Vector3 pos = PlayerMove.transform.position;
             DIR dir = PlayerMove.LookingDir;
 
-            if (pos == new Vector3(0, 37, -1) && dir == DIR.UP)
+            if (floorChangePoints.InteractCheck(PlayerMove, out Vector3 v))
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -255,106 +251,10 @@ namespace MainGame
                     _enemy.SelectNewStokingPoint();
                 }
 
-                // B1に行く
-                PlayerMove.transform.position = new(101, 36, -1);
+                // その階に行く
+                PlayerMove.transform.position = v.SetZ(-1);
                 playerController.OnInteractedElevator();
             }
-            else if (pos == new Vector3(1, 37, -1) && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B1に行く
-                PlayerMove.transform.position = new(101, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(100, 37, -1) && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // 1に行く
-                PlayerMove.transform.position = new(1, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(101, 37, -1) && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B2に行く
-                PlayerMove.transform.position = new(1, 136, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(0, 137, -1) && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B1に行く
-                PlayerMove.transform.position = new(101, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(1, 137, -1) && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B1に行く
-                PlayerMove.transform.position = new(101, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-
             else if (CHECK_POSITIONS.Any(e => PlayerMove.IsInteractableAgainst(e)))
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...

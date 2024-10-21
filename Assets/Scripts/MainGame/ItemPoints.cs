@@ -72,10 +72,10 @@ namespace MainGame
 
             return d switch
             {
-                DIR.UP => p.y == t.y - 1,
-                DIR.DOWN => p.y == t.y + 1,
-                DIR.LEFT => p.x == t.x + 1,
-                DIR.RIGHT => p.x == t.x - 1,
+                DIR.UP => p.x == t.x && p.y == t.y - 1,
+                DIR.DOWN => p.x == t.x && p.y == t.y + 1,
+                DIR.LEFT => p.y == t.y && p.x == t.x + 1,
+                DIR.RIGHT => p.y == t.y && p.x == t.x - 1,
                 _ => false
             };
         }
