@@ -47,6 +47,7 @@ namespace MainGame
 
         [SerializeField] TextMeshProUGUI floorText;
 
+        [SerializeField] private ItemOutlineTrigger itemOutlineTrigger;
         [SerializeField, Header("アイテムの設置候補場所\n(z座標はきらきらと同じにする)")] private ItemPoints itemPoints;
         [SerializeField] private FloorChangePoints floorChangePoints;
 
@@ -184,6 +185,7 @@ namespace MainGame
             textMeshProUGUI.text = "";
 
             finalHint.SetActive(false);
+            itemOutlineTrigger.SetActivation(2);
 
             ShowDirectionLog();
         }
@@ -253,6 +255,7 @@ namespace MainGame
 
                 // その階に行く
                 PlayerMove.transform.position = v.SetZ(-1);
+                itemOutlineTrigger.SetActivation(v.x >= 100 ? 1 : v.y >= 100 ? 2 : 0);
                 playerController.OnInteractedElevator();
             }
             else if (CHECK_POSITIONS.Any(e => PlayerMove.IsInteractableAgainst(e)))
