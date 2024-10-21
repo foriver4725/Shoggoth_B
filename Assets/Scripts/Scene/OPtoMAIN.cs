@@ -9,6 +9,7 @@ using Ex;
 using TMPro;
 using System.Threading;
 using IA;
+using UnityEngine.UI;
 
 namespace Scene
 {
@@ -19,11 +20,18 @@ namespace Scene
         [SerializeField] private TextMeshProUGUI _startText;
         [SerializeField] private TextMeshProUGUI _nextText;
 
-        [SerializeField] private TextMeshProUGUI _easyText;
-        [SerializeField] private TextMeshProUGUI _normalText;
-        [SerializeField] private TextMeshProUGUI _hardText;
-        [SerializeField] private TextMeshProUGUI _nightmareText;
-        
+        //[SerializeField] private TextMeshProUGUI _easyText;
+        //[SerializeField] private TextMeshProUGUI _normalText;
+        //[SerializeField] private TextMeshProUGUI _hardText;
+        //[SerializeField] private TextMeshProUGUI _nightmareText;
+
+        public Button[] buttons;
+
+        //[SerializeField] private Button _easyButton;
+        //[SerializeField] private Button _normalButton;
+        //[SerializeField] private Button _hardButton;
+        //[SerializeField] private Button _nightmareButton;
+
         [SerializeField] private AudioSource _click1st;
         [SerializeField] private AudioSource _click2nd;
         [SerializeField] private AudioSource _titleBGM;
@@ -35,6 +43,13 @@ namespace Scene
             _ct = this.GetCancellationTokenOnDestroy();
             _titleBGM.Raise(SO_Sound.Entity.TitleBGM, SType.BGM);
             SceneChange(_ct).Forget();
+
+            // すべてのボタンにクリックイベントを登録
+            foreach (Button button in buttons)
+            {
+                // ラムダ式を使ってクリックされたボタンを引数として渡す
+                button.onClick.AddListener(() => OnButtonClick(button));
+            }
         }
 
         private void Update()
@@ -49,6 +64,38 @@ namespace Scene
             }
         }
 
+
+        // ボタンがクリックされたときに呼ばれるメソッド
+        void OnButtonClick(Button clickedButton)
+        {
+            // クリックされたボタンの名前を取得
+            string buttonName = clickedButton.name;
+            if (buttonName == "Easy")
+            {
+                Debug.Log("Easy");
+            }
+            else if (buttonName == "Normal")
+            {
+                Debug.Log("Normal");
+            }
+            else if (buttonName == "Hard")
+            {
+                Debug.Log("Hard");
+            }
+            else if (buttonName == "Nightmare")
+            {
+                Debug.Log("Nightmare");
+            }
+            else
+            {
+                Debug.Log("NormalNormalNormal");
+            }
+
+        }
+
+
+
+
         private async UniTask SceneChange(CancellationToken ct)
         {
             _startDescription.SetActive(false);
@@ -56,25 +103,26 @@ namespace Scene
             _nextText.color = Color.black;
             
             _startDifficulty.SetActive(false);
-            _easyText.color = Color.black;
-            _normalText.color = Color.black;
-            _hardText.color = Color.black;
-            _nightmareText.color = Color.black;
+            //_easyText.color = Color.black;
+            //_normalText.color = Color.black;
+            //_hardText.color = Color.black;
+            //_nightmareText.color = Color.black;
 
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.ClickDur), cancellationToken: ct);
             await UniTask.WaitUntil(() => IA.InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
             _startText.color = Color.yellow;
             _click1st.Raise(SO_Sound.Entity.ClickSE, SType.SE);
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);
-            
+
             _startDifficulty.SetActive(true);
 
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.ClickDur), cancellationToken: ct);
             await UniTask.WaitUntil(() => IA.InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
-            _easyText.color = Color.yellow;
-            _normalText.color = Color.yellow;
-            _hardText.color = Color.yellow;
-            _nightmareText.color = Color.yellow;
+            //_easyText.color = Color.green;
+            //_normalText.color = Color.yellow;
+            //_hardText.color = Color.red;
+            //_nightmareText.color = Color.magenta;
+
             _click2nd.Raise(SO_Sound.Entity.ClickSE, SType.SE);
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);
 
@@ -87,6 +135,7 @@ namespace Scene
             _nextText.color = Color.yellow;
             _click2nd.Raise(SO_Sound.Entity.ClickSE, SType.SE);
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);
+
             await SceneManager.LoadSceneAsync(SO_SceneName.Entity.MainGame);
         }
     }
