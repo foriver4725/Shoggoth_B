@@ -69,6 +69,9 @@ namespace Ex
         {
             return new(vec.x, vec.y, z);
         }
+
+        // z座標のみを変化させたベクトルを返す
+        public static Vector3 SetZ(this Vector3 v, float z) => new(v.x, v.y, z);
     }
 
     namespace AStar
