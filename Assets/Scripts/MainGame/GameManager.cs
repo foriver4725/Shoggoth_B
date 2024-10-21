@@ -36,6 +36,8 @@ namespace MainGame
         [NonSerialized] public bool IsClear = false;
         [NonSerialized] public bool IsOver = false;
 
+        [SerializeField] private PlayerController playerController;
+
         [SerializeField] Image textBack;
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
 
@@ -138,7 +140,7 @@ namespace MainGame
 
         void Start()
         {
-            ct = this.GetCancellationTokenOnDestroy();
+            ct = destroyCancellationToken;
 
             Player = GameObject.FindGameObjectWithTag("player");
             Enemys = GameObject.FindGameObjectsWithTag("shoggoth");
@@ -240,6 +242,7 @@ namespace MainGame
 
                 // B1に行く
                 PlayerMove.transform.position = new(101, 36, -1);
+                playerController.OnInteractedElevator();
             }
             else if (pos == new Vector3(1, 37, -1) && dir == DIR.UP)
             {
@@ -258,6 +261,7 @@ namespace MainGame
 
                 // B1に行く
                 PlayerMove.transform.position = new(101, 36, -1);
+                playerController.OnInteractedElevator();
             }
             else if (pos == new Vector3(100, 37, -1) && dir == DIR.UP)
             {
@@ -276,6 +280,7 @@ namespace MainGame
 
                 // 1に行く
                 PlayerMove.transform.position = new(1, 36, -1);
+                playerController.OnInteractedElevator();
             }
             else if (pos == new Vector3(101, 37, -1) && dir == DIR.UP)
             {
@@ -294,6 +299,7 @@ namespace MainGame
 
                 // B2に行く
                 PlayerMove.transform.position = new(1, 136, -1);
+                playerController.OnInteractedElevator();
             }
             else if (pos == new Vector3(0, 137, -1) && dir == DIR.UP)
             {
@@ -312,6 +318,7 @@ namespace MainGame
 
                 // B1に行く
                 PlayerMove.transform.position = new(101, 36, -1);
+                playerController.OnInteractedElevator();
             }
             else if (pos == new Vector3(1, 137, -1) && dir == DIR.UP)
             {
@@ -330,6 +337,7 @@ namespace MainGame
 
                 // B1に行く
                 PlayerMove.transform.position = new(101, 36, -1);
+                playerController.OnInteractedElevator();
             }
 
             else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.left && dir == DIR.RIGHT)

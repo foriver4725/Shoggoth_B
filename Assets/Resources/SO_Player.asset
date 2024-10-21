@@ -21,7 +21,7 @@ MonoBehaviour:
   EnemyChaseRange: 3
   EnemyStopChaseRange: 4
   EnemyStopChaseDuration: 3
-  InvincibleTime: 2
+  invincibleTime: 2
   StaminaIncreaseDur: 10
   StaminaDecreaseDur: 5
   bgmOn: {fileID: 8554479520563138585, guid: f7b30ed9331904e40a33eef91831f896, type: 3}
