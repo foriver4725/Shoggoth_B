@@ -72,19 +72,19 @@ namespace Scene
             string buttonName = clickedButton.name;
             if (buttonName == "Easy")
             {
-                Debug.Log("Easy");
+                DifficultyType Type = DifficultyType.Easy;
             }
             else if (buttonName == "Normal")
             {
-                Debug.Log("Normal");
+                DifficultyType Type = DifficultyType.Normal;
             }
             else if (buttonName == "Hard")
             {
-                Debug.Log("Hard");
+                DifficultyType Type = DifficultyType.Hard;
             }
             else if (buttonName == "Nightmare")
             {
-                Debug.Log("Nightmare");
+                DifficultyType Type = DifficultyType.Nightmare;
             }
             else
             {
