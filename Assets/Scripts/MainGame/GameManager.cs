@@ -46,6 +46,8 @@ namespace MainGame
 
         [SerializeField] TextMeshProUGUI floorText;
 
+        [SerializeField, Header("アイテムの設置候補場所\n(z座標はきらきらと同じにする)")] private ItemPoints itemPoints;
+
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
         [NonSerialized] public GameObject Player;
