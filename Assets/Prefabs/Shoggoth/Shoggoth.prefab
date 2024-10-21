@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floor: 0
-  _enemySpeed: 0
-  chaseAS: {fileID: 0}
 --- !u!1 &6236799144384842294
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +120,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5602949675497452718, guid: 47a2bb6aa86f9a7488c570a646f208cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1086db6b62d2ee4cbe8de988087b7a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -143,7 +141,7 @@ Animator:
   m_GameObject: {fileID: 6236799144384842294}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -8684255261624176548, guid: 47a2bb6aa86f9a7488c570a646f208cf, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2c374edda362da84e966e1f11201ad8e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
