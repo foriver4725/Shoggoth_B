@@ -111,7 +111,7 @@ namespace MainGame
         void Cash()
         {
             // 「path」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
-            GameObject[] paths = GameObject.FindGameObjectsWithTag("path");
+            GameObject[] paths = GameObject.FindGameObjectsWithTag("celltype/path");
             foreach (GameObject path in paths)
             {
                 PathPositions.Add(path.transform.position.ToVec2I());
@@ -119,19 +119,19 @@ namespace MainGame
 
             // 「type_stokingposition」タグが付いているゲームオブジェクトの座標を全て、整数座標に変換して格納する。
             HashSet<Vector2Int> enemyStokingPositions = new();
-            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint"))
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("stokingpoint/1F"))
             {
                 enemyStokingPositions.Add(stokingPos.transform.position.ToVec2I());
             }
             EnemyStokingPositions.Add(enemyStokingPositions);
             HashSet<Vector2Int> enemyStokingPositions1 = new();
-            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint_1"))
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("stokingpoint/B1F"))
             {
                 enemyStokingPositions1.Add(stokingPos.transform.position.ToVec2I());
             }
             EnemyStokingPositions.Add(enemyStokingPositions1);
             HashSet<Vector2Int> enemyStokingPositions2 = new();
-            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint_2"))
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("stokingpoint/B2F"))
             {
                 enemyStokingPositions2.Add(stokingPos.transform.position.ToVec2I());
             }
@@ -142,8 +142,8 @@ namespace MainGame
         {
             ct = destroyCancellationToken;
 
-            Player = GameObject.FindGameObjectWithTag("player");
-            Enemys = GameObject.FindGameObjectsWithTag("shoggoth");
+            Player = GameObject.FindGameObjectWithTag("character/player");
+            Enemys = GameObject.FindGameObjectsWithTag("character/shoggoth");
 
             PlayerMove = Player.GetComponent<PlayerMove>();
             for (int i = 0; i < Enemys.Length; i++)
