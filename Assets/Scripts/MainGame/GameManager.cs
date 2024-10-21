@@ -30,6 +30,7 @@ namespace MainGame
             }
 
             Cash();
+            ItemGenerate();
         }
         #endregion
 
@@ -87,8 +88,7 @@ namespace MainGame
 
         // アイテムの場所
         // 濃硝酸1つ(0)、濃塩酸3つ(1,2,3)
-        static readonly private Vector3[] ITEM__POSITIONS
-            = new Vector3[4] { new(25, 110, -0.055f), new(133, 32, -0.055f), new(106, 6, -0.055f), new(35, 136, -0.055f) };
+        private readonly Vector3[] itemPositions = new Vector3[4];
         // アイテム取得状況(4つ集めると脱出可能)
         [NonSerialized] public bool[] IsGetItems = new bool[4] { false, false, false, false };
         // アイテム取得状況のヒントをもらっているか(falseなら、光らないし取得できない)
@@ -138,6 +138,19 @@ namespace MainGame
                 enemyStokingPositions2.Add(stokingPos.transform.position.ToVec2I());
             }
             EnemyStokingPositions.Add(enemyStokingPositions2);
+        }
+
+        void ItemGenerate()
+        {
+            var pB1F = itemPoints.GetRandomPosition(1, 2);
+            var pB2F = itemPoints.GetRandomPosition(2, 2);
+
+            if (pB1F is null || pB2F is null) return;
+
+            itemPositions[0] = pB2F[0];
+            itemPositions[1] = pB2F[1];
+            itemPositions[2] = pB1F[0];
+            itemPositions[3] = pB1F[1];
         }
 
         void Start()
@@ -342,7 +355,7 @@ namespace MainGame
                 playerController.OnInteractedElevator();
             }
 
-            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.left && dir == DIR.RIGHT)
+            else if (CHECK_POSITIONS.Any(e => PlayerMove.IsInteractableAgainst(e)))
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -352,154 +365,24 @@ namespace MainGame
                 // 書斎の棚を調べる
                 CheckRack();
             }
-            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.up && dir == DIR.DOWN)
+            else if (CheckItemInteract(out int idx))
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[1].x, CHECK_POSITIONS[1].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[1].x, CHECK_POSITIONS[1].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[2].x, CHECK_POSITIONS[2].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[2].x, CHECK_POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.right && dir == DIR.LEFT)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // 書斎の棚を調べる
-                CheckRack();
-            }
-
-            else if (pos == new Vector3(ITEM__POSITIONS[0].x, ITEM__POSITIONS[0].y, -1) + Vector3.right && dir == DIR.LEFT)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // アイテム0を入手
-                if (IsHintedItems[0])
+                // アイテムを入手
+                if (IsHintedItems[idx])
                 {
-                    IsGetItems[0] = true;
-                }
-            }
-            else if (pos == new Vector3(ITEM__POSITIONS[1].x, ITEM__POSITIONS[1].y, -1) + Vector3.left && dir == DIR.RIGHT)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // アイテム1を入手
-                if (IsHintedItems[1])
-                {
-                    IsGetItems[1] = true;
-                }
-            }
-            else if (pos == new Vector3(ITEM__POSITIONS[2].x, ITEM__POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // アイテム2を入手
-                if (IsHintedItems[2])
-                {
-                    IsGetItems[2] = true;
-                }
-            }
-            else if (pos == new Vector3(ITEM__POSITIONS[3].x, ITEM__POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // クールタイムが明けるまでインタラクト出来ないようにし...
-                InteractCheck_IsInteractable = false;
-                // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // アイテム3を入手
-                if (IsHintedItems[3])
-                {
-                    IsGetItems[3] = true;
+                    IsGetItems[idx] = true;
                 }
             }
             else
             {
-                for (int i = 0; i < ENTRANCE_POSITIONS.Length; i++)
+                foreach (var p in ENTRANCE_POSITIONS)
                 {
-                    if (pos == new Vector3(ENTRANCE_POSITIONS[i].x, ENTRANCE_POSITIONS[i].y, -1) + Vector3.up && dir == DIR.DOWN)
+                    if (PlayerMove.IsInteractableAgainst(p))
                     {
                         // クールタイムが明けるまでインタラクト出来ないようにし...
                         InteractCheck_IsInteractable = false;
@@ -519,6 +402,21 @@ namespace MainGame
                 }
             }
             #endregion
+        }
+
+        bool CheckItemInteract(out int idx)
+        {
+            for (int i = 0; i < itemPositions.Length; i++)
+            {
+                if (PlayerMove.IsInteractableAgainst(itemPositions[i]))
+                {
+                    idx = i;
+                    return true;
+                }
+            }
+
+            idx = -1;
+            return false;
         }
 
         // ドアを壊したかどうか
@@ -598,13 +496,13 @@ namespace MainGame
                     _preItemImages[i].color = IsGetItems[i] ? Color.white : new Color32(100, 100, 100, 255);
                 }
                 if (IsHintedItems[0]) _itemKirakiras[0].transform.position
-                        = IsGetItems[0] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[0];
+                        = IsGetItems[0] ? new(-100, -100, -0.055f) : itemPositions[0].SetZ(-0.055f);
                 if (IsHintedItems[1]) _itemKirakiras[1].transform.position
-                        = IsGetItems[1] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[1];
+                        = IsGetItems[1] ? new(-100, -100, -0.055f) : itemPositions[1].SetZ(-0.055f);
                 if (IsHintedItems[2]) _itemKirakiras[2].transform.position
-                        = IsGetItems[2] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[2];
+                        = IsGetItems[2] ? new(-100, -100, -0.055f) : itemPositions[2].SetZ(-0.055f);
                 if (IsHintedItems[3]) _itemKirakiras[3].transform.position
-                        = IsGetItems[3] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[3];
+                        = IsGetItems[3] ? new(-100, -100, -0.055f) : itemPositions[3].SetZ(-0.055f);
             }
         }
 
