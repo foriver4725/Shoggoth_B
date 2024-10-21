@@ -11,15 +11,15 @@ namespace SO
         public const string PATH = "SO_DifficultySettings";
 
         // CakeParamsSOの実体
-        private static SO_Debug _entity = null;
-        public static SO_Debug Entity
+        private static SO_DifficultySettings _entity = null;
+        public static SO_DifficultySettings Entity
         {
             get
             {
                 // 初アクセス時にロードする
                 if (_entity == null)
                 {
-                    _entity = Resources.Load<SO_Debug>(PATH);
+                    _entity = Resources.Load<SO_DifficultySettings>(PATH);
 
                     //ロード出来なかった場合はエラーログを表示
                     if (_entity == null)

@@ -23,8 +23,13 @@ namespace MainGame
             // ダッシュしていない時...
             else
             {
+                
+                
+
+                
+                 
                 // 常にスタミナは回復する
-                GameManager.Instance.Stamina += 1 / SO_Player.Entity.StaminaIncreaseDur * Time.deltaTime;
+                GameManager.Instance.Stamina += 1 / SO_DifficultySettings.Entity.StaminaRecover * Time.deltaTime;
             }
 
             // UIを更新
