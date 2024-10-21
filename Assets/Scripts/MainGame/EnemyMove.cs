@@ -9,6 +9,7 @@ namespace MainGame
     public class EnemyMove : MonoBehaviour
     {
         private enum FLOOR { F1, BF1, BF2 };
+        [SerializeField] private Animator anim;
         [SerializeField, Header("どの階層の敵か")] private FLOOR _floor;
 
         private HashSet<Vector2Int> _stokingPos;
@@ -120,6 +121,9 @@ namespace MainGame
                 {
                     lookingDir = moveDir.ToDir();
                 }
+
+                // アニメーションの遷移を発火させる。
+                anim.SetInteger("LookingDirection", (int)lookingDir);
 
                 // 必ず向いている方向の次の整数座標まで移動する。
                 if (moveDir != Vector2.zero)
