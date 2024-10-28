@@ -1,4 +1,4 @@
-using MainGame;
+ï»¿using MainGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class HPManager : MonoBehaviour
 {
-    public List<Image> hearts; // ƒn[ƒg‚ÌImageƒŠƒXƒg
+    public List<Image> hearts; // ãƒãƒ¼ãƒˆã®Imageãƒªã‚¹ãƒˆ
 
     void Start()
     {
-        GameManager.Instance.CurrentHP = hearts.Count; // ‰ŠúHP‚ğƒn[ƒg‚Ì”‚Éİ’è
+        GameManager.Instance.CurrentHP = hearts.Count; // åˆæœŸHPã‚’ãƒãƒ¼ãƒˆã®æ•°ã«è¨­å®š
     }
 
     public void DecreaseHP()
@@ -18,7 +18,7 @@ public class HPManager : MonoBehaviour
         if (GameManager.Instance.CurrentHP > 0)
         {
             GameManager.Instance.CurrentHP--;
-            hearts[GameManager.Instance.CurrentHP].color = Color.black; // ƒn[ƒg‚ÌImage‚ğ”ñ•\¦‚É‚·‚é
+            hearts[GameManager.Instance.CurrentHP].color = Color.black; // ãƒãƒ¼ãƒˆã®Imageã‚’éè¡¨ç¤ºã«ã™ã‚‹
         }
     }
 }

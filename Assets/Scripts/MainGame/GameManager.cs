@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using Ex;
 using IA;
 using SO;
@@ -30,6 +30,7 @@ namespace MainGame
             }
 
             Cash();
+            ItemGenerate();
         }
         #endregion
 
@@ -46,16 +47,20 @@ namespace MainGame
 
         [SerializeField] TextMeshProUGUI floorText;
 
+        [SerializeField] private ItemOutlineTrigger itemOutlineTrigger;
+        [SerializeField, Header("ã‚¢ã‚¤ãƒ†ãƒ ã®è¨­ç½®å€™è£œå ´æ‰€\n(zåº§æ¨™ã¯ãã‚‰ãã‚‰ã¨åŒã˜ã«ã™ã‚‹)")] private ItemPoints itemPoints;
+        [SerializeField] private FloorChangePoints floorChangePoints;
+
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
-        [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0‚ª1FA2‚ªB2F
+        [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0ãŒ1Fã€2ãŒB2F
         [NonSerialized] public GameObject Player;
         [NonSerialized] public GameObject[] Enemys = new GameObject[6];
         [NonSerialized] public PlayerMove PlayerMove;
         [NonSerialized] public EnemyMove[] EnemyMoves = new EnemyMove[6];
 
-        [NonSerialized] public int CurrentHP; // ƒvƒŒƒCƒ„[‚ÌHP
+        [NonSerialized] public int CurrentHP; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®HP
 
-        // Œ»İ‚ÌƒXƒ^ƒ~ƒi (0 ~ 1)
+        // ç¾åœ¨ã®ã‚¹ã‚¿ãƒŸãƒŠ (0 ~ 1)
         private float _stamina = 1;
         public float Stamina
         {
@@ -69,35 +74,34 @@ namespace MainGame
             }
         }
 
-        // ƒGƒ“ƒgƒ‰ƒ“ƒX‚ÌêŠ
+        // ã‚¨ãƒ³ãƒˆãƒ©ãƒ³ã‚¹ã®å ´æ‰€
         static readonly private Vector3[] ENTRANCE_POSITIONS
             = new Vector3[7] { new(15, -1, -0.055f), new(16, -1, -0.055f), new(17, -1, -0.055f), new(18, -1, -0.055f), new(19, -1, -0.055f), new(20, -1, -0.055f), new(21, -1, -0.055f) };
-        // ƒGƒ“ƒgƒ‰ƒ“ƒX‚Ì‚«‚ç‚«‚ç
+        // ã‚¨ãƒ³ãƒˆãƒ©ãƒ³ã‚¹ã®ãã‚‰ãã‚‰
         [SerializeField] private GameObject[] _entranceKirakiras = new GameObject[7];
 
-        // ‘Ö‚ÌA’²‚×‚ç‚ê‚é’I‚ÌêŠ
+        // æ›¸æ–ã®ã€èª¿ã¹ã‚‰ã‚Œã‚‹æ£šã®å ´æ‰€
         static readonly private Vector3[] CHECK_POSITIONS
             = new Vector3[4] { new(18, 104, -0.055f), new(19, 104, -0.055f), new(20, 104, -0.055f), new(21, 104, -0.055f) };
-        // ‘Ö‚Ì’I‚ğ’²‚×‚Ä‚¢‚é‚©
+        // æ›¸æ–ã®æ£šã‚’èª¿ã¹ã¦ã„ã‚‹ã‹
         [NonSerialized] public bool IsCheckedRack = false;
-        // ‘Ö‚Ì’I‚Ì‚«‚ç‚«‚ç
+        // æ›¸æ–ã®æ£šã®ãã‚‰ãã‚‰
         [SerializeField] private GameObject[] _checkKirakiras = new GameObject[4];
 
-        // ƒAƒCƒeƒ€‚ÌêŠ
-        // ”ZÉ_1‚Â(0)A”Z‰–_3‚Â(1,2,3)
-        static readonly private Vector3[] ITEM__POSITIONS
-            = new Vector3[4] { new(25, 110, -0.055f), new(133, 32, -0.055f), new(106, 6, -0.055f), new(35, 136, -0.055f) };
-        // ƒAƒCƒeƒ€æ“¾ó‹µ(4‚ÂW‚ß‚é‚Æ’Eo‰Â”\)
+        // ã‚¢ã‚¤ãƒ†ãƒ ã®å ´æ‰€
+        // æ¿ƒç¡é…¸1ã¤(0)ã€æ¿ƒå¡©é…¸3ã¤(1,2,3)
+        private readonly Vector3[] itemPositions = new Vector3[4];
+        // ã‚¢ã‚¤ãƒ†ãƒ å–å¾—çŠ¶æ³(4ã¤é›†ã‚ã‚‹ã¨è„±å‡ºå¯èƒ½)
         [NonSerialized] public bool[] IsGetItems = new bool[4] { false, false, false, false };
-        // ƒAƒCƒeƒ€æ“¾ó‹µ‚Ìƒqƒ“ƒg‚ğ‚à‚ç‚Á‚Ä‚¢‚é‚©(false‚È‚çAŒõ‚ç‚È‚¢‚µæ“¾‚Å‚«‚È‚¢)
+        // ã‚¢ã‚¤ãƒ†ãƒ å–å¾—çŠ¶æ³ã®ãƒ’ãƒ³ãƒˆã‚’ã‚‚ã‚‰ã£ã¦ã„ã‚‹ã‹(falseãªã‚‰ã€å…‰ã‚‰ãªã„ã—å–å¾—ã§ããªã„)
         [NonSerialized] public bool[] IsHintedItems = new bool[4] { false, false, false, false };
-        // ƒAƒCƒeƒ€‚Ì‚«‚ç‚«‚ç
+        // ã‚¢ã‚¤ãƒ†ãƒ ã®ãã‚‰ãã‚‰
         [SerializeField] private GameObject[] _itemKirakiras = new GameObject[4];
-        // ƒAƒCƒeƒ€æ“¾ó‹µ‚É‘Î‰‚·‚éImage
+        // ã‚¢ã‚¤ãƒ†ãƒ å–å¾—çŠ¶æ³ã«å¯¾å¿œã™ã‚‹Image
         [SerializeField] private Image[] _preItemImages = new Image[4];
-        // ƒAƒCƒeƒ€æ“¾ó‹µ‚É‘Î‰‚·‚éImage‚Ìe‚ÌGameObject
+        // ã‚¢ã‚¤ãƒ†ãƒ å–å¾—çŠ¶æ³ã«å¯¾å¿œã™ã‚‹Imageã®è¦ªã®GameObject
         [SerializeField] private GameObject _preItemImageParent;
-        // ‰¤…‚ÌImage
+        // ç‹æ°´ã®Image
         [SerializeField] private Image _ousuiImage;
 
         [SerializeField] private AudioSource _onGameBGM;
@@ -110,40 +114,53 @@ namespace MainGame
 
         void Cash()
         {
-            // upathvƒ^ƒO‚ª•t‚¢‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌÀ•W‚ğ‘S‚ÄA®”À•W‚É•ÏŠ·‚µ‚ÄŠi”[‚·‚éB
-            GameObject[] paths = GameObject.FindGameObjectsWithTag("path");
+            // ã€Œpathã€ã‚¿ã‚°ãŒä»˜ã„ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™ã‚’å…¨ã¦ã€æ•´æ•°åº§æ¨™ã«å¤‰æ›ã—ã¦æ ¼ç´ã™ã‚‹ã€‚
+            GameObject[] paths = GameObject.FindGameObjectsWithTag("celltype/path");
             foreach (GameObject path in paths)
             {
                 PathPositions.Add(path.transform.position.ToVec2I());
             }
 
-            // utype_stokingpositionvƒ^ƒO‚ª•t‚¢‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌÀ•W‚ğ‘S‚ÄA®”À•W‚É•ÏŠ·‚µ‚ÄŠi”[‚·‚éB
+            // ã€Œtype_stokingpositionã€ã‚¿ã‚°ãŒä»˜ã„ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™ã‚’å…¨ã¦ã€æ•´æ•°åº§æ¨™ã«å¤‰æ›ã—ã¦æ ¼ç´ã™ã‚‹ã€‚
             HashSet<Vector2Int> enemyStokingPositions = new();
-            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint"))
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("stokingpoint/1F"))
             {
                 enemyStokingPositions.Add(stokingPos.transform.position.ToVec2I());
             }
             EnemyStokingPositions.Add(enemyStokingPositions);
             HashSet<Vector2Int> enemyStokingPositions1 = new();
-            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint_1"))
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("stokingpoint/B1F"))
             {
                 enemyStokingPositions1.Add(stokingPos.transform.position.ToVec2I());
             }
             EnemyStokingPositions.Add(enemyStokingPositions1);
             HashSet<Vector2Int> enemyStokingPositions2 = new();
-            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("type_stokingpoint_2"))
+            foreach (GameObject stokingPos in GameObject.FindGameObjectsWithTag("stokingpoint/B2F"))
             {
                 enemyStokingPositions2.Add(stokingPos.transform.position.ToVec2I());
             }
             EnemyStokingPositions.Add(enemyStokingPositions2);
         }
 
+        void ItemGenerate()
+        {
+            var pB1F = itemPoints.GetRandomPosition(1, 2);
+            var pB2F = itemPoints.GetRandomPosition(2, 2);
+
+            if (pB1F is null || pB2F is null) return;
+
+            itemPositions[0] = pB2F[0];
+            itemPositions[1] = pB2F[1];
+            itemPositions[2] = pB1F[0];
+            itemPositions[3] = pB1F[1];
+        }
+
         void Start()
         {
             ct = destroyCancellationToken;
 
-            Player = GameObject.FindGameObjectWithTag("player");
-            Enemys = GameObject.FindGameObjectsWithTag("shoggoth");
+            Player = GameObject.FindGameObjectWithTag("character/player");
+            Enemys = GameObject.FindGameObjectsWithTag("character/shoggoth");
 
             PlayerMove = Player.GetComponent<PlayerMove>();
             for (int i = 0; i < Enemys.Length; i++)
@@ -168,6 +185,7 @@ namespace MainGame
             textMeshProUGUI.text = "";
 
             finalHint.SetActive(false);
+            itemOutlineTrigger.SetActivation(2);
 
             ShowDirectionLog();
         }
@@ -179,7 +197,7 @@ namespace MainGame
                 InteractCheck();
             }
 
-            // ”­Šoó‘Ô‚ÌBGM‚ğXV‚·‚é
+            // ç™ºè¦šçŠ¶æ…‹ã®BGMã‚’æ›´æ–°ã™ã‚‹
             if (EnemyMoves.Map(e => e.IsOnChase).Any(true))
             {
                 chaseBGM.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
@@ -189,10 +207,10 @@ namespace MainGame
                 chaseBGM.Stop();
             }
 
-            // ƒAƒCƒeƒ€Image’B‚ğXV
+            // ã‚¢ã‚¤ãƒ†ãƒ Imageé”ã‚’æ›´æ–°
             UpdateItemImages();
 
-            // ŠK‚ÌƒeƒLƒXƒg‚ğXV
+            // éšã®ãƒ†ã‚­ã‚¹ãƒˆã‚’æ›´æ–°
             floorText.text = (Player.transform.position.x < 75, Player.transform.position.y < 75) switch
             {
                 (true, true) => "1F",
@@ -201,7 +219,7 @@ namespace MainGame
                 _ => "B2F"
             };
 
-            // ƒAƒCƒeƒ€‚ª‘µ‚Á‚½ó‘Ô‚Å1F‚É‚¢‚é‚È‚çA‰æ–Ê‚ğÔ‚­‚·‚éB‚½‚¾‚µAƒNƒŠƒA‚ÆƒQ[ƒ€ƒI[ƒo[‚ÍÔ‚­‚µ‚È‚¢B
+            // ã‚¢ã‚¤ãƒ†ãƒ ãŒæƒã£ãŸçŠ¶æ…‹ã§1Fã«ã„ã‚‹ãªã‚‰ã€ç”»é¢ã‚’èµ¤ãã™ã‚‹ã€‚ãŸã ã—ã€ã‚¯ãƒªã‚¢ã¨ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã¯èµ¤ãã—ãªã„ã€‚
             redImage.enabled =
                 !IsClear
                 && !IsOver
@@ -212,27 +230,22 @@ namespace MainGame
         bool InteractCheck_IsInteractable = true;
         void InteractCheck()
         {
-            // ƒNƒŠƒA‚Ü‚½‚ÍƒQ[ƒ€ƒI[ƒo[‚È‚çƒCƒ“ƒ^ƒ‰ƒNƒg‚Å‚«‚È‚¢
             if (IsClear || IsOver) return;
-
-            // ƒ|[ƒY’†‚È‚çƒCƒ“ƒ^ƒ‰ƒNƒg‚Å‚«‚È‚¢
             if (Time.timeScale == 0) return;
-
-            // ƒCƒ“ƒ^ƒ‰ƒNƒg•s‰Â‚È‚ç‰½‚à‚µ‚È‚¢
             if (!InteractCheck_IsInteractable) return;
 
-            #region ƒCƒ“ƒ^ƒ‰ƒNƒg‚ÌŒŸ’m
+            #region ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã®æ¤œçŸ¥
             Vector3 pos = PlayerMove.transform.position;
             DIR dir = PlayerMove.LookingDir;
 
-            if (pos == new Vector3(0, 37, -1) && dir == DIR.UP)
+            if (floorChangePoints.InteractCheck(PlayerMove, out Vector3 v))
             {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
+                // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ãŒæ˜ã‘ã‚‹ã¾ã§ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆå‡ºæ¥ãªã„ã‚ˆã†ã«ã—...
                 InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
+                // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’é–‹å§‹ã™ã‚‹
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
-                // “G‚Ì”­Šoó‘Ô‚ğ‰ğœ‚·‚é
+                // æ•µã®ç™ºè¦šçŠ¶æ…‹ã‚’è§£é™¤ã™ã‚‹
                 foreach (EnemyMove _enemy in EnemyMoves)
                 {
                     _enemy.StopChaseTime = 0;
@@ -240,271 +253,46 @@ namespace MainGame
                     _enemy.SelectNewStokingPoint();
                 }
 
-                // B1‚És‚­
-                PlayerMove.transform.position = new(101, 36, -1);
+                // ãã®éšã«è¡Œã
+                PlayerMove.transform.position = v.SetZ(-1);
+                itemOutlineTrigger.SetActivation(v.x >= 100 ? 1 : v.y >= 100 ? 2 : 0);
                 playerController.OnInteractedElevator();
             }
-            else if (pos == new Vector3(1, 37, -1) && dir == DIR.UP)
+            else if (CHECK_POSITIONS.Any(e => PlayerMove.IsInteractableAgainst(e)))
             {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
+                // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ãŒæ˜ã‘ã‚‹ã¾ã§ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆå‡ºæ¥ãªã„ã‚ˆã†ã«ã—...
                 InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
+                // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’é–‹å§‹ã™ã‚‹
                 Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
-                // “G‚Ì”­Šoó‘Ô‚ğ‰ğœ‚·‚é
-                foreach (EnemyMove _enemy in EnemyMoves)
+                // æ›¸æ–ã®æ£šã‚’èª¿ã¹ã‚‹
+                CheckRack();
+            }
+            else if (CheckItemInteract(out int idx))
+            {
+                // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ãŒæ˜ã‘ã‚‹ã¾ã§ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆå‡ºæ¥ãªã„ã‚ˆã†ã«ã—...
+                InteractCheck_IsInteractable = false;
+                // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’é–‹å§‹ã™ã‚‹
+                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+
+                // ã‚¢ã‚¤ãƒ†ãƒ ã‚’å…¥æ‰‹
+                if (IsHintedItems[idx])
                 {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B1‚És‚­
-                PlayerMove.transform.position = new(101, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(100, 37, -1) && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // “G‚Ì”­Šoó‘Ô‚ğ‰ğœ‚·‚é
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // 1‚És‚­
-                PlayerMove.transform.position = new(1, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(101, 37, -1) && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // “G‚Ì”­Šoó‘Ô‚ğ‰ğœ‚·‚é
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B2‚És‚­
-                PlayerMove.transform.position = new(1, 136, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(0, 137, -1) && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // “G‚Ì”­Šoó‘Ô‚ğ‰ğœ‚·‚é
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B1‚És‚­
-                PlayerMove.transform.position = new(101, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-            else if (pos == new Vector3(1, 137, -1) && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // “G‚Ì”­Šoó‘Ô‚ğ‰ğœ‚·‚é
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
-
-                // B1‚És‚­
-                PlayerMove.transform.position = new(101, 36, -1);
-                playerController.OnInteractedElevator();
-            }
-
-            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.left && dir == DIR.RIGHT)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[0].x, CHECK_POSITIONS[0].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[1].x, CHECK_POSITIONS[1].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[1].x, CHECK_POSITIONS[1].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[2].x, CHECK_POSITIONS[2].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[2].x, CHECK_POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.right && dir == DIR.LEFT)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-            else if (pos == new Vector3(CHECK_POSITIONS[3].x, CHECK_POSITIONS[3].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ‘Ö‚Ì’I‚ğ’²‚×‚é
-                CheckRack();
-            }
-
-            else if (pos == new Vector3(ITEM__POSITIONS[0].x, ITEM__POSITIONS[0].y, -1) + Vector3.right && dir == DIR.LEFT)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ƒAƒCƒeƒ€0‚ğ“üè
-                if (IsHintedItems[0])
-                {
-                    IsGetItems[0] = true;
-                }
-            }
-            else if (pos == new Vector3(ITEM__POSITIONS[1].x, ITEM__POSITIONS[1].y, -1) + Vector3.left && dir == DIR.RIGHT)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ƒAƒCƒeƒ€1‚ğ“üè
-                if (IsHintedItems[1])
-                {
-                    IsGetItems[1] = true;
-                }
-            }
-            else if (pos == new Vector3(ITEM__POSITIONS[2].x, ITEM__POSITIONS[2].y, -1) + Vector3.down && dir == DIR.UP)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ƒAƒCƒeƒ€2‚ğ“üè
-                if (IsHintedItems[2])
-                {
-                    IsGetItems[2] = true;
-                }
-            }
-            else if (pos == new Vector3(ITEM__POSITIONS[3].x, ITEM__POSITIONS[3].y, -1) + Vector3.up && dir == DIR.DOWN)
-            {
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
-                InteractCheck_IsInteractable = false;
-                // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
-
-                // ƒAƒCƒeƒ€3‚ğ“üè
-                if (IsHintedItems[3])
-                {
-                    IsGetItems[3] = true;
+                    IsGetItems[idx] = true;
                 }
             }
             else
             {
-                for (int i = 0; i < ENTRANCE_POSITIONS.Length; i++)
+                foreach (var p in ENTRANCE_POSITIONS)
                 {
-                    if (pos == new Vector3(ENTRANCE_POSITIONS[i].x, ENTRANCE_POSITIONS[i].y, -1) + Vector3.up && dir == DIR.DOWN)
+                    if (PlayerMove.IsInteractableAgainst(p))
                     {
-                        // ƒN[ƒ‹ƒ^ƒCƒ€‚ª–¾‚¯‚é‚Ü‚ÅƒCƒ“ƒ^ƒ‰ƒNƒgo—ˆ‚È‚¢‚æ‚¤‚É‚µ...
+                        // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ãŒæ˜ã‘ã‚‹ã¾ã§ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆå‡ºæ¥ãªã„ã‚ˆã†ã«ã—...
                         InteractCheck_IsInteractable = false;
-                        // ƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒJƒEƒ“ƒg‚ğŠJn‚·‚é
+                        // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’é–‹å§‹ã™ã‚‹
                         Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
 
-                        // ‚«‚ç‚«‚ç‚ğ”ñ•\¦
+                        // ãã‚‰ãã‚‰ã‚’éè¡¨ç¤º
                         foreach (GameObject e in _entranceKirakiras)
                         {
                             e.transform.position = new(-100, -100, -0.055f);
@@ -519,20 +307,35 @@ namespace MainGame
             #endregion
         }
 
-        // ƒhƒA‚ğ‰ó‚µ‚½‚©‚Ç‚¤‚©
+        bool CheckItemInteract(out int idx)
+        {
+            for (int i = 0; i < itemPositions.Length; i++)
+            {
+                if (PlayerMove.IsInteractableAgainst(itemPositions[i]))
+                {
+                    idx = i;
+                    return true;
+                }
+            }
+
+            idx = -1;
+            return false;
+        }
+
+        // ãƒ‰ã‚¢ã‚’å£Šã—ãŸã‹ã©ã†ã‹
         bool CheckEscape_IsDoorBroken = false;
         void CheckEscape()
         {
-            // •K—vƒAƒCƒeƒ€‚ª‘µ‚Á‚Ä‚¢‚È‚¢‚È‚ç‰½‚à‚µ‚È‚¢
+            // å¿…è¦ã‚¢ã‚¤ãƒ†ãƒ ãŒæƒã£ã¦ã„ãªã„ãªã‚‰ä½•ã‚‚ã—ãªã„
             if (IsGetItems.Any(false))
             {
                 lockedDoorSE.Raise(SO_Sound.Entity.LockedDoorSE, SType.SE);
                 return;
             }
 
-            // •K—vƒAƒCƒeƒ€‚ª‘µ‚Á‚Ä‚¢‚é‚È‚ç...
+            // å¿…è¦ã‚¢ã‚¤ãƒ†ãƒ ãŒæƒã£ã¦ã„ã‚‹ãªã‚‰...
 
-            // Å‰‚ÌƒCƒ“ƒ^ƒ‰ƒNƒg‚Å‚ÍƒhƒA‚ğ‰ó‚·
+            // æœ€åˆã®ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã§ã¯ãƒ‰ã‚¢ã‚’å£Šã™
             if (!CheckEscape_IsDoorBroken)
             {
                 CheckEscape_IsDoorBroken = true;
@@ -542,7 +345,7 @@ namespace MainGame
                 textMeshProUGUI.text = "";
                 finalHint.SetActive(true);
             }
-            // Ÿ‚ÌƒCƒ“ƒ^ƒ‰ƒNƒg‚Å‚Í’Eo‚·‚é
+            // æ¬¡ã®ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã§ã¯è„±å‡ºã™ã‚‹
             else
             {
                 if (!IsClear && !IsOver)
@@ -552,12 +355,12 @@ namespace MainGame
             }
         }
 
-        // ƒAƒCƒeƒ€‚ª‘µ‚Á‚½‰‰o‚ğ‚Ü‚¾‚µ‚Ä‚¢‚È‚¢‚È‚çfalseA‚µ‚Ä‚¢‚é‚È‚çtrue
+        // ã‚¢ã‚¤ãƒ†ãƒ ãŒæƒã£ãŸæ¼”å‡ºã‚’ã¾ã ã—ã¦ã„ãªã„ãªã‚‰falseã€ã—ã¦ã„ã‚‹ãªã‚‰true
         bool UpdateItemImages_IsDirection = false;
-        // ƒAƒCƒeƒ€Image’B‚ğXV
+        // ã‚¢ã‚¤ãƒ†ãƒ Imageé”ã‚’æ›´æ–°
         void UpdateItemImages()
         {
-            // 4‚Â‚ÌƒAƒCƒeƒ€‚ğƒRƒ“ƒv‚µ‚Ä‚¢‚é‚È‚ç
+            // 4ã¤ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’ã‚³ãƒ³ãƒ—ã—ã¦ã„ã‚‹ãªã‚‰
             if (IsGetItems.All(true))
             {
                 _preItemImageParent.SetActive(false);
@@ -573,20 +376,20 @@ namespace MainGame
 
                     potionSE.Raise(SO_Sound.Entity.UsePotionSE, SType.SE);
 
-                    // ‚«‚ç‚«‚ç‚ğ•\¦
+                    // ãã‚‰ãã‚‰ã‚’è¡¨ç¤º
                     for (int i = 0; i < _entranceKirakiras.Length; i++)
                     {
                         _entranceKirakiras[i].transform.position = ENTRANCE_POSITIONS[i];
                     }
 
-                    // ƒƒO‚ğ•\¦
+                    // ãƒ­ã‚°ã‚’è¡¨ç¤º
                     Time.timeScale = 0.0f;
                     textBack.enabled = true;
                     textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
                     StartCoroutine(FadeItemCompletedLog());
                 }
             }
-            // •K—vƒAƒCƒeƒ€‚ª‚»‚ë‚Á‚Ä‚¢‚È‚¢‚È‚ç
+            // å¿…è¦ã‚¢ã‚¤ãƒ†ãƒ ãŒãã‚ã£ã¦ã„ãªã„ãªã‚‰
             else
             {
                 _ousuiImage.enabled = false;
@@ -596,13 +399,13 @@ namespace MainGame
                     _preItemImages[i].color = IsGetItems[i] ? Color.white : new Color32(100, 100, 100, 255);
                 }
                 if (IsHintedItems[0]) _itemKirakiras[0].transform.position
-                        = IsGetItems[0] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[0];
+                        = IsGetItems[0] ? new(-100, -100, -0.055f) : itemPositions[0].SetZ(-0.055f);
                 if (IsHintedItems[1]) _itemKirakiras[1].transform.position
-                        = IsGetItems[1] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[1];
+                        = IsGetItems[1] ? new(-100, -100, -0.055f) : itemPositions[1].SetZ(-0.055f);
                 if (IsHintedItems[2]) _itemKirakiras[2].transform.position
-                        = IsGetItems[2] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[2];
+                        = IsGetItems[2] ? new(-100, -100, -0.055f) : itemPositions[2].SetZ(-0.055f);
                 if (IsHintedItems[3]) _itemKirakiras[3].transform.position
-                        = IsGetItems[3] ? new(-100, -100, -0.055f) : ITEM__POSITIONS[3];
+                        = IsGetItems[3] ? new(-100, -100, -0.055f) : itemPositions[3].SetZ(-0.055f);
             }
         }
 
@@ -622,21 +425,21 @@ namespace MainGame
             }
         }
 
-        // ‘Ö‚Ì’I‚ğ’²‚×‚é
+        // æ›¸æ–ã®æ£šã‚’èª¿ã¹ã‚‹
         public void CheckRack()
         {
-            // Šù‚É’²‚×‚Ä‚ ‚é‚È‚ç‰½‚à‚µ‚È‚¢
+            // æ—¢ã«èª¿ã¹ã¦ã‚ã‚‹ãªã‚‰ä½•ã‚‚ã—ãªã„
             if (IsCheckedRack) return;
-            // ‚à‚¤‚±‚Ìƒƒ\ƒbƒh‚Ìˆ—‚Ís‚í‚È‚¢
+            // ã‚‚ã†ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å‡¦ç†ã¯è¡Œã‚ãªã„
             IsCheckedRack = true;
 
             StopCoroutine(ShowDirectionLog_Cor);
             ShowDirectionLog_Cor = null;
 
-            // ƒAƒCƒeƒ€‚Ìƒqƒ“ƒg‚ğ‚à‚ç‚Á‚Ä‚¢‚éó‘Ô‚É‚·‚é
+            // ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ’ãƒ³ãƒˆã‚’ã‚‚ã‚‰ã£ã¦ã„ã‚‹çŠ¶æ…‹ã«ã™ã‚‹
             IsHintedItems = IsHintedItems.Map(e => true).ToArray();
 
-            // ‘Ö‚Ì’I‚Ì‚«‚ç‚«‚ç‚ğ”ñ•\¦‚É‚·‚é
+            // æ›¸æ–ã®æ£šã®ãã‚‰ãã‚‰ã‚’éè¡¨ç¤ºã«ã™ã‚‹
             foreach (GameObject e in _checkKirakiras)
             {
                 e.transform.position = new(-100, -100, -0.055f);

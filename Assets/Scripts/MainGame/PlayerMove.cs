@@ -12,30 +12,30 @@ namespace MainGame
         [SerializeField] Animator anim;
         [SerializeField] AudioSource walkAS;
 
-        // ƒvƒŒƒCƒ„[‚ÌŒü‚«
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½
         public DIR LookingDir { get; set; } = DIR.DOWN;
 
-        // ƒvƒŒƒCƒ„[‚ÌˆÚ“®•ûŒü‚ÌƒxƒNƒgƒ‹(‘å‚«‚³1‚ğ‘z’è)
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½(ï¿½å‚«ï¿½ï¿½1ï¿½ï¿½zï¿½ï¿½)
         public Vector2 InputDir { get; set; } = Vector2.zero;
 
-        // ƒvƒŒƒCƒ„[‚ª®”À•W‚Ü‚ÅˆÚ“®Š®—¹‚µ‚Ä‚¢‚é‚©
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Ü‚ÅˆÚ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
         bool isStepEnded = true;
 
         enum MoveState { STOP, WALK, DASH };
-        MoveState moveState = MoveState.STOP; // Œ»İ‚ÌƒtƒŒ[ƒ€‚ÌˆÚ“®ó‘Ô
-        MoveState moveStatePre = MoveState.STOP; // 1‚Â‘O‚ÌƒtƒŒ[ƒ€‚ÌˆÚ“®ó‘Ô
-        bool isOnDash = true; // ƒ_ƒbƒVƒ…ó‘Ô‚É‚È‚Á‚½ƒtƒŒ[ƒ€‚Å‚ ‚é‚©
-        bool isOnWalk = true; // •à‚«ó‘Ô‚É‚È‚Á‚½ƒtƒŒ[ƒ€‚Å‚ ‚é‚©
-        bool isOnStop = true; // ’â~ó‘Ô‚É‚È‚Á‚½ƒtƒŒ[ƒ€‚Å‚ ‚é‚©
+        MoveState moveState = MoveState.STOP; // ï¿½ï¿½ï¿½İ‚Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½
+        MoveState moveStatePre = MoveState.STOP; // 1ï¿½Â‘Oï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½
+        bool isOnDash = true; // ï¿½_ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½Ô‚É‚È‚ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Å‚ï¿½ï¿½é‚©
+        bool isOnWalk = true; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚É‚È‚ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Å‚ï¿½ï¿½é‚©
+        bool isOnStop = true; // ï¿½ï¿½~ï¿½ï¿½Ô‚É‚È‚ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Å‚ï¿½ï¿½é‚©
 
         void Update()
         {
-            // ƒNƒŠƒA‚Ü‚½‚ÍƒQ[ƒ€ƒI[ƒo[‚È‚ç“®‚©‚È‚¢
+            // ï¿½Nï¿½ï¿½ï¿½Aï¿½Ü‚ï¿½ï¿½ÍƒQï¿½[ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½È‚ç“®ï¿½ï¿½ï¿½È‚ï¿½
             if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
 
             InputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
 
-            // ƒ_ƒbƒVƒ…‚Ì“ü—Í‚ğŒŸ’m‚µ‚ÄAƒtƒ‰ƒO‚ğXV‚·‚é
+            // ï¿½_ï¿½bï¿½Vï¿½ï¿½ï¿½Ì“ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½ÄAï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
 
             if (InputGetter.Instance.MainGame_IsDash && GameManager.Instance.Stamina != 0) moveState = MoveState.DASH;
             else if (InputDir != Vector2.zero) moveState = MoveState.WALK;
@@ -53,17 +53,17 @@ namespace MainGame
 
             if (isStepEnded)
             {
-                // i“®‚¢‚Ä‚¢‚é‚È‚çjŒü‚¢‚Ä‚¢‚é•ûŒü‚ğ”»’f‚·‚éB
+                // ï¿½iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½È‚ï¿½jï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ğ”»’fï¿½ï¿½ï¿½ï¿½B
                 if (InputDir != Vector2.zero)
                 {
                     LookingDir = InputDir.ToDir();
                 }
 
-                // ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘JˆÚ‚ğ”­‰Î‚³‚¹‚éB
+                // ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ì‘Jï¿½Ú‚ğ”­‰Î‚ï¿½ï¿½ï¿½ï¿½ï¿½B
                 anim.SetBool("IsMoving", InputDir != Vector2.zero);
                 anim.SetInteger("LookingDirection", (int)LookingDir);
 
-                // •K‚¸Œü‚¢‚Ä‚¢‚é•ûŒü‚ÌŸ‚Ì®”À•W‚Ü‚ÅˆÚ“®‚µA‚»‚ÌŠÔ‚Í“ü—Í‚ğó‚¯•t‚¯‚È‚¢B
+                // ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Ü‚ÅˆÚ“ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ÌŠÔ‚Í“ï¿½ï¿½Í‚ï¿½ï¿½ó‚¯•tï¿½ï¿½ï¿½È‚ï¿½ï¿½B
                 if (InputDir != Vector2.zero)
                 {
                     isStepEnded = false;
@@ -77,7 +77,7 @@ namespace MainGame
             Vector3 fromPos = transform.position;
             Vector3 toPos = fromPos + dir;
 
-            // path‚ÌŠ‚µ‚©“®‚¯‚È‚¢‚Ì‚ÅA–Ú“I’n‚ªpath‚Å‚È‚©‚Á‚½‚çˆÚ“®‚Ìˆ—‚ğs‚í‚È‚¢B
+            // pathï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚ÅAï¿½Ú“Iï¿½nï¿½ï¿½pathï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú“ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½È‚ï¿½ï¿½B
             if (!GameManager.Instance.PathPositions.Contains(new Vector2Int((int)toPos.x, (int)toPos.y)))
             {
                 isStepEnded = true;
