@@ -5,9 +5,12 @@ using SO;
 using System;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Light2D light2D;
+
     public HPManager hpManager; // HP管理スクリプト
     [SerializeField] private AudioSource damagedAS;
 
@@ -23,6 +26,11 @@ public class PlayerController : MonoBehaviour
     {
         elevatorFlag.Dispose();
         damagableFlag.Dispose();
+    }
+
+    private void Awake()
+    {
+        light2D.intensity = SO_DifficultySettings.Entity.VisibilityRange;
     }
 
     private void Update()

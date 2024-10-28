@@ -1,4 +1,5 @@
 ﻿using Ex;
+using SO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,28 +38,49 @@ namespace MainGame
         /// 処理コスト高め
         /// </summary>
         /// <param name="floor">B1Fなら1、B2Fなら2</param>
-        /// <param name="num">いくつ取得するか</param>
+        /// <param name="num">いくつ取得するか(ランダムでないなら、常に2個)</param>
         public ReadOnlyCollection<Vector3> GetRandomPosition(byte floor, byte num)
         {
-            if (floor is not (1 or 2)) return null;
-
-            List<Vector3> posList = new();
-            foreach (Transform e in floor == 1 ? itemPoints11 : itemPoints21) posList.Add(e.position);
-            foreach (Transform e in floor == 1 ? itemPoints12 : itemPoints22) posList.Add(e.position);
-            foreach (Transform e in floor == 1 ? itemPoints13 : itemPoints23) posList.Add(e.position);
-            foreach (Transform e in floor == 1 ? itemPoints14 : itemPoints24) posList.Add(e.position);
-
-            if (!(0 < num && num < posList.Count)) return null;
-
-            Vector3[] returnPosArray = new Vector3[num];
-            for (int i = 0; i < num; i++)
+            if (SO_DifficultySettings.Entity.IsItemRandom)
             {
-                int index = UnityEngine.Random.Range(0, posList.Count);
-                returnPosArray[i] = posList[index];
-                posList.RemoveAt(index);
-            }
+                if (floor is not (1 or 2)) return null;
 
-            return Array.AsReadOnly(returnPosArray);
+                List<Vector3> posList = new();
+                foreach (Transform e in floor == 1 ? itemPoints11 : itemPoints21) posList.Add(e.position);
+                foreach (Transform e in floor == 1 ? itemPoints12 : itemPoints22) posList.Add(e.position);
+                foreach (Transform e in floor == 1 ? itemPoints13 : itemPoints23) posList.Add(e.position);
+                foreach (Transform e in floor == 1 ? itemPoints14 : itemPoints24) posList.Add(e.position);
+
+                if (!(0 < num && num < posList.Count)) return null;
+
+                Vector3[] returnPosArray = new Vector3[num];
+                for (int i = 0; i < num; i++)
+                {
+                    int index = UnityEngine.Random.Range(0, posList.Count);
+                    returnPosArray[i] = posList[index];
+                    posList.RemoveAt(index);
+                }
+
+                return Array.AsReadOnly(returnPosArray);
+            }
+            else
+            {
+                if (floor is 1)
+                {
+                    Vector3[] returnPosArray = new Vector3[2];
+                    returnPosArray[0] = itemPoints11[0].position;
+                    returnPosArray[1] = itemPoints13[0].position;
+                    return Array.AsReadOnly(returnPosArray);
+                }
+                else if (floor is 2)
+                {
+                    Vector3[] returnPosArray = new Vector3[2];
+                    returnPosArray[0] = itemPoints21[0].position;
+                    returnPosArray[1] = itemPoints23[0].position;
+                    return Array.AsReadOnly(returnPosArray);
+                }
+                else return null;
+            }
         }
     }
 
