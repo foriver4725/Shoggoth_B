@@ -10,6 +10,7 @@ using UnityEngine.Rendering.Universal;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Light2D light2D;
+    public Light2D Light2D => light2D;
 
     public HPManager hpManager; // HP管理スクリプト
     [SerializeField] private AudioSource damagedAS;
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (GameObject e in GameManager.Instance.Enemys)
         {
-            if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) continue;
+            if (GameManager.Instance.EventState == EventState.End) continue;
             if (GameManager.Instance.CurrentHP <= 0) continue;
             if (SqrDistance2D(transform.position, e.transform.position) > sqrPlayerDamageRange) continue;
             return true;

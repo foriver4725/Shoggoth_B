@@ -31,7 +31,7 @@ namespace MainGame
         void Update()
         {
             // �N���A�܂��̓Q�[���I�[�o�[�Ȃ瓮���Ȃ�
-            if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
+            if (GameManager.Instance.EventState == EventState.End) return;
 
             InputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
 
@@ -78,7 +78,8 @@ namespace MainGame
             Vector3 toPos = fromPos + dir;
 
             // path�̏����������Ȃ��̂ŁA�ړI�n��path�łȂ�������ړ��̏������s��Ȃ��B
-            if (!GameManager.Instance.PathPositions.Contains(new Vector2Int((int)toPos.x, (int)toPos.y)))
+            Vector2Int toPosInt = new((int)toPos.x, (int)toPos.y);
+            if (!GameManager.Instance.PathPositions.Contains(toPosInt) || !GameManager.Instance.FencePoints.IsPath(toPosInt))
             {
                 isStepEnded = true;
                 yield break;

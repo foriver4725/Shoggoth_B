@@ -45,19 +45,16 @@ namespace MainGame
         void Update()
         {
             // クリアまたはゲームオーバーなら動かない
-            if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
+            if (GameManager.Instance.EventState == EventState.End) return;
 
             // 1Fのショゴスは、アイテムが揃ってかつプレイヤーが1Fにいる間、常に発覚状態となる。
-            if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
+            if (GameManager.Instance.EventState == EventState.LastShoggoth && _floor == FLOOR.F1)
             {
-                if (GameManager.Instance.Player.transform.position.x < 75 && GameManager.Instance.Player.transform.position.y < 75)
-                {
-                    IsChasing = true;
-                }
-                else
-                {
-                    IsChasing = false;
-                }
+                IsChasing = true;
+            }
+            else if (GameManager.Instance.EventState == EventState.ShoggothRaise && _floor != FLOOR.F1)
+            {
+                IsChasing = false;
             }
             // プレイヤーに近づいたら追跡モードになる。
             else if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)

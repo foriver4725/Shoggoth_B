@@ -40,6 +40,9 @@ namespace SO
         public int VisibilityRange => difficulty[Difficulty.Type.ToInt()].VisibilityRange;
         public float StaminaRecover => difficulty[Difficulty.Type.ToInt()].StaminaRecover;
         public bool IsItemRandom => difficulty[Difficulty.Type.ToInt()].IsItemRandom;
+
+        public int VisibilityRangeOnBreakerDown => difficulty[
+            Difficulty.Type == DifficultyType.Nightmare ? Difficulty.Type.ToInt() : Difficulty.Type.ToInt() + 1].VisibilityRange;
     }
 
     [Serializable]
