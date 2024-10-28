@@ -95,13 +95,13 @@ namespace Scene
 
         private void UpdateOnTitleImage()
         {
-            if (InputGetter.Instance.System_IsCredit)
+            if (isClickEnabled && InputGetter.Instance.System_IsCredit)
             {
                 OnClick();
                 state = State.SceneChanging;
                 AfterClick(() => SceneManager.LoadScene(SO_SceneName.Entity.Credit), destroyCancellationToken).Forget();
             }
-            else if (InputGetter.Instance.System_IsCancel)
+            else if (isClickEnabled && InputGetter.Instance.System_IsCancel)
             {
                 OnClick();
                 state = State.SceneChanging;
@@ -114,7 +114,7 @@ namespace Scene
 #endif
                 }, destroyCancellationToken).Forget();
             }
-            else if (InputGetter.Instance.System_IsSubmit)
+            else if (isClickEnabled && InputGetter.Instance.System_IsSubmit)
             {
                 OnClick();
                 state = State.SceneChanging;
@@ -131,7 +131,7 @@ namespace Scene
             if (InputGetter.Instance.MainGame_IsUp) difficultyIndex.Value--;
             else if (InputGetter.Instance.MainGame_IsDown) difficultyIndex.Value++;
 
-            if (InputGetter.Instance.System_IsSubmit)
+            if (isClickEnabled && InputGetter.Instance.System_IsSubmit)
             {
                 OnClick();
                 state = State.SceneChanging;
@@ -158,14 +158,23 @@ namespace Scene
         private void ShowOpeningVideo()
         {
             VideoPlayer vp = openingVideo.GetComponent<VideoPlayer>();
-            vp.loopPointReached += _ => LoadMainScene(destroyCancellationToken).Forget();
+            VideoPlayer.EventHandler f = _ => LoadMainScene(destroyCancellationToken).Forget();
+            vp.loopPointReached += f;
             audioSources.StopBGM();
             openingVideo.SetActive(true);
+            MovieSkip(() => vp.loopPointReached -= f, destroyCancellationToken).Forget();
         }
 
-        private async UniTask LoadMainScene(CancellationToken ct)
+        private async UniTaskVoid LoadMainScene(CancellationToken ct)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: ct);
+            SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
+        }
+
+        private async UniTaskVoid MovieSkip(Action onSkip, CancellationToken ct)
+        {
+            await UniTask.WaitUntil(() => isClickEnabled && InputGetter.Instance.System_IsCancel);
+            onSkip();
             SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
         }
     }
