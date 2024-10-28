@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        light2D.intensity = SO_DifficultySettings.Entity.VisibilityRange;
+        light2D.pointLightOuterRadius = SO_DifficultySettings.Entity.VisibilityRange;
     }
 
     private void Update()
