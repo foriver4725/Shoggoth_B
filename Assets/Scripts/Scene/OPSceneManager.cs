@@ -6,12 +6,16 @@ using IA;
 using UnityEngine.UI;
 using MainGame;
 using Ex;
+using Cysharp.Threading.Tasks;
+using System.Threading;
+using UnityEngine.Video;
 
 namespace Scene
 {
     public class OPSceneManager : MonoBehaviour
     {
         [SerializeField] private GameObject difficultySelectUI;
+        [SerializeField] private GameObject openingVideo;
 
         [Serializable]
         private sealed class DifficultyPanel
@@ -105,13 +109,26 @@ namespace Scene
                     3 => DifficultyType.Nightmare,
                     _ => DifficultyType.Easy
                 };
-                SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
+                ShowOpeningVideo();
             }
 
             difficultyPanel.EasyColor = difficultyIndex.Value == 0 ? Color.yellow : Color.white;
             difficultyPanel.NormalColor = difficultyIndex.Value == 1 ? Color.yellow : Color.white;
             difficultyPanel.HardColor = difficultyIndex.Value == 2 ? Color.yellow : Color.white;
             difficultyPanel.NightmareColor = difficultyIndex.Value == 3 ? Color.yellow : Color.white;
+        }
+
+        private void ShowOpeningVideo()
+        {
+            VideoPlayer vp = openingVideo.GetComponent<VideoPlayer>();
+            vp.loopPointReached += _ => LoadMainScene(destroyCancellationToken).Forget();
+            openingVideo.SetActive(true);
+        }
+
+        private async UniTask LoadMainScene(CancellationToken ct)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: ct);
+            SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
         }
     }
 }
