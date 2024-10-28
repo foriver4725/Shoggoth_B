@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace IA
 {
     public class InputGetter : MonoBehaviour
     {
-        #region ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŠÇ—AƒR[ƒ‹ƒoƒbƒN‚Æ‚ÌƒŠƒ“ƒNAstatic‚©‚ÂƒVƒ“ƒOƒ‹ƒgƒ“‚É‚·‚é
+        #region ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ç®¡ç†ã€ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã¨ã®ãƒªãƒ³ã‚¯ã€staticã‹ã¤ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã«ã™ã‚‹
         IA _inputs;
 
         public static InputGetter Instance { get; set; } = null;
@@ -44,7 +44,7 @@ namespace IA
         }
         #endregion
 
-        #region •Ï”éŒ¾
+        #region å¤‰æ•°å®£è¨€
         public Vector2 MainGame_ValueMove { get; private set; } = Vector2.zero;
         public bool MainGame_IsDash { get; private set; } = false;
         public bool MainGame_IsPause { get; private set; } = false;
@@ -56,7 +56,7 @@ namespace IA
         public bool System_IsCredit { get; set; } = false;
         #endregion
 
-        #regionyLateUpdatez–ˆƒtƒŒ[ƒ€‚ÌÅŒã‚ÅAƒtƒ‰ƒO‚ğ‰Šú‰»‚·‚é
+        #regionã€LateUpdateã€‘æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®æœ€å¾Œã§ã€ãƒ•ãƒ©ã‚°ã‚’åˆæœŸåŒ–ã™ã‚‹
         void LateUpdate()
         {
             if (MainGame_IsPause) MainGame_IsPause = false;
@@ -69,10 +69,10 @@ namespace IA
         }
         #endregion
 
-        #region ƒR[ƒ‹ƒoƒbƒN‚Æ‚ÌƒŠƒ“ƒN‚ÌÚ×
+        #region ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã¨ã®ãƒªãƒ³ã‚¯ã®è©³ç´°
         void Link(bool isLink)
         {
-            // ƒCƒ“ƒXƒ^ƒ“ƒX–¼.Map–¼.Action–¼.ƒR[ƒ‹ƒoƒbƒN–¼
+            // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å.Mapå.Actionå.ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯å
             if (isLink)
             {
                 _inputs.MainGame.Move.started += MainGame_ReadMove;
@@ -106,7 +106,7 @@ namespace IA
         }
         #endregion
 
-        #region ˆ—‚ÌÚ×
+        #region å‡¦ç†ã®è©³ç´°
         void MainGame_ReadMove(InputAction.CallbackContext context) { MainGame_ValueMove = context.ReadValue<Vector2>(); }
         void MainGame_OnDashDown(InputAction.CallbackContext context) { MainGame_IsDash = true; }
         void MainGame_OnDashUp(InputAction.CallbackContext context) { MainGame_IsDash = false; }

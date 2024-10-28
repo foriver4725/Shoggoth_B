@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,22 +7,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/GameState", fileName = "SO_GameState")]
     public class SO_GameState : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_GameState";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_GameState _entity = null;
         public static SO_GameState Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_GameState>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -34,9 +34,9 @@ namespace SO
         }
         #endregion
 
-        [Header("‰ğ‘œ“x(—áF1920*1080)")] public Vector2Int Resolution;
-        [Header("ƒtƒ‹ƒXƒNƒŠ[ƒ“‚É‚·‚é")] public bool IsFullScreen;
-        [Header("Vsync‚ğƒIƒ“‚É‚·‚é")] public bool IsVsyncOn;
-        [Header("(Vsync‚ªƒIƒt‚Ì‚Ì‚İ)ƒ^[ƒQƒbƒgƒtƒŒ[ƒ€ƒŒ[ƒg")] public int TargetFrameRate;
+        [Header("è§£åƒåº¦(ä¾‹ï¼š1920*1080)")] public Vector2Int Resolution;
+        [Header("ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã«ã™ã‚‹")] public bool IsFullScreen;
+        [Header("Vsyncã‚’ã‚ªãƒ³ã«ã™ã‚‹")] public bool IsVsyncOn;
+        [Header("(VsyncãŒã‚ªãƒ•ã®æ™‚ã®ã¿)ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ")] public int TargetFrameRate;
     }
 }

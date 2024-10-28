@@ -1,21 +1,21 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
 
 public class TextFadeIn : MonoBehaviour
 {
-    public TextMeshProUGUI gameOverText; // ƒtƒF[ƒhƒCƒ“‚³‚¹‚éTextƒRƒ“ƒ|[ƒlƒ“ƒg
-    public float fadeDuration = 2.0f; // ƒtƒF[ƒhƒCƒ“‚É‚©‚¯‚éŠÔ
+    public TextMeshProUGUI gameOverText; // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã•ã›ã‚‹Textã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    public float fadeDuration = 2.0f; // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã«ã‹ã‘ã‚‹æ™‚é–“
 
     private void Start()
     {
-        // ‰Šúó‘Ô‚ÅƒeƒLƒXƒg‚Ì“§–¾“x‚ğ0‚Éİ’è
+        // åˆæœŸçŠ¶æ…‹ã§ãƒ†ã‚­ã‚¹ãƒˆã®é€æ˜åº¦ã‚’0ã«è¨­å®š
         Color textColor = gameOverText.color;
         textColor.a = 0;
         gameOverText.color = textColor;
 
-        // ƒtƒF[ƒhƒCƒ“‚ğŠJn
+        // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã‚’é–‹å§‹
         StartCoroutine(FadeIn());
     }
 
@@ -28,7 +28,7 @@ public class TextFadeIn : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / fadeDuration);
 
-            // ƒeƒLƒXƒg‚Ì“§–¾“x‚ğ•ÏX
+            // ãƒ†ã‚­ã‚¹ãƒˆã®é€æ˜åº¦ã‚’å¤‰æ›´
             Color textColor = gameOverText.color;
             textColor.a = alpha;
             gameOverText.color = textColor;

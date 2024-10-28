@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -8,22 +8,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/General", fileName = "SO_General")]
     public class SO_General : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_General";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_General _entity = null;
         public static SO_General Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_General>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -35,10 +35,10 @@ namespace SO
         }
         #endregion
 
-        [Header("ƒ{ƒ^ƒ“‚Ì”½‰ŠÔŠu[s]")] public float ClickDur;
-        [Header("ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½Œã‚Ì‘Ò‹@•b”[s]")] public float AfterClickDur;
-        [Header("ƒCƒ“ƒ^ƒ‰ƒNƒg‚Ì”½‰ŠÔŠu")] public float InteractDur;
-        [Header("ƒƒO‚ğÁ‚·‚Ü‚Å‚ÌŠÔ")] public float LogFadeDur;
-        [Header("ƒtƒF[ƒhƒAƒEƒg/ƒzƒƒCƒgƒAƒEƒg ‚É‚©‚¯‚éŠÔ[s]")] public float FadeWhiteDur;
+        [Header("ãƒœã‚¿ãƒ³ã®åå¿œé–“éš”[s]")] public float ClickDur;
+        [Header("ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå¾Œã®å¾…æ©Ÿç§’æ•°[s]")] public float AfterClickDur;
+        [Header("ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã®åå¿œé–“éš”")] public float InteractDur;
+        [Header("ãƒ­ã‚°ã‚’æ¶ˆã™ã¾ã§ã®æ™‚é–“")] public float LogFadeDur;
+        [Header("ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ/ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆ ã«ã‹ã‘ã‚‹æ™‚é–“[s]")] public float FadeWhiteDur;
     }
 }

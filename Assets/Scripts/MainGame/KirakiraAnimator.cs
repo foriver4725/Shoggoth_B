@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -7,9 +7,9 @@ namespace MainGame
 {
     public class KirakiraAnimator : MonoBehaviour
     {
-        [SerializeField, Header("‚«‚ç‚«‚ç‚ÌƒXƒvƒ‰ƒCƒg(Å‰‚Ì—v‘f‚ª‰Šú)")] private Sprite[] kirakiraSprites;
-        [SerializeField, Header("‚«‚ç‚«‚ç‚ÌImageƒRƒ“ƒ|[ƒlƒ“ƒg")] private SpriteRenderer[] kirakiraComponents;
-        [SerializeField, Range(0.1f, 5.0f), Header("ƒXƒvƒ‰ƒCƒg‘JˆÚŠÔŠu(•b)")] private float interval;
+        [SerializeField, Header("ãã‚‰ãã‚‰ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ(æœ€åˆã®è¦ç´ ãŒåˆæœŸ)")] private Sprite[] kirakiraSprites;
+        [SerializeField, Header("ãã‚‰ãã‚‰ã®Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ")] private SpriteRenderer[] kirakiraComponents;
+        [SerializeField, Range(0.1f, 5.0f), Header("ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆé·ç§»é–“éš”(ç§’)")] private float interval;
 
         private void Start()
         {

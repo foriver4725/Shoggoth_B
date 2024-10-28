@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using Ex;
 using MainGame;
 using SO;
@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public HPManager hpManager; // HPŠÇ—ƒXƒNƒŠƒvƒg
+    public HPManager hpManager; // HPç®¡ç†ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
     [SerializeField] private AudioSource damagedAS;
 
     private readonly DamageFlag elevatorFlag = new();
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// “G‚Æ‚Ô‚Â‚©‚Á‚½‚©•Ô‚·
+    /// æ•µã¨ã¶ã¤ã‹ã£ãŸã‹è¿”ã™
     /// </summary>
     private bool IsHit()
     {
@@ -65,8 +65,8 @@ public sealed class DamageFlag : IDisposable
     public void Dispose() => ResetToken();
 
     /// <summary>
-    /// ƒtƒ‰ƒO‚ğfalse‚É‚µA–³“GŠÔ‚ÌƒJƒEƒ“ƒgŒã‚Étrue‚É–ß‚·
-    /// ŒÄ‚Ño‚·‚½‚Ñ‚ÉƒŠƒZƒbƒgEÄƒJƒEƒ“ƒg
+    /// ãƒ•ãƒ©ã‚°ã‚’falseã«ã—ã€ç„¡æ•µæ™‚é–“ã®ã‚«ã‚¦ãƒ³ãƒˆå¾Œã«trueã«æˆ»ã™
+    /// å‘¼ã³å‡ºã™ãŸã³ã«ãƒªã‚»ãƒƒãƒˆãƒ»å†ã‚«ã‚¦ãƒ³ãƒˆ
     /// </summary>
     public void CountInvincible()
     {

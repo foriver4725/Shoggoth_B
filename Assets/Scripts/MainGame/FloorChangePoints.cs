@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 namespace MainGame
@@ -6,11 +6,11 @@ namespace MainGame
     [Serializable]
     public sealed class FloorChangePoints
     {
-        [SerializeField, Tooltip("ŠK‚ğ•Ï‚¦‚éƒCƒ“ƒ^ƒ‰ƒNƒgƒ|ƒCƒ“ƒg")]
+        [SerializeField, Tooltip("éšã‚’å¤‰ãˆã‚‹ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆãƒã‚¤ãƒ³ãƒˆ")]
         private FloorChangePoint[] floorChangePoints;
 
         /// <summary>
-        /// ƒCƒ“ƒ^ƒ‰ƒNƒg‰Â”\‚È‚çtoPos‚ÉˆÚ“®æ‚ğ‘ã“ü‚·‚é
+        /// ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆå¯èƒ½ãªã‚‰toPosã«ç§»å‹•å…ˆã‚’ä»£å…¥ã™ã‚‹
         /// </summary>
         public bool InteractCheck(PlayerMove playerMove, out Vector3 toPos)
         {
@@ -30,11 +30,11 @@ namespace MainGame
     [Serializable]
     public sealed class FloorChangePoint
     {
-        [SerializeField, Tooltip("ƒCƒ“ƒ^ƒ‰ƒNƒg’n“_")]
+        [SerializeField, Tooltip("ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆåœ°ç‚¹")]
         private Transform fromPos;
         public Transform FromPos => fromPos;
 
-        [SerializeField, Tooltip("ˆÚ“®æ")]
+        [SerializeField, Tooltip("ç§»å‹•å…ˆ")]
         private Transform toPos;
         public Transform ToPos => toPos;
     }

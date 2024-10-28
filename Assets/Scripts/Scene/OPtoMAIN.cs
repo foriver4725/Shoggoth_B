@@ -1,4 +1,4 @@
-using SO;
+ï»¿using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,10 +44,10 @@ namespace Scene
             _titleBGM.Raise(SO_Sound.Entity.TitleBGM, SType.BGM);
             SceneChange(_ct).Forget();
 
-            // ‚·‚×‚Ä‚Ìƒ{ƒ^ƒ“‚ÉƒNƒŠƒbƒNƒCƒxƒ“ƒg‚ğ“o˜^
+            // ã™ã¹ã¦ã®ãƒœã‚¿ãƒ³ã«ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™»éŒ²
             foreach (Button button in buttons)
             {
-                // ƒ‰ƒ€ƒ_®‚ğg‚Á‚ÄƒNƒŠƒbƒN‚³‚ê‚½ƒ{ƒ^ƒ“‚ğˆø”‚Æ‚µ‚Ä“n‚·
+                // ãƒ©ãƒ ãƒ€å¼ã‚’ä½¿ã£ã¦ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸãƒœã‚¿ãƒ³ã‚’å¼•æ•°ã¨ã—ã¦æ¸¡ã™
                 button.onClick.AddListener(() => OnButtonClick(button));
             }
         }
@@ -65,10 +65,10 @@ namespace Scene
         }
 
 
-        // ƒ{ƒ^ƒ“‚ªƒNƒŠƒbƒN‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éƒƒ\ƒbƒh
+        // ãƒœã‚¿ãƒ³ãŒã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
         void OnButtonClick(Button clickedButton)
         {
-            // ƒNƒŠƒbƒN‚³‚ê‚½ƒ{ƒ^ƒ“‚Ì–¼‘O‚ğæ“¾
+            // ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸãƒœã‚¿ãƒ³ã®åå‰ã‚’å–å¾—
             string buttonName = clickedButton.name;
             if (buttonName == "Easy")
             {

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,20 +7,20 @@ namespace MainGame
     [Serializable]
     public sealed class ItemOutlineTrigger
     {
-        [SerializeField, Tooltip("0”Ô–Ú‚ÌƒAƒCƒeƒ€")]
+        [SerializeField, Tooltip("0ç•ªç›®ã®ã‚¢ã‚¤ãƒ†ãƒ ")]
         private Image itemImage0;
 
-        [SerializeField, Tooltip("1”Ô–Ú‚ÌƒAƒCƒeƒ€")]
+        [SerializeField, Tooltip("1ç•ªç›®ã®ã‚¢ã‚¤ãƒ†ãƒ ")]
         private Image itemImage1;
 
-        [SerializeField, Tooltip("2”Ô–Ú‚ÌƒAƒCƒeƒ€")]
+        [SerializeField, Tooltip("2ç•ªç›®ã®ã‚¢ã‚¤ãƒ†ãƒ ")]
         private Image itemImage2;
 
-        [SerializeField, Tooltip("3”Ô–Ú‚ÌƒAƒCƒeƒ€")]
+        [SerializeField, Tooltip("3ç•ªç›®ã®ã‚¢ã‚¤ãƒ†ãƒ ")]
         private Image itemImage3;
 
         /// <summary>
-        /// 0‚ª1FA1‚ªB1FA2‚ªB2F
+        /// 0ãŒ1Fã€1ãŒB1Fã€2ãŒB2F
         /// </summary>
         public void SetActivation(int floor)
         {

@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using IA;
 using System.Threading;
 using TMPro;
@@ -10,22 +10,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/UIConsoleText", fileName = "SO_UIConsoleText")]
     public class SO_UIConsoleText : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_UIConsoleText";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_UIConsoleText _entity = null;
         public static SO_UIConsoleText Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_UIConsoleText>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -37,9 +37,9 @@ namespace SO
         }
         #endregion
 
-        [Header("‘Ö‚ÉŒü‚©‚¤‚±‚Æ‚ğ‚ğ¦´‚·‚éƒƒO"), TextArea(1, 1000)] public string ShowDirectionLog;
-        [Header("’Eo•û–@‚ğ¦´‚·‚éƒƒO"), TextArea(1, 1000)] public string EscapeTeachLog;
-        [Header("ƒAƒCƒeƒ€‚ğ‘S‚Ä“üè‚µ‚½ŒãA\n’Eo‚·‚éêŠ‚ğ¦´‚·‚éƒƒO"), TextArea(1, 1000)] public string ItemCompletedLog;
+        [Header("æ›¸æ–ã«å‘ã‹ã†ã“ã¨ã‚’ã‚’ç¤ºå”†ã™ã‚‹ãƒ­ã‚°"), TextArea(1, 1000)] public string ShowDirectionLog;
+        [Header("è„±å‡ºæ–¹æ³•ã‚’ç¤ºå”†ã™ã‚‹ãƒ­ã‚°"), TextArea(1, 1000)] public string EscapeTeachLog;
+        [Header("ã‚¢ã‚¤ãƒ†ãƒ ã‚’å…¨ã¦å…¥æ‰‹ã—ãŸå¾Œã€\nè„±å‡ºã™ã‚‹å ´æ‰€ã‚’ç¤ºå”†ã™ã‚‹ãƒ­ã‚°"), TextArea(1, 1000)] public string ItemCompletedLog;
 
         public async UniTask Show(Image textBack, TextMeshProUGUI text, string logMessage, CancellationToken ct)
         {
