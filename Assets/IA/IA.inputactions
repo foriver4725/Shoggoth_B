@@ -47,6 +47,17 @@
                 },
                 {
                     "name": "",
+                    "id": "fa90a155-50a4-4262-bebd-1ee12c6daed5",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "465c17c7-935a-4602-b499-282e08421fa4",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -69,12 +80,34 @@
                 },
                 {
                     "name": "",
+                    "id": "eef440ad-8a25-4f28-81d3-395d7c871168",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5d824337-5196-4dfe-8ed7-d0ea1bc34aaa",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af1d4393-3130-418d-a421-a1e38f570819",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Credit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
