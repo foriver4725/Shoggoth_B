@@ -5,6 +5,7 @@ using System;
 using IA;
 using UnityEngine.UI;
 using MainGame;
+using Ex;
 
 namespace Scene
 {
@@ -29,6 +30,17 @@ namespace Scene
         }
         [SerializeField] private DifficultyPanel difficultyPanel;
 
+        [Serializable]
+        private sealed class AudioSources
+        {
+            [SerializeField] private AudioSource bgmAS;
+            public void PlayBGM() => bgmAS.Raise(SO_Sound.Entity.TitleBGM, SType.BGM);
+
+            [SerializeField] private AudioSource clickAS;
+            public void PlayClickSE() => clickAS.Raise(SO_Sound.Entity.ClickSE, SType.SE);
+        }
+        [SerializeField] private AudioSources audioSources;
+
         private enum State
         {
             TitleImage,
@@ -37,7 +49,7 @@ namespace Scene
         }
         private State state = State.TitleImage;
 
-        private LoopedInt dificultyIndex = new(4);
+        private LoopedInt difficultyIndex = new(4);
 
         private void Update()
         {
@@ -79,19 +91,27 @@ namespace Scene
 
         private void UpdateOnDifficultySelect()
         {
-            if (InputGetter.Instance.MainGame_IsUp) dificultyIndex.Value--;
-            else if (InputGetter.Instance.MainGame_IsDown) dificultyIndex.Value++;
+            if (InputGetter.Instance.MainGame_IsUp) difficultyIndex.Value--;
+            else if (InputGetter.Instance.MainGame_IsDown) difficultyIndex.Value++;
 
             if (InputGetter.Instance.System_IsSubmit)
             {
                 state = State.SceneChanging;
+                Difficulty.Type = difficultyIndex.Value switch
+                {
+                    0 => DifficultyType.Easy,
+                    1 => DifficultyType.Normal,
+                    2 => DifficultyType.Hard,
+                    3 => DifficultyType.Nightmare,
+                    _ => DifficultyType.Easy
+                };
                 SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
             }
 
-            difficultyPanel.EasyColor = dificultyIndex.Value == 0 ? Color.yellow : Color.white;
-            difficultyPanel.NormalColor = dificultyIndex.Value == 1 ? Color.yellow : Color.white;
-            difficultyPanel.HardColor = dificultyIndex.Value == 2 ? Color.yellow : Color.white;
-            difficultyPanel.NightmareColor = dificultyIndex.Value == 3 ? Color.yellow : Color.white;
+            difficultyPanel.EasyColor = difficultyIndex.Value == 0 ? Color.yellow : Color.white;
+            difficultyPanel.NormalColor = difficultyIndex.Value == 1 ? Color.yellow : Color.white;
+            difficultyPanel.HardColor = difficultyIndex.Value == 2 ? Color.yellow : Color.white;
+            difficultyPanel.NightmareColor = difficultyIndex.Value == 3 ? Color.yellow : Color.white;
         }
     }
 }
