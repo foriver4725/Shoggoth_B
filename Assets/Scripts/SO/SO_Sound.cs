@@ -51,5 +51,8 @@ namespace SO
         [Header("鍵のかかったドアに対してインタラクトする")] public AudioClip LockedDoorSE;
         [Header("ポーションを使う")] public AudioClip UsePotionSE;
         [Header("クリックする")] public AudioClip ClickSE;
+        [Header("1Fのエレベーター")] public AudioClip Elevator1FSE;
+        [Header("B1Fのエレベーター")] public AudioClip ElevatorB1FSE;
+        [Header("B2Fのエレベーター")] public AudioClip ElevatorB2FSE;
     }
 }

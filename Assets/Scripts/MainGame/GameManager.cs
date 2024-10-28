@@ -109,6 +109,9 @@ namespace MainGame
         [SerializeField] AudioSource lockedDoorSE;
         [SerializeField] AudioSource potionSE;
         [SerializeField] AudioSource chaseBGM;
+        [SerializeField] AudioSource elevator1FSE;
+        [SerializeField] AudioSource elevatorB1FSE;
+        [SerializeField] AudioSource elevatorB2FSE;
 
         private CancellationToken ct;
 
@@ -238,7 +241,7 @@ namespace MainGame
             Vector3 pos = PlayerMove.transform.position;
             DIR dir = PlayerMove.LookingDir;
 
-            if (floorChangePoints.InteractCheck(PlayerMove, out Vector3 v))
+            if (floorChangePoints.InteractCheck(PlayerMove, out Vector3 v, out bool isElevator))
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
@@ -257,6 +260,14 @@ namespace MainGame
                 PlayerMove.transform.position = v.SetZ(-1);
                 itemOutlineTrigger.SetActivation(v.x >= 100 ? 1 : v.y >= 100 ? 2 : 0);
                 playerController.OnInteractedElevator();
+
+                if (isElevator is true)
+                {
+                    var so = SO_Sound.Entity;
+                    AudioSource source = v.x >= 100 ? elevatorB1FSE : v.y >= 100 ? elevatorB2FSE : elevator1FSE;
+                    AudioClip clip = v.x >= 100 ? so.ElevatorB1FSE : v.y >= 100 ? so.ElevatorB2FSE : so.Elevator1FSE;
+                    source.Raise(clip, SType.SE);
+                }
             }
             else if (CHECK_POSITIONS.Any(e => PlayerMove.IsInteractableAgainst(e)))
             {
