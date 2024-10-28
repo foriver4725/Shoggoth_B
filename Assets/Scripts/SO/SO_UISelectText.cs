@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +8,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/UISelectText", fileName = "SO_UISelectText")]
     public class SO_UISelectText : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_UISelectText";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_UISelectText _entity = null;
         public static SO_UISelectText Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_UISelectText>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -35,11 +35,11 @@ namespace SO
         }
         #endregion
 
-        [Header("ƒAƒCƒeƒ€©”Ì‹@")] public List<string> VendingItem;
+        [Header("ã‚¢ã‚¤ãƒ†ãƒ è‡ªè²©æ©Ÿ")] public List<string> VendingItem;
 
-        [Header("–WŠQ©”Ì‹@")] public List<string> VendingArms;
-        [Header("’²‡")] public List<string> Mixture;
-        [Header("ƒZ[ƒu")] public List<string> Save;
+        [Header("å¦¨å®³è‡ªè²©æ©Ÿ")] public List<string> VendingArms;
+        [Header("èª¿åˆ")] public List<string> Mixture;
+        [Header("ã‚»ãƒ¼ãƒ–")] public List<string> Save;
 
     }
 

@@ -1,4 +1,4 @@
-using SO;
+ï»¿using SO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,24 +10,24 @@ namespace MainGame
     {
         private enum FLOOR { F1, BF1, BF2 };
         [SerializeField] private Animator anim;
-        [SerializeField, Header("‚Ç‚ÌŠK‘w‚Ì“G‚©")] private FLOOR _floor;
+        [SerializeField, Header("ã©ã®éšå±¤ã®æ•µã‹")] private FLOOR _floor;
 
         private HashSet<Vector2Int> _stokingPos;
 
-        // “G‚ÌŒü‚«
+        // æ•µã®å‘ã
         DIR lookingDir = DIR.DOWN;
 
-        // ƒvƒŒƒCƒ„[‚ª®”À•W‚Ü‚ÅˆÚ“®Š®—¹‚µ‚Ä‚¢‚é‚©
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ•´æ•°åº§æ¨™ã¾ã§ç§»å‹•å®Œäº†ã—ã¦ã„ã‚‹ã‹
         bool IsStepEnded = true;
 
-        // “G‚ªœpœjƒ|ƒCƒ“ƒgã‚É‚¢‚é‚©itrue‚É‚È‚Á‚½‚çA1‰ñ‚¾‚¯–Ú“IÀ•W‚ğXV‚·‚éBj
+        // æ•µãŒå¾˜å¾Šãƒã‚¤ãƒ³ãƒˆä¸Šã«ã„ã‚‹ã‹ï¼ˆtrueã«ãªã£ãŸã‚‰ã€1å›ã ã‘ç›®çš„åº§æ¨™ã‚’æ›´æ–°ã™ã‚‹ã€‚ï¼‰
         bool isAtStokingPosition = true;
         Vector2Int targetPos = new();
 
-        public bool IsChasing { get; set; } = false; // Œ»İ‚ÌƒtƒŒ[ƒ€‚Å”­Šoó‘Ô‚Å‚ ‚é‚©
-        public bool IsOnChase { get; set; } = false; // ‚±‚ÌƒtƒŒ[ƒ€‚Å”­Šoó‘Ô‚É‚È‚Á‚½‚©
-        public bool IsOffChase { get; set; } = false; // ‚±‚ÌƒtƒŒ[ƒ€‚Å”­Šoó‘Ô‚Å‚È‚­‚È‚Á‚½‚©
-        bool isChasingPre = false; // 1‚Â‘O‚ÌƒtƒŒ[ƒ€‚Å”­Šoó‘Ô‚Å‚ ‚Á‚½‚©
+        public bool IsChasing { get; set; } = false; // ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§ç™ºè¦šçŠ¶æ…‹ã§ã‚ã‚‹ã‹
+        public bool IsOnChase { get; set; } = false; // ã“ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§ç™ºè¦šçŠ¶æ…‹ã«ãªã£ãŸã‹
+        public bool IsOffChase { get; set; } = false; // ã“ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§ç™ºè¦šçŠ¶æ…‹ã§ãªããªã£ãŸã‹
+        bool isChasingPre = false; // 1ã¤å‰ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§ç™ºè¦šçŠ¶æ…‹ã§ã‚ã£ãŸã‹
         public float StopChaseTime { get; set; } = 0;
 
         private void Start()
@@ -44,10 +44,10 @@ namespace MainGame
 
         void Update()
         {
-            // ƒNƒŠƒA‚Ü‚½‚ÍƒQ[ƒ€ƒI[ƒo[‚È‚ç“®‚©‚È‚¢
+            // ã‚¯ãƒªã‚¢ã¾ãŸã¯ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãªã‚‰å‹•ã‹ãªã„
             if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
 
-            // 1F‚ÌƒVƒ‡ƒSƒX‚ÍAƒAƒCƒeƒ€‚ª‘µ‚Á‚Ä‚©‚ÂƒvƒŒƒCƒ„[‚ª1F‚É‚¢‚éŠÔAí‚É”­Šoó‘Ô‚Æ‚È‚éB
+            // 1Fã®ã‚·ãƒ§ã‚´ã‚¹ã¯ã€ã‚¢ã‚¤ãƒ†ãƒ ãŒæƒã£ã¦ã‹ã¤ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒ1Fã«ã„ã‚‹é–“ã€å¸¸ã«ç™ºè¦šçŠ¶æ…‹ã¨ãªã‚‹ã€‚
             if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
             {
                 if (GameManager.Instance.Player.transform.position.x < 75 && GameManager.Instance.Player.transform.position.y < 75)
@@ -59,7 +59,7 @@ namespace MainGame
                     IsChasing = false;
                 }
             }
-            // ƒvƒŒƒCƒ„[‚É‹ß‚Ã‚¢‚½‚ç’ÇÕƒ‚[ƒh‚É‚È‚éB
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«è¿‘ã¥ã„ãŸã‚‰è¿½è·¡ãƒ¢ãƒ¼ãƒ‰ã«ãªã‚‹ã€‚
             else if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
                 IsChasing = true;
@@ -116,16 +116,16 @@ namespace MainGame
                     moveDir = new(_moveDir.x, _moveDir.y);
                 }
 
-                // i“®‚¢‚Ä‚¢‚é‚È‚çjŒü‚¢‚Ä‚¢‚é•ûŒü‚ğ”»’f‚·‚éB
+                // ï¼ˆå‹•ã„ã¦ã„ã‚‹ãªã‚‰ï¼‰å‘ã„ã¦ã„ã‚‹æ–¹å‘ã‚’åˆ¤æ–­ã™ã‚‹ã€‚
                 if (moveDir != Vector2.zero)
                 {
                     lookingDir = moveDir.ToDir();
                 }
 
-                // ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘JˆÚ‚ğ”­‰Î‚³‚¹‚éB
+                // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®é·ç§»ã‚’ç™ºç«ã•ã›ã‚‹ã€‚
                 anim.SetInteger("LookingDirection", (int)lookingDir);
 
-                // •K‚¸Œü‚¢‚Ä‚¢‚é•ûŒü‚ÌŸ‚Ì®”À•W‚Ü‚ÅˆÚ“®‚·‚éB
+                // å¿…ãšå‘ã„ã¦ã„ã‚‹æ–¹å‘ã®æ¬¡ã®æ•´æ•°åº§æ¨™ã¾ã§ç§»å‹•ã™ã‚‹ã€‚
                 if (moveDir != Vector2.zero)
                 {
                     IsStepEnded = false;
@@ -146,7 +146,7 @@ namespace MainGame
             Vector3 fromPos = transform.position;
             Vector3 toPos = fromPos + dir;
 
-            // path‚ÌŠ‚µ‚©“®‚¯‚È‚¢‚Ì‚ÅA–Ú“I’n‚ªpath‚Å‚È‚©‚Á‚½‚çˆÚ“®‚Ìˆ—‚ğs‚í‚È‚¢B
+            // pathã®æ‰€ã—ã‹å‹•ã‘ãªã„ã®ã§ã€ç›®çš„åœ°ãŒpathã§ãªã‹ã£ãŸã‚‰ç§»å‹•ã®å‡¦ç†ã‚’è¡Œã‚ãªã„ã€‚
             if (!GameManager.Instance.PathPositions.Contains(new Vector2Int((int)toPos.x, (int)toPos.y)))
             {
                 IsStepEnded = true;

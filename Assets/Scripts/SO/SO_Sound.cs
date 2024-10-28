@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -8,22 +8,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/Sound", fileName = "SO_Sound")]
     public class SO_Sound : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_Sound";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_Sound _entity = null;
         public static SO_Sound Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_Sound>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -35,21 +35,21 @@ namespace SO
         }
         #endregion
 
-        [Header("Master‚ÌAUdioMixerGroup")] public AudioMixerGroup AMGroupMaster;
-        [Header("BGM‚ÌAUdioMixerGroup")] public AudioMixerGroup AMGroupBGM;
-        [Header("SE‚ÌAUdioMixerGroup")] public AudioMixerGroup AMGroupSE;
+        [Header("Masterã®AUdioMixerGroup")] public AudioMixerGroup AMGroupMaster;
+        [Header("BGMã®AUdioMixerGroup")] public AudioMixerGroup AMGroupBGM;
+        [Header("SEã®AUdioMixerGroup")] public AudioMixerGroup AMGroupSE;
         [Space(25)]
         [Header("BGM")]
-        [Header("ƒ^ƒCƒgƒ‹")] public AudioClip TitleBGM;
-        [Header("ƒ`ƒFƒCƒX’†")] public AudioClip ChaseBGM;
-        [Header("ƒQ[ƒ€“àƒm[ƒ}ƒ‹")] public AudioClip OnGameNormalBGM;
-        [Header("•à‚­‘«‰¹")] public AudioClip FootstepBGM;
-        [Header("‘–‚é‘«‰¹")] public AudioClip DashFootstepBGM;
+        [Header("ã‚¿ã‚¤ãƒˆãƒ«")] public AudioClip TitleBGM;
+        [Header("ãƒã‚§ã‚¤ã‚¹ä¸­")] public AudioClip ChaseBGM;
+        [Header("ã‚²ãƒ¼ãƒ å†…ãƒãƒ¼ãƒãƒ«")] public AudioClip OnGameNormalBGM;
+        [Header("æ­©ãè¶³éŸ³")] public AudioClip FootstepBGM;
+        [Header("èµ°ã‚‹è¶³éŸ³")] public AudioClip DashFootstepBGM;
         [Space(25)]
         [Header("SE")]
-        [Header("”íƒ_ƒ[ƒW")] public AudioClip DamageTookSE;
-        [Header("Œ®‚Ì‚©‚©‚Á‚½ƒhƒA‚É‘Î‚µ‚ÄƒCƒ“ƒ^ƒ‰ƒNƒg‚·‚é")] public AudioClip LockedDoorSE;
-        [Header("ƒ|[ƒVƒ‡ƒ“‚ğg‚¤")] public AudioClip UsePotionSE;
-        [Header("ƒNƒŠƒbƒN‚·‚é")] public AudioClip ClickSE;
+        [Header("è¢«ãƒ€ãƒ¡ãƒ¼ã‚¸")] public AudioClip DamageTookSE;
+        [Header("éµã®ã‹ã‹ã£ãŸãƒ‰ã‚¢ã«å¯¾ã—ã¦ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã™ã‚‹")] public AudioClip LockedDoorSE;
+        [Header("ãƒãƒ¼ã‚·ãƒ§ãƒ³ã‚’ä½¿ã†")] public AudioClip UsePotionSE;
+        [Header("ã‚¯ãƒªãƒƒã‚¯ã™ã‚‹")] public AudioClip ClickSE;
     }
 }

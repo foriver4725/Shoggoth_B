@@ -1,4 +1,4 @@
-using MainGame;
+ï»¿using MainGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +12,10 @@ namespace MainGame
     {
 
 #if false
-        // ƒAƒCƒeƒ€‰æ‘œ‚ÌUI
+        // ã‚¢ã‚¤ãƒ†ãƒ ç”»åƒã®UI
         [SerializeField] private Image _itemImage;
 
-        // Œ»İè‚É‚Á‚Ä‚¢‚éƒAƒCƒeƒ€‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†(0~ƒAƒCƒeƒ€”-1 ‚ğƒ‹[ƒv‚·‚é)
+        // ç¾åœ¨æ‰‹ã«æŒã£ã¦ã„ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·(0~ã‚¢ã‚¤ãƒ†ãƒ æ•°-1 ã‚’ãƒ«ãƒ¼ãƒ—ã™ã‚‹)
         private static int _currentIndex = 0;
         public static int CurrentIndex
         {
@@ -39,7 +39,7 @@ namespace MainGame
             }
         }
 
-        public static Sprite Sprite; // ¡•\¦‚·‚é‚×‚«ƒXƒvƒ‰ƒCƒg
+        public static Sprite Sprite; // ä»Šè¡¨ç¤ºã™ã‚‹ã¹ãã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
 
         private void Start()
         {
@@ -53,7 +53,7 @@ namespace MainGame
 
         void Update()
         {
-            // ƒJ[ƒ\ƒ‹‚ğ‰ñ‚·‚ÆƒAƒCƒeƒ€‚ªØ‚è‘Ö‚í‚é
+            // ã‚«ãƒ¼ã‚½ãƒ«ã‚’å›ã™ã¨ã‚¢ã‚¤ãƒ†ãƒ ãŒåˆ‡ã‚Šæ›¿ã‚ã‚‹
             if (InputGetter.Instance.MainGame_ValueScrollItem == -1)
             {
                 CurrentIndex--;
@@ -65,7 +65,7 @@ namespace MainGame
                 Sprite = ItemDatabase.FindItem(CurrentIndex).Sprite;
             }
 
-            // ƒXƒvƒ‰ƒCƒg‚ğ•ÏX
+            // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’å¤‰æ›´
             _itemImage.sprite = Sprite;
         }
 

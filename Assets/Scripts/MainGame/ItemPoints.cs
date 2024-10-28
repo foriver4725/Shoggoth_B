@@ -1,4 +1,4 @@
-using Ex;
+ï»¿using Ex;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,35 +9,35 @@ namespace MainGame
     [Serializable]
     public sealed class ItemPoints
     {
-        [SerializeField, Tooltip("B1F‚Ì1•”‰®–Ú")]
+        [SerializeField, Tooltip("B1Fã®1éƒ¨å±‹ç›®")]
         private Transform[] itemPoints11;
 
-        [SerializeField, Tooltip("B1F‚Ì2•”‰®–Ú")]
+        [SerializeField, Tooltip("B1Fã®2éƒ¨å±‹ç›®")]
         private Transform[] itemPoints12;
 
-        [SerializeField, Tooltip("B1F‚Ì3•”‰®–Ú")]
+        [SerializeField, Tooltip("B1Fã®3éƒ¨å±‹ç›®")]
         private Transform[] itemPoints13;
 
-        [SerializeField, Tooltip("B1F‚Ì4•”‰®–Ú")]
+        [SerializeField, Tooltip("B1Fã®4éƒ¨å±‹ç›®")]
         private Transform[] itemPoints14;
 
-        [SerializeField, Tooltip("B2F‚Ì1•”‰®–Ú")]
+        [SerializeField, Tooltip("B2Fã®1éƒ¨å±‹ç›®")]
         private Transform[] itemPoints21;
 
-        [SerializeField, Tooltip("B2F‚Ì2•”‰®–Ú")]
+        [SerializeField, Tooltip("B2Fã®2éƒ¨å±‹ç›®")]
         private Transform[] itemPoints22;
 
-        [SerializeField, Tooltip("B2F‚Ì3•”‰®–Ú")]
+        [SerializeField, Tooltip("B2Fã®3éƒ¨å±‹ç›®")]
         private Transform[] itemPoints23;
 
-        [SerializeField, Tooltip("B2F‚Ì4•”‰®–Ú")]
+        [SerializeField, Tooltip("B2Fã®4éƒ¨å±‹ç›®")]
         private Transform[] itemPoints24;
 
         /// <summary>
-        /// ˆ—ƒRƒXƒg‚‚ß
+        /// å‡¦ç†ã‚³ã‚¹ãƒˆé«˜ã‚
         /// </summary>
-        /// <param name="floor">B1F‚È‚ç1AB2F‚È‚ç2</param>
-        /// <param name="num">‚¢‚­‚Âæ“¾‚·‚é‚©</param>
+        /// <param name="floor">B1Fãªã‚‰1ã€B2Fãªã‚‰2</param>
+        /// <param name="num">ã„ãã¤å–å¾—ã™ã‚‹ã‹</param>
         public ReadOnlyCollection<Vector3> GetRandomPosition(byte floor, byte num)
         {
             if (floor is not (1 or 2)) return null;

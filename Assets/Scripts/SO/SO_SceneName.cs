@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,22 +7,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/SceneName", fileName = "SO_SceneName")]
     public class SO_SceneName : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_SceneName";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_SceneName _entity = null;
         public static SO_SceneName Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_SceneName>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -34,10 +34,10 @@ namespace SO
         }
         #endregion
 
-        [Header("ƒ^ƒCƒgƒ‹ƒV[ƒ“–¼")] public string Title;
-        [Header("ƒNƒŒƒWƒbƒgƒV[ƒ“–¼")] public string Credit;
-        [Header("ƒƒCƒ“ƒQ[ƒ€‚ÌƒV[ƒ“–¼")] public string MainGame;
-        [Header("ƒQ[ƒ€ƒNƒŠƒA‚ÌƒV[ƒ“–¼")] public string GameClear;
-        [Header("ƒQ[ƒ€ƒI[ƒo[‚ÌƒV[ƒ“–¼")] public string GameOver;
+        [Header("ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³å")] public string Title;
+        [Header("ã‚¯ãƒ¬ã‚¸ãƒƒãƒˆã‚·ãƒ¼ãƒ³å")] public string Credit;
+        [Header("ãƒ¡ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ã®ã‚·ãƒ¼ãƒ³å")] public string MainGame;
+        [Header("ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã®ã‚·ãƒ¼ãƒ³å")] public string GameClear;
+        [Header("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã®ã‚·ãƒ¼ãƒ³å")] public string GameOver;
     }
 }

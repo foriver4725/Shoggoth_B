@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using SO;
 using System;
 using System.Collections;
@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Ex
 {
-    // Œü‚«
+    // å‘ã
     public enum DIR
     {
         DOWN,
@@ -19,7 +19,7 @@ namespace Ex
 
     public static class To
     {
-        // Œü‚«‚ğ’PˆÊƒxƒNƒgƒ‹‚É•ÏŠ·‚·‚éB
+        // å‘ãã‚’å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã«å¤‰æ›ã™ã‚‹ã€‚
         public static Vector3 ToVector3(this DIR dir)
         {
             Vector3 moveDir = dir switch
@@ -34,11 +34,11 @@ namespace Ex
             return moveDir;
         }
 
-        // ’PˆÊƒxƒNƒgƒ‹‚ğŒü‚«‚É•ÏŠ·‚·‚éB
+        // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’å‘ãã«å¤‰æ›ã™ã‚‹ã€‚
         public static DIR ToDir(this Vector2 vec)
         {
-            // Œü‚«‚ğ”»’è‚·‚éÛ‚Ég‚¤2‚Â‚ÌƒxƒNƒgƒ‹B
-            // —^‚¦‚ç‚ê‚½’PˆÊƒxƒNƒgƒ‹‚Æ‚±‚ê‚ç‚Æ‚Ì“àÏ‚Ì³•‰‚Ì‘g‚İ‡‚í‚¹‚É‚æ‚Á‚ÄAŒü‚¢‚Ä‚¢‚é•ûŒü‚ğ”»’f‚·‚éB
+            // å‘ãã‚’åˆ¤å®šã™ã‚‹éš›ã«ä½¿ã†2ã¤ã®ãƒ™ã‚¯ãƒˆãƒ«ã€‚
+            // ä¸ãˆã‚‰ã‚ŒãŸå˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã¨ã“ã‚Œã‚‰ã¨ã®å†…ç©ã®æ­£è² ã®çµ„ã¿åˆã‚ã›ã«ã‚ˆã£ã¦ã€å‘ã„ã¦ã„ã‚‹æ–¹å‘ã‚’åˆ¤æ–­ã™ã‚‹ã€‚
             Vector2 baseVec1 = new(-1, -1);
             Vector2 baseVec2 = new(1, -1);
 
@@ -56,7 +56,7 @@ namespace Ex
             return dir;
         }
 
-        // Vector3‚ğVector2Int‚É•ÏŠ·‚·‚éBz‚Í0‚É‚È‚éB
+        // Vector3ã‚’Vector2Intã«å¤‰æ›ã™ã‚‹ã€‚zã¯0ã«ãªã‚‹ã€‚
         public static Vector2Int ToVec2I(this Vector3 vec)
         {
             int x = (int)vec.x;
@@ -64,13 +64,13 @@ namespace Ex
             return new(x, y);
         }
 
-        // Vector2Int‚ğVector3‚É•ÏŠ·‚·‚éBz‚ğw’è‚Å‚«‚éB
+        // Vector2Intã‚’Vector3ã«å¤‰æ›ã™ã‚‹ã€‚zã‚’æŒ‡å®šã§ãã‚‹ã€‚
         public static Vector3 ToVec3(this Vector2Int vec, float z = 0)
         {
             return new(vec.x, vec.y, z);
         }
 
-        // zÀ•W‚Ì‚İ‚ğ•Ï‰»‚³‚¹‚½ƒxƒNƒgƒ‹‚ğ•Ô‚·
+        // zåº§æ¨™ã®ã¿ã‚’å¤‰åŒ–ã•ã›ãŸãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™
         public static Vector3 SetZ(this Vector3 v, float z) => new(v.x, v.y, z);
     }
 
@@ -113,12 +113,12 @@ namespace Ex
         {
             public static List<Vector2Int> FindPath(Vector2Int start, Vector2Int goal, HashSet<Vector2Int> validPositions)
             {
-                // A*ƒAƒ‹ƒSƒŠƒYƒ€‚Ì‚½‚ß‚ÌƒI[ƒvƒ“ƒŠƒXƒg‚ÆƒNƒ[ƒYƒhƒŠƒXƒg‚ğì¬‚·‚éB
+                // A*ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®ãŸã‚ã®ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã¨ã‚¯ãƒ­ãƒ¼ã‚ºãƒ‰ãƒªã‚¹ãƒˆã‚’ä½œæˆã™ã‚‹ã€‚
                 HashSet<Vector2Int> closedSet = new HashSet<Vector2Int>();
                 PriorityQueue<Vector2Int, float> openSet = new PriorityQueue<Vector2Int, float>();
                 openSet.Enqueue(start, 0);
 
-                // Šeƒm[ƒh‚Ìeƒm[ƒh‚ÆƒRƒXƒg‚ğ’ÇÕ‚·‚é«‘‚ğì¬‚·‚éB
+                // å„ãƒãƒ¼ãƒ‰ã®è¦ªãƒãƒ¼ãƒ‰ã¨ã‚³ã‚¹ãƒˆã‚’è¿½è·¡ã™ã‚‹è¾æ›¸ã‚’ä½œæˆã™ã‚‹ã€‚
                 Dictionary<Vector2Int, Vector2Int> cameFrom = new Dictionary<Vector2Int, Vector2Int>();
                 Dictionary<Vector2Int, float> gScore = new Dictionary<Vector2Int, float>
         {
@@ -147,7 +147,7 @@ namespace Ex
                             continue;
                         }
 
-                        float tentativeGScore = gScore[current] + 1; // ‚·‚×‚Ä‚ÌˆÚ“®ƒRƒXƒg‚Í1‚Æ‰¼’è‚·‚éB
+                        float tentativeGScore = gScore[current] + 1; // ã™ã¹ã¦ã®ç§»å‹•ã‚³ã‚¹ãƒˆã¯1ã¨ä»®å®šã™ã‚‹ã€‚
 
                         if (!gScore.ContainsKey(neighbor))
                         {
@@ -168,7 +168,7 @@ namespace Ex
                     }
                 }
 
-                // Œo˜H‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡A‹ó‚ÌƒŠƒXƒg‚ğ•Ô‚·B
+                // çµŒè·¯ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã€ç©ºã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚
                 return new List<Vector2Int>();
             }
 
@@ -205,7 +205,7 @@ namespace Ex
 
     public static class PlaySound
     {
-        // —^‚¦‚ç‚ê‚½AudioSource‚ğ—p‚¢‚ÄABGM/SE‚ğÄ¶‚·‚é
+        // ä¸ãˆã‚‰ã‚ŒãŸAudioSourceã‚’ç”¨ã„ã¦ã€BGM/SEã‚’å†ç”Ÿã™ã‚‹
         public static void Raise(this AudioSource source, AudioClip clip, bool sType, float volume = 1, float pitch = 1)
         {
             source.volume = volume;
@@ -229,7 +229,7 @@ namespace Ex
         }
     }
 
-    // ƒTƒEƒ“ƒh‚Ìí—Ş(BGM or SE)
+    // ã‚µã‚¦ãƒ³ãƒ‰ã®ç¨®é¡(BGM or SE)
     public static class SType
     {
         public static bool BGM = true;
@@ -238,7 +238,7 @@ namespace Ex
 
     public static class Async
     {
-        // ˆê’èŠÔ‘Ò‚Á‚Ä‚©‚çˆ—‚ğs‚¤
+        // ä¸€å®šæ™‚é–“å¾…ã£ã¦ã‹ã‚‰å‡¦ç†ã‚’è¡Œã†
         public static async UniTask AfterWaited(Action action, float seconds, CancellationToken ct)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(seconds), cancellationToken: ct);
@@ -264,7 +264,7 @@ namespace Ex
             }
         }
 
-        // —v‘f‚Ì‚¢‚¸‚ê‚©‚ªtarget‚ÌAtrue‚ğ•Ô‚·B
+        // è¦ç´ ã®ã„ãšã‚Œã‹ãŒtargetã®æ™‚ã€trueã‚’è¿”ã™ã€‚
         public static bool Any(this IEnumerable<bool> self, bool target)
         {
             foreach (bool e in self)
@@ -278,7 +278,7 @@ namespace Ex
             return false;
         }
 
-        // —v‘f‚ª‘S‚Ätarget‚Ì‚Ì‚İAtrue‚ğ•Ô‚·B
+        // è¦ç´ ãŒå…¨ã¦targetã®æ™‚ã®ã¿ã€trueã‚’è¿”ã™ã€‚
         public static bool All(this IEnumerable<bool> self, bool target)
         {
             foreach (bool e in self)

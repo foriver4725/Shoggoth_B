@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,22 +7,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/Debug", fileName = "SO_Debug")]
     public class SO_Debug : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_Debug";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_Debug _entity = null;
         public static SO_Debug Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_Debug>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -34,8 +34,8 @@ namespace SO
         }
         #endregion
 
-        [Header("–³“GŠÔ‚ğ10000•b‚É‚·‚é")] public bool IsInvincible;
-        [Header("ˆÚ“®‘¬“x‚ğ5”{‚É‚·‚é")] public bool IsExtraSpeed;
-        [Header("ƒXƒ^ƒ~ƒi‚ÌŒ¸­‘¬“x‚ğ0.01”{‚É‚·‚é")] public bool IsInfiniteStamina;
+        [Header("ç„¡æ•µæ™‚é–“ã‚’10000ç§’ã«ã™ã‚‹")] public bool IsInvincible;
+        [Header("ç§»å‹•é€Ÿåº¦ã‚’5å€ã«ã™ã‚‹")] public bool IsExtraSpeed;
+        [Header("ã‚¹ã‚¿ãƒŸãƒŠã®æ¸›å°‘é€Ÿåº¦ã‚’0.01å€ã«ã™ã‚‹")] public bool IsInfiniteStamina;
     }
 }

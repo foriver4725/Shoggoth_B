@@ -1,4 +1,4 @@
-using IA;
+ï»¿using IA;
 using SO;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,13 +14,13 @@ namespace MainGame
 
         void Update()
         {
-            // ƒ_ƒbƒVƒ…‚µ‚Ä‚¢‚é‚È‚ç...
+            // ãƒ€ãƒƒã‚·ãƒ¥ã—ã¦ã„ã‚‹ãªã‚‰...
             if (InputGetter.Instance.MainGame_IsDash && playerMove.InputDir != Vector2.zero)
             {
-                // ƒXƒ^ƒ~ƒiŒ¸­
+                // ã‚¹ã‚¿ãƒŸãƒŠæ¸›å°‘
                 GameManager.Instance.Stamina -= (SO_Debug.Entity.IsInfiniteStamina ? 0.01f : 1) / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
             }
-            // ƒ_ƒbƒVƒ…‚µ‚Ä‚¢‚È‚¢...
+            // ãƒ€ãƒƒã‚·ãƒ¥ã—ã¦ã„ãªã„æ™‚...
             else
             {
                 
@@ -28,11 +28,11 @@ namespace MainGame
 
                 
                  
-                // í‚ÉƒXƒ^ƒ~ƒi‚Í‰ñ•œ‚·‚é
+                // å¸¸ã«ã‚¹ã‚¿ãƒŸãƒŠã¯å›å¾©ã™ã‚‹
                 GameManager.Instance.Stamina += 1 / SO_DifficultySettings.Entity.StaminaRecover * Time.deltaTime;
             }
 
-            // UI‚ğXV
+            // UIã‚’æ›´æ–°
             FrontStamina.fillAmount = GameManager.Instance.Stamina;
         }
     }

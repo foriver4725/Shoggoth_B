@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +8,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/TileSprite", fileName = "SO_TileSprite")]
     public class SO_TileSprite : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_TileSprite";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_TileSprite _entity = null;
         public static SO_TileSprite Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_TileSprite>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -35,11 +35,11 @@ namespace SO
         }
         #endregion
 
-        [Header("°")] public List<TagSprite> Floors;
-        [Header("•Ç")] public List<TagSprite> Walls;
-        [Header("ƒIƒuƒWƒFƒNƒg")] public List<TagSprite> Objects;
-        [Header("ƒ‰ƒ“ƒ_ƒ€”z’u‚·‚éƒIƒuƒWƒFƒNƒg")] public List<TagSprites> RandomObjects;
-        [Header("ƒfƒoƒbƒO—p")] public List<TagSprite> Debugs;
+        [Header("åºŠ")] public List<TagSprite> Floors;
+        [Header("å£")] public List<TagSprite> Walls;
+        [Header("ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")] public List<TagSprite> Objects;
+        [Header("ãƒ©ãƒ³ãƒ€ãƒ é…ç½®ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")] public List<TagSprites> RandomObjects;
+        [Header("ãƒ‡ãƒãƒƒã‚°ç”¨")] public List<TagSprite> Debugs;
     }
 
     [Serializable]

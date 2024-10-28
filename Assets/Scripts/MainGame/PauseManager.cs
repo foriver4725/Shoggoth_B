@@ -1,10 +1,10 @@
-using IA;
+ï»¿using IA;
 using MainGame;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    public GameObject pauseMenu; // ƒ|[ƒYƒƒjƒ…[‚ÌUIƒIƒuƒWƒFƒNƒg
+    public GameObject pauseMenu; // ãƒãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®UIã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
     public bool isPaused = false;
 
@@ -12,13 +12,13 @@ public class PauseManager : MonoBehaviour
     {
         if (pauseMenu != null)
         {
-            pauseMenu.SetActive(false); // ƒV[ƒ“ŠJn‚Éƒ|[ƒYƒƒjƒ…[‚ğ”ñ•\¦‚É‚·‚é
+            pauseMenu.SetActive(false); // ã‚·ãƒ¼ãƒ³é–‹å§‹æ™‚ã«ãƒãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’éè¡¨ç¤ºã«ã™ã‚‹
         }
     }
 
     void Update()
     {
-        // ƒNƒŠƒA‚Ü‚½‚ÍƒQ[ƒ€ƒI[ƒo[‚È‚çƒ|[ƒY‚Å‚«‚È‚¢
+        // ã‚¯ãƒªã‚¢ã¾ãŸã¯ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãªã‚‰ãƒãƒ¼ã‚ºã§ããªã„
         if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
 
         if (InputGetter.Instance.MainGame_IsPause)
@@ -38,9 +38,9 @@ public class PauseManager : MonoBehaviour
     {
         if (pauseMenu != null)
         {
-            pauseMenu.SetActive(true); // ƒ|[ƒYƒƒjƒ…[‚ğ•\¦
+            pauseMenu.SetActive(true); // ãƒãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’è¡¨ç¤º
         }
-        Time.timeScale = 0f; // ƒQ[ƒ€‚ğˆê’â~
+        Time.timeScale = 0f; // ã‚²ãƒ¼ãƒ ã‚’ä¸€æ™‚åœæ­¢
         isPaused = true;
     }
 
@@ -48,9 +48,9 @@ public class PauseManager : MonoBehaviour
     {
         if (pauseMenu != null)
         {
-            pauseMenu.SetActive(false); // ƒ|[ƒYƒƒjƒ…[‚ğ”ñ•\¦
+            pauseMenu.SetActive(false); // ãƒãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’éè¡¨ç¤º
         }
-        Time.timeScale = 1f; // ƒQ[ƒ€‚ğÄŠJ
+        Time.timeScale = 1f; // ã‚²ãƒ¼ãƒ ã‚’å†é–‹
         isPaused = false;
     }
 }

@@ -1,26 +1,26 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace SO
 {
     [CreateAssetMenu(menuName = "SO/Player", fileName = "SO_Player")]
     public class SO_Player : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_Player";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_Player _entity = null;
         public static SO_Player Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_Player>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -32,24 +32,24 @@ namespace SO
         }
         #endregion
 
-        [SerializeField, Header("ƒvƒŒƒCƒ„[‚ÌˆÚ“®ƒXƒs[ƒh [m/s]")] private float playerSpeed;
+        [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰ [m/s]")] private float playerSpeed;
         public float PlayerSpeed => SO_Debug.Entity.IsExtraSpeed ? playerSpeed * 5 : playerSpeed;
-        [SerializeField, Header("ƒvƒŒƒCƒ„[‚ÌˆÚ“®ƒXƒs[ƒhi‘–‚èj [m/s]")] private float playerDashSpeed;
+        [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰ï¼ˆèµ°ã‚Šï¼‰ [m/s]")] private float playerDashSpeed;
         public float PlayerDashSpeed => SO_Debug.Entity.IsExtraSpeed ? playerDashSpeed * 5 : playerDashSpeed;
-        [Header("“G‚ÌˆÚ“®ƒXƒs[ƒh(1F) [m/s]")] public float EnemySpeed1F;
-        [Header("“G‚ÌˆÚ“®ƒXƒs[ƒh(B1F) [m/s]")] public float EnemySpeedB1F;
-        [Header("“G‚ÌˆÚ“®ƒXƒs[ƒh(B2F) [m/s]")] public float EnemySpeedB2F;
-        [Header("ƒvƒŒƒCƒ„[‚Æ“G‚Ì‹——£‚ªA\n‚±‚Ì”’l‚æ‚è¬‚³‚­‚È‚Á‚½‚ç”í’e‚·‚é")] public float PlayerDamageRange;
-        [Header("“G‚ªƒvƒŒƒCƒ„[‚ğ”­Œ©‚·‚é‹——£")] public float EnemyChaseRange;
-        [Header("“G‚ªƒvƒŒƒCƒ„[‚ğŒ©¸‚¤‹——£")] public float EnemyStopChaseRange;
-        [Header("“G‚ªª‚Ì‹——£‚æ‚è‰“‚­‚É‚¢‚é‚Æ‚«AƒvƒŒƒCƒ„[‚ğŒ©¸‚¤‚Ü‚Å‚ÌŠÔ")] public float EnemyStopChaseDuration;
-        [SerializeField, Header("–³“GŠÔ")] private float invincibleTime;
+        [Header("æ•µã®ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰(1F) [m/s]")] public float EnemySpeed1F;
+        [Header("æ•µã®ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰(B1F) [m/s]")] public float EnemySpeedB1F;
+        [Header("æ•µã®ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰(B2F) [m/s]")] public float EnemySpeedB2F;
+        [Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µã®è·é›¢ãŒã€\nã“ã®æ•°å€¤ã‚ˆã‚Šå°ã•ããªã£ãŸã‚‰è¢«å¼¾ã™ã‚‹")] public float PlayerDamageRange;
+        [Header("æ•µãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç™ºè¦‹ã™ã‚‹è·é›¢")] public float EnemyChaseRange;
+        [Header("æ•µãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹å¤±ã†è·é›¢")] public float EnemyStopChaseRange;
+        [Header("æ•µãŒâ†‘ã®è·é›¢ã‚ˆã‚Šé ãã«ã„ã‚‹ã¨ãã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹å¤±ã†ã¾ã§ã®æ™‚é–“")] public float EnemyStopChaseDuration;
+        [SerializeField, Header("ç„¡æ•µæ™‚é–“")] private float invincibleTime;
         public float InvincibleTime => SO_Debug.Entity.IsInvincible ? 10000 : invincibleTime;
 
-        [Header("ƒXƒ^ƒ~ƒi‚Ì‰ñ•œ‘¬“x(‰½•b‚ÅÅ¬‚©‚çÅ‘å‚É‚È‚é‚©)")] public float StaminaIncreaseDur;
-        [Header("ƒXƒ^ƒ~ƒi‚ÌŒ¸­‘¬“x(‰½•b‚ÅÅ‘å‚©‚çÅ¬‚É‚È‚é‚©)")] public float StaminaDecreaseDur;
+        [Header("ã‚¹ã‚¿ãƒŸãƒŠã®å›å¾©é€Ÿåº¦(ä½•ç§’ã§æœ€å°ã‹ã‚‰æœ€å¤§ã«ãªã‚‹ã‹)")] public float StaminaIncreaseDur;
+        [Header("ã‚¹ã‚¿ãƒŸãƒŠã®æ¸›å°‘é€Ÿåº¦(ä½•ç§’ã§æœ€å¤§ã‹ã‚‰æœ€å°ã«ãªã‚‹ã‹)")] public float StaminaDecreaseDur;
 
-        [Header("BGM‚ÌƒvƒŒƒnƒu")] public GameObject bgmOn;
-        [Header("SE‚ÌƒvƒŒƒnƒu")] public GameObject seOn;
+        [Header("BGMã®ãƒ—ãƒ¬ãƒãƒ–")] public GameObject bgmOn;
+        [Header("SEã®ãƒ—ãƒ¬ãƒãƒ–")] public GameObject seOn;
     }
 }

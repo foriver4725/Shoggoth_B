@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 namespace SO
@@ -6,22 +6,22 @@ namespace SO
     [CreateAssetMenu(menuName = "SO/DifficultySettings", fileName = "SO_DifficultySettings")]
     public class SO_DifficultySettings : ScriptableObject
     {
-        #region QOLŒüãˆ—
-        // CakeParamsSO‚ª•Û‘¶‚µ‚Ä‚ ‚éêŠ‚ÌƒpƒX
+        #region QOLå‘ä¸Šå‡¦ç†
+        // CakeParamsSOãŒä¿å­˜ã—ã¦ã‚ã‚‹å ´æ‰€ã®ãƒ‘ã‚¹
         public const string PATH = "SO_DifficultySettings";
 
-        // CakeParamsSO‚ÌÀ‘Ì
+        // CakeParamsSOã®å®Ÿä½“
         private static SO_DifficultySettings _entity = null;
         public static SO_DifficultySettings Entity
         {
             get
             {
-                // ‰ƒAƒNƒZƒX‚Éƒ[ƒh‚·‚é
+                // åˆã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
                 if (_entity == null)
                 {
                     _entity = Resources.Load<SO_DifficultySettings>(PATH);
 
-                    //ƒ[ƒho—ˆ‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[ƒƒO‚ğ•\¦
+                    //ãƒ­ãƒ¼ãƒ‰å‡ºæ¥ãªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’è¡¨ç¤º
                     if (_entity == null)
                     {
                         Debug.LogError(PATH + " not found");
@@ -34,7 +34,7 @@ namespace SO
         #endregion
 
 
-        [SerializeField, Header("“ïˆÕ“xİ’è\nE, N, H, N")]
+        [SerializeField, Header("é›£æ˜“åº¦è¨­å®š\nE, N, H, N")]
         private Difficulty[] difficulty;
 
         public int VisibilityRange => difficulty[Difficulty.Type.ToInt()].VisibilityRange;
@@ -45,9 +45,9 @@ namespace SO
     [Serializable]
     public class Difficulty
     {
-        [Header("‹ŠE”ÍˆÍ")] public int VisibilityRange;
-        [Header("ƒXƒ^ƒ~ƒi‰ñ•œ‘¬“x")] public float StaminaRecover;
-        [Header("ƒAƒCƒeƒ€”z’uƒ‰ƒ“ƒ_ƒ€‰»")] public bool IsItemRandom;
+        [Header("è¦–ç•Œç¯„å›²")] public int VisibilityRange;
+        [Header("ã‚¹ã‚¿ãƒŸãƒŠå›å¾©é€Ÿåº¦")] public float StaminaRecover;
+        [Header("ã‚¢ã‚¤ãƒ†ãƒ é…ç½®ãƒ©ãƒ³ãƒ€ãƒ åŒ–")] public bool IsItemRandom;
 
         public static DifficultyType Type = DifficultyType.Normal;
     }
