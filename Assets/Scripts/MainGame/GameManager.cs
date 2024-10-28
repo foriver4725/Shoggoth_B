@@ -13,6 +13,16 @@ using UnityEngine.UI;
 
 namespace MainGame
 {
+    public enum EventState
+    {
+        Normal,
+        ItemComleted,
+        BreakerDown,
+        ShoggothRaise,
+        LastShoggoth,
+        End
+    }
+
     public class GameManager : MonoBehaviour
     {
         #region
@@ -34,8 +44,8 @@ namespace MainGame
         }
         #endregion
 
-        [NonSerialized] public bool IsClear = false;
-        [NonSerialized] public bool IsOver = false;
+        [NonSerialized]
+        public EventState EventState = EventState.Normal;
 
         [SerializeField] private PlayerController playerController;
 
@@ -50,6 +60,11 @@ namespace MainGame
         [SerializeField] private ItemOutlineTrigger itemOutlineTrigger;
         [SerializeField, Header("アイテムの設置候補場所\n(z座標はきらきらと同じにする)")] private ItemPoints itemPoints;
         [SerializeField] private FloorChangePoints floorChangePoints;
+        [SerializeField] private BreakerPoints breakerPoints;
+        [SerializeField] private FencePoints fencePoints;
+        public FencePoints FencePoints => fencePoints;
+
+        [SerializeField] private MainToGameClear mainToGameClear;
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
@@ -222,18 +237,37 @@ namespace MainGame
                 _ => "B2F"
             };
 
-            // アイテムが揃った状態で1Fにいるなら、画面を赤くする。ただし、クリアとゲームオーバー時は赤くしない。
-            redImage.enabled =
-                !IsClear
-                && !IsOver
-                && IsGetItems.All(true)
-                && Player.transform.position.x < 75 && Player.transform.position.y < 75;
+            if (EventState == EventState.ItemComleted)
+            {
+                if (IsGetItems.All(true) && Player.transform.position.x < 75 && Player.transform.position.y < 75)
+                {
+                    EventState = EventState.BreakerDown;
+                    playerController.Light2D.pointLightOuterRadius = SO_DifficultySettings.Entity.VisibilityRangeOnBreakerDown;
+                    fencePoints.Arrange();
+                }
+            }
+            else if (EventState == EventState.ShoggothRaise)
+            {
+                if (Player.transform.position.x < 75 && Player.transform.position.y < 75)
+                {
+                    EventState = EventState.LastShoggoth;
+                    redImage.enabled = true;
+                }
+            }
+            else if (EventState == EventState.LastShoggoth)
+            {
+                if (!(Player.transform.position.x < 75 && Player.transform.position.y < 75))
+                {
+                    EventState = EventState.ShoggothRaise;
+                    redImage.enabled = false;
+                }
+            }
         }
 
         bool InteractCheck_IsInteractable = true;
         void InteractCheck()
         {
-            if (IsClear || IsOver) return;
+            if (EventState == EventState.End) return;
             if (Time.timeScale == 0) return;
             if (!InteractCheck_IsInteractable) return;
 
@@ -292,6 +326,12 @@ namespace MainGame
                     IsGetItems[idx] = true;
                 }
             }
+            else if (breakerPoints.IsInteractableAgainstAny(PlayerMove))
+            {
+                EventState = EventState.ShoggothRaise;
+                fencePoints.Dearrange();
+                playerController.Light2D.pointLightOuterRadius = SO_DifficultySettings.Entity.VisibilityRange;
+            }
             else
             {
                 foreach (var p in ENTRANCE_POSITIONS)
@@ -337,6 +377,8 @@ namespace MainGame
         bool CheckEscape_IsDoorBroken = false;
         void CheckEscape()
         {
+            if (EventState != EventState.LastShoggoth) return;
+
             // 必要アイテムが揃っていないなら何もしない
             if (IsGetItems.Any(false))
             {
@@ -359,9 +401,10 @@ namespace MainGame
             // 次のインタラクトでは脱出する
             else
             {
-                if (!IsClear && !IsOver)
+                if (EventState != EventState.End)
                 {
-                    IsClear = true;
+                    EventState = EventState.End;
+                    mainToGameClear.Clear();
                 }
             }
         }
@@ -398,6 +441,8 @@ namespace MainGame
                     textBack.enabled = true;
                     textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
                     StartCoroutine(FadeItemCompletedLog());
+
+                    if (EventState == EventState.Normal) EventState = EventState.ItemComleted;
                 }
             }
             // 必要アイテムがそろっていないなら
