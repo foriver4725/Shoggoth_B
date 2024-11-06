@@ -57,6 +57,7 @@ namespace MainGame
 
         [SerializeField] TextMeshProUGUI floorText;
 
+        [SerializeField] private ExtraShogghth extraShogghth;
         [SerializeField] private ItemOutlineTrigger itemOutlineTrigger;
         [SerializeField, Header("アイテムの設置候補場所\n(z座標はきらきらと同じにする)")] private ItemPoints itemPoints;
         [SerializeField] private FloorChangePoints floorChangePoints;
@@ -130,6 +131,7 @@ namespace MainGame
         [SerializeField] private AudioSource breakerOffSE;
         [SerializeField] private AudioSource breakerOnSE;
         [SerializeField] private AudioSource ironFenceCloseSE;
+        [SerializeField] private AudioSource glassBreakSE;
 
         private CancellationToken ct;
 
@@ -339,6 +341,9 @@ namespace MainGame
                     fencePoints.Dearrange();
                     playerController.Light2D.intensity = SO_Player.Entity.LightIntensityDefault;
                     breakerOnSE.Raise(SO_Sound.Entity.BreakerOnSE, SType.SE);
+
+                    extraShogghth.Raise();
+                    0.5f.SecWaitAndDo(() => glassBreakSE.Raise(SO_Sound.Entity.GlassBreakSE, SType.SE), destroyCancellationToken).Forget();
                 }
             }
             else
