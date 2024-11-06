@@ -251,6 +251,7 @@ namespace MainGame
                     EventState = EventState.BreakerDown;
                     playerController.Light2D.intensity = SO_Player.Entity.LightIntensityOnBreakerOff;
                     fencePoints.Arrange();
+                    StartCoroutine(ShowLogWaitingSubmit(SO_UIConsoleText.Entity.BreakerLog));
                     breakerOffSE.Raise(SO_Sound.Entity.BreakerOffSE, SType.SE);
                     0.5f.SecWaitAndDo(() => ironFenceCloseSE.Raise(SO_Sound.Entity.IronFenceCloseSE, SType.SE), destroyCancellationToken).Forget();
                 }
