@@ -7,7 +7,7 @@ namespace MainGame
     [Serializable]
     public sealed class ExtraShogghth
     {
-        [SerializeField, Required, SceneObjectsOnly, Header("エクストラショゴスの配置場所一覧\n(座標を読み取るだけ)")]
+        [SerializeField, Required, SceneObjectsOnly, Header("エクストラショゴスの配置場所一覧(座標を読み取るだけ)")]
         private Transform[] arrangePositions;
 
         [SerializeField, Required, SceneObjectsOnly, Header("出てくる壁のSprite Renderer一覧")]
@@ -16,13 +16,11 @@ namespace MainGame
         [SerializeField, Required, AssetsOnly, LabelText("壊れた壁のスプライト")]
         private Sprite brokenWallSprite;
 
-        [SerializeField, Required, AssetsOnly, LabelText("プレハブ")]
-        private GameObject prefab;
+        [SerializeField, Required, AssetsOnly, LabelText("プレハブ"), Tooltip("この中からランダム")]
+        private GameObject[] prefabs;
 
         [SerializeField, Required, SceneObjectsOnly, LabelText("生成後の親")]
         private Transform parent;
-
-        private static readonly float z = -1.9f;
 
         private bool isDone = false;
 
@@ -39,15 +37,19 @@ namespace MainGame
         private void CreateEnemies()
         {
             if (arrangePositions is null) return;
-            if (prefab == null) return;
+            if (prefabs is null) return;
             if (parent == null) return;
+            if (prefabs.Length <= 0) return;
 
             foreach (Transform tf in arrangePositions)
             {
                 if (tf == null) continue;
 
-                Vector3 pos = new(tf.position.x, tf.position.y, z);
-                GameObject.Instantiate(prefab, pos, Quaternion.identity, parent);
+                Vector3 pos = new(tf.position.x, tf.position.y, 0);
+                GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];
+                if (prefab == null) continue;
+                GameObject go = GameObject.Instantiate(prefab, pos, Quaternion.identity, parent);
+                GameManager.Instance.ExtraShoggoth.Add(go);
             }
         }
 

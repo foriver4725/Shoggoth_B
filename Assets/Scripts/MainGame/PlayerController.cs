@@ -3,6 +3,7 @@ using Ex;
 using MainGame;
 using SO;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -52,13 +53,27 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private bool IsHit()
     {
+        if (GameManager.Instance.EventState == EventState.End) return false;
+        if (GameManager.Instance.CurrentHP <= 0) return false;
+
         foreach (GameObject e in GameManager.Instance.Enemys)
         {
-            if (GameManager.Instance.EventState == EventState.End) continue;
-            if (GameManager.Instance.CurrentHP <= 0) continue;
+            if (e == null) continue;
             if (SqrDistance2D(transform.position, e.transform.position) > sqrPlayerDamageRange) continue;
             return true;
         }
+
+        List<GameObject> extraShoggoth = GameManager.Instance.ExtraShoggoth;
+        if (extraShoggoth is not null)
+        {
+            foreach (GameObject e in extraShoggoth)
+            {
+                if (e == null) continue;
+                if (SqrDistance2D(transform.position, e.transform.position) > sqrPlayerDamageRange) continue;
+                return true;
+            }
+        }
+
         return false;
     }
 }

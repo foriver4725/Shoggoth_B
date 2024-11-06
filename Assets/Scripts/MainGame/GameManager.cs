@@ -71,6 +71,7 @@ namespace MainGame
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
         [NonSerialized] public GameObject Player;
         [NonSerialized] public GameObject[] Enemys = new GameObject[6];
+        [NonSerialized] public List<GameObject> ExtraShoggoth = new();
         [NonSerialized] public PlayerMove PlayerMove;
         [NonSerialized] public EnemyMove[] EnemyMoves = new EnemyMove[6];
 
