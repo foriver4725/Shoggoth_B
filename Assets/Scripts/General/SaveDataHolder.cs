@@ -9,7 +9,7 @@ namespace General
     {
         public static SaveDataHolder Instance { get; private set; } = null;
 
-        public SaveData SaveData { get; private set; } = new();
+        public SaveData SaveData { get; private set; } = null;
 
         private void Awake()
         {
@@ -60,29 +60,26 @@ namespace General
     [Serializable]
     public sealed class SaveData
     {
-        public uint ClearNumEasy { get; set; } = 0;
-        public uint ClearNumNormal { get; set; } = 0;
-        public uint ClearNumHard { get; set; } = 0;
-        public uint ClearNumNightmare { get; set; } = 0;
+        public uint ClearNumEasy = 0;
+        public uint ClearNumNormal = 0;
+        public uint ClearNumHard = 0;
+        public uint ClearNumNightmare = 0;
 
         private const string PATH = "saves.json";
 
         public static void Save(SaveData data)
         {
             string json = JsonUtility.ToJson(data);
-            StreamWriter sw = new(Path.Combine(Application.persistentDataPath, PATH), false);
-            sw.Write(json);
-            sw.Flush();
-            sw.Close();
+            using StreamWriter sw = new(Path.Combine(Application.persistentDataPath, PATH), false);
+            sw.WriteLine(json);
         }
 
         public static void Load(out SaveData data)
         {
             try
             {
-                StreamReader sr = new(Path.Combine(Application.persistentDataPath, PATH));
+                using StreamReader sr = new(Path.Combine(Application.persistentDataPath, PATH));
                 string json = sr.ReadToEnd();
-                sr.Close();
                 data = JsonUtility.FromJson<SaveData>(json);
             }
             catch (Exception)
