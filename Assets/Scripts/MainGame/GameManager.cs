@@ -284,6 +284,8 @@ namespace MainGame
 
             if (floorChangePoints.InteractCheck(PlayerMove, out Vector3 v, out bool isElevator))
             {
+                if ((EventState is EventState.BreakerDown or EventState.End) && isElevator) return;
+
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
