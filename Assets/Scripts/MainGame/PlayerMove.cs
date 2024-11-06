@@ -33,11 +33,11 @@ namespace MainGame
             // �N���A�܂��̓Q�[���I�[�o�[�Ȃ瓮���Ȃ�
             if (GameManager.Instance.EventState == EventState.End) return;
 
-            InputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGame_ValueMove : Vector2.zero;
+            InputDir = Time.timeScale == 1f ? InputGetter.Instance.MainGameMove.Vector2 : Vector2.zero;
 
             // �_�b�V���̓��͂����m���āA�t���O���X�V����
 
-            if (InputGetter.Instance.MainGame_IsDash && GameManager.Instance.Stamina != 0) moveState = MoveState.DASH;
+            if (InputGetter.Instance.MainGameDash.Bool && GameManager.Instance.Stamina != 0) moveState = MoveState.DASH;
             else if (InputDir != Vector2.zero) moveState = MoveState.WALK;
             else moveState = MoveState.STOP;
 
@@ -89,7 +89,7 @@ namespace MainGame
             {
                 //true,true:A  true,false:B  false,false:C  false,true:C
                 transform.position +=
-                    (InputGetter.Instance.MainGame_IsDash && GameManager.Instance.Stamina != 0 ?
+                    (InputGetter.Instance.MainGameDash.Bool && GameManager.Instance.Stamina != 0 ?
                     SO_Player.Entity.PlayerDashSpeed : SO_Player.Entity.PlayerSpeed)
                     * Time.deltaTime * dir;
                 if ((transform.position - fromPos).sqrMagnitude >= 1)

@@ -29,7 +29,7 @@ namespace Scene
             _backText.color = Color.black;
 
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.ClickDur), cancellationToken: ct);
-            await UniTask.WaitUntil(() => IA.InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
+            await UniTask.WaitUntil(() => IA.InputGetter.Instance.SystenmSubmit.Bool, cancellationToken: ct);
             _backText.color = Color.yellow;
             _click1st.Raise(SO_Sound.Entity.ClickSE, SType.SE);
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);

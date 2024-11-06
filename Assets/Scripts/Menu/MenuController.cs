@@ -21,7 +21,7 @@ public class MenuController : MonoBehaviour
     {
         if (!menuPanel.activeSelf)
         {
-            if (InputGetter.Instance.MainGame_IsPause)
+            if (InputGetter.Instance.MainGamePause.Bool)
             {
                 if (pauseAnnounceTextBack.activeSelf) pauseAnnounceTextBack.SetActive(false);
                 Time.timeScale = 0f;
@@ -31,7 +31,7 @@ public class MenuController : MonoBehaviour
         else
         {
             HandleMenuNavigation();
-            if (InputGetter.Instance.System_IsSubmit)
+            if (InputGetter.Instance.SystenmSubmit.Bool)
             {
                 if (currentIndex == 0)
                 {
@@ -47,12 +47,12 @@ public class MenuController : MonoBehaviour
 
     void HandleMenuNavigation()
     {
-        if (InputGetter.Instance.MainGame_IsUp)
+        if (InputGetter.Instance.MainGameUp.Bool)
         {
             currentIndex = (currentIndex > 0) ? currentIndex - 1 : menuOptions.Length - 1;
             UpdateMenuOptions();
         }
-        else if (InputGetter.Instance.MainGame_IsDown)
+        else if (InputGetter.Instance.MainGameDown.Bool)
         {
             currentIndex = (currentIndex < menuOptions.Length - 1) ? currentIndex + 1 : 0;
             UpdateMenuOptions();

@@ -24,5 +24,7 @@ MonoBehaviour:
   invincibleTime: 2
   StaminaIncreaseDur: 10
   StaminaDecreaseDur: 5
+  lightIntensityDefault: 0.6
+  lightIntensityOnBreakerOff: 0.1
   bgmOn: {fileID: 8554479520563138585, guid: f7b30ed9331904e40a33eef91831f896, type: 3}
   seOn: {fileID: 7065322409582102352, guid: 837728a0c15dac744aac2def112c7104, type: 3}

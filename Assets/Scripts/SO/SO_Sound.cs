@@ -54,5 +54,8 @@ namespace SO
         [Header("1Fのエレベーター")] public AudioClip Elevator1FSE;
         [Header("B1Fのエレベーター")] public AudioClip ElevatorB1FSE;
         [Header("B2Fのエレベーター")] public AudioClip ElevatorB2FSE;
+        [Header("ブレーカーが落ちる")] public AudioClip BreakerOffSE;
+        [Header("ブレーカーが復旧する")] public AudioClip BreakerOnSE;
+        [Header("鉄格子が閉まる")] public AudioClip IronFenceCloseSE;
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace SO
 {
@@ -48,6 +49,14 @@ namespace SO
 
         [Header("スタミナの回復速度(何秒で最小から最大になるか)")] public float StaminaIncreaseDur;
         [Header("スタミナの減少速度(何秒で最大から最小になるか)")] public float StaminaDecreaseDur;
+
+        [SerializeField, Required, Range(0.01f, 1.0f), Header("ライトのデフォルトintensity")]
+        private float lightIntensityDefault;
+        public float LightIntensityDefault => lightIntensityDefault;
+
+        [SerializeField, Required, Range(0.01f, 1.0f), Header("ライトのブレーカーダウン時intensity")]
+        private float lightIntensityOnBreakerOff;
+        public float LightIntensityOnBreakerOff => lightIntensityOnBreakerOff;
 
         [Header("BGMのプレハブ")] public GameObject bgmOn;
         [Header("SEのプレハブ")] public GameObject seOn;

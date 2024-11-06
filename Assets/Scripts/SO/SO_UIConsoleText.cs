@@ -48,7 +48,7 @@ namespace SO
             Time.timeScale = 0f;
             text.text = logMessage;
             textBack.enabled = true;
-            await UniTask.WaitUntil(() => InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
+            await UniTask.WaitUntil(() => InputGetter.Instance.SystenmSubmit.Bool, cancellationToken: ct);
             textBack.enabled = false;
             text.text = "";
             Time.timeScale = 1f;

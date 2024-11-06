@@ -1,4 +1,5 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SO
@@ -33,16 +34,12 @@ namespace SO
         }
         #endregion
 
-
         [SerializeField, Header("難易度設定\nE, N, H, N")]
         private Difficulty[] difficulty;
 
         public int VisibilityRange => difficulty[Difficulty.Type.ToInt()].VisibilityRange;
         public float StaminaRecover => difficulty[Difficulty.Type.ToInt()].StaminaRecover;
         public bool IsItemRandom => difficulty[Difficulty.Type.ToInt()].IsItemRandom;
-
-        public int VisibilityRangeOnBreakerDown => difficulty[
-            Difficulty.Type == DifficultyType.Nightmare ? Difficulty.Type.ToInt() : Difficulty.Type.ToInt() + 1].VisibilityRange;
     }
 
     [Serializable]
