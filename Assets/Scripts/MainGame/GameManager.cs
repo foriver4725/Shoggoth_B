@@ -64,6 +64,7 @@ namespace MainGame
         [SerializeField] private BreakerPoints breakerPoints;
         [SerializeField] private FencePoints fencePoints;
         public FencePoints FencePoints => fencePoints;
+        [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
 
         [SerializeField] private MainToGameClear mainToGameClear;
 
@@ -360,6 +361,24 @@ namespace MainGame
                 if (EventState == EventState.BreakerDown)
                 {
                     EventState = EventState.ShoggothRaise;
+
+                    // 敵の発覚状態を解除して、招集する
+                    foreach (EnemyMove _enemy in EnemyMoves)
+                    {
+                        _enemy.ChangeFloorThenDo(EnemyMove.FLOOR.F1, () =>
+                        {
+                            _enemy.StopChaseTime = 0;
+                            _enemy.IsChasing = false;
+
+                            Vector3 enemyPos = _enemy.transform.position;
+                            enemyPos.x = shoggothFinalPoint.position.x;
+                            enemyPos.y = shoggothFinalPoint.position.y;
+                            _enemy.transform.position = enemyPos;
+
+                            _enemy.SelectNewStokingPoint();
+                        }, destroyCancellationToken).Forget();
+                    }
+
                     fencePoints.Dearrange();
                     playerController.Light2D.intensity = SO_Player.Entity.LightIntensityDefault;
                     breakerOnSE.Raise(SO_Sound.Entity.BreakerOnSE, SType.SE);
