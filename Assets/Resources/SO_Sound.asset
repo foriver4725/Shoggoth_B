@@ -30,3 +30,4 @@ MonoBehaviour:
   BreakerOffSE: {fileID: 8300000, guid: b732119e1a0794730860ac26213ddf3d, type: 3}
   BreakerOnSE: {fileID: 8300000, guid: 4a07040a9205c4b0fb9378bba289c7fb, type: 3}
   IronFenceCloseSE: {fileID: 8300000, guid: 0ebcbe9792b40464d9f9b528544b35f2, type: 3}
+  GlassBreakSE: {fileID: 8300000, guid: 21d38ea02c78d477b8e2e58a583a7f41, type: 3}
