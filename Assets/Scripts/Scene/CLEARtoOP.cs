@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using General;
 using SO;
 using System;
 using System.Threading;
@@ -12,8 +13,10 @@ namespace Scene
     {
         [SerializeField] private VideoPlayer videoPlayer;
 
-        void Start()
+        private void Start()
         {
+            SaveDataHolder.Instance.OnClearChangeDataAndSave(Difficulty.Type);
+
             videoPlayer.loopPointReached += OnPlayEnded;
             videoPlayer.Play();
         }

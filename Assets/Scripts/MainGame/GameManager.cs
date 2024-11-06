@@ -211,7 +211,8 @@ namespace MainGame
             finalHint.SetActive(false);
             itemOutlineTrigger.SetActivation(2);
 
-            ShowDirectionLog();
+            15.0f.SecWaitAndDo(() => StartCoroutine(
+                ShowLogWaitingTime(SO_UIConsoleText.Entity.ShowDirectionLog, SO_General.Entity.LogFadeDur)), destroyCancellationToken).Forget();
         }
 
         void Update()
@@ -471,10 +472,7 @@ namespace MainGame
                     }
 
                     // ログを表示
-                    Time.timeScale = 0.0f;
-                    textBack.enabled = true;
-                    textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
-                    StartCoroutine(FadeItemCompletedLog());
+                    StartCoroutine(ShowLogWaitingSubmit(SO_UIConsoleText.Entity.ItemCompletedLog));
 
                     if (EventState == EventState.Normal) EventState = EventState.ItemCompleted;
                 }
@@ -499,22 +497,6 @@ namespace MainGame
             }
         }
 
-        private IEnumerator FadeItemCompletedLog()
-        {
-            while (true)
-            {
-                yield return null;
-
-                if (InputGetter.Instance.SystenmSubmit.Bool)
-                {
-                    textMeshProUGUI.text = "";
-                    textBack.enabled = false;
-                    Time.timeScale = 1.0f;
-                    yield break;
-                }
-            }
-        }
-
         // 書斎の棚を調べる
         public void CheckRack()
         {
@@ -522,9 +504,6 @@ namespace MainGame
             if (IsCheckedRack) return;
             // もうこのメソッドの処理は行わない
             IsCheckedRack = true;
-
-            StopCoroutine(ShowDirectionLog_Cor);
-            ShowDirectionLog_Cor = null;
 
             // アイテムのヒントをもらっている状態にする
             IsHintedItems = IsHintedItems.Map(e => true).ToArray();
@@ -535,15 +514,26 @@ namespace MainGame
                 e.transform.position = new(-100, -100, -0.055f);
             }
 
-            Time.timeScale = 0.0f;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.EscapeTeachLog;
-
-            StartCoroutine(FadeEscapeTeachLog());
+            StartCoroutine(ShowLogWaitingSubmit(SO_UIConsoleText.Entity.EscapeTeachLog));
         }
 
-        private IEnumerator FadeEscapeTeachLog()
+        private IEnumerator ShowLogWaitingTime(string text, float seconds)
         {
+            textBack.enabled = true;
+            textMeshProUGUI.text = text;
+
+            yield return new WaitForSeconds(seconds);
+
+            textMeshProUGUI.text = "";
+            textBack.enabled = false;
+        }
+
+        private IEnumerator ShowLogWaitingSubmit(string text)
+        {
+            Time.timeScale = 0.0f;
+            textBack.enabled = true;
+            textMeshProUGUI.text = text;
+
             while (true)
             {
                 yield return null;
@@ -556,38 +546,6 @@ namespace MainGame
                     yield break;
                 }
             }
-        }
-
-        Coroutine ShowDirectionLog_Cor = null;
-        void ShowDirectionLog()
-        {
-            ShowDirectionLog_Cor = StartCoroutine(ShowDirectionLogCor());
-        }
-        IEnumerator ShowDirectionLogCor()
-        {
-            yield return new WaitForSeconds(15);
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShowDirectionLog;
-            FadeLog();
-        }
-
-        Coroutine FadeLog_Cor = null;
-        public void FadeLog()
-        {
-            if (FadeLog_Cor != null)
-            {
-                StopCoroutine(FadeLog_Cor);
-                FadeLog_Cor = null;
-            }
-
-            FadeLog_Cor = StartCoroutine(ResetLog());
-        }
-
-        IEnumerator ResetLog()
-        {
-            yield return new WaitForSeconds(SO_General.Entity.LogFadeDur);
-            textBack.enabled = false;
-            textMeshProUGUI.text = "";
         }
     }
 }
