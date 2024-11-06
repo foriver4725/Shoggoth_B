@@ -78,9 +78,9 @@ namespace General
 
         public static void Load(out SaveData data)
         {
-            StreamReader sr = new(Path.Combine(Application.persistentDataPath, PATH));
             try
             {
+                StreamReader sr = new(Path.Combine(Application.persistentDataPath, PATH));
                 string json = sr.ReadToEnd();
                 sr.Close();
                 data = JsonUtility.FromJson<SaveData>(json);
