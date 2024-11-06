@@ -269,6 +269,23 @@ namespace MainGame
                     redImage.enabled = false;
                 }
             }
+
+            if (InputGetter.Instance.DebugAction1.Bool) DebugTeleport(new(9, 106, -1));
+            else if (InputGetter.Instance.DebugAction2.Bool) DebugTeleport(new(35, 125, -1));
+            else if (InputGetter.Instance.DebugAction3.Bool) DebugTeleport(new(109, 11, -1));
+            else if (InputGetter.Instance.DebugAction4.Bool) DebugTeleport(new(126, 30, -1));
+            void DebugTeleport(Vector3 pos)
+            {
+                // 敵の発覚状態を解除する
+                foreach (EnemyMove _enemy in EnemyMoves)
+                {
+                    _enemy.StopChaseTime = 0;
+                    _enemy.IsChasing = false;
+                    _enemy.SelectNewStokingPoint();
+                }
+
+                PlayerMove.transform.position = pos;
+            }
         }
 
         bool InteractCheck_IsInteractable = true;
