@@ -52,10 +52,6 @@ namespace MainGame
             {
                 IsChasing = true;
             }
-            else if (GameManager.Instance.EventState == EventState.ShoggothRaise && _floor != FLOOR.F1)
-            {
-                IsChasing = false;
-            }
             // プレイヤーに近づいたら追跡モードになる。
             else if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
