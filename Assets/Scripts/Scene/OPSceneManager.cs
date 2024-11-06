@@ -95,13 +95,13 @@ namespace Scene
 
         private void UpdateOnTitleImage()
         {
-            if (isClickEnabled && InputGetter.Instance.System_IsCredit)
+            if (isClickEnabled && InputGetter.Instance.SystemCredit.Bool)
             {
                 OnClick();
                 state = State.SceneChanging;
                 AfterClick(() => SceneManager.LoadScene(SO_SceneName.Entity.Credit), destroyCancellationToken).Forget();
             }
-            else if (isClickEnabled && InputGetter.Instance.System_IsCancel)
+            else if (isClickEnabled && InputGetter.Instance.SystemCancel.Bool)
             {
                 OnClick();
                 state = State.SceneChanging;
@@ -114,7 +114,7 @@ namespace Scene
 #endif
                 }, destroyCancellationToken).Forget();
             }
-            else if (isClickEnabled && InputGetter.Instance.System_IsSubmit)
+            else if (isClickEnabled && InputGetter.Instance.SystenmSubmit.Bool)
             {
                 OnClick();
                 state = State.SceneChanging;
@@ -128,10 +128,10 @@ namespace Scene
 
         private void UpdateOnDifficultySelect()
         {
-            if (InputGetter.Instance.MainGame_IsUp) difficultyIndex.Value--;
-            else if (InputGetter.Instance.MainGame_IsDown) difficultyIndex.Value++;
+            if (InputGetter.Instance.MainGameUp.Bool) difficultyIndex.Value--;
+            else if (InputGetter.Instance.MainGameDown.Bool) difficultyIndex.Value++;
 
-            if (isClickEnabled && InputGetter.Instance.System_IsSubmit)
+            if (isClickEnabled && InputGetter.Instance.SystenmSubmit.Bool)
             {
                 OnClick();
                 state = State.SceneChanging;
@@ -173,7 +173,7 @@ namespace Scene
 
         private async UniTaskVoid MovieSkip(Action onSkip, CancellationToken ct)
         {
-            await UniTask.WaitUntil(() => isClickEnabled && InputGetter.Instance.System_IsCancel);
+            await UniTask.WaitUntil(() => isClickEnabled && InputGetter.Instance.SystemCancel.Bool);
             onSkip();
             SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
         }

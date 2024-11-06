@@ -21,12 +21,12 @@ namespace Credit
 
         void Update()
         {
-            if (InputGetter.Instance.System_IsCancel)
+            if (InputGetter.Instance.SystemCancel.Bool)
             {
                 SceneManager.LoadScene(SO_SceneName.Entity.Title);
             }
 
-            if (InputGetter.Instance.System_IsSubmit)
+            if (InputGetter.Instance.SystenmSubmit.Bool)
             {
                 _page1.enabled = !_page1.enabled;
                 _page2.enabled = !_page2.enabled;

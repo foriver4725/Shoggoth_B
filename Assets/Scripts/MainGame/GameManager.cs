@@ -16,7 +16,7 @@ namespace MainGame
     public enum EventState
     {
         Normal,
-        ItemComleted,
+        ItemCompleted,
         BreakerDown,
         ShoggothRaise,
         LastShoggoth,
@@ -121,12 +121,15 @@ namespace MainGame
 
         [SerializeField] private AudioSource _onGameBGM;
 
-        [SerializeField] AudioSource lockedDoorSE;
-        [SerializeField] AudioSource potionSE;
-        [SerializeField] AudioSource chaseBGM;
-        [SerializeField] AudioSource elevator1FSE;
-        [SerializeField] AudioSource elevatorB1FSE;
-        [SerializeField] AudioSource elevatorB2FSE;
+        [SerializeField] private AudioSource lockedDoorSE;
+        [SerializeField] private AudioSource potionSE;
+        [SerializeField] private AudioSource chaseBGM;
+        [SerializeField] private AudioSource elevator1FSE;
+        [SerializeField] private AudioSource elevatorB1FSE;
+        [SerializeField] private AudioSource elevatorB2FSE;
+        [SerializeField] private AudioSource breakerOffSE;
+        [SerializeField] private AudioSource breakerOnSE;
+        [SerializeField] private AudioSource ironFenceCloseSE;
 
         private CancellationToken ct;
 
@@ -210,7 +213,7 @@ namespace MainGame
 
         void Update()
         {
-            if (InputGetter.Instance.System_IsSubmit)
+            if (InputGetter.Instance.SystenmSubmit.Bool)
             {
                 InteractCheck();
             }
@@ -237,13 +240,15 @@ namespace MainGame
                 _ => "B2F"
             };
 
-            if (EventState == EventState.ItemComleted)
+            if (EventState == EventState.ItemCompleted)
             {
                 if (IsGetItems.All(true) && Player.transform.position.x < 75 && Player.transform.position.y < 75)
                 {
                     EventState = EventState.BreakerDown;
-                    playerController.Light2D.pointLightOuterRadius = SO_DifficultySettings.Entity.VisibilityRangeOnBreakerDown;
+                    playerController.Light2D.intensity = SO_Player.Entity.LightIntensityOnBreakerOff;
                     fencePoints.Arrange();
+                    breakerOffSE.Raise(SO_Sound.Entity.BreakerOffSE, SType.SE);
+                    0.5f.SecWaitAndDo(() => ironFenceCloseSE.Raise(SO_Sound.Entity.IronFenceCloseSE, SType.SE), destroyCancellationToken).Forget();
                 }
             }
             else if (EventState == EventState.ShoggothRaise)
@@ -280,7 +285,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in EnemyMoves)
@@ -308,7 +313,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -318,7 +323,7 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                 // アイテムを入手
                 if (IsHintedItems[idx])
@@ -328,9 +333,13 @@ namespace MainGame
             }
             else if (breakerPoints.IsInteractableAgainstAny(PlayerMove))
             {
-                EventState = EventState.ShoggothRaise;
-                fencePoints.Dearrange();
-                playerController.Light2D.pointLightOuterRadius = SO_DifficultySettings.Entity.VisibilityRange;
+                if (EventState == EventState.BreakerDown)
+                {
+                    EventState = EventState.ShoggothRaise;
+                    fencePoints.Dearrange();
+                    playerController.Light2D.intensity = SO_Player.Entity.LightIntensityDefault;
+                    breakerOnSE.Raise(SO_Sound.Entity.BreakerOnSE, SType.SE);
+                }
             }
             else
             {
@@ -341,7 +350,7 @@ namespace MainGame
                         // クールタイムが明けるまでインタラクト出来ないようにし...
                         InteractCheck_IsInteractable = false;
                         // クールタイムのカウントを開始する
-                        Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                        SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                         // きらきらを非表示
                         foreach (GameObject e in _entranceKirakiras)
@@ -442,7 +451,7 @@ namespace MainGame
                     textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
                     StartCoroutine(FadeItemCompletedLog());
 
-                    if (EventState == EventState.Normal) EventState = EventState.ItemComleted;
+                    if (EventState == EventState.Normal) EventState = EventState.ItemCompleted;
                 }
             }
             // 必要アイテムがそろっていないなら
@@ -471,7 +480,7 @@ namespace MainGame
             {
                 yield return null;
 
-                if (InputGetter.Instance.System_IsSubmit)
+                if (InputGetter.Instance.SystenmSubmit.Bool)
                 {
                     textMeshProUGUI.text = "";
                     textBack.enabled = false;
@@ -514,7 +523,7 @@ namespace MainGame
             {
                 yield return null;
 
-                if (InputGetter.Instance.System_IsSubmit)
+                if (InputGetter.Instance.SystenmSubmit.Bool)
                 {
                     textMeshProUGUI.text = "";
                     textBack.enabled = false;

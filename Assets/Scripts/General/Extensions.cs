@@ -239,7 +239,7 @@ namespace Ex
     public static class Async
     {
         // 一定時間待ってから処理を行う
-        public static async UniTask AfterWaited(Action action, float seconds, CancellationToken ct)
+        public static async UniTask SecWaitAndDo(this float seconds, Action action, CancellationToken ct)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(seconds), cancellationToken: ct);
             action();

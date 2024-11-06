@@ -22,7 +22,7 @@ namespace MainGame
         void Update()
         {
             // ダッシュしているなら...
-            if (InputGetter.Instance.MainGame_IsDash && playerMove.InputDir != Vector2.zero)
+            if (InputGetter.Instance.MainGameDash.Bool && playerMove.InputDir != Vector2.zero)
             {
                 // スタミナ減少
                 GameManager.Instance.Stamina -= (SO_Debug.Entity.IsInfiniteStamina ? 0.01f : 1) / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
