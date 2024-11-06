@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Ex;
+using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 
 namespace MainGame
 {
     public class EnemyMove : MonoBehaviour
     {
-        private enum FLOOR { F1, BF1, BF2 };
+        public enum FLOOR { F1, BF1, BF2 };
         [SerializeField] private Animator anim;
         [SerializeField, Header("どの階層の敵か")] private FLOOR _floor;
 
@@ -47,13 +50,8 @@ namespace MainGame
             // クリアまたはゲームオーバーなら動かない
             if (GameManager.Instance.EventState == EventState.End) return;
 
-            // 1Fのショゴスは、アイテムが揃ってかつプレイヤーが1Fにいる間、常に発覚状態となる。
-            if (GameManager.Instance.EventState == EventState.LastShoggoth && _floor == FLOOR.F1)
-            {
-                IsChasing = true;
-            }
             // プレイヤーに近づいたら追跡モードになる。
-            else if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+            if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
             {
                 IsChasing = true;
             }
@@ -169,7 +167,7 @@ namespace MainGame
         public void SelectNewStokingPoint()
         {
             int posNum = _stokingPos.Count;
-            int nextIndex = Random.Range(0, posNum);
+            int nextIndex = UnityEngine.Random.Range(0, posNum);
 
             int i = 0;
             foreach (Vector2Int pos in _stokingPos)
@@ -190,6 +188,24 @@ namespace MainGame
                 }
                 i++;
             }
+        }
+
+        public async UniTaskVoid ChangeFloorThenDo(FLOOR floor, Action action, CancellationToken ct)
+        {
+            await UniTask.WaitUntil(() => IsStepEnded, cancellationToken: ct);
+
+            _floor = floor;
+
+            int stokingPosIndex = _floor switch
+            {
+                FLOOR.F1 => 0,
+                FLOOR.BF1 => 1,
+                FLOOR.BF2 => 2,
+                _ => 0
+            };
+            _stokingPos = GameManager.Instance.EnemyStokingPositions[stokingPosIndex];
+
+            action?.Invoke();
         }
     }
 }
