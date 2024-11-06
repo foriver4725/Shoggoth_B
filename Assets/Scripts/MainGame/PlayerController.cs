@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.EventState == EventState.End) return;
+        if (GameManager.Instance.CurrentHP <= 0) return;
         if (damagableFlag.IsCounting) return;
         if (!elevatorFlag.IsDamagable) return;
 
@@ -53,9 +55,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private bool IsHit()
     {
-        if (GameManager.Instance.EventState == EventState.End) return false;
-        if (GameManager.Instance.CurrentHP <= 0) return false;
-
         foreach (GameObject e in GameManager.Instance.Enemys)
         {
             if (e == null) continue;
