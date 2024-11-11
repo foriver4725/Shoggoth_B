@@ -35,9 +35,17 @@ namespace SO
 
         [SerializeField, Range(1, 6), Header("プレイヤーの初期体力")] public int PlayerInitHp;
         [SerializeField, Header("プレイヤーの移動スピード [m/s]")] private float playerSpeed;
+#if UNITY_EDITOR
         public float PlayerSpeed => SO_Debug.Entity.IsExtraSpeed ? playerSpeed * 5 : playerSpeed;
+#else
+        public float PlayerSpeed => playerSpeed;
+#endif
         [SerializeField, Header("プレイヤーの移動スピード（走り） [m/s]")] private float playerDashSpeed;
+#if UNITY_EDITOR
         public float PlayerDashSpeed => SO_Debug.Entity.IsExtraSpeed ? playerDashSpeed * 5 : playerDashSpeed;
+#else
+        public float PlayerDashSpeed => playerDashSpeed;
+#endif
         [Header("敵の移動スピード(1F) [m/s]")] public float EnemySpeed1F;
         [Header("敵の移動スピード(B1F) [m/s]")] public float EnemySpeedB1F;
         [Header("敵の移動スピード(B2F) [m/s]")] public float EnemySpeedB2F;
@@ -46,7 +54,11 @@ namespace SO
         [Header("敵がプレイヤーを見失う距離")] public float EnemyStopChaseRange;
         [Header("敵が↑の距離より遠くにいるとき、プレイヤーを見失うまでの時間")] public float EnemyStopChaseDuration;
         [SerializeField, Header("無敵時間")] private float invincibleTime;
+#if UNITY_EDITOR
         public float InvincibleTime => SO_Debug.Entity.IsInvincible ? 10000 : invincibleTime;
+#else
+        public float InvincibleTime => invincibleTime;
+#endif
 
         [Header("スタミナの回復速度(何秒で最小から最大になるか)")] public float StaminaIncreaseDur;
         [Header("スタミナの減少速度(何秒で最大から最小になるか)")] public float StaminaDecreaseDur;
