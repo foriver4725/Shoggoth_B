@@ -15,7 +15,7 @@ namespace Scene
 
         private void Start()
         {
-            SaveDataHolder.Instance.OnClearChangeDataAndSave(Difficulty.Type);
+            GetIncrementClearNumAction(Difficulty.Type)?.Invoke();
 
             videoPlayer.loopPointReached += OnPlayEnded;
             videoPlayer.Play();
@@ -28,5 +28,14 @@ namespace Scene
             await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: ct);
             SceneManager.LoadScene(SO_SceneName.Entity.Title);
         }
+
+        private Action GetIncrementClearNumAction(DifficultyType type) => type switch
+        {
+            DifficultyType.Easy => () => SaveDataHolder.Instance.SaveData.ClearNumEasy++,
+            DifficultyType.Normal => () => SaveDataHolder.Instance.SaveData.ClearNumNormal++,
+            DifficultyType.Hard => () => SaveDataHolder.Instance.SaveData.ClearNumHard++,
+            DifficultyType.Nightmare => () => SaveDataHolder.Instance.SaveData.ClearNumNightmare++,
+            _ => null
+        };
     }
 }

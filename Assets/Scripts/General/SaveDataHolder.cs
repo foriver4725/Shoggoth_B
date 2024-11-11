@@ -16,43 +16,19 @@ namespace General
             if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
             else { Destroy(gameObject); return; }
 
-            LoadAndChangeData();
+            Load();
         }
 
-        private void LoadAndChangeData()
+        // ロードしてメンバを更新
+        public void Load()
         {
             SaveData.Load(out SaveData loadedData);
             SaveData = loadedData;
         }
 
-        public void OnClearChangeDataAndSave(DifficultyType clearedDifficultyType)
+        //メンバをセーブ
+        public void Save()
         {
-            switch (clearedDifficultyType)
-            {
-                case DifficultyType.Easy:
-                    {
-                        SaveData.ClearNumEasy++;
-                    }
-                    break;
-                case DifficultyType.Normal:
-                    {
-                        SaveData.ClearNumNormal++;
-                    }
-                    break;
-                case DifficultyType.Hard:
-                    {
-                        SaveData.ClearNumHard++;
-                    }
-                    break;
-                case DifficultyType.Nightmare:
-                    {
-                        SaveData.ClearNumNightmare++;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
             SaveData.Save(SaveData);
         }
     }
@@ -64,6 +40,8 @@ namespace General
         public uint ClearNumNormal = 0;
         public uint ClearNumHard = 0;
         public uint ClearNumNightmare = 0;
+        public bool HasEnteredToilet = false;
+        public bool HasToiletExploded = false;
 
         private const string PATH = "saves.json";
 
