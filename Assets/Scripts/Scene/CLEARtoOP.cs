@@ -1,9 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
 using General;
+using IA;
 using SO;
 using System;
 using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -16,10 +16,19 @@ namespace Scene
 
         private void Start()
         {
+            bool isFirstClear = SaveDataHolder.Instance.SaveData.ClearNum <= 0;
             Save(Difficulty.Type);
 
             videoPlayer.loopPointReached += OnPlayEnded;
+            SkipMovie(isFirstClear, destroyCancellationToken).Forget();
             videoPlayer.Play();
+        }
+
+        private async UniTaskVoid SkipMovie(bool isFirstClear, CancellationToken ct)
+        {
+            if (isFirstClear) return;
+            await UniTask.WaitUntil(() => InputGetter.Instance.SystemCancel.Bool, cancellationToken: ct);
+            SceneManager.LoadScene(SO_SceneName.Entity.Title);
         }
 
         private void OnPlayEnded(VideoPlayer _) => SceneChange(destroyCancellationToken).Forget();
