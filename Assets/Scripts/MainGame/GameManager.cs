@@ -68,8 +68,11 @@ namespace MainGame
         [SerializeField] private FencePoints fencePoints;
         [SerializeField] private ToiletPoints toiletPoints;
         [SerializeField] private HealPoints healPoints;
+        [SerializeField] private SecretPoints secretPoints;
         public FencePoints FencePoints => fencePoints;
         [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
+        [SerializeField] private GameObject dirkSecretKirakira;
+        [SerializeField] private GameObject lightSecretKirakira;
 
         [SerializeField] private MainToGameClear mainToGameClear;
 
@@ -82,6 +85,10 @@ namespace MainGame
         [NonSerialized] public EnemyMove[] EnemyMoves = new EnemyMove[6];
 
         [NonSerialized] public int CurrentHP; // プレイヤーのHP
+
+        private bool isFoundSecretDirk = false;
+        private bool isFoundSecretLight = false;
+        private bool isDirkSecretInteractable => EventState is (EventState.ShoggothRaise or EventState.LastShoggoth);
 
         // 現在のスタミナ (0 ~ 1)
         private float _stamina = 1;
@@ -290,6 +297,16 @@ namespace MainGame
 
             // トイレに入った実績達成
             CheckToiletEntry();
+
+            ShowSecretKirakira();
+        }
+
+        private void OnDestroy()
+        {
+            if (isFoundSecretDirk && isFoundSecretLight && SaveDataHolder.Instance.SaveData.HasFoundSecretItem is false)
+            {
+                SaveDataHolder.Instance.SaveData.HasFoundSecretItem = true;
+            }
         }
 
         void DebugTeleport(Vector3 pos)
@@ -404,11 +421,26 @@ namespace MainGame
             }
             else if (healPoints.IsInteractableAgainstAny(PlayerMove))
             {
-                if (EventState == EventState.End) return;
-
-                // 回復する
-                CurrentHP++;
-                healSE.Raise(SO_Sound.Entity.HealSE, SType.SE);
+                if (EventState != EventState.End)
+                {
+                    // 回復する
+                    CurrentHP++;
+                    healSE.Raise(SO_Sound.Entity.HealSE, SType.SE);
+                }
+            }
+            else if (secretPoints.IsInteractableAgainstSecretDirk(PlayerMove))
+            {
+                if (isDirkSecretInteractable && !isFoundSecretDirk)
+                {
+                    isFoundSecretDirk = true;
+                }
+            }
+            else if (secretPoints.IsInteractableAgainstSecretLight(PlayerMove))
+            {
+                if (!isFoundSecretLight)
+                {
+                    isFoundSecretLight = true;
+                }
             }
             else
             {
@@ -628,6 +660,13 @@ namespace MainGame
                 int sec = intSecond % 60;
                 return $"　爆発まで　{min}:{sec:00}";
             }
+        }
+
+        // 毎フレーム
+        private void ShowSecretKirakira()
+        {
+            dirkSecretKirakira.SetActive(!isFoundSecretDirk && isDirkSecretInteractable);
+            lightSecretKirakira.SetActive(!isFoundSecretLight);
         }
     }
 }
