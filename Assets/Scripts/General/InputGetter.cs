@@ -265,7 +265,6 @@ namespace IA
 
         public InputInfo SystenmSubmit { get; private set; }
         public InputInfo SystemCancel { get; private set; }
-        public InputInfo SystemCredit { get; private set; }
 
         public InputInfo MainGameMove { get; private set; }
         public InputInfo MainGameDash { get; private set; }
@@ -283,7 +282,6 @@ namespace IA
         {
             SystenmSubmit = new InputInfo(_ia.System.Submit, InputType.Click).Add(_inputInfoList);
             SystemCancel = new InputInfo(_ia.System.Cancel, InputType.Click).Add(_inputInfoList);
-            SystemCredit = new InputInfo(_ia.System.Credit, InputType.Click).Add(_inputInfoList);
 
             MainGameMove = new InputInfo(_ia.MainGame.Move, InputType.Value2).Add(_inputInfoList);
             MainGameDash = new InputInfo(_ia.MainGame.Dash, InputType.Value0).Add(_inputInfoList);
