@@ -73,6 +73,8 @@ namespace MainGame
         [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
         [SerializeField] private GameObject dirkSecretKirakira;
         [SerializeField] private GameObject lightSecretKirakira;
+        [SerializeField] private Image darkSecretImage;
+        [SerializeField] private Image lightSecretImage;
 
         [SerializeField] private MainToGameClear mainToGameClear;
 
@@ -665,6 +667,11 @@ namespace MainGame
         // 毎フレーム
         private void ShowSecretKirakira()
         {
+            if (darkSecretImage != null && darkSecretImage.enabled is false && isFoundSecretDirk is true)
+                darkSecretImage.enabled = true;
+            if (lightSecretImage != null && lightSecretImage.enabled is false && isFoundSecretLight is true)
+                lightSecretImage.enabled = true;
+
             dirkSecretKirakira.SetActive(!isFoundSecretDirk && isDirkSecretInteractable);
             lightSecretKirakira.SetActive(!isFoundSecretLight);
         }
