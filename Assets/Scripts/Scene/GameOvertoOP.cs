@@ -1,9 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
 using Ex;
+using General;
 using SO;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -20,6 +19,8 @@ namespace Scene
 
         void Start()
         {
+            SaveDataHolder.Instance.SaveData.OverNum++;
+
             _ct = this.GetCancellationTokenOnDestroy();
             SceneChange(_ct).Forget();
         }

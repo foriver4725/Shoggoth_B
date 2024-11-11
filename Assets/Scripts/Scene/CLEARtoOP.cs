@@ -3,6 +3,7 @@ using General;
 using SO;
 using System;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -15,7 +16,7 @@ namespace Scene
 
         private void Start()
         {
-            GetIncrementClearNumAction(Difficulty.Type)?.Invoke();
+            Save(Difficulty.Type);
 
             videoPlayer.loopPointReached += OnPlayEnded;
             videoPlayer.Play();
@@ -29,13 +30,18 @@ namespace Scene
             SceneManager.LoadScene(SO_SceneName.Entity.Title);
         }
 
-        private Action GetIncrementClearNumAction(DifficultyType type) => type switch
+        private void Save(DifficultyType type)
         {
-            DifficultyType.Easy => () => SaveDataHolder.Instance.SaveData.ClearNumEasy++,
-            DifficultyType.Normal => () => SaveDataHolder.Instance.SaveData.ClearNumNormal++,
-            DifficultyType.Hard => () => SaveDataHolder.Instance.SaveData.ClearNumHard++,
-            DifficultyType.Nightmare => () => SaveDataHolder.Instance.SaveData.ClearNumNightmare++,
-            _ => null
-        };
+            if (type == DifficultyType.Easy && SaveDataHolder.Instance.SaveData.HasEasyCleared is false)
+                SaveDataHolder.Instance.SaveData.HasEasyCleared = true;
+            else if (type == DifficultyType.Normal && SaveDataHolder.Instance.SaveData.HasNormalCleared is false)
+                SaveDataHolder.Instance.SaveData.HasNormalCleared = true;
+            else if (type == DifficultyType.Hard && SaveDataHolder.Instance.SaveData.HasHardCleared is false)
+                SaveDataHolder.Instance.SaveData.HasHardCleared = true;
+            else if (type == DifficultyType.Nightmare && SaveDataHolder.Instance.SaveData.HasNightmareCleared is false)
+                SaveDataHolder.Instance.SaveData.HasNightmareCleared = true;
+
+            SaveDataHolder.Instance.SaveData.ClearNum++;
+        }
     }
 }

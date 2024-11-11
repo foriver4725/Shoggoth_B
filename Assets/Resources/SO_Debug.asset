@@ -15,3 +15,4 @@ MonoBehaviour:
   IsInvincible: 1
   IsExtraSpeed: 1
   IsInfiniteStamina: 1
+  IsDeleteAllSaveData: 0

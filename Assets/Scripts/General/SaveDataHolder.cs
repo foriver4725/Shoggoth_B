@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using SO;
 using UnityEngine;
 
 namespace General
@@ -9,7 +8,11 @@ namespace General
     {
         public static SaveDataHolder Instance { get; private set; } = null;
 
+#if UNITY_EDITOR
+        public SaveData SaveData { get; set; } = null;
+#else
         public SaveData SaveData { get; private set; } = null;
+#endif
 
         private void Awake()
         {
@@ -36,10 +39,12 @@ namespace General
     [Serializable]
     public sealed class SaveData
     {
-        public uint ClearNumEasy = 0;
-        public uint ClearNumNormal = 0;
-        public uint ClearNumHard = 0;
-        public uint ClearNumNightmare = 0;
+        public bool HasEasyCleared = false;
+        public bool HasNormalCleared = false;
+        public bool HasHardCleared = false;
+        public bool HasNightmareCleared = false;
+        public ulong ClearNum = 0;
+        public ulong OverNum = 0;
         public bool HasEnteredToilet = false;
         public bool HasToiletExploded = false;
 
