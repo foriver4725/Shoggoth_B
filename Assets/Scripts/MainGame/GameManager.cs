@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 namespace MainGame
 {
     public enum EventState
@@ -141,6 +142,9 @@ namespace MainGame
         [SerializeField] private AudioSource ironFenceCloseSE;
         [SerializeField] private AudioSource glassBreakSE;
 
+
+        [NonSerialized] public bool IsExplosion = false;
+
         private CancellationToken ct;
 
         void Cash()
@@ -193,7 +197,7 @@ namespace MainGame
             Player = GameObject.FindGameObjectWithTag("character/player");
             Enemys = GameObject.FindGameObjectsWithTag("character/shoggoth");
 
-
+          
 
             PlayerMove = Player.GetComponent<PlayerMove>();
             for (int i = 0; i < Enemys.Length; i++)
@@ -229,6 +233,12 @@ namespace MainGame
             if (InputGetter.Instance.SystenmSubmit.Bool)
             {
                 InteractCheck();
+            }
+
+            if (IsExplosion)
+            {
+                ExplosionTime -= Time.deltaTime;
+                ExplosionTimeText.text = ("爆破まで:" + (int)ExplosionTime);
             }
 
             // 発覚状態のBGMを更新する
@@ -375,10 +385,7 @@ namespace MainGame
                 {
                     EventState = EventState.ShoggothRaise;
 
-                    // クールタイムのカウントを開始する
-                      SO_General.Entity.ExplosionDur.SecWaitAndDo(() => SceneChange(destroyCancellationToken)).Forget();
-                    ExplosionTime -= Time.deltaTime;
-                    ExplosionTimeText().text=((int)ExplosionTime).Tostring();
+                    
 
                     // 敵の発覚状態を解除して、招集する
                     foreach (EnemyMove _enemy in EnemyMoves)
@@ -403,6 +410,11 @@ namespace MainGame
 
                     extraShogghth.Raise();
                     0.5f.SecWaitAndDo(() => glassBreakSE.Raise(SO_Sound.Entity.GlassBreakSE, SType.SE), destroyCancellationToken).Forget();
+
+                    // クールタイムのカウントを開始する
+                    SO_General.Entity.ExplosionDur.SecWaitAndDo(() => SceneChange(destroyCancellationToken), destroyCancellationToken).Forget();
+                    IsExplosion = true;
+                   
                 }
             }
             else
