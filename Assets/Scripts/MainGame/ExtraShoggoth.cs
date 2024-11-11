@@ -1,14 +1,19 @@
 using System;
 using Sirenix.OdinInspector;
+using SO;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MainGame
 {
     [Serializable]
     public sealed class ExtraShogghth
     {
-        [SerializeField, Required, SceneObjectsOnly, Header("エクストラショゴスの配置場所一覧(座標を読み取るだけ)")]
-        private Transform[] arrangePositions;
+        [SerializeField, Required, SceneObjectsOnly, Header("エクストラショゴスの配置場所一覧\n(易：座標を読み取るだけ)")]
+        private Transform[] arrangePositionsEasy;
+
+        [SerializeField, Required, SceneObjectsOnly, Header("エクストラショゴスの配置場所一覧\n(難：座標を読み取るだけ)"), FormerlySerializedAs("arrangePositions")]
+        private Transform[] arrangePositionsDifficult;
 
         [SerializeField, Required, SceneObjectsOnly, Header("出てくる壁のSprite Renderer一覧")]
         private SpriteRenderer[] wallSpriteRenderers;
@@ -21,6 +26,10 @@ namespace MainGame
 
         [SerializeField, Required, SceneObjectsOnly, LabelText("生成後の親")]
         private Transform parent;
+
+        private Transform[] arrangePositions =>
+            SO_DifficultySettings.Entity.IsExtraShoggothArrangeDifficult ?
+            arrangePositionsDifficult : arrangePositionsEasy;
 
         private bool isDone = false;
 
