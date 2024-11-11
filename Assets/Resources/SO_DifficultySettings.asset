@@ -16,12 +16,16 @@ MonoBehaviour:
   - VisibilityRange: 20
     StaminaRecover: 2
     IsItemRandom: 0
+    IsExtraShoggothArrangeDifficult: 0
   - VisibilityRange: 10
     StaminaRecover: 5
     IsItemRandom: 0
+    IsExtraShoggothArrangeDifficult: 0
   - VisibilityRange: 5
     StaminaRecover: 10
     IsItemRandom: 1
+    IsExtraShoggothArrangeDifficult: 0
   - VisibilityRange: 2
     StaminaRecover: 30
     IsItemRandom: 1
+    IsExtraShoggothArrangeDifficult: 1
