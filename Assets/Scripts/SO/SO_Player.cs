@@ -33,6 +33,7 @@ namespace SO
         }
         #endregion
 
+        [SerializeField, Range(1, 6), Header("プレイヤーの初期体力")] public int PlayerInitHp;
         [SerializeField, Header("プレイヤーの移動スピード [m/s]")] private float playerSpeed;
         public float PlayerSpeed => SO_Debug.Entity.IsExtraSpeed ? playerSpeed * 5 : playerSpeed;
         [SerializeField, Header("プレイヤーの移動スピード（走り） [m/s]")] private float playerDashSpeed;

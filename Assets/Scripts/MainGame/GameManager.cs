@@ -67,6 +67,7 @@ namespace MainGame
         [SerializeField] private BreakerPoints breakerPoints;
         [SerializeField] private FencePoints fencePoints;
         [SerializeField] private ToiletPoints toiletPoints;
+        [SerializeField] private HealPoints healPoints;
         public FencePoints FencePoints => fencePoints;
         [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
 
@@ -138,6 +139,7 @@ namespace MainGame
         [SerializeField] private AudioSource breakerOnSE;
         [SerializeField] private AudioSource ironFenceCloseSE;
         [SerializeField] private AudioSource glassBreakSE;
+        [SerializeField] private AudioSource healSE;
 
         private CancellationToken ct;
 
@@ -400,6 +402,14 @@ namespace MainGame
                     0.5f.SecWaitAndDo(() => glassBreakSE.Raise(SO_Sound.Entity.GlassBreakSE, SType.SE), destroyCancellationToken).Forget();
                 }
             }
+            else if (healPoints.IsInteractableAgainstAny(PlayerMove))
+            {
+                if (EventState == EventState.End) return;
+
+                // 回復する
+                CurrentHP++;
+                healSE.Raise(SO_Sound.Entity.HealSE, SType.SE);
+            }
             else
             {
                 foreach (var p in ENTRANCE_POSITIONS)
@@ -616,7 +626,7 @@ namespace MainGame
                 int intSecond = (int)second;
                 int min = intSecond / 60;
                 int sec = intSecond % 60;
-                return $"爆発まで　{min}:{sec:00}";
+                return $"　爆発まで　{min}:{sec:00}";
             }
         }
     }
