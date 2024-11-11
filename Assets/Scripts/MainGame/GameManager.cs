@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace MainGame
@@ -52,6 +53,7 @@ namespace MainGame
 
         [SerializeField] Image textBack;
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
+        [SerializeField] TextMeshProUGUI ExplosionTimeText;
 
         [SerializeField] GameObject finalHint;
         [SerializeField] Image redImage;
@@ -79,6 +81,8 @@ namespace MainGame
         [NonSerialized] public EnemyMove[] EnemyMoves = new EnemyMove[6];
 
         [NonSerialized] public int CurrentHP; // プレイヤーのHP
+
+        private float ExplosionTime = SO_General.Entity.ExplosionDur;
 
         // 現在のスタミナ (0 ~ 1)
         private float _stamina = 1;
@@ -188,6 +192,8 @@ namespace MainGame
 
             Player = GameObject.FindGameObjectWithTag("character/player");
             Enemys = GameObject.FindGameObjectsWithTag("character/shoggoth");
+
+
 
             PlayerMove = Player.GetComponent<PlayerMove>();
             for (int i = 0; i < Enemys.Length; i++)
@@ -369,6 +375,11 @@ namespace MainGame
                 {
                     EventState = EventState.ShoggothRaise;
 
+                    // クールタイムのカウントを開始する
+                      SO_General.Entity.ExplosionDur.SecWaitAndDo(() => SceneChange(destroyCancellationToken)).Forget();
+                    ExplosionTime -= Time.deltaTime;
+                    ExplosionTimeText().text=((int)ExplosionTime).Tostring();
+
                     // 敵の発覚状態を解除して、招集する
                     foreach (EnemyMove _enemy in EnemyMoves)
                     {
@@ -418,6 +429,13 @@ namespace MainGame
                 }
             }
             #endregion
+        }
+
+
+        private async UniTaskVoid SceneChange(CancellationToken ct)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: ct);
+            SceneManager.LoadScene(SO_SceneName.Entity.Explosion);
         }
 
         bool CheckItemInteract(out int idx)
@@ -581,5 +599,7 @@ namespace MainGame
             if (toiletPoints.IsInAny(Player.transform.position) is false) return;
             SaveDataHolder.Instance.SaveData.HasEnteredToilet = true;
         }
+
+        
     }
 }
