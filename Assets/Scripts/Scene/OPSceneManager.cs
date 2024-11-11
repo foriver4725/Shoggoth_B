@@ -97,13 +97,7 @@ namespace Scene
 
         private void UpdateOnTitleImage()
         {
-            if (isClickEnabled && InputGetter.Instance.SystemCredit.Bool)
-            {
-                OnClick();
-                state = State.SceneChanging;
-                AfterClick(() => SceneManager.LoadScene(SO_SceneName.Entity.Credit), destroyCancellationToken).Forget();
-            }
-            else if (isClickEnabled && InputGetter.Instance.SystemCancel.Bool)
+            if (isClickEnabled && InputGetter.Instance.SystemCancel.Bool)
             {
                 OnClick();
                 state = State.SceneChanging;

@@ -58,5 +58,6 @@ namespace SO
         [Header("ブレーカーが復旧する")] public AudioClip BreakerOnSE;
         [Header("鉄格子が閉まる")] public AudioClip IronFenceCloseSE;
         [Header("ガラスが割れる")] public AudioClip GlassBreakSE;
+        [Header("回復する")] public AudioClip HealSE;
     }
 }

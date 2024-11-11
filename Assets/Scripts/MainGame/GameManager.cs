@@ -67,6 +67,7 @@ namespace MainGame
         [SerializeField] private BreakerPoints breakerPoints;
         [SerializeField] private FencePoints fencePoints;
         [SerializeField] private ToiletPoints toiletPoints;
+        [SerializeField] private HealPoints healPoints;
         public FencePoints FencePoints => fencePoints;
         [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
 
@@ -81,8 +82,6 @@ namespace MainGame
         [NonSerialized] public EnemyMove[] EnemyMoves = new EnemyMove[6];
 
         [NonSerialized] public int CurrentHP; // プレイヤーのHP
-
-        private float ExplosionTime = SO_General.Entity.ExplosionDur;
 
         // 現在のスタミナ (0 ~ 1)
         private float _stamina = 1;
@@ -140,6 +139,7 @@ namespace MainGame
         [SerializeField] private AudioSource breakerOnSE;
         [SerializeField] private AudioSource ironFenceCloseSE;
         [SerializeField] private AudioSource glassBreakSE;
+        [SerializeField] private AudioSource healSE;
 
         private CancellationToken ct;
 
@@ -375,10 +375,7 @@ namespace MainGame
                 {
                     EventState = EventState.ShoggothRaise;
 
-                    // クールタイムのカウントを開始する
-                      SO_General.Entity.ExplosionDur.SecWaitAndDo(() => SceneChange(destroyCancellationToken)).Forget();
-                    ExplosionTime -= Time.deltaTime;
-                    ExplosionTimeText().text=((int)ExplosionTime).Tostring();
+                    StartExplosionCount(destroyCancellationToken).Forget();
 
                     // 敵の発覚状態を解除して、招集する
                     foreach (EnemyMove _enemy in EnemyMoves)
@@ -404,6 +401,14 @@ namespace MainGame
                     extraShogghth.Raise();
                     0.5f.SecWaitAndDo(() => glassBreakSE.Raise(SO_Sound.Entity.GlassBreakSE, SType.SE), destroyCancellationToken).Forget();
                 }
+            }
+            else if (healPoints.IsInteractableAgainstAny(PlayerMove))
+            {
+                if (EventState == EventState.End) return;
+
+                // 回復する
+                CurrentHP++;
+                healSE.Raise(SO_Sound.Entity.HealSE, SType.SE);
             }
             else
             {
@@ -600,6 +605,29 @@ namespace MainGame
             SaveDataHolder.Instance.SaveData.HasEnteredToilet = true;
         }
 
-        
+        private async UniTaskVoid StartExplosionCount(CancellationToken ct)
+        {
+            ExplosionTimeText.enabled = true;
+            float t = SO_General.Entity.ExplosionDur;
+            while (true)
+            {
+                await UniTask.NextFrame(ct);
+                t -= Time.deltaTime;
+                if (t <= 0)
+                {
+                    SceneManager.LoadScene(SO_SceneName.Entity.Explosion);
+                    return;
+                }
+                ExplosionTimeText.text = ToNormalizedText(t);
+            }
+
+            static string ToNormalizedText(float second)
+            {
+                int intSecond = (int)second;
+                int min = intSecond / 60;
+                int sec = intSecond % 60;
+                return $"　爆発まで　{min}:{sec:00}";
+            }
+        }
     }
 }
