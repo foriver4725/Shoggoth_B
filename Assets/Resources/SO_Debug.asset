@@ -16,4 +16,4 @@ MonoBehaviour:
   IsExtraSpeed: 1
   IsInfiniteStamina: 1
   IsDeleteAllSaveData: 0
-  IsAchieveAllSaveData: 1
+  IsAchieveAllSaveData: 0
