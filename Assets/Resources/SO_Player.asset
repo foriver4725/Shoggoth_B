@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 3
   playerDashSpeed: 5
-  EnemySpeed1F: 4
+  EnemySpeed1F: 3
   EnemySpeedB1F: 3
   EnemySpeedB2F: 2
   PlayerDamageRange: 0.85
