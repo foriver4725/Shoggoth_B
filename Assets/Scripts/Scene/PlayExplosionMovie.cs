@@ -7,12 +7,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using IA;
+using UnityEngine.UI;
+using Ex;
 
 namespace Scene
 {
     public sealed class PlayExplosionMovie : MonoBehaviour
     {
         [SerializeField] private VideoPlayer videoPlayer;
+        [SerializeField] private Image blackImage;
 
         private void Start()
         {
@@ -35,8 +38,37 @@ namespace Scene
 
         private async UniTaskVoid SceneChange(CancellationToken ct)
         {
+            FadeOut(1, ct).Forget();
             await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: ct);
-            SceneManager.LoadScene(SO_SceneName.Entity.GameOver);
+
+            async UniTaskVoid FadeOut(float duration, CancellationToken ct)
+            {
+                SetA(blackImage, 0);
+                float t = 0;
+
+                while (true)
+                {
+                    await UniTask.NextFrame(ct);
+                    t += Time.deltaTime;
+
+                    float a = t.Remap(0, duration, 0, 1);
+                    SetA(blackImage, a);
+
+                    if (t >= duration)
+                    {
+                        SetA(blackImage, 1);
+                        SceneManager.LoadScene(SO_SceneName.Entity.GameOver);
+                    }
+                }
+            }
+
+            static void SetA(Image image, float a)
+            {
+                if (image == null) return;
+                Color color = image.color;
+                color.a = a;
+                image.color = color;
+            }
         }
 
         private void Save() => SaveDataHolder.Instance.SaveData.HasToiletExploded = true;
