@@ -292,4 +292,11 @@ namespace Ex
             return true;
         }
     }
+
+    public static class Arith
+    {
+        // X[a, b] -> Y[c, d] の線形変換
+        public static float Remap(this float x, float a, float b, float c, float d)
+            => a == b ? 0 : (x - a) * (d - c) / (b - a) + c;
+    }
 }
