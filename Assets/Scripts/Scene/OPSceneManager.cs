@@ -9,6 +9,7 @@ using Ex;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine.Video;
+using General;
 
 namespace Scene
 {
@@ -70,11 +71,12 @@ namespace Scene
         private async UniTaskVoid AfterClick(Action action, CancellationToken ct)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);
-            action();
+            action?.Invoke();
         }
 
         private void OnEnable()
         {
+            SaveDataHolder.Instance.Save(); // タイトルに戻るたびにセーブ
             audioSources.PlayBGM();
         }
 

@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Ex;
+using General;
 using IA;
 using SO;
 using System;
@@ -63,6 +64,7 @@ namespace MainGame
         [SerializeField] private FloorChangePoints floorChangePoints;
         [SerializeField] private BreakerPoints breakerPoints;
         [SerializeField] private FencePoints fencePoints;
+        [SerializeField] private ToiletPoints toiletPoints;
         public FencePoints FencePoints => fencePoints;
         [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
 
@@ -278,18 +280,23 @@ namespace MainGame
             else if (InputGetter.Instance.DebugAction2.Bool) DebugTeleport(new(35, 125, -1));
             else if (InputGetter.Instance.DebugAction3.Bool) DebugTeleport(new(109, 11, -1));
             else if (InputGetter.Instance.DebugAction4.Bool) DebugTeleport(new(126, 30, -1));
-            void DebugTeleport(Vector3 pos)
-            {
-                // 敵の発覚状態を解除する
-                foreach (EnemyMove _enemy in EnemyMoves)
-                {
-                    _enemy.StopChaseTime = 0;
-                    _enemy.IsChasing = false;
-                    _enemy.SelectNewStokingPoint();
-                }
 
-                PlayerMove.transform.position = pos;
+
+            // トイレに入った実績達成
+            CheckToiletEntry();
+        }
+
+        void DebugTeleport(Vector3 pos)
+        {
+            // 敵の発覚状態を解除する
+            foreach (EnemyMove _enemy in EnemyMoves)
+            {
+                _enemy.StopChaseTime = 0;
+                _enemy.IsChasing = false;
+                _enemy.SelectNewStokingPoint();
             }
+
+            PlayerMove.transform.position = pos;
         }
 
         bool InteractCheck_IsInteractable = true;
@@ -566,6 +573,13 @@ namespace MainGame
                     yield break;
                 }
             }
+        }
+
+        private void CheckToiletEntry()
+        {
+            if (SaveDataHolder.Instance.SaveData.HasEnteredToilet is true) return;
+            if (toiletPoints.IsInAny(Player.transform.position) is false) return;
+            SaveDataHolder.Instance.SaveData.HasEnteredToilet = true;
         }
     }
 }
