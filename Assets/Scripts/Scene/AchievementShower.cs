@@ -66,6 +66,12 @@ namespace Scene
             [SerializeField, Required, SceneObjectsOnly]
             private Image toiletExplodedImage;
 
+            [SerializeField, Required, SceneObjectsOnly]
+            private Image secretItemImage;
+
+            [SerializeField, Required, SceneObjectsOnly]
+            private Image achievedAllImage;
+
             public void SetEnabledFromSaveData(SaveData saveData)
             {
                 if (saveData is null) return;
@@ -87,6 +93,9 @@ namespace Scene
 
                 toiletEnteredImage.transform.parent.gameObject.SetActive(saveData.HasEnteredToilet);
                 toiletExplodedImage.transform.parent.gameObject.SetActive(saveData.HasToiletExploded);
+
+                secretItemImage.transform.parent.gameObject.SetActive(saveData.HasFoundSecretItem);
+                achievedAllImage.transform.parent.gameObject.SetActive(SaveData.HasAchievedAll(saveData));
             }
         }
     }

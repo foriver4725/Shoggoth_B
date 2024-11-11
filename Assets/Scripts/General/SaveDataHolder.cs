@@ -47,6 +47,7 @@ namespace General
         public ulong OverNum = 0;
         public bool HasEnteredToilet = false;
         public bool HasToiletExploded = false;
+        public bool HasFoundSecretItem = false;
 
         private const string PATH = "saves.json";
 
@@ -71,6 +72,20 @@ namespace General
                 Save(newData);
                 data = newData;
             }
+        }
+
+        public static bool HasAchievedAll(SaveData data)
+        {
+            if (data.HasEasyCleared is false) return false;
+            if (data.HasNormalCleared is false) return false;
+            if (data.HasHardCleared is false) return false;
+            if (data.HasNightmareCleared is false) return false;
+            if (data.ClearNum < 100) return false;
+            if (data.OverNum < 100) return false;
+            if (data.HasEnteredToilet is false) return false;
+            if (data.HasToiletExploded is false) return false;
+            if (data.HasFoundSecretItem is false) return false;
+            return true;
         }
     }
 }
