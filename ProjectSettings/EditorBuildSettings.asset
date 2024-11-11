@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameComplete.unity
     guid: 5dec51594cb4af141b70b03aff2bee1b
+  - enabled: 1
+    path: Assets/Scenes/Explosion.unity
+    guid: 35de5ac245061ec449d743d130f3929e
   m_configObjects: {}
