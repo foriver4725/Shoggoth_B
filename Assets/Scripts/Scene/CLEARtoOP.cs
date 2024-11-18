@@ -16,6 +16,8 @@ namespace Scene
 
         private void Start()
         {
+            if (videoPlayer != null) videoPlayer.targetTexture.Release();
+
             bool isFirstClear = SaveDataHolder.Instance.SaveData.ClearNum <= 0;
             Save(Difficulty.Type);
 

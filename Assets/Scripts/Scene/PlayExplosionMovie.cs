@@ -19,6 +19,8 @@ namespace Scene
 
         private void Start()
         {
+            if (videoPlayer != null) videoPlayer.targetTexture.Release();
+
             bool isFirstExplosion = SaveDataHolder.Instance.SaveData.HasToiletExploded is false;
             Save();
 
