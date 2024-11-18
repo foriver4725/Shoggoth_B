@@ -154,6 +154,7 @@ namespace Scene
         private void ShowOpeningVideo()
         {
             VideoPlayer vp = openingVideo.GetComponent<VideoPlayer>();
+            if (vp != null) vp.targetTexture.Release();
             VideoPlayer.EventHandler f = _ => LoadMainScene(destroyCancellationToken).Forget();
             vp.loopPointReached += f;
             audioSources.StopBGM();
