@@ -303,14 +303,6 @@ namespace MainGame
             ShowSecretKirakira();
         }
 
-        private void OnDestroy()
-        {
-            if (isFoundSecretDirk && isFoundSecretLight && SaveDataHolder.Instance.SaveData.HasFoundSecretItem is false)
-            {
-                SaveDataHolder.Instance.SaveData.HasFoundSecretItem = true;
-            }
-        }
-
         void DebugTeleport(Vector3 pos)
         {
             // 敵の発覚状態を解除する
@@ -523,6 +515,12 @@ namespace MainGame
                 if (EventState != EventState.End)
                 {
                     EventState = EventState.End;
+
+                    if (isFoundSecretDirk && isFoundSecretLight && SaveDataHolder.Instance.SaveData.HasFoundSecretItem is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasFoundSecretItem = true;
+                    }
+
                     mainToGameClear.Clear();
                 }
             }
