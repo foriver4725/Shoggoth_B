@@ -4,8 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - celltype_path
-  - celltype_block
   - character/player
   - character/shoggoth
   - stokingpoint/1F
