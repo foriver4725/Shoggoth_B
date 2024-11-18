@@ -76,8 +76,14 @@ namespace Scene
 
         private void OnEnable()
         {
-            SaveDataHolder.Instance.Save(); // タイトルに戻るたびにセーブ
+            SaveImpl(SaveDataHolder.Instance, destroyCancellationToken).Forget(); // タイトルに戻るたびにセーブ
             audioSources.PlayBGM();
+
+            static async UniTaskVoid SaveImpl(SaveDataHolder saveDataHolder, CancellationToken ct)
+            {
+                await UniTask.WaitUntil(() => saveDataHolder != null, cancellationToken: ct);
+                saveDataHolder.Save();
+            }
         }
 
         private void Update()
