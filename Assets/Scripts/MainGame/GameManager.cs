@@ -71,6 +71,7 @@ namespace MainGame
         [SerializeField] private HealPoints healPoints;
         [SerializeField] private SecretPoints secretPoints;
         public FencePoints FencePoints => fencePoints;
+        [SerializeField] private AquaPoints aquaPoints;
         [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
         [SerializeField] private GameObject dirkSecretKirakira;
         [SerializeField] private GameObject lightSecretKirakira;
@@ -156,6 +157,8 @@ namespace MainGame
         [SerializeField] private AudioSource ironFenceCloseSE;
         [SerializeField] private AudioSource glassBreakSE;
         [SerializeField] private AudioSource healSE;
+        [SerializeField] private AudioSource aquaGlassBreakSE;
+        public AudioSource AquaGlassBreakSE => aquaGlassBreakSE;
 
         private Gamepad currentGamepad => Gamepad.current;
 
@@ -471,6 +474,10 @@ namespace MainGame
                 {
                     isFoundSecretLight = true;
                 }
+            }
+            else if (aquaPoints.CheckInteract(PlayerMove))
+            {
+                HasBrokenAquaGlass = true;
             }
             else
             {
