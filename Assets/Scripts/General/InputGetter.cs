@@ -291,11 +291,13 @@ namespace IA
             MainGameUp = new InputInfo(_ia.MainGame.Up, InputType.Click).Add(_inputInfoList);
             MainGameDown = new InputInfo(_ia.MainGame.Down, InputType.Click).Add(_inputInfoList);
 
+#if UNITY_EDITOR
             DebugAction1 = new InputInfo(_ia.Debug.Action1, InputType.Click).Add(_inputInfoList);
             DebugAction2 = new InputInfo(_ia.Debug.Action2, InputType.Click).Add(_inputInfoList);
             DebugAction3 = new InputInfo(_ia.Debug.Action3, InputType.Click).Add(_inputInfoList);
             DebugAction4 = new InputInfo(_ia.Debug.Action4, InputType.Click).Add(_inputInfoList);
             DebugAction5 = new InputInfo(_ia.Debug.Action5, InputType.Click).Add(_inputInfoList);
+#endif
         }
     }
 }
