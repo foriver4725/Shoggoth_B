@@ -272,11 +272,13 @@ namespace IA
         public InputInfo MainGameUp { get; private set; }
         public InputInfo MainGameDown { get; private set; }
 
+#if UNITY_EDITOR
         public InputInfo DebugAction1 { get; private set; }
         public InputInfo DebugAction2 { get; private set; }
         public InputInfo DebugAction3 { get; private set; }
         public InputInfo DebugAction4 { get; private set; }
         public InputInfo DebugAction5 { get; private set; }
+#endif
 
         private void Init()
         {

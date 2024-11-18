@@ -322,11 +322,12 @@ namespace MainGame
                 }
             }
 
+#if UNITY_EDITOR
             if (InputGetter.Instance.DebugAction1.Bool) DebugTeleport(new(9, 106, -1));
             else if (InputGetter.Instance.DebugAction2.Bool) DebugTeleport(new(35, 125, -1));
             else if (InputGetter.Instance.DebugAction3.Bool) DebugTeleport(new(109, 11, -1));
             else if (InputGetter.Instance.DebugAction4.Bool) DebugTeleport(new(126, 30, -1));
-
+#endif
 
             // トイレに入った実績達成
             CheckToiletEntry();
@@ -339,6 +340,7 @@ namespace MainGame
             VibGamePad(false);
         }
 
+#if UNITY_EDITOR
         void DebugTeleport(Vector3 pos)
         {
             // 敵の発覚状態を解除する
@@ -351,6 +353,7 @@ namespace MainGame
 
             PlayerMove.transform.position = pos;
         }
+#endif
 
         bool InteractCheck_IsInteractable = true;
         void InteractCheck()

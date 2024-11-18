@@ -176,8 +176,8 @@ namespace Scene
 
         private async UniTaskVoid MovieSkip(Action onSkip, CancellationToken ct)
         {
-            await UniTask.WaitUntil(() => isClickEnabled && InputGetter.Instance.SystemCancel.Bool);
-            onSkip();
+            await UniTask.WaitUntil(() => isClickEnabled && InputGetter.Instance.SystemCancel.Bool, cancellationToken: ct);
+            onSkip?.Invoke();
             SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
         }
     }
