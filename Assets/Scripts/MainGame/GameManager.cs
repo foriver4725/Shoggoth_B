@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -150,6 +151,8 @@ namespace MainGame
         [SerializeField] private AudioSource glassBreakSE;
         [SerializeField] private AudioSource healSE;
 
+        private Gamepad currentGamepad => Gamepad.current;
+
         private CancellationToken ct;
 
         void Cash()
@@ -243,10 +246,12 @@ namespace MainGame
             // 発覚状態のBGMを更新する
             if (EnemyMoves.Map(e => e.IsOnChase).Any(true))
             {
+                VibGamePad(true);
                 chaseBGM.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
             }
             else if (EnemyMoves.Map(e => e.IsChasing).All(false))
             {
+                VibGamePad(false);
                 chaseBGM.Stop();
             }
 
@@ -301,6 +306,11 @@ namespace MainGame
             CheckToiletEntry();
 
             ShowSecretKirakira();
+        }
+
+        void OnDestroy()
+        {
+            VibGamePad(false);
         }
 
         void DebugTeleport(Vector3 pos)
@@ -672,6 +682,12 @@ namespace MainGame
 
             dirkSecretKirakira.SetActive(!isFoundSecretDirk && isDirkSecretInteractable);
             lightSecretKirakira.SetActive(!isFoundSecretLight);
+        }
+
+        private void VibGamePad(bool isVib)
+        {
+            if (currentGamepad == null) return;
+            currentGamepad.SetMotorSpeeds(isVib ? 1 : 0, isVib ? 1 : 0);
         }
     }
 }
