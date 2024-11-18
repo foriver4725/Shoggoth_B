@@ -711,6 +711,8 @@ namespace MainGame
             while (true)
             {
                 await UniTask.NextFrame(ct);
+                if (EventState == EventState.End) continue;
+
                 t -= Time.deltaTime;
                 if (t <= 0)
                 {
