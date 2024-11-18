@@ -67,6 +67,24 @@ namespace Scene
             private Image toiletExplodedImage;
 
             [SerializeField, Required, SceneObjectsOnly]
+            private Image chasedALotImage;
+
+            [SerializeField, Required, SceneObjectsOnly]
+            private Image notChasedImage;
+
+            [SerializeField, Required, SceneObjectsOnly]
+            private Image withoutAnyHealImage;
+
+            [SerializeField, Required, SceneObjectsOnly]
+            private Image withAllHealImage;
+
+            [SerializeField, Required, SceneObjectsOnly]
+            private Image breakAquaGlassImage;
+
+            [SerializeField, Required, SceneObjectsOnly]
+            private Image stepALotImage;
+
+            [SerializeField, Required, SceneObjectsOnly]
             private Image secretItemImage;
 
             [SerializeField, Required, SceneObjectsOnly]
@@ -93,6 +111,15 @@ namespace Scene
 
                 toiletEnteredImage.transform.parent.gameObject.SetActive(saveData.HasEnteredToilet);
                 toiletExplodedImage.transform.parent.gameObject.SetActive(saveData.HasToiletExploded);
+
+                chasedALotImage.transform.parent.gameObject.SetActive(saveData.HasBeenChasedALot);
+                notChasedImage.transform.parent.gameObject.SetActive(saveData.HasClearedWithoutChasing);
+
+                withoutAnyHealImage.transform.parent.gameObject.SetActive(saveData.HasClearedWithoutAnyHeal);
+                withAllHealImage.transform.parent.gameObject.SetActive(saveData.HasClearedWithAllHeal);
+
+                breakAquaGlassImage.transform.parent.gameObject.SetActive(saveData.HasBrokenAquaGlass);
+                stepALotImage.transform.parent.gameObject.SetActive(saveData.HasSteppedALot);
 
                 secretItemImage.transform.parent.gameObject.SetActive(saveData.HasFoundSecretItem);
                 achievedAllImage.transform.parent.gameObject.SetActive(SaveData.HasAchievedAll(saveData));

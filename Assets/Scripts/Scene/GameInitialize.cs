@@ -25,6 +25,12 @@ namespace Scene
                 SaveDataHolder.Instance.SaveData.OverNum = 999;
                 SaveDataHolder.Instance.SaveData.HasEnteredToilet = true;
                 SaveDataHolder.Instance.SaveData.HasToiletExploded = true;
+                SaveDataHolder.Instance.SaveData.HasBeenChasedALot = true;
+                SaveDataHolder.Instance.SaveData.HasClearedWithoutChasing = true;
+                SaveDataHolder.Instance.SaveData.HasClearedWithoutAnyHeal = true;
+                SaveDataHolder.Instance.SaveData.HasClearedWithAllHeal = true;
+                SaveDataHolder.Instance.SaveData.HasBrokenAquaGlass = true;
+                SaveDataHolder.Instance.SaveData.HasSteppedALot = true;
                 SaveDataHolder.Instance.SaveData.HasFoundSecretItem = true;
                 SaveDataHolder.Instance.Save();
             }
