@@ -92,6 +92,12 @@ namespace MainGame
         private bool isFoundSecretDirk = false;
         private bool isFoundSecretLight = false;
         private bool isDirkSecretInteractable => EventState is (EventState.ShoggothRaise or EventState.LastShoggoth);
+        public bool HasBeenChasedALot { get; set; } = false;
+        public bool HasNotBeenChased { get; set; } = true;
+        public bool HasClearedWithoutAnyHeal { get; set; } = true;
+        public bool HasClearedWithAllHeal { get; set; } = false;
+        public bool HasBrokenAquaGlass { get; set; } = false;
+        public bool HasSteppedALot { get; set; } = false;
 
         // 現在のスタミナ (0 ~ 1)
         private float _stamina = 1;
@@ -154,6 +160,11 @@ namespace MainGame
         private Gamepad currentGamepad => Gamepad.current;
 
         private CancellationToken ct;
+
+        private static readonly float ChasedALotTime = 120;
+        private bool isChased = false;
+        private float chaseTime = 0;
+        private int changeFloorNum = 0;
 
         void Cash()
         {
@@ -246,13 +257,25 @@ namespace MainGame
             // 発覚状態のBGMを更新する
             if (EnemyMoves.Map(e => e.IsOnChase).Any(true))
             {
+                HasNotBeenChased = false;
+                isChased = true; chaseTime = 0;
                 VibGamePad(true);
                 chaseBGM.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
             }
             else if (EnemyMoves.Map(e => e.IsChasing).All(false))
             {
+                isChased = false; chaseTime = 0;
                 VibGamePad(false);
                 chaseBGM.Stop();
+            }
+            if (isChased && !HasBeenChasedALot)
+            {
+                chaseTime += Time.deltaTime;
+                if (chaseTime >= ChasedALotTime)
+                {
+                    HasBeenChasedALot = true;
+                    chaseTime = 0;
+                }
             }
 
             // アイテムImage達を更新
@@ -355,6 +378,7 @@ namespace MainGame
                 }
 
                 // その階に行く
+                if (++changeFloorNum >= 100) HasSteppedALot = true;
                 PlayerMove.transform.position = v.SetZ(-1);
                 itemOutlineTrigger.SetActivation(v.x >= 100 ? 1 : v.y >= 100 ? 2 : 0);
                 playerController.OnInteractedElevator();
@@ -428,7 +452,9 @@ namespace MainGame
                 if (EventState != EventState.End)
                 {
                     // 回復する
+                    HasClearedWithoutAnyHeal = false;
                     CurrentHP++;
+                    if (CurrentHP >= 6) HasClearedWithAllHeal = true; // 最大体力6のはず
                     healSE.Raise(SO_Sound.Entity.HealSE, SType.SE);
                 }
             }
@@ -529,6 +555,30 @@ namespace MainGame
                     if (isFoundSecretDirk && isFoundSecretLight && SaveDataHolder.Instance.SaveData.HasFoundSecretItem is false)
                     {
                         SaveDataHolder.Instance.SaveData.HasFoundSecretItem = true;
+                    }
+                    if (HasBeenChasedALot && SaveDataHolder.Instance.SaveData.HasBeenChasedALot is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasBeenChasedALot = true;
+                    }
+                    if (HasNotBeenChased && SaveDataHolder.Instance.SaveData.HasClearedWithoutChasing is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasClearedWithoutChasing = true;
+                    }
+                    if (HasClearedWithoutAnyHeal && SaveDataHolder.Instance.SaveData.HasClearedWithoutAnyHeal is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasClearedWithoutAnyHeal = true;
+                    }
+                    if (HasClearedWithAllHeal && SaveDataHolder.Instance.SaveData.HasClearedWithAllHeal is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasClearedWithAllHeal = true;
+                    }
+                    if (HasBrokenAquaGlass && SaveDataHolder.Instance.SaveData.HasBrokenAquaGlass is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasBrokenAquaGlass = true;
+                    }
+                    if (HasSteppedALot && SaveDataHolder.Instance.SaveData.HasSteppedALot is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasSteppedALot = true;
                     }
 
                     mainToGameClear.Clear();

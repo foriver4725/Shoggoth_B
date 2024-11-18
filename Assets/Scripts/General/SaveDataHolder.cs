@@ -22,14 +22,14 @@ namespace General
             Load();
         }
 
-        // ƒ[ƒh‚µ‚Äƒƒ“ƒo‚ğXV
+        // ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½Äƒï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Xï¿½V
         public void Load()
         {
             SaveData.Load(out SaveData loadedData);
             SaveData = loadedData;
         }
 
-        //ƒƒ“ƒo‚ğƒZ[ƒu
+        //ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Zï¿½[ï¿½u
         public void Save()
         {
             SaveData.Save(SaveData);
@@ -47,6 +47,12 @@ namespace General
         public ulong OverNum = 0;
         public bool HasEnteredToilet = false;
         public bool HasToiletExploded = false;
+        public bool HasBeenChasedALot = false;
+        public bool HasClearedWithoutChasing = false;
+        public bool HasClearedWithoutAnyHeal = false;
+        public bool HasClearedWithAllHeal = false;
+        public bool HasBrokenAquaGlass = false;
+        public bool HasSteppedALot = false;
         public bool HasFoundSecretItem = false;
 
         private const string PATH = "saves.json";
@@ -84,6 +90,12 @@ namespace General
             if (data.OverNum < 100) return false;
             if (data.HasEnteredToilet is false) return false;
             if (data.HasToiletExploded is false) return false;
+            if (data.HasBeenChasedALot is false) return false;
+            if (data.HasClearedWithoutChasing is false) return false;
+            if (data.HasClearedWithoutAnyHeal is false) return false;
+            if (data.HasClearedWithAllHeal is false) return false;
+            if (data.HasBrokenAquaGlass is false) return false;
+            if (data.HasSteppedALot is false) return false;
             if (data.HasFoundSecretItem is false) return false;
             return true;
         }
