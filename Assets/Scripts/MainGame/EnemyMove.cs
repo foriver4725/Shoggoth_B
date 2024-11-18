@@ -58,32 +58,25 @@ namespace MainGame
 
             if (IsChasing)
             {
-                if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
+                if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
                 {
-                    targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
+                    StopChaseTime += Time.deltaTime;
                 }
                 else
                 {
-                    if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
-                    {
-                        StopChaseTime += Time.deltaTime;
-                    }
-                    else
-                    {
-                        StopChaseTime = 0;
-                    }
+                    StopChaseTime = 0;
+                }
 
-                    if (StopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
-                    {
-                        StopChaseTime = 0;
-                        IsChasing = false;
+                if (StopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
+                {
+                    StopChaseTime = 0;
+                    IsChasing = false;
 
-                        SelectNewStokingPoint();
-                    }
-                    else
-                    {
-                        targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
-                    }
+                    SelectNewStokingPoint();
+                }
+                else
+                {
+                    targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
                 }
             }
             else if (isAtStokingPosition)
