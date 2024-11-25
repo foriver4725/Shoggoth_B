@@ -33,21 +33,22 @@ namespace SO
         }
         #endregion
 
-
         [SerializeField, Header("難易度設定\nE, N, H, N")]
         private Difficulty[] difficulty;
 
-        public int VisibilityRange => difficulty[Difficulty.Type.ToInt()].VisibilityRange;
+        public float VisibilityRange => difficulty[Difficulty.Type.ToInt()].VisibilityRange;
         public float StaminaRecover => difficulty[Difficulty.Type.ToInt()].StaminaRecover;
         public bool IsItemRandom => difficulty[Difficulty.Type.ToInt()].IsItemRandom;
+        public bool IsExtraShoggothArrangeDifficult => difficulty[Difficulty.Type.ToInt()].IsExtraShoggothArrangeDifficult;
     }
 
     [Serializable]
     public class Difficulty
     {
-        [Header("視界範囲")] public int VisibilityRange;
+        [Header("視界範囲")] public float VisibilityRange;
         [Header("スタミナ回復速度")] public float StaminaRecover;
         [Header("アイテム配置ランダム化")] public bool IsItemRandom;
+        [Header("エクストラショゴスの配置難化")] public bool IsExtraShoggothArrangeDifficult;
 
         public static DifficultyType Type = DifficultyType.Normal;
     }

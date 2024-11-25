@@ -17,3 +17,4 @@ MonoBehaviour:
   MainGame: Game
   GameClear: GameComplete
   GameOver: GameOver
+  Explosion: Explosion

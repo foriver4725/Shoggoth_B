@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Ex;
+using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 
 namespace MainGame
 {
     public class EnemyMove : MonoBehaviour
     {
-        private enum FLOOR { F1, BF1, BF2 };
+        public enum FLOOR { F1, BF1, BF2 };
         [SerializeField] private Animator anim;
         [SerializeField, Header("どの階層の敵か")] private FLOOR _floor;
 
@@ -42,57 +45,44 @@ namespace MainGame
             _stokingPos = GameManager.Instance.EnemyStokingPositions[stokingPosIndex];
         }
 
+        private bool isRaised => GameManager.Instance.EventState is EventState.ShoggothRaise or EventState.LastShoggoth or EventState.End;
+
         void Update()
         {
             // クリアまたはゲームオーバーなら動かない
-            if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
+            if (GameManager.Instance.EventState == EventState.End) return;
 
-            // 1Fのショゴスは、アイテムが揃ってかつプレイヤーが1Fにいる間、常に発覚状態となる。
-            if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
-            {
-                if (GameManager.Instance.Player.transform.position.x < 75 && GameManager.Instance.Player.transform.position.y < 75)
-                {
-                    IsChasing = true;
-                }
-                else
-                {
-                    IsChasing = false;
-                }
-            }
             // プレイヤーに近づいたら追跡モードになる。
-            else if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+            float chaseRange = SO_Player.Entity.EnemyChaseRange;
+            if (isRaised) chaseRange *= 2; // レイズ時は追跡範囲を2倍にする
+            if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= chaseRange * chaseRange)
             {
                 IsChasing = true;
             }
 
             if (IsChasing)
             {
-                if (GameManager.Instance.IsGetItems.All(true) && _floor == FLOOR.F1)
+                float stopChaseRange = SO_Player.Entity.EnemyStopChaseRange;
+                if (isRaised) stopChaseRange *= 2; // レイズ時は追跡停止範囲を2倍にする
+                if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > stopChaseRange * stopChaseRange)
                 {
-                    targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
+                    StopChaseTime += Time.deltaTime;
                 }
                 else
                 {
-                    if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
-                    {
-                        StopChaseTime += Time.deltaTime;
-                    }
-                    else
-                    {
-                        StopChaseTime = 0;
-                    }
+                    StopChaseTime = 0;
+                }
 
-                    if (StopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
-                    {
-                        StopChaseTime = 0;
-                        IsChasing = false;
+                if (StopChaseTime >= SO_Player.Entity.EnemyStopChaseDuration)
+                {
+                    StopChaseTime = 0;
+                    IsChasing = false;
 
-                        SelectNewStokingPoint();
-                    }
-                    else
-                    {
-                        targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
-                    }
+                    SelectNewStokingPoint();
+                }
+                else
+                {
+                    targetPos = GameManager.Instance.Player.transform.position.ToVec2I();
                 }
             }
             else if (isAtStokingPosition)
@@ -155,14 +145,16 @@ namespace MainGame
 
             while (true)
             {
-                transform.position
-                    += _floor switch
-                    {
-                        FLOOR.F1 => SO_Player.Entity.EnemySpeed1F,
-                        FLOOR.BF1 => SO_Player.Entity.EnemySpeedB1F,
-                        FLOOR.BF2 => SO_Player.Entity.EnemySpeedB2F,
-                        _ => 0
-                    } * Time.deltaTime * dir;
+                float speed = _floor switch
+                {
+                    FLOOR.F1 => SO_Player.Entity.EnemySpeed1F,
+                    FLOOR.BF1 => SO_Player.Entity.EnemySpeedB1F,
+                    FLOOR.BF2 => SO_Player.Entity.EnemySpeedB2F,
+                    _ => 0
+                };
+                if (isRaised) speed *= 0.5f; // レイズ時は移動速度を半分にする
+                transform.position += speed * Time.deltaTime * dir;
+
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;
                 yield return null;
@@ -176,7 +168,7 @@ namespace MainGame
         public void SelectNewStokingPoint()
         {
             int posNum = _stokingPos.Count;
-            int nextIndex = Random.Range(0, posNum);
+            int nextIndex = UnityEngine.Random.Range(0, posNum);
 
             int i = 0;
             foreach (Vector2Int pos in _stokingPos)
@@ -197,6 +189,24 @@ namespace MainGame
                 }
                 i++;
             }
+        }
+
+        public async UniTaskVoid ChangeFloorThenDo(FLOOR floor, Action action, CancellationToken ct)
+        {
+            await UniTask.WaitUntil(() => IsStepEnded, cancellationToken: ct);
+
+            _floor = floor;
+
+            int stokingPosIndex = _floor switch
+            {
+                FLOOR.F1 => 0,
+                FLOOR.BF1 => 1,
+                FLOOR.BF2 => 2,
+                _ => 0
+            };
+            _stokingPos = GameManager.Instance.EnemyStokingPositions[stokingPosIndex];
+
+            action?.Invoke();
         }
     }
 }

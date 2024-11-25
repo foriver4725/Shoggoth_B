@@ -40,6 +40,7 @@ namespace SO
         [Header("書斎に向かうことをを示唆するログ"), TextArea(1, 1000)] public string ShowDirectionLog;
         [Header("脱出方法を示唆するログ"), TextArea(1, 1000)] public string EscapeTeachLog;
         [Header("アイテムを全て入手した後、\n脱出する場所を示唆するログ"), TextArea(1, 1000)] public string ItemCompletedLog;
+        [Header("アイテムをすべて集めて1Fに行った後、落ちたブレーカーの位置を示唆するログ"), TextArea(1, 1000)] public string BreakerLog;
 
         public async UniTask Show(Image textBack, TextMeshProUGUI text, string logMessage, CancellationToken ct)
         {
@@ -48,7 +49,7 @@ namespace SO
             Time.timeScale = 0f;
             text.text = logMessage;
             textBack.enabled = true;
-            await UniTask.WaitUntil(() => InputGetter.Instance.System_IsSubmit, cancellationToken: ct);
+            await UniTask.WaitUntil(() => InputGetter.Instance.SystenmSubmit.Bool, cancellationToken: ct);
             textBack.enabled = false;
             text.text = "";
             Time.timeScale = 1f;

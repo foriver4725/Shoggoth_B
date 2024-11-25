@@ -9,6 +9,7 @@ using Ex;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine.Video;
+using General;
 
 namespace Scene
 {
@@ -39,6 +40,7 @@ namespace Scene
         {
             [SerializeField] private AudioSource bgmAS;
             public void PlayBGM() => bgmAS.Raise(SO_Sound.Entity.TitleBGM, SType.BGM);
+            public void StopBGM() => bgmAS.Stop();
 
             [SerializeField] private AudioSource clickAS;
             public void PlayClickSE() => clickAS.Raise(SO_Sound.Entity.ClickSE, SType.SE);
@@ -54,6 +56,35 @@ namespace Scene
         private State state = State.TitleImage;
 
         private LoopedInt difficultyIndex = new(4);
+
+        private bool isClickEnabled = true;
+        // これを通じてフラグを書き換える
+        private void OnClick() => OnClickImpl(destroyCancellationToken).Forget();
+        private async UniTaskVoid OnClickImpl(CancellationToken ct)
+        {
+            isClickEnabled = false;
+            audioSources.PlayClickSE();
+            await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.ClickDur), cancellationToken: ct);
+            isClickEnabled = true;
+        }
+
+        private async UniTaskVoid AfterClick(Action action, CancellationToken ct)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(SO_General.Entity.AfterClickDur), cancellationToken: ct);
+            action?.Invoke();
+        }
+
+        private void OnEnable()
+        {
+            SaveImpl(SaveDataHolder.Instance, destroyCancellationToken).Forget(); // タイトルに戻るたびにセーブ
+            audioSources.PlayBGM();
+
+            static async UniTaskVoid SaveImpl(SaveDataHolder saveDataHolder, CancellationToken ct)
+            {
+                await UniTask.WaitUntil(() => saveDataHolder != null, cancellationToken: ct);
+                saveDataHolder.Save();
+            }
+        }
 
         private void Update()
         {
@@ -72,44 +103,52 @@ namespace Scene
 
         private void UpdateOnTitleImage()
         {
-            if (InputGetter.Instance.System_IsCredit)
+            if (isClickEnabled && InputGetter.Instance.SystemCancel.Bool)
             {
+                OnClick();
                 state = State.SceneChanging;
-                SceneManager.LoadScene(SO_SceneName.Entity.Credit);
-            }
-            else if (InputGetter.Instance.System_IsCancel)
-            {
-                state = State.SceneChanging;
+                AfterClick(() =>
+                {
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+                    UnityEditor.EditorApplication.isPlaying = false;
 #else
-                Application.Quit();
+                    Application.Quit();
 #endif
+                }, destroyCancellationToken).Forget();
             }
-            else if (InputGetter.Instance.System_IsSubmit)
+            else if (isClickEnabled && InputGetter.Instance.SystenmSubmit.Bool)
             {
-                state = State.DifficultySelect;
-                difficultySelectUI.SetActive(true);
+                OnClick();
+                state = State.SceneChanging;
+                AfterClick(() =>
+                {
+                    state = State.DifficultySelect;
+                    difficultySelectUI.SetActive(true);
+                }, destroyCancellationToken).Forget();
             }
         }
 
         private void UpdateOnDifficultySelect()
         {
-            if (InputGetter.Instance.MainGame_IsUp) difficultyIndex.Value--;
-            else if (InputGetter.Instance.MainGame_IsDown) difficultyIndex.Value++;
+            if (InputGetter.Instance.MainGameUp.Bool) difficultyIndex.Value--;
+            else if (InputGetter.Instance.MainGameDown.Bool) difficultyIndex.Value++;
 
-            if (InputGetter.Instance.System_IsSubmit)
+            if (isClickEnabled && InputGetter.Instance.SystenmSubmit.Bool)
             {
+                OnClick();
                 state = State.SceneChanging;
-                Difficulty.Type = difficultyIndex.Value switch
+                AfterClick(() =>
                 {
-                    0 => DifficultyType.Easy,
-                    1 => DifficultyType.Normal,
-                    2 => DifficultyType.Hard,
-                    3 => DifficultyType.Nightmare,
-                    _ => DifficultyType.Easy
-                };
-                ShowOpeningVideo();
+                    Difficulty.Type = difficultyIndex.Value switch
+                    {
+                        0 => DifficultyType.Easy,
+                        1 => DifficultyType.Normal,
+                        2 => DifficultyType.Hard,
+                        3 => DifficultyType.Nightmare,
+                        _ => DifficultyType.Easy
+                    };
+                    ShowOpeningVideo();
+                }, destroyCancellationToken).Forget();
             }
 
             difficultyPanel.EasyColor = difficultyIndex.Value == 0 ? Color.yellow : Color.white;
@@ -121,13 +160,24 @@ namespace Scene
         private void ShowOpeningVideo()
         {
             VideoPlayer vp = openingVideo.GetComponent<VideoPlayer>();
-            vp.loopPointReached += _ => LoadMainScene(destroyCancellationToken).Forget();
+            if (vp != null) vp.targetTexture.Release();
+            VideoPlayer.EventHandler f = _ => LoadMainScene(destroyCancellationToken).Forget();
+            vp.loopPointReached += f;
+            audioSources.StopBGM();
             openingVideo.SetActive(true);
+            MovieSkip(() => vp.loopPointReached -= f, destroyCancellationToken).Forget();
         }
 
-        private async UniTask LoadMainScene(CancellationToken ct)
+        private async UniTaskVoid LoadMainScene(CancellationToken ct)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: ct);
+            SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
+        }
+
+        private async UniTaskVoid MovieSkip(Action onSkip, CancellationToken ct)
+        {
+            await UniTask.WaitUntil(() => isClickEnabled && InputGetter.Instance.SystemCancel.Bool, cancellationToken: ct);
+            onSkip?.Invoke();
             SceneManager.LoadScene(SO_SceneName.Entity.MainGame);
         }
     }

@@ -22,10 +22,15 @@ namespace MainGame
         void Update()
         {
             // ダッシュしているなら...
-            if (InputGetter.Instance.MainGame_IsDash && playerMove.InputDir != Vector2.zero)
+            if (InputGetter.Instance.MainGameDash.Bool && playerMove.InputDir != Vector2.zero)
             {
+#if UNITY_EDITOR
+                float decreaseAmount = SO_Debug.Entity.IsInfiniteStamina ? 0.01f : 1;
+#else
+                float decreaseAmount = 1;
+#endif
                 // スタミナ減少
-                GameManager.Instance.Stamina -= (SO_Debug.Entity.IsInfiniteStamina ? 0.01f : 1) / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
+                GameManager.Instance.Stamina -= decreaseAmount / SO_Player.Entity.StaminaDecreaseDur * Time.deltaTime;
             }
             // ダッシュしていない時...
             else

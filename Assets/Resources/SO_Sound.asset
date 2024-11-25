@@ -24,3 +24,11 @@ MonoBehaviour:
   LockedDoorSE: {fileID: 8300000, guid: af41787cb31271b4392c96fb9d287b03, type: 3}
   UsePotionSE: {fileID: 8300000, guid: c09a3020fc7e04045bddf6f36881535c, type: 3}
   ClickSE: {fileID: 8300000, guid: af75497c7a42c46409a52842d8397519, type: 3}
+  Elevator1FSE: {fileID: 8300000, guid: 74abdd95821ea4dc2bbc2f405065abfe, type: 3}
+  ElevatorB1FSE: {fileID: 8300000, guid: 2e699d75016c94cdb8056b83971e747a, type: 3}
+  ElevatorB2FSE: {fileID: 8300000, guid: ec55a6c873a8e49658a822aeee67612e, type: 3}
+  BreakerOffSE: {fileID: 8300000, guid: b732119e1a0794730860ac26213ddf3d, type: 3}
+  BreakerOnSE: {fileID: 8300000, guid: 931836cbb620646639442007e9094829, type: 3}
+  IronFenceCloseSE: {fileID: 8300000, guid: 0ebcbe9792b40464d9f9b528544b35f2, type: 3}
+  GlassBreakSE: {fileID: 8300000, guid: 21d38ea02c78d477b8e2e58a583a7f41, type: 3}
+  HealSE: {fileID: 8300000, guid: abb48a1f7c3d7544780699a67a8d94da, type: 3}

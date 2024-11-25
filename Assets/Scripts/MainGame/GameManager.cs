@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Ex;
+using General;
 using IA;
 using SO;
 using System;
@@ -9,10 +10,22 @@ using System.Linq;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace MainGame
 {
+    public enum EventState
+    {
+        Normal,
+        ItemCompleted,
+        BreakerDown,
+        ShoggothRaise,
+        LastShoggoth,
+        End
+    }
+
     public class GameManager : MonoBehaviour
     {
         #region
@@ -34,31 +47,58 @@ namespace MainGame
         }
         #endregion
 
-        [NonSerialized] public bool IsClear = false;
-        [NonSerialized] public bool IsOver = false;
+        [NonSerialized]
+        public EventState EventState = EventState.Normal;
 
         [SerializeField] private PlayerController playerController;
 
         [SerializeField] Image textBack;
         [SerializeField] TextMeshProUGUI textMeshProUGUI;
+        [SerializeField] TextMeshProUGUI ExplosionTimeText;
 
         [SerializeField] GameObject finalHint;
         [SerializeField] Image redImage;
 
         [SerializeField] TextMeshProUGUI floorText;
 
+        [SerializeField] private ExtraShogghth extraShogghth;
         [SerializeField] private ItemOutlineTrigger itemOutlineTrigger;
         [SerializeField, Header("アイテムの設置候補場所\n(z座標はきらきらと同じにする)")] private ItemPoints itemPoints;
         [SerializeField] private FloorChangePoints floorChangePoints;
+        [SerializeField] private BreakerPoints breakerPoints;
+        [SerializeField] private FencePoints fencePoints;
+        [SerializeField] private ToiletPoints toiletPoints;
+        [SerializeField] private HealPoints healPoints;
+        [SerializeField] private SecretPoints secretPoints;
+        public FencePoints FencePoints => fencePoints;
+        [SerializeField] private AquaPoints aquaPoints;
+        [SerializeField, Header("全てのショゴスの招集場所(x,yのみ)")] private Transform shoggothFinalPoint;
+        [SerializeField] private GameObject dirkSecretKirakira;
+        [SerializeField] private GameObject lightSecretKirakira;
+        [SerializeField] private Image darkSecretImage;
+        [SerializeField] private Image lightSecretImage;
+
+        [SerializeField] private MainToGameClear mainToGameClear;
 
         [NonSerialized] public HashSet<Vector2Int> PathPositions = new();
         [NonSerialized] public List<HashSet<Vector2Int>> EnemyStokingPositions = new(); // 0が1F、2がB2F
         [NonSerialized] public GameObject Player;
         [NonSerialized] public GameObject[] Enemys = new GameObject[6];
+        [NonSerialized] public List<GameObject> ExtraShoggoth = new();
         [NonSerialized] public PlayerMove PlayerMove;
         [NonSerialized] public EnemyMove[] EnemyMoves = new EnemyMove[6];
 
         [NonSerialized] public int CurrentHP; // プレイヤーのHP
+
+        private bool isFoundSecretDirk = false;
+        private bool isFoundSecretLight = false;
+        private bool isDirkSecretInteractable => EventState is (EventState.ShoggothRaise or EventState.LastShoggoth);
+        public bool HasBeenChasedALot { get; set; } = false;
+        public bool HasNotBeenChased { get; set; } = true;
+        public bool HasClearedWithoutAnyHeal { get; set; } = true;
+        public bool HasClearedWithAllHeal { get; set; } = false;
+        public bool HasBrokenAquaGlass { get; set; } = false;
+        public bool HasSteppedALot { get; set; } = false;
 
         // 現在のスタミナ (0 ~ 1)
         private float _stamina = 1;
@@ -106,11 +146,28 @@ namespace MainGame
 
         [SerializeField] private AudioSource _onGameBGM;
 
-        [SerializeField] AudioSource lockedDoorSE;
-        [SerializeField] AudioSource potionSE;
-        [SerializeField] AudioSource chaseBGM;
+        [SerializeField] private AudioSource lockedDoorSE;
+        [SerializeField] private AudioSource potionSE;
+        [SerializeField] private AudioSource chaseBGM;
+        [SerializeField] private AudioSource elevator1FSE;
+        [SerializeField] private AudioSource elevatorB1FSE;
+        [SerializeField] private AudioSource elevatorB2FSE;
+        [SerializeField] private AudioSource breakerOffSE;
+        [SerializeField] private AudioSource breakerOnSE;
+        [SerializeField] private AudioSource ironFenceCloseSE;
+        [SerializeField] private AudioSource glassBreakSE;
+        [SerializeField] private AudioSource healSE;
+        [SerializeField] private AudioSource aquaGlassBreakSE;
+        public AudioSource AquaGlassBreakSE => aquaGlassBreakSE;
+
+        private Gamepad currentGamepad => Gamepad.current;
 
         private CancellationToken ct;
+
+        private static readonly float ChasedALotTime = 120;
+        private bool isChased = false;
+        private float chaseTime = 0;
+        private int changeFloorNum = 0;
 
         void Cash()
         {
@@ -162,6 +219,8 @@ namespace MainGame
             Player = GameObject.FindGameObjectWithTag("character/player");
             Enemys = GameObject.FindGameObjectsWithTag("character/shoggoth");
 
+
+
             PlayerMove = Player.GetComponent<PlayerMove>();
             for (int i = 0; i < Enemys.Length; i++)
             {
@@ -187,12 +246,13 @@ namespace MainGame
             finalHint.SetActive(false);
             itemOutlineTrigger.SetActivation(2);
 
-            ShowDirectionLog();
+            15.0f.SecWaitAndDo(() => StartCoroutine(
+                ShowLogWaitingTime(SO_UIConsoleText.Entity.ShowDirectionLog, SO_General.Entity.LogFadeDur)), destroyCancellationToken).Forget();
         }
 
         void Update()
         {
-            if (InputGetter.Instance.System_IsSubmit)
+            if (InputGetter.Instance.SystenmSubmit.Bool)
             {
                 InteractCheck();
             }
@@ -200,11 +260,25 @@ namespace MainGame
             // 発覚状態のBGMを更新する
             if (EnemyMoves.Map(e => e.IsOnChase).Any(true))
             {
+                HasNotBeenChased = false;
+                isChased = true; chaseTime = 0;
+                VibGamePad(true);
                 chaseBGM.Raise(SO_Sound.Entity.ChaseBGM, SType.BGM);
             }
             else if (EnemyMoves.Map(e => e.IsChasing).All(false))
             {
+                isChased = false; chaseTime = 0;
+                VibGamePad(false);
                 chaseBGM.Stop();
+            }
+            if (isChased && !HasBeenChasedALot)
+            {
+                chaseTime += Time.deltaTime;
+                if (chaseTime >= ChasedALotTime)
+                {
+                    HasBeenChasedALot = true;
+                    chaseTime = 0;
+                }
             }
 
             // アイテムImage達を更新
@@ -219,18 +293,72 @@ namespace MainGame
                 _ => "B2F"
             };
 
-            // アイテムが揃った状態で1Fにいるなら、画面を赤くする。ただし、クリアとゲームオーバー時は赤くしない。
-            redImage.enabled =
-                !IsClear
-                && !IsOver
-                && IsGetItems.All(true)
-                && Player.transform.position.x < 75 && Player.transform.position.y < 75;
+            if (EventState == EventState.ItemCompleted)
+            {
+                if (IsGetItems.All(true) && Player.transform.position.x < 75 && Player.transform.position.y < 75)
+                {
+                    EventState = EventState.BreakerDown;
+                    playerController.Light2D.intensity = SO_Player.Entity.LightIntensityOnBreakerOff;
+                    fencePoints.Arrange();
+                    StartCoroutine(ShowLogWaitingSubmit(SO_UIConsoleText.Entity.BreakerLog));
+                    breakerOffSE.Raise(SO_Sound.Entity.BreakerOffSE, SType.SE);
+                    0.5f.SecWaitAndDo(() => ironFenceCloseSE.Raise(SO_Sound.Entity.IronFenceCloseSE, SType.SE), destroyCancellationToken).Forget();
+                }
+            }
+            else if (EventState == EventState.ShoggothRaise)
+            {
+                if (Player.transform.position.x < 75 && Player.transform.position.y < 75)
+                {
+                    EventState = EventState.LastShoggoth;
+                    redImage.enabled = true;
+                }
+            }
+            else if (EventState == EventState.LastShoggoth)
+            {
+                if (!(Player.transform.position.x < 75 && Player.transform.position.y < 75))
+                {
+                    EventState = EventState.ShoggothRaise;
+                    redImage.enabled = false;
+                }
+            }
+
+#if UNITY_EDITOR
+            if (InputGetter.Instance.DebugAction1.Bool) DebugTeleport(new(9, 106, -1));
+            else if (InputGetter.Instance.DebugAction2.Bool) DebugTeleport(new(35, 125, -1));
+            else if (InputGetter.Instance.DebugAction3.Bool) DebugTeleport(new(109, 11, -1));
+            else if (InputGetter.Instance.DebugAction4.Bool) DebugTeleport(new(126, 30, -1));
+#endif
+
+            // トイレに入った実績達成
+            CheckToiletEntry();
+
+            ShowSecretKirakira();
         }
+
+        void OnDestroy()
+        {
+            VibGamePad(false);
+        }
+
+#if UNITY_EDITOR
+        void DebugTeleport(Vector3 pos)
+        {
+            // 敵の発覚状態を解除する
+            foreach (EnemyMove _enemy in EnemyMoves)
+            {
+                _enemy.StopChaseTime = 0;
+                _enemy.IsChasing = false;
+                _enemy.SelectNewStokingPoint();
+            }
+
+            PlayerMove.transform.position = pos;
+        }
+#endif
 
         bool InteractCheck_IsInteractable = true;
         void InteractCheck()
         {
-            if (IsClear || IsOver) return;
+            if (EventState == EventState.End) return;
             if (Time.timeScale == 0) return;
             if (!InteractCheck_IsInteractable) return;
 
@@ -238,12 +366,14 @@ namespace MainGame
             Vector3 pos = PlayerMove.transform.position;
             DIR dir = PlayerMove.LookingDir;
 
-            if (floorChangePoints.InteractCheck(PlayerMove, out Vector3 v))
+            if (floorChangePoints.InteractCheck(PlayerMove, out Vector3 v, out bool isElevator))
             {
+                if ((EventState is EventState.BreakerDown or EventState.End) && isElevator) return;
+
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                 // 敵の発覚状態を解除する
                 foreach (EnemyMove _enemy in EnemyMoves)
@@ -254,16 +384,25 @@ namespace MainGame
                 }
 
                 // その階に行く
+                if (++changeFloorNum >= 100) HasSteppedALot = true;
                 PlayerMove.transform.position = v.SetZ(-1);
                 itemOutlineTrigger.SetActivation(v.x >= 100 ? 1 : v.y >= 100 ? 2 : 0);
                 playerController.OnInteractedElevator();
+
+                if (isElevator is true)
+                {
+                    var so = SO_Sound.Entity;
+                    AudioSource source = v.x >= 100 ? elevatorB1FSE : v.y >= 100 ? elevatorB2FSE : elevator1FSE;
+                    AudioClip clip = v.x >= 100 ? so.ElevatorB1FSE : v.y >= 100 ? so.ElevatorB2FSE : so.Elevator1FSE;
+                    source.Raise(clip, SType.SE);
+                }
             }
             else if (CHECK_POSITIONS.Any(e => PlayerMove.IsInteractableAgainst(e)))
             {
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                 // 書斎の棚を調べる
                 CheckRack();
@@ -273,13 +412,75 @@ namespace MainGame
                 // クールタイムが明けるまでインタラクト出来ないようにし...
                 InteractCheck_IsInteractable = false;
                 // クールタイムのカウントを開始する
-                Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                 // アイテムを入手
                 if (IsHintedItems[idx])
                 {
                     IsGetItems[idx] = true;
                 }
+            }
+            else if (breakerPoints.IsInteractableAgainstAny(PlayerMove))
+            {
+                if (EventState == EventState.BreakerDown)
+                {
+                    EventState = EventState.ShoggothRaise;
+
+                    StartExplosionCount(destroyCancellationToken).Forget();
+
+                    // 敵の発覚状態を解除して、招集する
+                    foreach (EnemyMove _enemy in EnemyMoves)
+                    {
+                        _enemy.ChangeFloorThenDo(EnemyMove.FLOOR.F1, () =>
+                        {
+                            _enemy.StopChaseTime = 0;
+                            _enemy.IsChasing = false;
+
+                            Vector3 enemyPos = _enemy.transform.position;
+                            enemyPos.x = shoggothFinalPoint.position.x;
+                            enemyPos.y = shoggothFinalPoint.position.y;
+                            _enemy.transform.position = enemyPos;
+
+                            _enemy.SelectNewStokingPoint();
+                        }, destroyCancellationToken).Forget();
+                    }
+
+                    fencePoints.Dearrange();
+                    playerController.Light2D.intensity = SO_Player.Entity.LightIntensityDefault;
+                    breakerOnSE.Raise(SO_Sound.Entity.BreakerOnSE, SType.SE);
+
+                    extraShogghth.Raise();
+                    0.5f.SecWaitAndDo(() => glassBreakSE.Raise(SO_Sound.Entity.GlassBreakSE, SType.SE), destroyCancellationToken).Forget();
+                }
+            }
+            else if (healPoints.IsInteractableAgainstAny(PlayerMove))
+            {
+                if (EventState != EventState.End)
+                {
+                    // 回復する
+                    HasClearedWithoutAnyHeal = false;
+                    CurrentHP++;
+                    if (CurrentHP >= 6) HasClearedWithAllHeal = true; // 最大体力6のはず
+                    healSE.Raise(SO_Sound.Entity.HealSE, SType.SE);
+                }
+            }
+            else if (secretPoints.IsInteractableAgainstSecretDirk(PlayerMove))
+            {
+                if (isDirkSecretInteractable && !isFoundSecretDirk)
+                {
+                    isFoundSecretDirk = true;
+                }
+            }
+            else if (secretPoints.IsInteractableAgainstSecretLight(PlayerMove))
+            {
+                if (!isFoundSecretLight)
+                {
+                    isFoundSecretLight = true;
+                }
+            }
+            else if (aquaPoints.CheckInteract(PlayerMove))
+            {
+                HasBrokenAquaGlass = true;
             }
             else
             {
@@ -290,7 +491,7 @@ namespace MainGame
                         // クールタイムが明けるまでインタラクト出来ないようにし...
                         InteractCheck_IsInteractable = false;
                         // クールタイムのカウントを開始する
-                        Async.AfterWaited(() => InteractCheck_IsInteractable = true, SO_General.Entity.InteractDur, ct).Forget();
+                        SO_General.Entity.InteractDur.SecWaitAndDo(() => InteractCheck_IsInteractable = true, ct).Forget();
 
                         // きらきらを非表示
                         foreach (GameObject e in _entranceKirakiras)
@@ -305,6 +506,13 @@ namespace MainGame
                 }
             }
             #endregion
+        }
+
+
+        private async UniTaskVoid SceneChange(CancellationToken ct)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: ct);
+            SceneManager.LoadScene(SO_SceneName.Entity.Explosion);
         }
 
         bool CheckItemInteract(out int idx)
@@ -326,6 +534,8 @@ namespace MainGame
         bool CheckEscape_IsDoorBroken = false;
         void CheckEscape()
         {
+            if (EventState != EventState.LastShoggoth) return;
+
             // 必要アイテムが揃っていないなら何もしない
             if (IsGetItems.Any(false))
             {
@@ -348,9 +558,40 @@ namespace MainGame
             // 次のインタラクトでは脱出する
             else
             {
-                if (!IsClear && !IsOver)
+                if (EventState != EventState.End)
                 {
-                    IsClear = true;
+                    EventState = EventState.End;
+
+                    if (isFoundSecretDirk && isFoundSecretLight && SaveDataHolder.Instance.SaveData.HasFoundSecretItem is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasFoundSecretItem = true;
+                    }
+                    if (HasBeenChasedALot && SaveDataHolder.Instance.SaveData.HasBeenChasedALot is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasBeenChasedALot = true;
+                    }
+                    if (HasNotBeenChased && SaveDataHolder.Instance.SaveData.HasClearedWithoutChasing is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasClearedWithoutChasing = true;
+                    }
+                    if (HasClearedWithoutAnyHeal && SaveDataHolder.Instance.SaveData.HasClearedWithoutAnyHeal is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasClearedWithoutAnyHeal = true;
+                    }
+                    if (HasClearedWithAllHeal && SaveDataHolder.Instance.SaveData.HasClearedWithAllHeal is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasClearedWithAllHeal = true;
+                    }
+                    if (HasBrokenAquaGlass && SaveDataHolder.Instance.SaveData.HasBrokenAquaGlass is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasBrokenAquaGlass = true;
+                    }
+                    if (HasSteppedALot && SaveDataHolder.Instance.SaveData.HasSteppedALot is false)
+                    {
+                        SaveDataHolder.Instance.SaveData.HasSteppedALot = true;
+                    }
+
+                    mainToGameClear.Clear();
                 }
             }
         }
@@ -383,10 +624,9 @@ namespace MainGame
                     }
 
                     // ログを表示
-                    Time.timeScale = 0.0f;
-                    textBack.enabled = true;
-                    textMeshProUGUI.text = SO_UIConsoleText.Entity.ItemCompletedLog;
-                    StartCoroutine(FadeItemCompletedLog());
+                    StartCoroutine(ShowLogWaitingSubmit(SO_UIConsoleText.Entity.ItemCompletedLog));
+
+                    if (EventState == EventState.Normal) EventState = EventState.ItemCompleted;
                 }
             }
             // 必要アイテムがそろっていないなら
@@ -409,22 +649,6 @@ namespace MainGame
             }
         }
 
-        private IEnumerator FadeItemCompletedLog()
-        {
-            while (true)
-            {
-                yield return null;
-
-                if (InputGetter.Instance.System_IsSubmit)
-                {
-                    textMeshProUGUI.text = "";
-                    textBack.enabled = false;
-                    Time.timeScale = 1.0f;
-                    yield break;
-                }
-            }
-        }
-
         // 書斎の棚を調べる
         public void CheckRack()
         {
@@ -432,9 +656,6 @@ namespace MainGame
             if (IsCheckedRack) return;
             // もうこのメソッドの処理は行わない
             IsCheckedRack = true;
-
-            StopCoroutine(ShowDirectionLog_Cor);
-            ShowDirectionLog_Cor = null;
 
             // アイテムのヒントをもらっている状態にする
             IsHintedItems = IsHintedItems.Map(e => true).ToArray();
@@ -445,20 +666,31 @@ namespace MainGame
                 e.transform.position = new(-100, -100, -0.055f);
             }
 
-            Time.timeScale = 0.0f;
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.EscapeTeachLog;
-
-            StartCoroutine(FadeEscapeTeachLog());
+            StartCoroutine(ShowLogWaitingSubmit(SO_UIConsoleText.Entity.EscapeTeachLog));
         }
 
-        private IEnumerator FadeEscapeTeachLog()
+        private IEnumerator ShowLogWaitingTime(string text, float seconds)
         {
+            textBack.enabled = true;
+            textMeshProUGUI.text = text;
+
+            yield return new WaitForSeconds(seconds);
+
+            textMeshProUGUI.text = "";
+            textBack.enabled = false;
+        }
+
+        private IEnumerator ShowLogWaitingSubmit(string text)
+        {
+            Time.timeScale = 0.0f;
+            textBack.enabled = true;
+            textMeshProUGUI.text = text;
+
             while (true)
             {
                 yield return null;
 
-                if (InputGetter.Instance.System_IsSubmit)
+                if (InputGetter.Instance.SystenmSubmit.Bool)
                 {
                     textMeshProUGUI.text = "";
                     textBack.enabled = false;
@@ -468,36 +700,56 @@ namespace MainGame
             }
         }
 
-        Coroutine ShowDirectionLog_Cor = null;
-        void ShowDirectionLog()
+        private void CheckToiletEntry()
         {
-            ShowDirectionLog_Cor = StartCoroutine(ShowDirectionLogCor());
-        }
-        IEnumerator ShowDirectionLogCor()
-        {
-            yield return new WaitForSeconds(15);
-            textBack.enabled = true;
-            textMeshProUGUI.text = SO_UIConsoleText.Entity.ShowDirectionLog;
-            FadeLog();
+            if (SaveDataHolder.Instance.SaveData.HasEnteredToilet is true) return;
+            if (toiletPoints.IsInAny(Player.transform.position) is false) return;
+            SaveDataHolder.Instance.SaveData.HasEnteredToilet = true;
         }
 
-        Coroutine FadeLog_Cor = null;
-        public void FadeLog()
+        private async UniTaskVoid StartExplosionCount(CancellationToken ct)
         {
-            if (FadeLog_Cor != null)
+            ExplosionTimeText.enabled = true;
+            float t = SO_General.Entity.ExplosionDur;
+            while (true)
             {
-                StopCoroutine(FadeLog_Cor);
-                FadeLog_Cor = null;
+                await UniTask.NextFrame(ct);
+                if (EventState == EventState.End) continue;
+
+                t -= Time.deltaTime;
+                if (t <= 0)
+                {
+                    SceneManager.LoadScene(SO_SceneName.Entity.Explosion);
+                    return;
+                }
+                ExplosionTimeText.text = ToNormalizedText(t);
             }
 
-            FadeLog_Cor = StartCoroutine(ResetLog());
+            static string ToNormalizedText(float second)
+            {
+                int intSecond = (int)second;
+                int min = intSecond / 60;
+                int sec = intSecond % 60;
+                return $"　爆発まで　{min}:{sec:00}";
+            }
         }
 
-        IEnumerator ResetLog()
+        // 毎フレーム
+        private void ShowSecretKirakira()
         {
-            yield return new WaitForSeconds(SO_General.Entity.LogFadeDur);
-            textBack.enabled = false;
-            textMeshProUGUI.text = "";
+            if (darkSecretImage != null && darkSecretImage.enabled is false && isFoundSecretDirk is true)
+                darkSecretImage.enabled = true;
+            if (lightSecretImage != null && lightSecretImage.enabled is false && isFoundSecretLight is true)
+                lightSecretImage.enabled = true;
+
+            dirkSecretKirakira.SetActive(!isFoundSecretDirk && isDirkSecretInteractable);
+            lightSecretKirakira.SetActive(!isFoundSecretLight);
+        }
+
+        private void VibGamePad(bool isVib)
+        {
+            if (currentGamepad == null) return;
+            currentGamepad.SetMotorSpeeds(isVib ? 1 : 0, isVib ? 1 : 0);
         }
     }
 }

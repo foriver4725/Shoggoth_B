@@ -13,12 +13,10 @@ namespace MainGame
 
         Coroutine whiteOutCor;
 
-        void Update()
+        public void Clear()
         {
-            if (GameManager.Instance.IsClear)
-            {
-                if (whiteOutCor == null) whiteOutCor = StartCoroutine(FadeOut());
-            }
+            if (whiteOutCor != null) return;
+            whiteOutCor = StartCoroutine(FadeOut());
         }
 
         IEnumerator FadeOut()

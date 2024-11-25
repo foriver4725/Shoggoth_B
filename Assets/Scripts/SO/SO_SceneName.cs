@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SO
 {
@@ -35,9 +33,9 @@ namespace SO
         #endregion
 
         [Header("タイトルシーン名")] public string Title;
-        [Header("クレジットシーン名")] public string Credit;
         [Header("メインゲームのシーン名")] public string MainGame;
-        [Header("ゲームクリアのシーン名")] public string GameClear;
         [Header("ゲームオーバーのシーン名")] public string GameOver;
+        [Header("爆破オチのシーン名")] public string Explosion;
+        [Header("ゲームクリアのシーン名")] public string GameClear;
     }
 }

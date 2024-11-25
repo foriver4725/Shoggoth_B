@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿using UnityEngine;
 
 namespace SO
 {
@@ -40,5 +37,6 @@ namespace SO
         [Header("インタラクトの反応間隔")] public float InteractDur;
         [Header("ログを消すまでの時間")] public float LogFadeDur;
         [Header("フェードアウト/ホワイトアウト にかける時間[s]")] public float FadeWhiteDur;
+        [Header("爆破するまでの時間[s]")] public float ExplosionDur;
     }
 }

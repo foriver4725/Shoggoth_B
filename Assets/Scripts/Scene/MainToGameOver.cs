@@ -16,9 +16,9 @@ namespace MainGame
         {
             if (GameManager.Instance.CurrentHP == 0)
             {
-                if (!GameManager.Instance.IsClear && !GameManager.Instance.IsOver)
+                if (GameManager.Instance.EventState != EventState.End)
                 {
-                    GameManager.Instance.IsOver = true;
+                    GameManager.Instance.EventState = EventState.End;
                     StartCoroutine(FadeOut());
                 }
             }

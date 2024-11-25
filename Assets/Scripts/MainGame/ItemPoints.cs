@@ -68,15 +68,15 @@ namespace MainGame
                 if (floor is 1)
                 {
                     Vector3[] returnPosArray = new Vector3[2];
-                    returnPosArray[0] = itemPoints11[0].position;
-                    returnPosArray[1] = itemPoints13[0].position;
+                    returnPosArray[0] = itemPoints12[0].position;
+                    returnPosArray[1] = itemPoints14[0].position;
                     return Array.AsReadOnly(returnPosArray);
                 }
                 else if (floor is 2)
                 {
                     Vector3[] returnPosArray = new Vector3[2];
-                    returnPosArray[0] = itemPoints21[0].position;
-                    returnPosArray[1] = itemPoints23[0].position;
+                    returnPosArray[0] = itemPoints22[0].position;
+                    returnPosArray[1] = itemPoints24[0].position;
                     return Array.AsReadOnly(returnPosArray);
                 }
                 else return null;

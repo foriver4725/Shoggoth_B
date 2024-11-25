@@ -3,6 +3,7 @@ using Ex;
 using MainGame;
 using SO;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -10,6 +11,7 @@ using UnityEngine.Rendering.Universal;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Light2D light2D;
+    public Light2D Light2D => light2D;
 
     public HPManager hpManager; // HP管理スクリプト
     [SerializeField] private AudioSource damagedAS;
@@ -30,11 +32,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        light2D.intensity = SO_DifficultySettings.Entity.VisibilityRange;
+        light2D.pointLightOuterRadius = SO_DifficultySettings.Entity.VisibilityRange;
     }
 
     private void Update()
     {
+        if (GameManager.Instance.EventState == EventState.End) return;
+        if (GameManager.Instance.CurrentHP <= 0) return;
         if (damagableFlag.IsCounting) return;
         if (!elevatorFlag.IsDamagable) return;
 
@@ -53,11 +57,22 @@ public class PlayerController : MonoBehaviour
     {
         foreach (GameObject e in GameManager.Instance.Enemys)
         {
-            if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) continue;
-            if (GameManager.Instance.CurrentHP <= 0) continue;
+            if (e == null) continue;
             if (SqrDistance2D(transform.position, e.transform.position) > sqrPlayerDamageRange) continue;
             return true;
         }
+
+        List<GameObject> extraShoggoth = GameManager.Instance.ExtraShoggoth;
+        if (extraShoggoth is not null)
+        {
+            foreach (GameObject e in extraShoggoth)
+            {
+                if (e == null) continue;
+                if (SqrDistance2D(transform.position, e.transform.position) > sqrPlayerDamageRange) continue;
+                return true;
+            }
+        }
+
         return false;
     }
 }

@@ -14,14 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty:
   - VisibilityRange: 20
-    StaminaRecover: 30
-    IsItemRandom: 0
-  - VisibilityRange: 10
-    StaminaRecover: 10
-    IsItemRandom: 0
-  - VisibilityRange: 5
-    StaminaRecover: 5
-    IsItemRandom: 1
-  - VisibilityRange: 2
     StaminaRecover: 2
+    IsItemRandom: 0
+    IsExtraShoggothArrangeDifficult: 0
+  - VisibilityRange: 10
+    StaminaRecover: 5
+    IsItemRandom: 0
+    IsExtraShoggothArrangeDifficult: 0
+  - VisibilityRange: 5
+    StaminaRecover: 10
     IsItemRandom: 1
+    IsExtraShoggothArrangeDifficult: 0
+  - VisibilityRange: 3.5
+    StaminaRecover: 30
+    IsItemRandom: 1
+    IsExtraShoggothArrangeDifficult: 1

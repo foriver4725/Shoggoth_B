@@ -239,7 +239,7 @@ namespace Ex
     public static class Async
     {
         // 一定時間待ってから処理を行う
-        public static async UniTask AfterWaited(Action action, float seconds, CancellationToken ct)
+        public static async UniTask SecWaitAndDo(this float seconds, Action action, CancellationToken ct)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(seconds), cancellationToken: ct);
             action();
@@ -291,5 +291,12 @@ namespace Ex
 
             return true;
         }
+    }
+
+    public static class Arith
+    {
+        // X[a, b] -> Y[c, d] の線形変換
+        public static float Remap(this float x, float a, float b, float c, float d)
+            => a == b ? 0 : (x - a) * (d - c) / (b - a) + c;
     }
 }

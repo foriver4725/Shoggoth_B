@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SO
 {
@@ -34,8 +32,13 @@ namespace SO
         }
         #endregion
 
+#if UNITY_EDITOR
         [Header("無敵時間を10000秒にする")] public bool IsInvincible;
         [Header("移動速度を5倍にする")] public bool IsExtraSpeed;
         [Header("スタミナの減少速度を0.01倍にする")] public bool IsInfiniteStamina;
+        [Header("有効にした状態でゲームを実行すると、\nセーブデータを全て削除する")] public bool IsDeleteAllSaveData;
+        [Header("有効にした状態でゲームを実行すると、\n実績を全て達成してセーブする\n(↑の方が優先)")]
+        public bool IsAchieveAllSaveData;
+#endif
     }
 }

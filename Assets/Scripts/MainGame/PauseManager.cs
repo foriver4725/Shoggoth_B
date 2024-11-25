@@ -19,9 +19,9 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         // クリアまたはゲームオーバーならポーズできない
-        if (GameManager.Instance.IsClear || GameManager.Instance.IsOver) return;
+        if (GameManager.Instance.EventState == EventState.End) return;
 
-        if (InputGetter.Instance.MainGame_IsPause)
+        if (InputGetter.Instance.MainGamePause.Bool)
         {
             if (isPaused)
             {

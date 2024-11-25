@@ -46,15 +46,6 @@ namespace IA
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Credit"",
-                    ""type"": ""Button"",
-                    ""id"": ""ec116e24-ab50-4308-9b54-36f7e1677547"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -62,6 +53,17 @@ namespace IA
                     ""name"": """",
                     ""id"": ""7e904c8b-468e-4d88-a43e-e79dc86f14f0"",
                     ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa90a155-50a4-4262-bebd-1ee12c6daed5"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -93,8 +95,8 @@ namespace IA
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5d824337-5196-4dfe-8ed7-d0ea1bc34aaa"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""eef440ad-8a25-4f28-81d3-395d7c871168"",
+                    ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -104,12 +106,12 @@ namespace IA
                 },
                 {
                     ""name"": """",
-                    ""id"": ""07d8186e-ba4e-4510-9183-2ee4511a9e3f"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""id"": ""5d824337-5196-4dfe-8ed7-d0ea1bc34aaa"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Credit"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -453,6 +455,114 @@ namespace IA
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""672ef28b-0695-4bca-8828-b5b05a320ec8"",
+            ""actions"": [
+                {
+                    ""name"": ""Action1"",
+                    ""type"": ""Button"",
+                    ""id"": ""22376995-47d7-450c-a69d-bf3fe679f64e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action2"",
+                    ""type"": ""Button"",
+                    ""id"": ""c25ef805-c4ae-4629-bba8-75af112a1c41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action3"",
+                    ""type"": ""Button"",
+                    ""id"": ""b549ec00-f1fa-4708-9179-ffd4372dd287"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action4"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8bfa778-22ad-4d3a-96b2-97b53c986fba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action5"",
+                    ""type"": ""Button"",
+                    ""id"": ""276ade6e-2454-4a32-9518-0da0fedd2665"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""73411963-bc39-4893-aff3-bf7d9abe26fe"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3360db94-210b-4055-bb83-8febabda0d19"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""595690cc-0b4c-4560-afd1-d6a3a60e4592"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cc87f6e-ea99-4df2-ad0e-926c1b548999"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3757ec7-b577-4efa-bd9a-e71f276b7052"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -461,7 +571,6 @@ namespace IA
             m_System = asset.FindActionMap("System", throwIfNotFound: true);
             m_System_Submit = m_System.FindAction("Submit", throwIfNotFound: true);
             m_System_Cancel = m_System.FindAction("Cancel", throwIfNotFound: true);
-            m_System_Credit = m_System.FindAction("Credit", throwIfNotFound: true);
             // MainGame
             m_MainGame = asset.FindActionMap("MainGame", throwIfNotFound: true);
             m_MainGame_Move = m_MainGame.FindAction("Move", throwIfNotFound: true);
@@ -469,6 +578,13 @@ namespace IA
             m_MainGame_Pause = m_MainGame.FindAction("Pause", throwIfNotFound: true);
             m_MainGame_Up = m_MainGame.FindAction("Up", throwIfNotFound: true);
             m_MainGame_Down = m_MainGame.FindAction("Down", throwIfNotFound: true);
+            // Debug
+            m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+            m_Debug_Action1 = m_Debug.FindAction("Action1", throwIfNotFound: true);
+            m_Debug_Action2 = m_Debug.FindAction("Action2", throwIfNotFound: true);
+            m_Debug_Action3 = m_Debug.FindAction("Action3", throwIfNotFound: true);
+            m_Debug_Action4 = m_Debug.FindAction("Action4", throwIfNotFound: true);
+            m_Debug_Action5 = m_Debug.FindAction("Action5", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -532,14 +648,12 @@ namespace IA
         private List<ISystemActions> m_SystemActionsCallbackInterfaces = new List<ISystemActions>();
         private readonly InputAction m_System_Submit;
         private readonly InputAction m_System_Cancel;
-        private readonly InputAction m_System_Credit;
         public struct SystemActions
         {
             private @IA m_Wrapper;
             public SystemActions(@IA wrapper) { m_Wrapper = wrapper; }
             public InputAction @Submit => m_Wrapper.m_System_Submit;
             public InputAction @Cancel => m_Wrapper.m_System_Cancel;
-            public InputAction @Credit => m_Wrapper.m_System_Credit;
             public InputActionMap Get() { return m_Wrapper.m_System; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -555,9 +669,6 @@ namespace IA
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
-                @Credit.started += instance.OnCredit;
-                @Credit.performed += instance.OnCredit;
-                @Credit.canceled += instance.OnCredit;
             }
 
             private void UnregisterCallbacks(ISystemActions instance)
@@ -568,9 +679,6 @@ namespace IA
                 @Cancel.started -= instance.OnCancel;
                 @Cancel.performed -= instance.OnCancel;
                 @Cancel.canceled -= instance.OnCancel;
-                @Credit.started -= instance.OnCredit;
-                @Credit.performed -= instance.OnCredit;
-                @Credit.canceled -= instance.OnCredit;
             }
 
             public void RemoveCallbacks(ISystemActions instance)
@@ -666,11 +774,88 @@ namespace IA
             }
         }
         public MainGameActions @MainGame => new MainGameActions(this);
+
+        // Debug
+        private readonly InputActionMap m_Debug;
+        private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+        private readonly InputAction m_Debug_Action1;
+        private readonly InputAction m_Debug_Action2;
+        private readonly InputAction m_Debug_Action3;
+        private readonly InputAction m_Debug_Action4;
+        private readonly InputAction m_Debug_Action5;
+        public struct DebugActions
+        {
+            private @IA m_Wrapper;
+            public DebugActions(@IA wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Action1 => m_Wrapper.m_Debug_Action1;
+            public InputAction @Action2 => m_Wrapper.m_Debug_Action2;
+            public InputAction @Action3 => m_Wrapper.m_Debug_Action3;
+            public InputAction @Action4 => m_Wrapper.m_Debug_Action4;
+            public InputAction @Action5 => m_Wrapper.m_Debug_Action5;
+            public InputActionMap Get() { return m_Wrapper.m_Debug; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+            public void AddCallbacks(IDebugActions instance)
+            {
+                if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+                @Action1.started += instance.OnAction1;
+                @Action1.performed += instance.OnAction1;
+                @Action1.canceled += instance.OnAction1;
+                @Action2.started += instance.OnAction2;
+                @Action2.performed += instance.OnAction2;
+                @Action2.canceled += instance.OnAction2;
+                @Action3.started += instance.OnAction3;
+                @Action3.performed += instance.OnAction3;
+                @Action3.canceled += instance.OnAction3;
+                @Action4.started += instance.OnAction4;
+                @Action4.performed += instance.OnAction4;
+                @Action4.canceled += instance.OnAction4;
+                @Action5.started += instance.OnAction5;
+                @Action5.performed += instance.OnAction5;
+                @Action5.canceled += instance.OnAction5;
+            }
+
+            private void UnregisterCallbacks(IDebugActions instance)
+            {
+                @Action1.started -= instance.OnAction1;
+                @Action1.performed -= instance.OnAction1;
+                @Action1.canceled -= instance.OnAction1;
+                @Action2.started -= instance.OnAction2;
+                @Action2.performed -= instance.OnAction2;
+                @Action2.canceled -= instance.OnAction2;
+                @Action3.started -= instance.OnAction3;
+                @Action3.performed -= instance.OnAction3;
+                @Action3.canceled -= instance.OnAction3;
+                @Action4.started -= instance.OnAction4;
+                @Action4.performed -= instance.OnAction4;
+                @Action4.canceled -= instance.OnAction4;
+                @Action5.started -= instance.OnAction5;
+                @Action5.performed -= instance.OnAction5;
+                @Action5.canceled -= instance.OnAction5;
+            }
+
+            public void RemoveCallbacks(IDebugActions instance)
+            {
+                if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IDebugActions instance)
+            {
+                foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public DebugActions @Debug => new DebugActions(this);
         public interface ISystemActions
         {
             void OnSubmit(InputAction.CallbackContext context);
             void OnCancel(InputAction.CallbackContext context);
-            void OnCredit(InputAction.CallbackContext context);
         }
         public interface IMainGameActions
         {
@@ -679,6 +864,14 @@ namespace IA
             void OnPause(InputAction.CallbackContext context);
             void OnUp(InputAction.CallbackContext context);
             void OnDown(InputAction.CallbackContext context);
+        }
+        public interface IDebugActions
+        {
+            void OnAction1(InputAction.CallbackContext context);
+            void OnAction2(InputAction.CallbackContext context);
+            void OnAction3(InputAction.CallbackContext context);
+            void OnAction4(InputAction.CallbackContext context);
+            void OnAction5(InputAction.CallbackContext context);
         }
     }
 }
