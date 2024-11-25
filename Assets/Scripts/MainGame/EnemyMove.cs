@@ -139,14 +139,17 @@ namespace MainGame
 
             while (true)
             {
-                transform.position
-                    += _floor switch
-                    {
-                        FLOOR.F1 => SO_Player.Entity.EnemySpeed1F,
-                        FLOOR.BF1 => SO_Player.Entity.EnemySpeedB1F,
-                        FLOOR.BF2 => SO_Player.Entity.EnemySpeedB2F,
-                        _ => 0
-                    } * Time.deltaTime * dir;
+                float speed = _floor switch
+                {
+                    FLOOR.F1 => SO_Player.Entity.EnemySpeed1F,
+                    FLOOR.BF1 => SO_Player.Entity.EnemySpeedB1F,
+                    FLOOR.BF2 => SO_Player.Entity.EnemySpeedB2F,
+                    _ => 0
+                };
+                if (GameManager.Instance.EventState is EventState.ShoggothRaise or EventState.LastShoggoth or EventState.End)
+                    speed *= 0.5f;
+                transform.position += speed * Time.deltaTime * dir;
+
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
                     break;
                 yield return null;
