@@ -25,7 +25,7 @@ MonoBehaviour:
     StaminaRecover: 10
     IsItemRandom: 1
     IsExtraShoggothArrangeDifficult: 0
-  - VisibilityRange: 3
+  - VisibilityRange: 3.5
     StaminaRecover: 30
     IsItemRandom: 1
     IsExtraShoggothArrangeDifficult: 1
