@@ -45,20 +45,26 @@ namespace MainGame
             _stokingPos = GameManager.Instance.EnemyStokingPositions[stokingPosIndex];
         }
 
+        private bool isRaised => GameManager.Instance.EventState is EventState.ShoggothRaise or EventState.LastShoggoth or EventState.End;
+
         void Update()
         {
             // クリアまたはゲームオーバーなら動かない
             if (GameManager.Instance.EventState == EventState.End) return;
 
             // プレイヤーに近づいたら追跡モードになる。
-            if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= SO_Player.Entity.EnemyChaseRange * SO_Player.Entity.EnemyChaseRange)
+            float chaseRange = SO_Player.Entity.EnemyChaseRange;
+            if (isRaised) chaseRange *= 2; // レイズ時は追跡範囲を2倍にする
+            if (!IsChasing && ((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude <= chaseRange * chaseRange)
             {
                 IsChasing = true;
             }
 
             if (IsChasing)
             {
-                if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > SO_Player.Entity.EnemyStopChaseRange * SO_Player.Entity.EnemyStopChaseRange)
+                float stopChaseRange = SO_Player.Entity.EnemyStopChaseRange;
+                if (isRaised) stopChaseRange *= 2; // レイズ時は追跡停止範囲を2倍にする
+                if (((Vector2)GameManager.Instance.Player.transform.position - (Vector2)transform.position).sqrMagnitude > stopChaseRange * stopChaseRange)
                 {
                     StopChaseTime += Time.deltaTime;
                 }
@@ -146,8 +152,7 @@ namespace MainGame
                     FLOOR.BF2 => SO_Player.Entity.EnemySpeedB2F,
                     _ => 0
                 };
-                if (GameManager.Instance.EventState is EventState.ShoggothRaise or EventState.LastShoggoth or EventState.End)
-                    speed *= 0.5f;
+                if (isRaised) speed *= 0.5f; // レイズ時は移動速度を半分にする
                 transform.position += speed * Time.deltaTime * dir;
 
                 if ((transform.position - fromPos).sqrMagnitude >= 1)
